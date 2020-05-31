@@ -1,0 +1,35 @@
+ <Module>
+	<Name value="Allegiance Overhaul"/>
+	<Id value="AllegianceOverhaul"/>
+	<Version value="v0.0.3"/>
+	<SingleplayerModule value="true"/>
+	<MultiplayerModule value="false"/>
+	<DependedModules>
+		<DependedModule Id="Native"/>
+		<DependedModule Id="SandBoxCore"/>
+		<DependedModule Id="Sandbox"/>
+		<DependedModule Id="CustomBattle"/>
+		<DependedModule Id="StoryMode"/>
+	</DependedModules>
+	<SubModules>
+		<SubModule>
+			<Name value="AllegianceOverhaul"/>
+			<DLLName value="AllegianceOverhaul.dll"/>
+			<SubModuleClassType value="AllegianceOverhaul.SubModule"/>
+			<Tags>
+				<Tag key="DedicatedServerType" value="none" />
+				<Tag key="IsNoRenderModeElement" value="false" />
+			</Tags>
+		</SubModule>
+		<SubModule>
+			<Name value="MCMv3 Integrated Loader"/>
+			<DLLName value="MCMv3.dll"/>
+			<SubModuleClassType value="MCM.IntegratedLoaderSubModule"/>
+			<Tags>
+				<Tag key="DedicatedServerType" value="none" />
+				<Tag key="IsNoRenderModeElement" value="false" />
+			</Tags>
+		</SubModule>		
+	</SubModules>
+	<Xmls/>
+ </Module>

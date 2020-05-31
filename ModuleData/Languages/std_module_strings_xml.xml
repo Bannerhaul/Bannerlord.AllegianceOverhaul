@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+	<tags>
+		<tag language="English" />
+	</tags>
+	<strings>
+		<string id="qfpqfAdz" text="Allegiance Overhaul" />
+		<string id="WddOMlv9" text="Loaded Allegiance Overhaul!" />
+		<!--
+		|||||||||||||||||||||||||| Debug Strings ||||||||||||||||||||||||||
+		-->
+		<string id="K23FeRhj" text="{=K23FeRhj}{CLAN_TYPE} {LEAVING_CLAN} {SERVICE_TYPE} {CURRENT_KINGDOM} is considering leaving. Value of the kingdom for them is {LEAVE_BARTERABLE}, threshold is {LEAVE_THRESHOLD}. Natively they would {CLAN_DECISION}." />
+		<string id="WNqBu5Ye" text="{CLAN_TYPE} {LEAVING_CLAN} {SERVICE_TYPE} {CURRENT_KINGDOM} is considering defecting to {TARGET_KINGDOM}. Current kingdom worth {CURRENT_BARTERABLE} for them and other kingdom is valued at {TARGET_BARTERABLE}. Natively they would {CLAN_DECISION}." />
+
+		<string id="uNS0QtqU" text="Minor faction" />
+		<string id="zmR6sT03" text="The clan" />
+		<string id="CYUKnxOH" text="under mercenary service of" />
+		<string id="rdpdUqkQ" text="of" />
+		<string id="KBPBbuE9" text="leave" />
+		<string id="GmDkOQ7C" text="stay" />
+
+		<!--
+		||||||||||||||||||||||||||| Mod Options |||||||||||||||||||||||||||
+	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu,Gp9KcTuz,eoQCaS0r,GmyQQ5Cm,If18n1li,u9YiryQR,1bsT0jB0,
+	13W8p9hd,UgeDMBZE,ZaPJhkuk,Fxyb9iPM,gI3AplJv,AOnhwhiK,1J0XkdxB,Fok4pGDs,6TbpFzJk,2JzGpjwk,tCqdcDuR,cM9saCDB,BEiLWxeU,uXwgU2WE,QLii7mIG,eBVb3S6S,acsZWxWF,00arXPdi,eMMKVjRU
+		-->
+		<!-- Main or reused headings -->
+		<string id="yRuHl3O6" text="General settings" />
+		<string id="Ps6RgRH1" text="Ensured loyalty" />
+		<string id="xNtFBSJF" text="Kingdom evaluation" />
+		<string id="fmUHcBME" text="Debug settings" />
+
+		<!-- Reused settings and hints -->
+		<string id="yul4vp54" text="Applies to" />
+		<string id="y3ClkEcy" text="Specify if below rules should affect all kingdoms, or just the player's one. Default is [All kingdoms]." />
+		<string id="z3oSKZFE" text="Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom]." />
+		<string id="xwz5YwZ8" text="Debug messages" />
+		<string id="uPYkZfKs" text="Enables debug messages for ensured loyalty system. Lore-friendly, but spammy. Default is false." />
+		<string id="BRI2fuVk" text="Enabled" />
+		<string id="fnO8oC3s" text="Enables accounting for additional factors when faction evaluating kingdom value. Affects both leave or defection probability and actual bartering (may make it more pricey)." />
+
+		<!-- Dropdown values -->
+		<string id="COahS2f6" text="All kingdoms" />
+		<string id="JeehGy9z" text="Player's kingdom" />
+		<string id="v2TacaMr" text="Kingdom ruled by player" />
+
+		<!-- Ensured loyalty -->
+		<string id="MIDoz9om" text="Faction oath of fealty limitation period" />
+		<string id="l5LWFlHv" text="Period in days after joining a kingdom, during which clan would not even consider leaving that kingdom. Default = 84 (a game year)." />
+		<string id="Az4K6FiF" text="Minor faction oath of fealty limitation period" />
+		<string id="qRnwZFts" text="Period in days after joining a kingdom, during which minor faction would not even consider leaving that kingdom. Default = 63 (three quarters of a game year)." />
+
+		<string id="eMMKVjRU" text="Minimum mercenary service period" />
+		<string id="00arXPdi" text="Period in days after initiating mercenary service of kingdom, during which minor faction would not even consider leaving that kingdom. Default = 42 (half a game year)." />
+
+		<string id="mmUgw8hL" text="Achieve via relation" />
+		<string id="gj3cKWJo" text="Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom." />
+		
+		<string id="JvWw6eSp" text="Ensured loyalty baseline" />
+		<string id="XP7qtIkt" text="The minimum required relationship a clan leader must have with a kingdom leader in order for them to never leave that kingdom. Being below that threshold does NOT mean clan will aitomatically leave. Can serve as a baseline for other togglable modifiers. Default = 50." />
+		
+		<string id="m5JmQwFt" text="Modify by situational context" />
+		<string id="0oeDqVTM" text="Specify if situational context should affect minimum required relationship, at which loyalty is ensured." />
+		
+		<string id="Rbo96zKF" text="Minor faction modifier" />
+		<string id="BFnZrVGK" text="Flat value that will be added to baseline if minor faction considering leaving its kingdom. Default = 10 (minor factions tend to be less loyal)." />
+		<string id="Nff6KlEn" text="Defection modifier" />
+		<string id="0B87ROVp" text="Flat value that will be added to baseline if clan considering not just leaving, but defection to another kingdom. Default = 0." />
+		<string id="5bJx7aO7" text="Landless clan modifier" />
+		<string id="QRmeDMie" text="Flat value that will be added to baseline if clan owns no land. Default = 20 (Landless clans tend to be less loyal)." />
+		<string id="rHn5IY0P" text="Landless kingdom modifier" />
+		<string id="vSD05nAh" text="Flat value that will be added to baseline of all clans of the kingdom, except the ruling one, if kingdom owns no land. Default = 50 (none but most honorable vassals would tolerate this)." />
+		
+		<string id="eExUFCCQ" text="Modify by honor level" />
+		<string id="gIDkdZP8" text="Specify if clan leader's honor should affect minimum required relationship, at which loyalty is ensured." />
+		
+		<string id="1QhZZBVA" text="High honor step when leaving" />
+		<string id="SJ2OA4HM" text="Flat value that will be deducted from baseline for each positive honor level of a clan leader when considering leaving kingdom (positive honor makes leaders loyal at lower relation). Default = 5." />
+		<string id="QJFQ5eSy" text="Low honor step when leaving" />
+		<string id="bp2jDgN4" text="Flat value that will be added to baseline for each negative honor level of a clan leader when considering leaving kingdom (negative honor requires higher relation for leaders to become loyal). Default = 5." />
+		<string id="Flo6n1rf" text="High honor step when defecting" />
+		<string id="6TOUjrrQ" text="Flat value that will be deducted from baseline for each positive honor level of a clan leader when considering defection from kingdom (positive honor makes leaders loyal at lower relation). Default = 15." />
+		<string id="ZZxrdAfn" text="Low honor step when defecting" />
+		<string id="rNiMWcE4" text="Flat value that will be added to baseline for each negative honor level of a clan leader when considering defection from kingdom (negative honor requires higher relation for leaders to become loyal). Default = 20." />
+
+		<!-- Kingdom evaluation -->
+		<string id="bZH00rVn" text="Additional relation weight" />
+		<string id="moc7wRwB" text="Specify if relationship a clan leader have with a kingdom leader should affect kingdom value for the clan more noticeable." />
+		
+		<string id="siPJey6u" text="Weight for current kingdom" />
+		<string id="Tei4s42W" text="Specify weight of the relationship between clan leader and leader of the current kingdom while evaluating kingdom value for that clan. Result is additive, so setting this to 1.0 means that native value might be doubled or negated completely depending on relation, while 0 means native value will be unaffected. Default = 0.5." />
+		<string id="rhvq8Yhb" text="Weight for potential kingdoms" />
+		<string id="rJw4D3kJ" text="Specify weight of the relationship between clan leader and leader of the potential kingdom while evaluating said kingdom value for that clan. Result is additive, so setting this to 1.0 means that native value might be doubled or negated completely depending on relation, while 0 means native value will be unaffected. Default = 0.15." />
+		<!--
+	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu,Gp9KcTuz,eoQCaS0r,GmyQQ5Cm,If18n1li,u9YiryQR,1bsT0jB0,
+	13W8p9hd,UgeDMBZE,ZaPJhkuk,Fxyb9iPM,gI3AplJv,AOnhwhiK,1J0XkdxB,Fok4pGDs,6TbpFzJk,2JzGpjwk,tCqdcDuR,cM9saCDB,BEiLWxeU,uXwgU2WE,QLii7mIG,eBVb3S6S,acsZWxWF,00arXPdi,eMMKVjRU
+		-->
+	</strings>
+</base>
