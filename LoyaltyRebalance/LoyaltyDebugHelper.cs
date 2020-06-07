@@ -1,11 +1,13 @@
 ﻿using MCM.Abstractions.Data;
+using System;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.Localization;
+using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
 
 namespace AllegianceOverhaul.LoyaltyRebalance
 {
-  internal class DebugHelper
+  internal class LoyaltyDebugHelper
   {
     //Fp18vLHE,16kFtifY
     private const string LeaveDecision = "{=KBPBbuE9}leave";
@@ -22,7 +24,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance
 
     public static void LeaveKingdomDebug(Clan clan)
     {
-      bool DebugEnsuredLoyalty = Settings.Instance.DebugEnsuredLoyalty;
+      bool DebugEnsuredLoyalty = Settings.Instance.EnableGeneralDebugging;
       SettingsHelper.InDebugBranch = true;
       if (!DebugEnsuredLoyalty || !SettingsHelper.FactionInScope(clan, Settings.Instance.EnsuredLoyaltyDebugScope) || !SettingsHelper.InDebugBranch)
         return;
@@ -34,15 +36,15 @@ namespace AllegianceOverhaul.LoyaltyRebalance
 
       TextObject ResultTextObject = new TextObject(Debug_Leave);
       ResultTextObject.SetTextVariable("CLAN_TYPE", clan.IsMinorFaction ? ClanTypeMinorFaction : ClanTypeUsual);
-      ResultTextObject.SetTextVariable("LEAVING_CLAN", clan.Name.ToString());
+      ResultTextObject.SetTextVariable("LEAVING_CLAN", clan.Name);
       ResultTextObject.SetTextVariable("SERVICE_TYPE", clan.IsUnderMercenaryService ? ServiceTypeMercenary : ServiceTypeUsual);
-      ResultTextObject.SetTextVariable("CURRENT_KINGDOM", clan.Kingdom.Name.ToString());
+      ResultTextObject.SetTextVariable("CURRENT_KINGDOM", clan.Kingdom.Name);
       ResultTextObject.SetTextVariable("LEAVE_BARTERABLE", ClanBarterableValueForFaction.ToString("N"));
       ResultTextObject.SetTextVariable("LEAVE_THRESHOLD", StayThreshold.ToString("N"));
       ResultTextObject.SetTextVariable("CLAN_DECISION", NativeDecision ? StayDecision : LeaveDecision);
 
-      bool IsLoyaltyEnsured = EnsuredLoyalty.CheckLoyalty(clan, out TextObject LoyaltyTextObject);
-      LoyaltyTextObject.SetTextVariable("TRANSITION_PART", NativeDecision == IsLoyaltyEnsured ? EnsuredLoyalty.TransitionFromSame: EnsuredLoyalty.TransitionFromDifferent);
+      bool IsLoyaltyEnsured = LoyaltyManager.CheckLoyalty(clan, out TextObject LoyaltyTextObject);
+      LoyaltyTextObject.SetTextVariable("TRANSITION_PART", NativeDecision == IsLoyaltyEnsured ? LoyaltyManager.TransitionFromSame: LoyaltyManager.TransitionFromDifferent);
       ResultTextObject.SetTextVariable("ENSURED_LOYALTY_RESULT", LoyaltyTextObject.ToString());
 
       MessageHelper.SimpleMessage(ResultTextObject.ToString());
@@ -51,32 +53,29 @@ namespace AllegianceOverhaul.LoyaltyRebalance
 
     public static void DefectKingdomDebug(Clan clan, Kingdom kingdom)
     {
-      bool DebugEnsuredLoyalty = Settings.Instance.DebugEnsuredLoyalty;
+      bool DebugEnsuredLoyalty = Settings.Instance.EnableGeneralDebugging;
       SettingsHelper.InDebugBranch = true;
       DefaultDropdown<string> DebugScope = Settings.Instance.EnsuredLoyaltyDebugScope;
       if (!DebugEnsuredLoyalty || !(SettingsHelper.FactionInScope(clan, DebugScope) || SettingsHelper.FactionInScope(kingdom, DebugScope)) || !SettingsHelper.InDebugBranch)
         return;
 
       JoinKingdomAsClanBarterable asClanBarterable = new JoinKingdomAsClanBarterable(clan.Leader, kingdom);
-      MessageHelper.SimpleMessage("Declared JoinKingdomAsClanBarterable asClanBarterable");
       int ClanBarterableValueForClan = asClanBarterable.GetValueForFaction((IFaction)clan);
-      MessageHelper.SimpleMessage("Calculated ClanBarterableValueForClan");
       int ClanBarterableValueForKingdom = asClanBarterable.GetValueForFaction((IFaction)kingdom);
-      MessageHelper.SimpleMessage("Calculated ClanBarterableValueForKingdom");
       bool NativeDecision = ClanBarterableValueForClan + ClanBarterableValueForKingdom <= 0;
 
       TextObject ResultTextObject = new TextObject(Debug_Defect);
       ResultTextObject.SetTextVariable("CLAN_TYPE", clan.IsMinorFaction ? ClanTypeMinorFaction : ClanTypeUsual);
-      ResultTextObject.SetTextVariable("LEAVING_CLAN", clan.Name.ToString());
+      ResultTextObject.SetTextVariable("LEAVING_CLAN", clan.Name);
       ResultTextObject.SetTextVariable("SERVICE_TYPE", clan.IsUnderMercenaryService ? ServiceTypeMercenary : ServiceTypeUsual);
-      ResultTextObject.SetTextVariable("CURRENT_KINGDOM", clan.Kingdom.Name.ToString());
-      ResultTextObject.SetTextVariable("TARGET_KINGDOM", kingdom.Name.ToString());
+      ResultTextObject.SetTextVariable("CURRENT_KINGDOM", clan.Kingdom.Name);
+      ResultTextObject.SetTextVariable("TARGET_KINGDOM", kingdom.Name);
       ResultTextObject.SetTextVariable("CURRENT_BARTERABLE", ClanBarterableValueForClan.ToString("N"));
       ResultTextObject.SetTextVariable("TARGET_BARTERABLE", ClanBarterableValueForKingdom.ToString("N"));
       ResultTextObject.SetTextVariable("CLAN_DECISION", NativeDecision ? StayDecision : LeaveDecision);
 
-      bool IsLoyaltyEnsured = EnsuredLoyalty.CheckLoyalty(clan, out TextObject LoyaltyTextObject, true);
-      LoyaltyTextObject.SetTextVariable("TRANSITION_PART", NativeDecision == IsLoyaltyEnsured ? EnsuredLoyalty.TransitionFromSame : EnsuredLoyalty.TransitionFromDifferent);
+      bool IsLoyaltyEnsured = LoyaltyManager.CheckLoyalty(clan, out TextObject LoyaltyTextObject, kingdom);
+      LoyaltyTextObject.SetTextVariable("TRANSITION_PART", NativeDecision == IsLoyaltyEnsured ? LoyaltyManager.TransitionFromSame : LoyaltyManager.TransitionFromDifferent);
       ResultTextObject.SetTextVariable("ENSURED_LOYALTY_RESULT", LoyaltyTextObject.ToString());
 
       MessageHelper.SimpleMessage(ResultTextObject.ToString());
