@@ -63,8 +63,6 @@
 		<string id="BkX1Q6G6" text="Let them go" />
 		<!--
 		||||||||||||||||||||||||||| Mod Options |||||||||||||||||||||||||||
-	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu,Gp9KcTuz,eoQCaS0r,GmyQQ5Cm,If18n1li,u9YiryQR,1bsT0jB0,
-	13W8p9hd,UgeDMBZE,ZaPJhkuk,Fxyb9iPM,gI3AplJv,AOnhwhiK,1J0XkdxB,Fok4pGDs
 		-->
 		<!-- Main or reused headings -->
 		<string id="yRuHl3O6" text="General settings" />
@@ -144,9 +142,5 @@
 		<string id="uPYkZfKs" text="Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false." />
 		<string id="acsZWxWF" text="Technical debug messages" />
 		<string id="eBVb3S6S" text="Enables technical debug messages. These are not localized, poorly readable and extremely spammy. Default is false." />
-		<!--
-	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu,Gp9KcTuz,eoQCaS0r,GmyQQ5Cm,If18n1li,u9YiryQR,1bsT0jB0,
-	13W8p9hd,UgeDMBZE,ZaPJhkuk,Fxyb9iPM,gI3AplJv,AOnhwhiK,1J0XkdxB,Fok4pGDs
-		-->
 	</strings>
 </base>
