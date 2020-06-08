@@ -1,4 +1,5 @@
-﻿using MCM.Abstractions.Data;
+﻿using System.Linq;
+using MCM.Abstractions.Data;
 using TaleWorlds.CampaignSystem;
 
 namespace AllegianceOverhaul
@@ -26,6 +27,29 @@ namespace AllegianceOverhaul
       }
 
       return true;
+    }
+    public static bool BloodRelatives(Hero queriedHero, Hero baseHero)
+    {
+      if
+        (
+          baseHero.Father == queriedHero || baseHero.Mother == queriedHero || baseHero.Siblings.Contains<Hero>(queriedHero) || baseHero.Children.Contains(queriedHero) || baseHero.Spouse == queriedHero
+          || baseHero.Spouse?.Father == queriedHero || baseHero.Spouse?.Mother == queriedHero || (baseHero.Spouse != null && baseHero.Spouse.Siblings.Contains<Hero>(queriedHero))
+        )
+        return true;
+      else
+        return false;
+    }
+    public static bool BloodRelatives(Clan queriedClan, Clan baseClan)
+    {
+      foreach (Hero baseHero in baseClan.Heroes)
+      {
+        foreach (Hero queriedHero in queriedClan.Heroes)
+        {
+          if (BloodRelatives(queriedHero, baseHero))
+            return true;
+        }
+      }
+      return false;
     }
   }
 }

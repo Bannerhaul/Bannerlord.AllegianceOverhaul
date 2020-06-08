@@ -53,13 +53,16 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     public static int GetRelationThreshold(Clan clan, bool Defecting = false)
     {
       int RelationThreshold = Settings.Instance.EnsuredLoyaltyBaseline;
-      
+
       if (Settings.Instance.UseContextForEnsuredLoyalty)
+      {
+        RelationThreshold -= SettingsHelper.BloodRelatives(clan.Kingdom.RulingClan, clan) ? Settings.Instance.BloodRelativesEnsuredLoyaltyModifier : 0;
         RelationThreshold +=
           (clan.IsMinorFaction ? Settings.Instance.MinorFactionEnsuredLoyaltyModifier : 0) +
           (Defecting ? Settings.Instance.DefectionEnsuredLoyaltyModifier : 0) +
           (clan.Fortifications?.Count < 1 ? Settings.Instance.LandlessClanEnsuredLoyaltyModifier : 0) +
           (KingdomFortificationsCount(clan.Kingdom) < 1 ? Settings.Instance.LandlessKingdomEnsuredLoyaltyModifier : 0);
+      }
 
       if (Settings.Instance.UseHonorForEnsuredLoyalty)
         RelationThreshold += GetHonorModifier(clan.Leader, Defecting);
@@ -97,7 +100,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             DebugTextObject.SetTextVariable("REASON", ReasonPeriod.ToString());
             return true;
           }
-          else if (Settings.Instance.UseRelationForEnsuredLoyalty)
+          else if (Settings.Instance.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
           {
             int CurrentRelation = clan.Leader.GetRelation(clan.Kingdom.Ruler);
             int RequiredRelation = GetRelationThreshold(clan, kingdom is null);
@@ -140,7 +143,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         )
         return true;
 
-      if (Settings.Instance.UseRelationForEnsuredLoyalty)
+      if (Settings.Instance.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
       {
         if (!(clan.Leader.GetRelation(clan.Kingdom.Ruler) >= GetRelationThreshold(clan, kingdom is null)))
           return false;

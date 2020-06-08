@@ -99,7 +99,9 @@
 		
 		<string id="m5JmQwFt" text="Modify by situational context" />
 		<string id="0oeDqVTM" text="Specify if situational context should affect minimum required relationship, at which loyalty is ensured." />
-		
+
+		<string id="AOnhwhiK" text="Blood relation modifier" />
+		<string id="gI3AplJv" text="Flat value that will be deducted from baseline if there is a kinship with the governing clan. Default = 30 (blood relatives are loyal)." />
 		<string id="Rbo96zKF" text="Minor faction modifier" />
 		<string id="BFnZrVGK" text="Flat value that will be added to baseline if minor faction considering leaving its kingdom. Default = 10 (minor factions tend to be less loyal)." />
 		<string id="Nff6KlEn" text="Defection modifier" />
@@ -136,7 +138,10 @@
 		<string id="tCqdcDuR" text="Maximum amount, measured in millions, by which score of clan to leave kingdom may exceed threshold, not arising the need for ruler to spend gold. Default = 1.0." />
 		<string id="2JzGpjwk" text="Gold cost multiplier" />
 		<string id="6TbpFzJk" text="Multiplier for calculated gold cost to withhold the clan. Suggested value would be somewhere between 100 and 1000. Default = 1000." />
-		
+
+		<!-- Debug settings -->
+		<string id="Fok4pGDs" text="Vassal minor factions follow general rules" />
+		<string id="1J0XkdxB" text="Specify if vassal minor factions should use general logic when considering leaving their kingdoms. If disabled, minor factions will use mercenary logic even being vassals. Enabling is suggested, consider this a bug fix." />
 		<!-- Debug settings -->
 		<string id="xwz5YwZ8" text="Debug messages" />
 		<string id="uPYkZfKs" text="Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false." />

@@ -9,7 +9,7 @@ namespace AllegianceOverhaul.Patches
   [HarmonyPatch(typeof(LeaveKingdomAsClanBarterable), "GetUnitValueForFaction")]
   public class GetUnitValueForFactionLeaveKingdomPatch
   {
-    public static void Postfix(IFaction faction, int __result, LeaveKingdomAsClanBarterable __instance)
+    public static void Postfix(IFaction faction, ref int __result, LeaveKingdomAsClanBarterable __instance)
     {
       try
       {
@@ -17,15 +17,17 @@ namespace AllegianceOverhaul.Patches
         Clan iOriginalOwnerClan = iOriginalOwner.Clan;
         Kingdom iOriginalOwnerKingdom = iOriginalOwnerClan.Kingdom;
 
-        if (!SettingsHelper.InDebugBranch || !Settings.Instance.EnableTechnicalDebugging || !SettingsHelper.FactionInScope(faction, Settings.Instance.EnsuredLoyaltyDebugScope))
+        if
+        (
+          (!Settings.Instance.FixMinorFactionVassals || !SettingsHelper.FactionInScope(faction, Settings.Instance.EnsuredLoyaltyScope))
+          && (!SettingsHelper.InDebugBranch || !Settings.Instance.EnableTechnicalDebugging || !SettingsHelper.FactionInScope(faction, Settings.Instance.EnsuredLoyaltyDebugScope))
+        )
           return;
 
-        //Hero leader = iOriginalOwnerClan.Leader;
         IFaction mapFaction = iOriginalOwner.MapFaction;
-
         float CalculatedResult;
         if (faction == __instance.OriginalOwner.Clan)
-          CalculatedResult = __instance.OriginalOwner.Clan.IsMinorFaction ? (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom) : (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom);
+          CalculatedResult = __instance.OriginalOwner.Clan.IsUnderMercenaryService ? (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom) : (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom);
         else
         {
           if (faction == mapFaction)
@@ -39,13 +41,18 @@ namespace AllegianceOverhaul.Patches
           }
         }
 
-        string UnitValueDebugInfo = String.Format("LeaveKingdom - UnitValueForFaction. faction: {0}. ScoreOfMercenaryToLeaveKingdom = {1}. ScoreOfClanToLeaveKingdom = {2}. CalculatedResult = {3}. Result = {4}",
-          faction.Name,
-          ((int)Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)).ToString("N"),
-          ((int)Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)).ToString("N"),
-          CalculatedResult.ToString("N"), __result.ToString("N"));
+        if (SettingsHelper.InDebugBranch && Settings.Instance.EnableTechnicalDebugging && SettingsHelper.FactionInScope(faction, Settings.Instance.EnsuredLoyaltyDebugScope))
+        {
+          string UnitValueDebugInfo = String.Format("LeaveKingdom - UnitValueForFaction. faction: {0}. ScoreOfMercenaryToLeaveKingdom = {1}. ScoreOfClanToLeaveKingdom = {2}. CalculatedResult = {3}. Result = {4}",
+            faction.Name,
+            ((int)Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)).ToString("N"),
+            ((int)Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)).ToString("N"),
+            CalculatedResult.ToString("N"), __result.ToString("N"));
 
-        MessageHelper.TechnicalMessage(UnitValueDebugInfo);
+          MessageHelper.TechnicalMessage(UnitValueDebugInfo);
+        }
+        if (Settings.Instance.FixMinorFactionVassals)
+          __result = (int)CalculatedResult;
       }
       catch (Exception ex)
       {
@@ -55,7 +62,7 @@ namespace AllegianceOverhaul.Patches
     }
     public static bool Prepare()
     {
-      return Settings.Instance.EnableTechnicalDebugging;
+      return (Settings.Instance.FixMinorFactionVassals || Settings.Instance.EnableTechnicalDebugging);
     }
   }
 }
