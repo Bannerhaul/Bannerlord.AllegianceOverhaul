@@ -277,6 +277,7 @@
     <Compile Include="Patches\ConsiderClanLeaveAsMercenaryPatch.cs" />
     <Compile Include="Patches\ConsiderClanLeaveKingdomPatch.cs" />
     <Compile Include="Patches\ExecuteAiBarterReversePatch.cs" />
+    <Compile Include="Patches\GetScoreOfMercenaryToLeaveKingdom.cs" />
     <Compile Include="Patches\GetScoreOfClanToLeaveKingdomPatch.cs" />
     <Compile Include="Patches\GetUnitValueForFactionJoinKingdomPatch.cs" />
     <Compile Include="Patches\GetScoreOfClanToJoinKingdomPatch.cs" />
