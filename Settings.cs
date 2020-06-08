@@ -17,7 +17,7 @@ namespace AllegianceOverhaul
     public override string Format => "json";
 
     //Headings
-    //private const string HeadingGeneral = "{=yRuHl3O6}General settings";
+    private const string HeadingGeneral = "{=yRuHl3O6}General settings";
     //private const string HeadingGeneralSub = "/{=yRuHl3O6}General settings";
     private const string HeadingDebug = "{=fmUHcBME}Debug settings";
     //private const string HeadingDebugSub = "/{=fmUHcBME}Debug settings";
@@ -72,16 +72,19 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext, GroupOrder = 0, IsMainToggle = true)]
     public bool UseContextForEnsuredLoyalty { get; set; } = false;
 
-    [SettingPropertyInteger("{=Rbo96zKF}Minor faction modifier", 0, 50, Order = 0, RequireRestart = false, HintText = "{=BFnZrVGK}Flat value that will be added to baseline if minor faction considering leaving its kingdom. Default = 10 (minor factions tend to be less loyal).")]
+    [SettingPropertyInteger("{=AOnhwhiK}Blood relation modifier", 0, 50, Order = 0, RequireRestart = false, HintText = "{=gI3AplJv}Flat value that will be deducted from baseline if there is a kinship with the governing clan. Default = 30 (blood relatives are loyal).")]
+    [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext)]
+    public int BloodRelativesEnsuredLoyaltyModifier { get; set; } = 30;
+    [SettingPropertyInteger("{=Rbo96zKF}Minor faction modifier", 0, 50, Order = 1, RequireRestart = false, HintText = "{=BFnZrVGK}Flat value that will be added to baseline if minor faction considering leaving its kingdom. Default = 10 (minor factions tend to be less loyal).")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext)]
     public int MinorFactionEnsuredLoyaltyModifier { get; set; } = 10;
-    [SettingPropertyInteger("{=Nff6KlEn}Defection modifier", -50, 50, Order = 1, RequireRestart = false, HintText = "{=0B87ROVp}Flat value that will be added to baseline if clan considering not just leaving, but defecting to another kingdom. Default = 0.")]
+    [SettingPropertyInteger("{=Nff6KlEn}Defection modifier", -50, 50, Order = 2, RequireRestart = false, HintText = "{=0B87ROVp}Flat value that will be added to baseline if clan considering not just leaving, but defecting to another kingdom. Default = 0.")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext)]
     public int DefectionEnsuredLoyaltyModifier { get; set; } = 0;
-    [SettingPropertyInteger("{=5bJx7aO7}Landless clan modifier", 0, 100, Order = 2, RequireRestart = false, HintText = "{=QRmeDMie}Flat value that will be added to baseline if clan owns no land. Default = 20 (Landless clans tend to be less loyal).")]
+    [SettingPropertyInteger("{=5bJx7aO7}Landless clan modifier", 0, 100, Order = 3, RequireRestart = false, HintText = "{=QRmeDMie}Flat value that will be added to baseline if clan owns no land. Default = 20 (Landless clans tend to be less loyal).")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext)]
     public int LandlessClanEnsuredLoyaltyModifier { get; set; } = 20;
-    [SettingPropertyInteger("{=rHn5IY0P}Landless kingdom modifier", 0, 100, Order = 3, RequireRestart = false, HintText = "{=vSD05nAh}Flat value that will be added to baseline of all clans of the kingdom, except the ruling one, if kingdom owns no land. Default = 50 (none but most honorable vassals would tolerate this).")]
+    [SettingPropertyInteger("{=rHn5IY0P}Landless kingdom modifier", 0, 100, Order = 4, RequireRestart = false, HintText = "{=vSD05nAh}Flat value that will be added to baseline of all clans of the kingdom, except the ruling one, if kingdom owns no land. Default = 50 (none but most honorable vassals would tolerate this).")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext)]
     public int LandlessKingdomEnsuredLoyaltyModifier { get; set; } = 50;
 
@@ -126,6 +129,11 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingEnsuredLoyaltyBribe)]
     public int WithholdGoldMultiplier { get; set; } = 1000;
 
+    //General settings
+    [SettingPropertyBool("{=Fok4pGDs}Vassal minor factions follow general rules", Order = 0, RequireRestart = true, HintText = "{=1J0XkdxB}Specify if vassal minor factions should use general logic when considering leaving their kingdoms. If disabled, minor factions will use mercenary logic even being vassals. Enabling is suggested, consider this a bug fix.")]
+    [SettingPropertyGroup(HeadingGeneral, GroupOrder = 99)]
+    public bool FixMinorFactionVassals { get; set; } = false;
+
     //Debugging and loging
     [SettingPropertyDropdown("{=yul4vp54}Applies to", Order = 0, RequireRestart = false, HintText = "{=z3oSKZFE}Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom].")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
@@ -154,7 +162,9 @@ namespace AllegianceOverhaul
         UseRelationForEnsuredLoyalty = true,
         UseContextForEnsuredLoyalty = true,
         UseHonorForEnsuredLoyalty = true,
-        UseWithholdPrice = true
+        UseWithholdPrice = true,
+        UseWithholdBribing = true,
+        FixMinorFactionVassals = true
       });
       basePresets.Add("Suggested with logging", () => new Settings()
       {
@@ -163,6 +173,8 @@ namespace AllegianceOverhaul
         UseContextForEnsuredLoyalty = true,
         UseHonorForEnsuredLoyalty = true,
         UseWithholdPrice = true,
+        UseWithholdBribing = true,
+        FixMinorFactionVassals = true,
         EnableGeneralDebugging = true
       });
       basePresets.Add("Technical", () => new Settings()
@@ -173,8 +185,15 @@ namespace AllegianceOverhaul
         UseHonorForEnsuredLoyalty = true,
         UseWithholdPrice = true,
         UseWithholdBribing = true,
+        FixMinorFactionVassals = true,
         EnableGeneralDebugging = true,
-        EnableTechnicalDebugging = true
+        EnableTechnicalDebugging = true,
+        EnsuredLoyaltyDebugScope  = new DefaultDropdown<string>(new string[]
+          {
+            DropdownValueAll,
+            DropdownValuePlayers,
+            DropdownValueRuled
+          }, 0)
       });
       return basePresets;
     }

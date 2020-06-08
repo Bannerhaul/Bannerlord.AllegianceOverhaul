@@ -31,7 +31,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance
       
       LeaveKingdomAsClanBarterable asClanBarterable = new LeaveKingdomAsClanBarterable(clan.Leader, (PartyBase)null);
       int ClanBarterableValueForFaction = asClanBarterable.GetValueForFaction((IFaction)clan);
-      int StayThreshold = clan.IsMinorFaction ? 500 : 0;
+      int StayThreshold = (Settings.Instance.FixMinorFactionVassals ? clan.IsUnderMercenaryService : clan.IsMinorFaction) ? 500 : 0;
       bool NativeDecision = ClanBarterableValueForFaction <= StayThreshold;
 
       TextObject ResultTextObject = new TextObject(Debug_Leave);
