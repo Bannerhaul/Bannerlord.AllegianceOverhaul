@@ -4,6 +4,7 @@ using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 {
@@ -136,15 +137,15 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       textObject.SetTextVariable("LEAVING_CLAN", LeavingClan.Name);
       textObject.SetTextVariable("CURRENT_KINGDOM", LeavingClan.Kingdom.Name);
       textObject.SetTextVariable("KINGDOM_LEADER_PRONOUN", LeavingClan.Kingdom.Ruler.IsFemale ? LeaderIsFemaleString : LeaderIsMaleString);
-      textObject.SetTextVariable("INITIAL_INFLUENCE", InitialInfluence.ToString("N"));
-      textObject.SetTextVariable("INITILAL_GOLD", InitilalGold.ToString("N"));
-      textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N"));
-      textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N"));
+      textObject.SetTextVariable("INITIAL_INFLUENCE", InitialInfluence.ToString("N0"));
+      textObject.SetTextVariable("INITILAL_GOLD", InitilalGold.ToString("N0"));
+      textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
+      textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
       if (Desision)
       {        
         ApplyAIWithholdDesision(Desision);
-        textObject.SetTextVariable("RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N"));
-        textObject.SetTextVariable("RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N"));
+        textObject.SetTextVariable("RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N0"));
+        textObject.SetTextVariable("RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
       }
       MessageHelper.SimpleMessage(textObject.ToString());
     }
@@ -166,11 +167,8 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       InquiryBody.SetTextVariable("ACTION_DESCRIPTION", TargetKingdom != null ? new TextObject(ActionDefecting).SetTextVariable("TARGET_KINGDOM", TargetKingdom.Name).ToString() : ActionLeaving);
       InquiryBody.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
       InquiryBody.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
-
-      TextObject ButtonWithhold = new TextObject(ButtonWithholdText);
-      TextObject ButtonRelease = new TextObject(ButtonReleaseText);
       
-      InformationManager.ShowInquiry(new InquiryData(InquiryHeader.ToString(), InquiryBody.ToString(), true, true, ButtonWithhold.ToString(), ButtonRelease.ToString(), () => WithholdClan(), () => ReleaseClan()), true);
+      InformationManager.ShowInquiry(new InquiryData(InquiryHeader.ToString(), InquiryBody.ToString(), true, true, ButtonWithholdText.ToLocalizedString(), ButtonReleaseText.ToLocalizedString(), () => WithholdClan(), () => ReleaseClan()), true);
     }
 
     public void WithholdClan()
@@ -188,12 +186,12 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         textObject.SetTextVariable("LEAVING_CLAN", LeavingClan.Name);
         textObject.SetTextVariable("CURRENT_KINGDOM", LeavingClan.Kingdom.Name);
         textObject.SetTextVariable("KINGDOM_LEADER_PRONOUN", LeavingClan.Kingdom.Ruler.IsFemale ? LeaderIsFemaleString : LeaderIsMaleString);
-        textObject.SetTextVariable("INITIAL_INFLUENCE", InitialInfluence.ToString("N"));
-        textObject.SetTextVariable("INITILAL_GOLD", InitilalGold.ToString("N"));
-        textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N"));
-        textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N"));
-        textObject.SetTextVariable("RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N"));
-        textObject.SetTextVariable("RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N"));
+        textObject.SetTextVariable("INITIAL_INFLUENCE", InitialInfluence.ToString("N0"));
+        textObject.SetTextVariable("INITILAL_GOLD", InitilalGold.ToString("N0"));
+        textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
+        textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
+        textObject.SetTextVariable("RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N0"));
+        textObject.SetTextVariable("RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
         MessageHelper.SimpleMessage(textObject.ToString());
       }
     }
@@ -206,10 +204,10 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         textObject.SetTextVariable("LEAVING_CLAN", LeavingClan.Name);
         textObject.SetTextVariable("CURRENT_KINGDOM", LeavingClan.Kingdom.Name);
         textObject.SetTextVariable("KINGDOM_LEADER_PRONOUN", LeavingClan.Kingdom.Ruler.IsFemale ? LeaderIsFemaleString : LeaderIsMaleString);
-        textObject.SetTextVariable("INITIAL_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N"));
-        textObject.SetTextVariable("INITILAL_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N"));
-        textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N"));
-        textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N"));
+        textObject.SetTextVariable("INITIAL_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N0"));
+        textObject.SetTextVariable("INITILAL_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
+        textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
+        textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
         MessageHelper.SimpleMessage(textObject.ToString());
       }
       if (TargetKingdom is null)

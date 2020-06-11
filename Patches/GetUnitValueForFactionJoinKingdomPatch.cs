@@ -66,7 +66,7 @@ namespace AllegianceOverhaul.Patches
       catch (Exception ex)
       {
         MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
-        DebugHelper.HandleException(ex, methodInfo, "Harmony patch for JoinKingdomAsClanBarterable - GetUnitValueForFaction");
+        DebugHelper.HandleException(ex, methodInfo, "Harmony patch for JoinKingdomAsClanBarterable.GetUnitValueForFaction");
       }
     }
     public static bool Prepare()

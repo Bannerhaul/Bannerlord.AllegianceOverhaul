@@ -57,7 +57,7 @@ namespace AllegianceOverhaul.Patches
       catch (Exception ex)
       {
         MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
-        DebugHelper.HandleException(ex, methodInfo, "Harmony patch for LeaveKingdomAsClanBarterable - GetUnitValueForFaction");
+        DebugHelper.HandleException(ex, methodInfo, "Harmony patch for LeaveKingdomAsClanBarterable.GetUnitValueForFaction");
       }
     }
     public static bool Prepare()

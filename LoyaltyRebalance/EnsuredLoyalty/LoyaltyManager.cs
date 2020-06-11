@@ -1,12 +1,20 @@
-﻿using TaleWorlds.CampaignSystem;
+﻿using System;
+using TaleWorlds.CampaignSystem;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.TwoDimension;
+using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 {
   public class LoyaltyManager
   {
-    //BB49Q65v,xJ9hsFLS,vhJZj4an
+    //BB49Q65v,xJ9hsFLS,xCyQmsJJ,QH0E2w6p,yttWp6ez,4bAtdf3F,wpPwwxHp,CMYzDghV
+    private const string TooltipOathLoyal = "{=vhJZj4an}Under {SERVICE_TYPE} at least for {REMAINING_DAYS} days";
+    private const string TooltipLoyal = "{=f0u5ZyFj}Loyal";
+    private const string TooltipRatherLoyal = "{=oeJtbs1u}Rather loyal";
+    private const string TooltipSomewhatLoyal = "{=zI5tJrm5}Somewhat loyal";
+    private const string TooltipNotLoyal = "{=9jecyxIV}Not loyal";
+
     internal const string TransitionFromSame = "{=5EjuUUvH}Furthermore,";
     internal const string TransitionFromDifferent = "{=PKqNif5j}But";
 
@@ -50,7 +58,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         return -HonorLevel * (Defecting ? Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Leaving);
     }
 
-    public static int GetRelationThreshold(Clan clan, bool Defecting = false)
+    public static int GetRelationThreshold(Clan clan, Kingdom kingdom = null)
     {
       int RelationThreshold = Settings.Instance.EnsuredLoyaltyBaseline;
 
@@ -58,14 +66,15 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       {
         RelationThreshold -= SettingsHelper.BloodRelatives(clan.Kingdom.RulingClan, clan) ? Settings.Instance.BloodRelativesEnsuredLoyaltyModifier : 0;
         RelationThreshold +=
+          kingdom != null && SettingsHelper.BloodRelatives(kingdom.RulingClan, clan) ? Settings.Instance.BloodRelativesEnsuredLoyaltyModifier : 0 +
           (clan.IsMinorFaction ? Settings.Instance.MinorFactionEnsuredLoyaltyModifier : 0) +
-          (Defecting ? Settings.Instance.DefectionEnsuredLoyaltyModifier : 0) +
+          (kingdom is null ? Settings.Instance.DefectionEnsuredLoyaltyModifier : 0) +
           (clan.Fortifications?.Count < 1 ? Settings.Instance.LandlessClanEnsuredLoyaltyModifier : 0) +
           (KingdomFortificationsCount(clan.Kingdom) < 1 ? Settings.Instance.LandlessKingdomEnsuredLoyaltyModifier : 0);
       }
 
       if (Settings.Instance.UseHonorForEnsuredLoyalty)
-        RelationThreshold += GetHonorModifier(clan.Leader, Defecting);
+        RelationThreshold += GetHonorModifier(clan.Leader, kingdom is null);
 
       return RelationThreshold;
     }
@@ -103,7 +112,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           else if (Settings.Instance.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
           {
             int CurrentRelation = clan.Leader.GetRelation(clan.Kingdom.Ruler);
-            int RequiredRelation = GetRelationThreshold(clan, kingdom is null);
+            int RequiredRelation = GetRelationThreshold(clan, kingdom);
             bool RelationCheckResult = CurrentRelation >= RequiredRelation;
             LoyaltyCostManager costManager = new LoyaltyCostManager(clan, kingdom);
             bool HaveResources = clan.Kingdom.RulingClan.Influence > (costManager.WithholdCost?.InfluenceCost ?? 0) && clan.Kingdom.Ruler.Gold > (costManager.WithholdCost?.GoldCost ?? 0);
@@ -115,7 +124,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             ReasonRelation.SetTextVariable("KINGDOM_LEADER", clan.Kingdom.Leader.Name);
             ReasonRelation.SetTextVariable("CURRENT_RELATION", CurrentRelation);
             ReasonRelation.SetTextVariable("REQUIRED_RELATION", RequiredRelation);
-            ReasonRelation.SetTextVariable("WITHHOLD_PRICE_INFO", RelationCheckResult && ShouldPay ? WithholdPrice : new TextObject(""));
+            ReasonRelation.SetTextVariable("WITHHOLD_PRICE_INFO", RelationCheckResult && ShouldPay ? WithholdPrice : TextObject.Empty);
             DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", RelationCheckResult ? (ShouldPay ? (HaveResources ? ResultDepends : ResultFalse) : ResultTrue) : ResultFalse);
             DebugTextObject.SetTextVariable("REASON", ReasonRelation.ToString());
             return RelationCheckResult;
@@ -126,7 +135,6 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             DebugTextObject.SetTextVariable("REASON", ReasonRelationDisabled);
             return false;
           }
-          
         }
       }
     }
@@ -145,7 +153,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 
       if (Settings.Instance.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
       {
-        if (!(clan.Leader.GetRelation(clan.Kingdom.Ruler) >= GetRelationThreshold(clan, kingdom is null)))
+        if (!(clan.Leader.GetRelation(clan.Kingdom.Ruler) >= GetRelationThreshold(clan, kingdom)))
           return false;
         else
         if (Settings.Instance.UseWithholdPrice)
@@ -165,6 +173,72 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       }
       else
         return false;
+    }
+    private static void GetBlankLoyaltyTooltip(out string text, out Color color)
+    {
+      text = "-";
+      color = ViewModels.TooltipHelper.DefaultTooltipColor;
+    }
+    public static void GetLoyaltyTooltipInfo(Clan clan, out string text, out Color color)
+    {
+      if (clan.Kingdom is null)
+      {
+        GetBlankLoyaltyTooltip(out text, out color);
+        return;
+      }
+
+      int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
+      int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance.MinorFactionServicePeriod : (clan.IsMinorFaction ? Settings.Instance.MinorFactionOathPeriod : Settings.Instance.FactionOathPeriod);
+      if (clan.Kingdom != null && DaysWithKingdom <= RequiredDays)
+      {
+        TextObject ReasonPeriod = new TextObject(TooltipOathLoyal);
+        ReasonPeriod.SetTextVariable("SERVICE_TYPE", clan.IsUnderMercenaryService ? ServiceTypeMercenary : ServiceTypeOath);
+        ReasonPeriod.SetTextVariable("REMAINING_DAYS", RequiredDays - DaysWithKingdom);
+        text = ReasonPeriod.ToString();
+        color = Colors.Green;
+        return;
+      }
+      if (!Settings.Instance.UseRelationForEnsuredLoyalty)
+      {
+        GetBlankLoyaltyTooltip(out text, out color);
+        return;
+      }
+      int MinRelationThreshold = -101;
+      int MaxRelationThreshold = 101;
+      int LeaveRelationThreshold = 0;
+      foreach (Kingdom kingdom in Kingdom.All)
+      {
+        if (kingdom == clan.Kingdom)
+          LeaveRelationThreshold = GetRelationThreshold(clan, null);
+        else
+        {
+          MinRelationThreshold = MinRelationThreshold < -100 ? GetRelationThreshold(clan, kingdom) : Math.Min(MinRelationThreshold, GetRelationThreshold(clan, kingdom));
+          MaxRelationThreshold = MaxRelationThreshold > 100 ? GetRelationThreshold(clan, kingdom) : Math.Max(MaxRelationThreshold, GetRelationThreshold(clan, kingdom));
+        }
+      }
+      int RelationWithLiege = clan.Leader.GetRelation(clan.Kingdom.Ruler);
+      if (RelationWithLiege > LeaveRelationThreshold && RelationWithLiege > MaxRelationThreshold)
+      {
+        text = TooltipLoyal.ToLocalizedString();
+        color = Colors.Green;
+      }
+      else
+      if (RelationWithLiege > LeaveRelationThreshold && RelationWithLiege > MinRelationThreshold)
+      {
+        text = TooltipRatherLoyal.ToLocalizedString();
+        color = ViewModels.TooltipHelper.DefaultTooltipColor;
+      }
+      else
+      if (RelationWithLiege > MinRelationThreshold)
+      {
+        text = TooltipSomewhatLoyal.ToLocalizedString();
+        color = ViewModels.TooltipHelper.DefaultTooltipColor;
+      }
+      else
+      {
+        text = TooltipNotLoyal.ToLocalizedString();
+        color = Colors.Red;
+      }
     }
   }
 }
