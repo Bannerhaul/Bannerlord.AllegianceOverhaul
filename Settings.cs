@@ -57,6 +57,9 @@ namespace AllegianceOverhaul
     [SettingPropertyInteger("{=eMMKVjRU}Minimum mercenary service period", 0, 420, Order = 2, RequireRestart = false, HintText = "{=00arXPdi}Period in days after initiating mercenary service of kingdom, during which minor faction would not even consider leaving that kingdom. Default = 42 (half a game year).")]
     [SettingPropertyGroup(HeadingEnsuredLoyalty)]
     public int MinorFactionServicePeriod { get; set; } = 42;
+    [SettingPropertyBool("{=Fxyb9iPM}Affect player conversations", Order = 3, RequireRestart = true, HintText = "{=ZaPJhkuk}Specify if ensured loyalty system should affect player conversations, making impossible to reqruit lords that are loyal to ther lieges.")]
+    [SettingPropertyGroup(HeadingEnsuredLoyalty)]
+    public bool UseLoyaltyInConversations { get; set; } = true;
 
     //Ensured loyalty via relation
     [SettingPropertyBool("{=mmUgw8hL}Achieve via relation",  RequireRestart = false, HintText = "{=gj3cKWJo}Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom.")]
@@ -72,7 +75,7 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext, GroupOrder = 0, IsMainToggle = true)]
     public bool UseContextForEnsuredLoyalty { get; set; } = false;
 
-    [SettingPropertyInteger("{=AOnhwhiK}Blood relation modifier", 0, 50, Order = 0, RequireRestart = false, HintText = "{=gI3AplJv}Flat value that will be deducted from baseline if there is a kinship with the governing clan. Default = 30 (blood relatives are loyal).")]
+    [SettingPropertyInteger("{=AOnhwhiK}Blood relation modifier", 0, 50, Order = 0, RequireRestart = false, HintText = "{=gI3AplJv}Flat value that will be deducted from baseline if there is a kinship with the governing clan. The same value will be added to the baseline if clan considering defecting to a kingdom, ruled by kinsman. Default = 30 (blood relatives are loyal to and tend to join their kinsfolk).")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext)]
     public int BloodRelativesEnsuredLoyaltyModifier { get; set; } = 30;
     [SettingPropertyInteger("{=Rbo96zKF}Minor faction modifier", 0, 50, Order = 1, RequireRestart = false, HintText = "{=BFnZrVGK}Flat value that will be added to baseline if minor faction considering leaving its kingdom. Default = 10 (minor factions tend to be less loyal).")]
@@ -133,6 +136,9 @@ namespace AllegianceOverhaul
     [SettingPropertyBool("{=Fok4pGDs}Vassal minor factions follow general rules", Order = 0, RequireRestart = true, HintText = "{=1J0XkdxB}Specify if vassal minor factions should use general logic when considering leaving their kingdoms. If disabled, minor factions will use mercenary logic even being vassals. Enabling is suggested, consider this a bug fix.")]
     [SettingPropertyGroup(HeadingGeneral, GroupOrder = 99)]
     public bool FixMinorFactionVassals { get; set; } = false;
+    [SettingPropertyBool("{=UgeDMBZE}Advanced hero tooltips", Order = 1, RequireRestart = true, HintText = "{=13W8p9hd}Enable adding additional info to hero tooltips in game Encyclopedia. That adds info about relations, loyalty etc - depending on enabled systems.")]
+    [SettingPropertyGroup(HeadingGeneral, GroupOrder = 99)]
+    public bool UseAdvancedHeroTooltips { get; set; } = false;
 
     //Debugging and loging
     [SettingPropertyDropdown("{=yul4vp54}Applies to", Order = 0, RequireRestart = false, HintText = "{=z3oSKZFE}Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom].")]
@@ -164,7 +170,8 @@ namespace AllegianceOverhaul
         UseHonorForEnsuredLoyalty = true,
         UseWithholdPrice = true,
         UseWithholdBribing = true,
-        FixMinorFactionVassals = true
+        FixMinorFactionVassals = true,
+        UseAdvancedHeroTooltips = true
       });
       basePresets.Add("Suggested with logging", () => new Settings()
       {
@@ -175,6 +182,7 @@ namespace AllegianceOverhaul
         UseWithholdPrice = true,
         UseWithholdBribing = true,
         FixMinorFactionVassals = true,
+        UseAdvancedHeroTooltips = true,
         EnableGeneralDebugging = true
       });
       basePresets.Add("Technical", () => new Settings()
@@ -186,6 +194,7 @@ namespace AllegianceOverhaul
         UseWithholdPrice = true,
         UseWithholdBribing = true,
         FixMinorFactionVassals = true,
+        UseAdvancedHeroTooltips = true,
         EnableGeneralDebugging = true,
         EnableTechnicalDebugging = true,
         EnsuredLoyaltyDebugScope  = new DefaultDropdown<string>(new string[]

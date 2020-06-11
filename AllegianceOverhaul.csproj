@@ -269,6 +269,7 @@
     <Compile Include="DebugHelper.cs" />
     <Compile Include="Extensions\Harmony\PatchesExtension.cs" />
     <Compile Include="Extensions\Harmony\PatchExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="LoggingHelper.cs" />
     <Compile Include="LoyaltyRebalance\LoyaltyDebugHelper.cs" />
     <Compile Include="LoyaltyRebalance\EnsuredLoyalty\LoyaltyCostManager.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Patches\ConsiderClanLeaveAsMercenaryPatch.cs" />
     <Compile Include="Patches\ConsiderClanLeaveKingdomPatch.cs" />
     <Compile Include="Patches\ExecuteAiBarterReversePatch.cs" />
+    <Compile Include="Patches\ConversationDefectionConditionPatch.cs" />
     <Compile Include="Patches\GetScoreOfMercenaryToLeaveKingdom.cs" />
     <Compile Include="Patches\GetScoreOfClanToLeaveKingdomPatch.cs" />
     <Compile Include="Patches\GetUnitValueForFactionJoinKingdomPatch.cs" />
@@ -287,6 +289,12 @@
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="SubModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Extensions\HeroVMcontactExtension.cs" />
+    <Compile Include="ViewModels\Extensions\TooltipVMExtension.cs" />
+    <Compile Include="ViewModels\Patches\EncyclopediaHeroPageVMRefreshPatch.cs" />
+    <Compile Include="ViewModels\Patches\TooltipVMExtensionsHeroActionPatch.cs" />
+    <Compile Include="ViewModels\Patches\TooltipVMExtensionsUpdateTooltipPatch.cs" />
+    <Compile Include="ViewModels\TooltipHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
