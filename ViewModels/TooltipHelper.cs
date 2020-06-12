@@ -15,6 +15,8 @@ namespace AllegianceOverhaul.ViewModels
 
     public static string GetTooltipRelationHeader (Hero hero)
     {
+      if (hero is null)
+        return string.Empty;
       TextObject textObject = new TextObject(TooltipRelationHeader);
       textObject.SetTextVariable("HERO", hero.Name);
       return textObject.ToString();
