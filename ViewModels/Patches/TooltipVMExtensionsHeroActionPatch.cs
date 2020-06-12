@@ -19,7 +19,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
       {
         if (!Settings.Instance.UseAdvancedHeroTooltips)
           return true;
-        if (args.Cast<Object>().ToList().Count == 2)
+        if (args.Length == 2 && args[1] != null && args[1] is Hero)
           tooltipVM.UpdateTooltip(args[0] as Hero, args[1] as Hero);
         else
           tooltipVM.UpdateTooltip(args[0] as Hero);
