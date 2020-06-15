@@ -111,7 +111,7 @@
 		<string id="gj3cKWJo" text="Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom." />
 		
 		<string id="JvWw6eSp" text="Ensured loyalty baseline" />
-		<string id="XP7qtIkt" text="The minimum required relationship a clan leader must have with a kingdom leader in order for them to never leave that kingdom. Being below that threshold does NOT mean clan will aitomatically leave. Can serve as a baseline for other togglable modifiers. Default = 50." />
+		<string id="XP7qtIkt" text="The minimum required relationship a clan leader must have with a kingdom leader in order for clan to never leave that kingdom. Being below that threshold does NOT mean clan will aitomatically leave. Serves as a baseline for other togglable modifiers. Default = 50." />
 		
 		<string id="m5JmQwFt" text="Modify by situational context" />
 		<string id="0oeDqVTM" text="Specify if situational context should affect minimum required relationship, at which loyalty is ensured." />

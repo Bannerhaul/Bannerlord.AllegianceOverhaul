@@ -21,6 +21,5 @@ namespace AllegianceOverhaul.ViewModels.Extensions
       else
         InformationManager.AddTooltipInformation(typeof(Hero), this.Hero);
     }
-
   }
 }

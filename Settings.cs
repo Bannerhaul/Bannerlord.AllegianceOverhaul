@@ -66,7 +66,7 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByRelation, GroupOrder = 0, IsMainToggle = true)]
     public bool UseRelationForEnsuredLoyalty { get; set; } = false;
 
-    [SettingPropertyInteger("{=JvWw6eSp}Ensured loyalty baseline", -100, 100, RequireRestart = false, HintText = "{=XP7qtIkt}The minimum required relationship a clan leader must have with a kingdom leader in order for them to never leave that kingdom. Being below that threshold does NOT mean clan will aitomatically leave. Can serve as a baseline for other togglable modifiers. Default = 50.")]
+    [SettingPropertyInteger("{=JvWw6eSp}Ensured loyalty baseline", -100, 100, RequireRestart = false, HintText = "{=XP7qtIkt}The minimum required relationship a clan leader must have with a kingdom leader in order for clan to never leave that kingdom. Being below that threshold does NOT mean clan will aitomatically leave. Serves as a baseline for other togglable modifiers. Default = 50.")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByRelation)]
     public int EnsuredLoyaltyBaseline { get; set; } = 50;
 
