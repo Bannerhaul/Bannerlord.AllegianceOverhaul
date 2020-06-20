@@ -168,7 +168,7 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingHarmonyCheckup, GroupOrder = 0, IsMainToggle = true)]
     public bool EnableHarmonyCheckup { get; set; } = false;
 
-    [SettingPropertyText("{=531Vobla}Ignore list", RequireRestart = true, HintText = "{=59KvCjXV}List of harmony instance names that should be ignored when checking for possible conflicts with other mods. Those could be found in mod log and should be separated by semicolon.")]
+    [SettingPropertyText("{=531Vobla}Ignore list", RequireRestart = true, HintText = "{=59KvCjXV}List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon.")]
     [SettingPropertyGroup(HeadingHarmonyCheckup)]
     public string HarmonyCheckupIgnoreList { get; set; } = "";
 

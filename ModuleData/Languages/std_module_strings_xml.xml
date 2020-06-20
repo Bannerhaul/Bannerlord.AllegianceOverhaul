@@ -179,7 +179,7 @@
 		<string id="ZnT9o5HI" text="Harmony checkup on initialize" />
 		<string id="ELPI6N1Q" text="Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul." />
 		<string id="531Vobla" text="Ignore list" />
-		<string id="59KvCjXV" text="List of harmony instance names that should be ignored when checking for possible conflicts with other mods. Those could be found in mod log and should be separated by semicolon." />
+		<string id="59KvCjXV" text="List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon." />
 		<!--
 	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu,Gp9KcTuz,eoQCaS0r,GmyQQ5Cm,If18n1li,u9YiryQR,1bsT0jB0
 		-->
