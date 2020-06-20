@@ -127,7 +127,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             ReasonRelation.SetTextVariable("WITHHOLD_PRICE_INFO", RelationCheckResult && ShouldPay ? WithholdPrice : TextObject.Empty);
             DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", RelationCheckResult ? (ShouldPay ? (HaveResources ? ResultDepends : ResultFalse) : ResultTrue) : ResultFalse);
             DebugTextObject.SetTextVariable("REASON", ReasonRelation.ToString());
-            return RelationCheckResult;
+            return RelationCheckResult && (!ShouldPay || HaveResources);
           }
           else
           {
@@ -162,7 +162,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           if (clan.Kingdom.RulingClan == Clan.PlayerClan)
           {
             if (costManager.WithholdCost != null)
+            {
+              if (!(clan.Kingdom.RulingClan.Influence > costManager.WithholdCost.InfluenceCost) || !(clan.Kingdom.Ruler.Gold > costManager.WithholdCost.GoldCost))
+                return false;
               costManager.AwaitPlayerDecision();
+            }
             return true;
           }
           else

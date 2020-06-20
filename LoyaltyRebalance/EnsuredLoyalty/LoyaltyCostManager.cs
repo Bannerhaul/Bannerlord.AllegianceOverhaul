@@ -82,9 +82,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       BaseCalculatedCost = Math.Sqrt(BarterableSum) / Math.Log10(BarterableSum);
 
       return
-        Settings.Instance.UseWithholdBribing && Settings.Instance.WithholdToleranceLimitForBribes * 1000000 < BarterableSum
-          ? new ComplexCost((int)(BaseCalculatedCost * Settings.Instance.WithholdInfluenceMultiplier), (int)BaseCalculatedCost * Settings.Instance.WithholdGoldMultiplier)
-          : new ComplexCost((int)(BaseCalculatedCost * Settings.Instance.WithholdInfluenceMultiplier), 0);
+        new ComplexCost
+        (
+          (int)(BaseCalculatedCost * Settings.Instance.WithholdInfluenceMultiplier),
+          Settings.Instance.UseWithholdBribing && Settings.Instance.WithholdToleranceLimitForBribes * 1000000 < BarterableSum ? (int)BaseCalculatedCost * Settings.Instance.WithholdGoldMultiplier : 0
+        );
     }
     private int GetScoreForKingdomToWithholdClan()
     {

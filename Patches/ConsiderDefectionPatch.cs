@@ -24,7 +24,7 @@ namespace AllegianceOverhaul.Patches
       }
     }
 
-    [HarmonyPriority(Priority.Normal)]
+    [HarmonyPriority(Priority.HigherThanNormal)]
     public static bool Prefix(Clan clan1, Kingdom kingdom) //Bool prefixes compete with each other and skip others, as well as original, if return false
     {
       try

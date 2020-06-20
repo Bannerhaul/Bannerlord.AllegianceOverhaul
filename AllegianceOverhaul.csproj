@@ -309,6 +309,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="ModuleData\Languages\RU\std_module_strings_xml.xml" />
     <Content Include="ModuleData\Languages\std_module_strings_xml.xml" />
     <Content Include="SubModule.xml" />
     <ModuleData Include="ModuleData\**/*.*" />
