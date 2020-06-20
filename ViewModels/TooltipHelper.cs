@@ -1,5 +1,4 @@
-﻿using TaleWorlds.Core;
-using TaleWorlds.Localization;
+﻿using TaleWorlds.Localization;
 using TaleWorlds.Library;
 using TaleWorlds.CampaignSystem;
 using AllegianceOverhaul.Extensions;
@@ -13,7 +12,7 @@ namespace AllegianceOverhaul.ViewModels
     private const string TooltipRelationHeader = "{=hlIYCDRA}Relation with {HERO}";
     private const string TooltipLoyaltyHeader = "{=AuJasuJQ}Loyalty";
 
-    public static string GetTooltipRelationHeader (Hero hero)
+    public static string GetTooltipRelationHeader(Hero hero)
     {
       if (hero is null)
         return string.Empty;

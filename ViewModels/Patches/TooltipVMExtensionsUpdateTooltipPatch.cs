@@ -10,7 +10,7 @@ using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
 namespace AllegianceOverhaul.ViewModels.Patches
 {
   [HarmonyPatch(typeof(TooltipVMExtensions), "UpdateTooltip", new[] { typeof(TooltipVM), typeof(Hero) })]
-  class TooltipVMExtensionsUpdateTooltipPatch
+  public class TooltipVMExtensionsUpdateTooltipPatch
   {
     [HarmonyPostfix]
     public static void UpdateTooltipPatch(TooltipVM tooltipVM, Hero hero)

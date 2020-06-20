@@ -17,9 +17,9 @@ namespace AllegianceOverhaul.Patches
           return;
 
         int RelationBetweenClans = FactionManager.GetRelationBetweenClans(kingdom.RulingClan, clan);
-        float RelationModifier = (float)Math.Min(2.0, Math.Max(0.5, 1.0 + Math.Sqrt((double)Math.Abs(RelationBetweenClans)) * (RelationBetweenClans < 0 ? -0.0599999986588955 : 0.0399999991059303)));
+        float RelationModifier = (float)Math.Min(2.0, Math.Max(0.5, 1.0 + Math.Sqrt(Math.Abs(RelationBetweenClans)) * (RelationBetweenClans < 0 ? -0.0599999986588955 : 0.0399999991059303)));
         float CultureModifier = (float)(1.0 + (kingdom.Culture == clan.Culture ? 0.150000005960464 : -0.150000005960464));
-        float NewSettlementValue = clan.CalculateSettlementValue((Kingdom)null);
+        float NewSettlementValue = clan.CalculateSettlementValue(null);
         float CurSettlementValue = clan.CalculateSettlementValue(kingdom);
         int ClanCmndrHeroeCount = clan.CommanderHeroes.Count;
         float StlmntValPerHeroModifier = 0.0f;
@@ -27,24 +27,26 @@ namespace AllegianceOverhaul.Patches
         if (!clan.IsMinorFaction)
         {
           foreach (Town fief in kingdom.Fiefs)
-            ValueOfKingdomSettlements += fief.Owner.Settlement.GetSettlementValueForFaction((IFaction)kingdom);
+          {
+            ValueOfKingdomSettlements += fief.Owner.Settlement.GetSettlementValueForFaction(kingdom);
+          }
           int KingdomCmndrHeroeCount = 0;
           foreach (Clan clan1 in kingdom.Clans)
           {
             if (!clan1.IsMinorFaction || clan1 == Clan.PlayerClan)
               KingdomCmndrHeroeCount += clan1.CommanderHeroes.Count;
           }
-          StlmntValPerHeroModifier = ValueOfKingdomSettlements / (float)(KingdomCmndrHeroeCount + ClanCmndrHeroeCount);
+          StlmntValPerHeroModifier = ValueOfKingdomSettlements / (KingdomCmndrHeroeCount + ClanCmndrHeroeCount);
         }
-        float ClanStrengthModifier = (float)(((double)clan.TotalStrength + 150.0 * (double)ClanCmndrHeroeCount) * 10.0);
+        float ClanStrengthModifier = (float)((clan.TotalStrength + 150.0 * ClanCmndrHeroeCount) * 10.0);
         float ReliabilityConstant = Helpers.HeroHelper.CalculateReliabilityConstant(clan.Leader, 1f);
         float DaysWithFactionModifier = 2000f * (float)(10.0 - Math.Sqrt(Math.Min(100.0, (CampaignTime.Now - clan.LastFactionChangeTime).ToDays)));
         int ClanFortificationsModifier = 40000 + (clan.Fortifications != null ? clan.Fortifications.Count : 0) * 20000;
         float ComputedResult =
-          (float)(-((double)StlmntValPerHeroModifier * Math.Sqrt((double)ClanCmndrHeroeCount) * 0.300000011920929 + (double)ReliabilityConstant * ((double)ClanFortificationsModifier + (double)ClanStrengthModifier) + (double)DaysWithFactionModifier) *
-            ((double)RelationModifier * (double)CultureModifier) + ((double)NewSettlementValue - (double)CurSettlementValue) + (kingdom.Ruler == Hero.MainHero ? -70000.0 : 0.0));
+          (float)(-(StlmntValPerHeroModifier * Math.Sqrt(ClanCmndrHeroeCount) * 0.300000011920929 + ReliabilityConstant * (ClanFortificationsModifier + (double)ClanStrengthModifier) + DaysWithFactionModifier) *
+            (RelationModifier * (double)CultureModifier) + (NewSettlementValue - (double)CurSettlementValue) + (kingdom.Ruler == Hero.MainHero ? -70000.0 : 0.0));
 
-        string UnitValueDebugInfo = String.Format("ScoreOfClanToLeaveKingdom. RelationBetweenClans = {0}. RelationModifier = {1}, CultureModifier = {2}. ClanCmndrHeroeCount = {3}. " +
+        string UnitValueDebugInfo = string.Format("ScoreOfClanToLeaveKingdom. RelationBetweenClans = {0}. RelationModifier = {1}, CultureModifier = {2}. ClanCmndrHeroeCount = {3}. " +
           "ValueOfKingdomSettlements = {4}. StlmntValPerHeroModifier = {5}. CurSettlementValue = {6}. NewSettlementValue = {7}. ClanStrengthModifier = {8}. ReliabilityConstant = {9}. " +
           "DaysWithFactionModifier = {10}. ClanFortificationsModifier = {11}. CalculatedResult = {12}. NativeResult = {13}.",
           RelationBetweenClans.ToString(), RelationModifier.ToString("N"), CultureModifier.ToString("N"), ClanCmndrHeroeCount.ToString("N"),

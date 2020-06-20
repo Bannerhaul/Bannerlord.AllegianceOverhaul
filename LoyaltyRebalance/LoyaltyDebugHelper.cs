@@ -1,5 +1,4 @@
 ﻿using MCM.Abstractions.Data;
-using System;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.Localization;
@@ -28,9 +27,9 @@ namespace AllegianceOverhaul.LoyaltyRebalance
       SettingsHelper.InDebugBranch = true;
       if (!DebugEnsuredLoyalty || !SettingsHelper.FactionInScope(clan, Settings.Instance.EnsuredLoyaltyDebugScope) || !SettingsHelper.InDebugBranch)
         return;
-      
-      LeaveKingdomAsClanBarterable asClanBarterable = new LeaveKingdomAsClanBarterable(clan.Leader, (PartyBase)null);
-      int ClanBarterableValueForFaction = asClanBarterable.GetValueForFaction((IFaction)clan);
+
+      LeaveKingdomAsClanBarterable asClanBarterable = new LeaveKingdomAsClanBarterable(clan.Leader, null);
+      int ClanBarterableValueForFaction = asClanBarterable.GetValueForFaction(clan);
       int StayThreshold = (Settings.Instance.FixMinorFactionVassals ? clan.IsUnderMercenaryService : clan.IsMinorFaction) ? 500 : 0;
       bool NativeDecision = ClanBarterableValueForFaction <= StayThreshold;
 
@@ -44,10 +43,10 @@ namespace AllegianceOverhaul.LoyaltyRebalance
       ResultTextObject.SetTextVariable("CLAN_DECISION", NativeDecision ? StayDecision : LeaveDecision);
 
       bool IsLoyaltyEnsured = LoyaltyManager.CheckLoyalty(clan, out TextObject LoyaltyTextObject);
-      LoyaltyTextObject.SetTextVariable("TRANSITION_PART", NativeDecision == IsLoyaltyEnsured ? LoyaltyManager.TransitionFromSame: LoyaltyManager.TransitionFromDifferent);
+      LoyaltyTextObject.SetTextVariable("TRANSITION_PART", NativeDecision == IsLoyaltyEnsured ? LoyaltyManager.TransitionFromSame : LoyaltyManager.TransitionFromDifferent);
       ResultTextObject.SetTextVariable("ENSURED_LOYALTY_RESULT", LoyaltyTextObject);
 
-      MessageHelper.SimpleMessage(ResultTextObject.ToString());
+      MessageHelper.SimpleMessage(ResultTextObject);
       SettingsHelper.InDebugBranch = false;
     }
 
@@ -60,8 +59,8 @@ namespace AllegianceOverhaul.LoyaltyRebalance
         return;
 
       JoinKingdomAsClanBarterable asClanBarterable = new JoinKingdomAsClanBarterable(clan.Leader, kingdom);
-      int ClanBarterableValueForClan = asClanBarterable.GetValueForFaction((IFaction)clan);
-      int ClanBarterableValueForKingdom = asClanBarterable.GetValueForFaction((IFaction)kingdom);
+      int ClanBarterableValueForClan = asClanBarterable.GetValueForFaction(clan);
+      int ClanBarterableValueForKingdom = asClanBarterable.GetValueForFaction(kingdom);
       bool NativeDecision = ClanBarterableValueForClan + ClanBarterableValueForKingdom <= 0;
 
       TextObject ResultTextObject = new TextObject(Debug_Defect);
@@ -78,7 +77,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance
       LoyaltyTextObject.SetTextVariable("TRANSITION_PART", NativeDecision == IsLoyaltyEnsured ? LoyaltyManager.TransitionFromSame : LoyaltyManager.TransitionFromDifferent);
       ResultTextObject.SetTextVariable("ENSURED_LOYALTY_RESULT", LoyaltyTextObject);
 
-      MessageHelper.SimpleMessage(ResultTextObject.ToString());
+      MessageHelper.SimpleMessage(ResultTextObject);
       SettingsHelper.InDebugBranch = false;
     }
   }

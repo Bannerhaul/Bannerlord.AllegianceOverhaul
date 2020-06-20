@@ -1,4 +1,7 @@
-﻿using TaleWorlds.Localization;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using TaleWorlds.Localization;
 
 namespace AllegianceOverhaul.Extensions
 {
@@ -7,6 +10,10 @@ namespace AllegianceOverhaul.Extensions
     public static string ToLocalizedString(this string String)
     {
       return new TextObject(String).ToString();
+    }
+    public static ReadOnlyCollection<string> ToReadOnlyCollection(this string String, char Separator = ';')
+    {
+      return String.Split(Separator).Select(p => p.Trim()).ToList().AsReadOnly();
     }
   }
 }

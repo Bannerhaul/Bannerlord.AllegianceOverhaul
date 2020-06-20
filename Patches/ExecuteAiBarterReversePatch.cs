@@ -4,7 +4,7 @@ using TaleWorlds.CampaignSystem;
 namespace AllegianceOverhaul.Patches
 {
   [HarmonyPatch(typeof(BarterManager), "ExecuteAiBarter", new[] { typeof(IFaction), typeof(IFaction), typeof(Hero), typeof(Hero), typeof(Barterable) })]
-  class ExecuteAiBarterReversePatch
+  public class ExecuteAiBarterReversePatch
   {
     [HarmonyReversePatch]
     public static void ExecuteAiBarter(object instance, IFaction faction1, IFaction faction2, Hero faction1Hero, Hero faction2Hero, Barterable barterable)

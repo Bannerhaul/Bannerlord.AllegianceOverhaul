@@ -16,11 +16,11 @@ namespace AllegianceOverhaul.Patches
         if (!SettingsHelper.InDebugBranch || !Settings.Instance.EnableTechnicalDebugging || !SettingsHelper.FactionInScope(mercenaryClan, Settings.Instance.EnsuredLoyaltyDebugScope))
           return;
 
-        float ComputedResult = (float)(10000.0 * (0.00999999977648258 * (double)Math.Min(100f, mercenaryClan.LastFactionChangeTime.ElapsedDaysUntilNow)) - 5000.0) - __instance.GetScoreOfMercenaryToJoinKingdom(mercenaryClan, kingdom);
+        float ComputedResult = (float)(10000.0 * (0.00999999977648258 * Math.Min(100f, mercenaryClan.LastFactionChangeTime.ElapsedDaysUntilNow)) - 5000.0) - __instance.GetScoreOfMercenaryToJoinKingdom(mercenaryClan, kingdom);
 
-        string UnitValueDebugInfo = String.Format("ScoreOfMercenaryToLeaveKingdom. DaysWithFaction = {0}. DaysWithFactionModified = {1}. GetScoreOfMercenaryToJoinKingdom = {2}." +
+        string UnitValueDebugInfo = string.Format("ScoreOfMercenaryToLeaveKingdom. DaysWithFaction = {0}. DaysWithFactionModified = {1}. GetScoreOfMercenaryToJoinKingdom = {2}." +
           "CalculatedResult = {3}. NativeResult = {4}.",
-          mercenaryClan.LastFactionChangeTime.ElapsedDaysUntilNow.ToString(), (10000.0 * (0.00999999977648258 * (double)Math.Min(100f, mercenaryClan.LastFactionChangeTime.ElapsedDaysUntilNow))).ToString("N"),
+          mercenaryClan.LastFactionChangeTime.ElapsedDaysUntilNow.ToString(), (10000.0 * (0.00999999977648258 * Math.Min(100f, mercenaryClan.LastFactionChangeTime.ElapsedDaysUntilNow))).ToString("N"),
           __instance.GetScoreOfMercenaryToJoinKingdom(mercenaryClan, kingdom).ToString("N"),
           ComputedResult.ToString("N"), __result.ToString("N"));
 

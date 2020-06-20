@@ -40,8 +40,8 @@ namespace AllegianceOverhaul.Patches
     }
 
     public static bool Prepare()
-    {      
-      return (Settings.Instance.UseEnsuredLoyalty || Settings.Instance.EnableGeneralDebugging || Settings.Instance.EnableTechnicalDebugging);
+    {
+      return Settings.Instance.UseEnsuredLoyalty || Settings.Instance.EnableGeneralDebugging || Settings.Instance.EnableTechnicalDebugging;
     }
   }
 }

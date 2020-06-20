@@ -6,10 +6,11 @@ using MCM.Abstractions.Settings.Base.Global;
 using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using TaleWorlds.Localization;
+using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul
 {
-  class Settings : AttributeGlobalSettings<Settings>
+  public class Settings : AttributeGlobalSettings<Settings>
   {
     public override string Id => "AllegianceOverhaul_v1";
     public override string DisplayName => $"{new TextObject("{=qfpqfAdz}Allegiance Overhaul")} {typeof(Settings).Assembly.GetName().Version.ToString(3)}";
@@ -28,8 +29,13 @@ namespace AllegianceOverhaul
     private const string HeadingEnsuredLoyaltyByHonor = HeadingEnsuredLoyaltyByRelation + "/{=eExUFCCQ}Modify by honor level";
     private const string HeadingEnsuredLoyaltyPrice = HeadingEnsuredLoyaltyByRelation + "/{=uXwgU2WE}Withhold price";
     private const string HeadingEnsuredLoyaltyBribe = HeadingEnsuredLoyaltyPrice + "/{=rhvq8Yhb}Bribing";
+    private const string HeadingHarmonyCheckup = HeadingDebug + "/{=ZnT9o5HI}Harmony checkup on initialize";
 
     //Reused settings, hints and values
+    private const string PresetSuggested = "{=s1ojXK7t}Suggested";
+    private const string PresetSLogging = "{=ViCdJulG}Suggested with logging";
+    private const string PresetTechnical = "{=3WYNEaOI}Technical";
+
     private const string DropdownValueAll = "{=COahS2f6}All kingdoms";
     private const string DropdownValuePlayers = "{=JeehGy9z}Player's kingdom";
     private const string DropdownValueRuled = "{=v2TacaMr}Kingdom ruled by player";
@@ -50,7 +56,7 @@ namespace AllegianceOverhaul
 
     [SettingPropertyInteger("{=MIDoz9om}Faction oath of fealty limitation period", 0, 420, Order = 0, RequireRestart = false, HintText = "{=l5LWFlHv}Period in days after joining a kingdom, during which clan would not even consider leaving that kingdom. Default = 84 (a game year).")]
     [SettingPropertyGroup(HeadingEnsuredLoyalty)]
-    public int FactionOathPeriod { get; set; } = 84;    
+    public int FactionOathPeriod { get; set; } = 84;
     [SettingPropertyInteger("{=Az4K6FiF}Minor faction oath of fealty limitation period", 0, 420, Order = 1, RequireRestart = false, HintText = "{=qRnwZFts}Period in days after joining a kingdom, during which minor faction would not even consider leaving that kingdom. Default = 63 (three quarters of a game year).")]
     [SettingPropertyGroup(HeadingEnsuredLoyalty)]
     public int MinorFactionOathPeriod { get; set; } = 63;
@@ -62,7 +68,7 @@ namespace AllegianceOverhaul
     public bool UseLoyaltyInConversations { get; set; } = true;
 
     //Ensured loyalty via relation
-    [SettingPropertyBool("{=mmUgw8hL}Achieve via relation",  RequireRestart = false, HintText = "{=gj3cKWJo}Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom.")]
+    [SettingPropertyBool("{=mmUgw8hL}Achieve via relation", RequireRestart = false, HintText = "{=gj3cKWJo}Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom.")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByRelation, GroupOrder = 0, IsMainToggle = true)]
     public bool UseRelationForEnsuredLoyalty { get; set; } = false;
 
@@ -84,7 +90,7 @@ namespace AllegianceOverhaul
     [SettingPropertyInteger("{=Nff6KlEn}Defection modifier", -50, 50, Order = 2, RequireRestart = false, HintText = "{=0B87ROVp}Flat value that will be added to baseline if clan considering not just leaving, but defecting to another kingdom. Default = 0.")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext)]
     public int DefectionEnsuredLoyaltyModifier { get; set; } = 0;
-    [SettingPropertyInteger("{=5bJx7aO7}Landless clan modifier", 0, 100, Order = 3, RequireRestart = false, HintText = "{=QRmeDMie}Flat value that will be added to baseline if clan owns no land. Default = 20 (Landless clans tend to be less loyal).")]
+    [SettingPropertyInteger("{=5bJx7aO7}Landless clan modifier", 0, 100, Order = 3, RequireRestart = false, HintText = "{=QRmeDMie}Flat value that will be added to baseline if clan owns no land. Default = 20 (landless clans tend to be less loyal).")]
     [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext)]
     public int LandlessClanEnsuredLoyaltyModifier { get; set; } = 20;
     [SettingPropertyInteger("{=rHn5IY0P}Landless kingdom modifier", 0, 100, Order = 4, RequireRestart = false, HintText = "{=vSD05nAh}Flat value that will be added to baseline of all clans of the kingdom, except the ruling one, if kingdom owns no land. Default = 50 (none but most honorable vassals would tolerate this).")]
@@ -158,11 +164,19 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
     public bool EnableTechnicalDebugging { get; set; } = false;
 
+    [SettingPropertyBool("{=ZnT9o5HI}Harmony checkup on initialize", RequireRestart = true, HintText = "{=ELPI6N1Q}Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul.")]
+    [SettingPropertyGroup(HeadingHarmonyCheckup, GroupOrder = 0, IsMainToggle = true)]
+    public bool EnableHarmonyCheckup { get; set; } = false;
+
+    [SettingPropertyText("{=531Vobla}Ignore list", RequireRestart = true, HintText = "{=59KvCjXV}List of harmony instance names that should be ignored when checking for possible conflicts with other mods. Those could be found in mod log and should be separated by semicolon.")]
+    [SettingPropertyGroup(HeadingHarmonyCheckup)]
+    public string HarmonyCheckupIgnoreList { get; set; } = "";
+
     //Presets
     public override IDictionary<string, Func<BaseSettings>> GetAvailablePresets()
     {
-      var basePresets = base.GetAvailablePresets(); // include the 'Default' preset that MCM provides
-      basePresets.Add("Suggested", () => new Settings()
+      IDictionary<string, Func<BaseSettings>> basePresets = base.GetAvailablePresets(); // include the 'Default' preset that MCM provides
+      basePresets.Add(PresetSuggested.ToLocalizedString(), () => new Settings()
       {
         UseEnsuredLoyalty = true,
         UseRelationForEnsuredLoyalty = true,
@@ -173,7 +187,7 @@ namespace AllegianceOverhaul
         FixMinorFactionVassals = true,
         UseAdvancedHeroTooltips = true
       });
-      basePresets.Add("Suggested with logging", () => new Settings()
+      basePresets.Add(PresetSLogging.ToLocalizedString(), () => new Settings()
       {
         UseEnsuredLoyalty = true,
         UseRelationForEnsuredLoyalty = true,
@@ -185,7 +199,7 @@ namespace AllegianceOverhaul
         UseAdvancedHeroTooltips = true,
         EnableGeneralDebugging = true
       });
-      basePresets.Add("Technical", () => new Settings()
+      basePresets.Add(PresetTechnical.ToLocalizedString(), () => new Settings()
       {
         UseEnsuredLoyalty = true,
         UseRelationForEnsuredLoyalty = true,
@@ -197,7 +211,7 @@ namespace AllegianceOverhaul
         UseAdvancedHeroTooltips = true,
         EnableGeneralDebugging = true,
         EnableTechnicalDebugging = true,
-        EnsuredLoyaltyDebugScope  = new DefaultDropdown<string>(new string[]
+        EnsuredLoyaltyDebugScope = new DefaultDropdown<string>(new string[]
           {
             DropdownValueAll,
             DropdownValuePlayers,

@@ -12,7 +12,7 @@ namespace AllegianceOverhaul.Patches
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
     public static void DebugPrefix(Clan clan) //void prefixes are guaranteed to run
-    {      
+    {
       try
       {
         LoyaltyRebalance.LoyaltyDebugHelper.LeaveKingdomDebug(clan);
@@ -26,7 +26,7 @@ namespace AllegianceOverhaul.Patches
 
     [HarmonyPriority(Priority.Normal)]
     public static bool Prefix(Clan clan) //Bool prefixes compete with each other and skip others, as well as original, if return false
-    {      
+    {
       try
       {
         return !LoyaltyRebalance.EnsuredLoyalty.LoyaltyManager.CheckLoyalty(clan);
@@ -41,7 +41,7 @@ namespace AllegianceOverhaul.Patches
 
     public static bool Prepare()
     {
-      return (Settings.Instance.UseEnsuredLoyalty || Settings.Instance.EnableGeneralDebugging || Settings.Instance.EnableTechnicalDebugging);
+      return Settings.Instance.UseEnsuredLoyalty || Settings.Instance.EnableGeneralDebugging || Settings.Instance.EnableTechnicalDebugging;
     }
   }
 }

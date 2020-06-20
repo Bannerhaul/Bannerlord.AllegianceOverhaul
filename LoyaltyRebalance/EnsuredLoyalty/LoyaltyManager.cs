@@ -52,10 +52,9 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     private static int GetHonorModifier(Hero leader, bool Defecting = false)
     {
       int HonorLevel = leader.GetTraitLevel(DefaultTraits.Honor);
-      if (HonorLevel < 0)
-        return -HonorLevel * (Defecting ? Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Leaving);
-      else
-        return -HonorLevel * (Defecting ? Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Leaving);
+      return HonorLevel < 0
+          ? -HonorLevel * (Defecting ? Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Leaving)
+          : -HonorLevel * (Defecting ? Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Leaving);
     }
 
     public static int GetRelationThreshold(Clan clan, Kingdom kingdom = null)
@@ -87,7 +86,8 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", ResultFalse);
         DebugTextObject.SetTextVariable("REASON", ReasonIsNotEnabled);
         return false;
-      } else
+      }
+      else
       {
         if (!SettingsHelper.FactionInScope(clan, Settings.Instance.EnsuredLoyaltyScope))
         {

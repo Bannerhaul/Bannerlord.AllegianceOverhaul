@@ -14,12 +14,12 @@ namespace AllegianceOverhaul.ViewModels.Extensions
 
     protected override void ExecuteBeginHint()
     {
-      if (this.Hero == null)
+      if (Hero == null)
         return;
-      if (this.OtherHero != null)
-        InformationManager.AddTooltipInformation(typeof(Hero), this.Hero, this.OtherHero);
+      if (OtherHero != null)
+        InformationManager.AddTooltipInformation(typeof(Hero), Hero, OtherHero);
       else
-        InformationManager.AddTooltipInformation(typeof(Hero), this.Hero);
+        InformationManager.AddTooltipInformation(typeof(Hero), Hero);
     }
   }
 }

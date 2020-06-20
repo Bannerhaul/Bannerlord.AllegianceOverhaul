@@ -26,9 +26,9 @@ namespace AllegianceOverhaul.Patches
         // supportForPolicyInClan > 0.0 ? wanted : not wanted
         int RelationBetweenClans = FactionManager.GetRelationBetweenClans(kingdom.RulingClan, clan);
         //float RelationModifier = (float)Math.Min(2.0, Math.Max(0.05, 1.0 + Math.Sqrt((double)Math.Abs(RelationBetweenClans)) * 0.1 * Math.Sign(RelationBetweenClans)));
-        float RelationModifier = (float)Math.Min(2.0, Math.Max(0.5, 1.0 + Math.Sqrt((double)Math.Abs(RelationBetweenClans)) * (RelationBetweenClans < 0 ? -0.0599999986588955 : 0.0399999991059303)));
+        float RelationModifier = (float)Math.Min(2.0, Math.Max(0.5, 1.0 + Math.Sqrt(Math.Abs(RelationBetweenClans)) * (RelationBetweenClans < 0 ? -0.0599999986588955 : 0.0399999991059303)));
         float CultureModifier = (float)(1.0 + (kingdom.Culture == clan.Culture ? 0.150000005960464 : -0.150000005960464));
-        float CurSettlementValue = clan.CalculateSettlementValue((Kingdom)null);
+        float CurSettlementValue = clan.CalculateSettlementValue(null);
         float NewSettlementValue = clan.CalculateSettlementValue(kingdom);
         int ClanCmndrHeroeCount = clan.CommanderHeroes.Count;
         float StlmntValPerHeroModifier = 0.0f;
@@ -39,7 +39,7 @@ namespace AllegianceOverhaul.Patches
           foreach (Settlement settlement in Settlement.All)
           {
             if (settlement.IsFortification && settlement.MapFaction == kingdom)
-              ValueOfTargetKingdomSettlements += settlement.GetSettlementValueForFaction((IFaction)kingdom);
+              ValueOfTargetKingdomSettlements += settlement.GetSettlementValueForFaction(kingdom);
           }
           int TargetKingdomCmndrHeroeCount = 0;
           foreach (Clan clan1 in kingdom.Clans)
@@ -47,12 +47,12 @@ namespace AllegianceOverhaul.Patches
             if (!clan1.IsMinorFaction || clan1 == Clan.PlayerClan)
               TargetKingdomCmndrHeroeCount += clan1.CommanderHeroes.Count;
           }
-          StlmntValPerHeroModifier = ValueOfTargetKingdomSettlements / (float)(TargetKingdomCmndrHeroeCount + ClanCmndrHeroeCount);
-          KingdomCmndrHeroeCntModifier = (float)-((double)(TargetKingdomCmndrHeroeCount * TargetKingdomCmndrHeroeCount) * 50.0);
+          StlmntValPerHeroModifier = ValueOfTargetKingdomSettlements / (TargetKingdomCmndrHeroeCount + ClanCmndrHeroeCount);
+          KingdomCmndrHeroeCntModifier = (float)-(TargetKingdomCmndrHeroeCount * TargetKingdomCmndrHeroeCount * 50.0);
         }
-        float ComputedResult = (float)((double)StlmntValPerHeroModifier * Math.Sqrt((double)ClanCmndrHeroeCount) * 0.300000011920929 * ((double)RelationModifier * (double)CultureModifier) + ((double)NewSettlementValue - (double)CurSettlementValue)) + KingdomCmndrHeroeCntModifier;
+        float ComputedResult = (float)(StlmntValPerHeroModifier * Math.Sqrt(ClanCmndrHeroeCount) * 0.300000011920929 * (RelationModifier * (double)CultureModifier) + (NewSettlementValue - CurSettlementValue)) + KingdomCmndrHeroeCntModifier;
 
-        string UnitValueDebugInfo = String.Format("ScoreOfClanToJoinKingdom. RelationBetweenClans = {0}. RelationModifier = {1}, CultureModifier = {2}. ClanCmndrHeroeCount = {3}. " +
+        string UnitValueDebugInfo = string.Format("ScoreOfClanToJoinKingdom. RelationBetweenClans = {0}. RelationModifier = {1}, CultureModifier = {2}. ClanCmndrHeroeCount = {3}. " +
           "ValueOfTargetKingdomSettlements = {4}. StlmntValPerHeroModifier = {5}. KingdomCmndrHeroeCntModifier = {6}. CurSettlementValue = {7}. NewSettlementValue = {8}. CalculatedResult = {9}. NativeResult = {10}.",
           RelationBetweenClans.ToString(), RelationModifier.ToString("N"), CultureModifier.ToString("N"), ClanCmndrHeroeCount.ToString("N"),
           ValueOfTargetKingdomSettlements.ToString("N"), StlmntValPerHeroModifier.ToString("N"), KingdomCmndrHeroeCntModifier.ToString("N"),
