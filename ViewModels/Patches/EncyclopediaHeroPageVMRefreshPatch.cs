@@ -24,7 +24,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
         EncyclopediaPage pageOf1 = Campaign.Current.EncyclopediaManager.GetPageOf(typeof(Hero));
         foreach (Hero hero in Hero.All)
         {
-          if (pageOf1.IsValidEncyclopediaItem((object)hero) && !hero.IsNotable && hero != PageHero)
+          if (pageOf1.IsValidEncyclopediaItem(hero) && !hero.IsNotable && hero != PageHero)
           {
             if (PageHero.IsFriend(hero))
               __instance.Allies.Add(new HeroVMcontactExtension(hero, PageHero));

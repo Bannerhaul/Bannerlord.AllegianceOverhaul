@@ -25,7 +25,7 @@ namespace AllegianceOverhaul.Patches
             if (RelationWithPlayer >= 30)
               MBTextManager.SetTextVariable("LIEGE_IS_RELATIVE", new TextObject(LoyaltyFriendlyRefuse), false);
             else
-              MBTextManager.SetTextVariable("LIEGE_IS_RELATIVE", new TextObject(!SettingsHelper.BloodRelatives(Hero.OneToOneConversationHero, Hero.MainHero) && RelationWithPlayer <= -10 ? LoyaltyRefuse : LoyaltyPoliteRefuse), false);  
+              MBTextManager.SetTextVariable("LIEGE_IS_RELATIVE", new TextObject(!SettingsHelper.BloodRelatives(Hero.OneToOneConversationHero, Hero.MainHero) && RelationWithPlayer <= -10 ? LoyaltyRefuse : LoyaltyPoliteRefuse), false);
             __result = true;
           }
         }

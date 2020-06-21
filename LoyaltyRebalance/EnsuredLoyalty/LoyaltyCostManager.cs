@@ -28,7 +28,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     //CPk4UlNb,PHLW0tH1,BbGZQujC,zMaP4T5X,9nAkgARf,Q4U1RxkS,xSYLqZ3q,UxXnDAyP,QvRH6auB,nnWihTh4
     private const string LeaderIsMaleString = "{=w3OMVa7M}he";
     private const string LeaderIsFemaleString = "{=J5SxdaLi}she";
-    
+
     private const string WithholdPricePayed = "{=MBVs126y}{KINGDOM_LEADER} decided to withhold {LEAVING_CLAN} in {CURRENT_KINGDOM}. Initially {KINGDOM_LEADER_PRONOUN} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} gold. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} gold. After intervention {KINGDOM_LEADER_PRONOUN} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} gold.";
     private const string WithholdPriceRejected = "{=PJSz7d09}{KINGDOM_LEADER} of {CURRENT_KINGDOM} decided to let {LEAVING_CLAN} go. At that moment {KINGDOM_LEADER_PRONOUN} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} gold. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} gold.";
 
@@ -63,14 +63,15 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       if (TargetKingdom != null)
       {
         JoinKingdomAsClanBarterable asClanBarterable = new JoinKingdomAsClanBarterable(LeavingClan.Leader, TargetKingdom);
-        int ClanBarterableValueForClan = asClanBarterable.GetValueForFaction((IFaction)LeavingClan);
-        int ClanBarterableValueForKingdom = asClanBarterable.GetValueForFaction((IFaction)TargetKingdom);
+        int ClanBarterableValueForClan = asClanBarterable.GetValueForFaction(LeavingClan);
+        int ClanBarterableValueForKingdom = asClanBarterable.GetValueForFaction(TargetKingdom);
         ClanBarterable = asClanBarterable;
         BarterableSum = ClanBarterableValueForClan + ClanBarterableValueForKingdom;
-      } else
+      }
+      else
       {
-        LeaveKingdomAsClanBarterable asClanBarterable = new LeaveKingdomAsClanBarterable(LeavingClan.Leader, (PartyBase)null);
-        int ClanBarterableValueForFaction = asClanBarterable.GetValueForFaction((IFaction)LeavingClan);
+        LeaveKingdomAsClanBarterable asClanBarterable = new LeaveKingdomAsClanBarterable(LeavingClan.Leader, null);
+        int ClanBarterableValueForFaction = asClanBarterable.GetValueForFaction(LeavingClan);
         ClanBarterable = asClanBarterable;
         BarterableSum = ClanBarterableValueForFaction - (LeavingClan.IsMinorFaction ? 500 : 0);
       }
@@ -81,9 +82,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       BaseCalculatedCost = Math.Sqrt(BarterableSum) / Math.Log10(BarterableSum);
 
       return
-        Settings.Instance.UseWithholdBribing && Settings.Instance.WithholdToleranceLimitForBribes * 1000000 < BarterableSum
-          ? new ComplexCost((int)(BaseCalculatedCost * (double)Settings.Instance.WithholdInfluenceMultiplier), (int)BaseCalculatedCost * Settings.Instance.WithholdGoldMultiplier)
-          : new ComplexCost((int)(BaseCalculatedCost * (double)Settings.Instance.WithholdInfluenceMultiplier), 0);
+        new ComplexCost
+        (
+          (int)(BaseCalculatedCost * Settings.Instance.WithholdInfluenceMultiplier),
+          Settings.Instance.UseWithholdBribing && Settings.Instance.WithholdToleranceLimitForBribes * 1000000 < BarterableSum ? (int)BaseCalculatedCost * Settings.Instance.WithholdGoldMultiplier : 0
+        );
     }
     private int GetScoreForKingdomToWithholdClan()
     {
@@ -98,7 +101,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           int relationBetweenClans = FactionManager.GetRelationBetweenClans(LeavingClan.Kingdom.RulingClan, clan);
           ClanCountModifier +=
             1 * (clan.IsUnderMercenaryService ? 0.5 : 1) * (1.0 + (LeavingClan.Kingdom.Culture == clan.Culture ? 0.150000005960464 : -0.150000005960464))
-            * Math.Min(1.3, Math.Max(0.5, 1.0 + Math.Sqrt((double)Math.Abs(relationBetweenClans)) * (relationBetweenClans < 0 ? -0.03 : 0.02)));
+            * Math.Min(1.3, Math.Max(0.5, 1.0 + Math.Sqrt(Math.Abs(relationBetweenClans)) * (relationBetweenClans < 0 ? -0.03 : 0.02)));
         }
       }
       double RelativeStrengthModifier = LeavingClan.TotalStrength / (LeavingClan.Kingdom.TotalStrength - LeavingClan.Kingdom.RulingClan.TotalStrength);
@@ -110,12 +113,9 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     }
     public bool CheckAIWithholdDesision()
     {
-      if (WithholdCost is null)
-        return true;
-      if (LeavingClan.Kingdom.RulingClan.Influence > WithholdCost.InfluenceCost && LeavingClan.Kingdom.Ruler.Gold > WithholdCost.GoldCost)
-        return (GetScoreForKingdomToWithholdClan() >= 0);
-      else
-        return false;
+      return
+        WithholdCost is null
+        || (LeavingClan.Kingdom.RulingClan.Influence > WithholdCost.InfluenceCost && LeavingClan.Kingdom.Ruler.Gold > WithholdCost.GoldCost && GetScoreForKingdomToWithholdClan() >= 0);
     }
     public bool GetAIWithholdDesision()
     {
@@ -142,12 +142,12 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
       textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
       if (Desision)
-      {        
+      {
         ApplyAIWithholdDesision(Desision);
         textObject.SetTextVariable("RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N0"));
         textObject.SetTextVariable("RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
       }
-      MessageHelper.SimpleMessage(textObject.ToString());
+      MessageHelper.SimpleMessage(textObject);
     }
     private void ApplyAIWithholdDesision(bool Desision)
     {
@@ -167,7 +167,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       InquiryBody.SetTextVariable("ACTION_DESCRIPTION", TargetKingdom != null ? new TextObject(ActionDefecting).SetTextVariable("TARGET_KINGDOM", TargetKingdom.Name).ToString() : ActionLeaving);
       InquiryBody.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
       InquiryBody.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
-      
+
       InformationManager.ShowInquiry(new InquiryData(InquiryHeader.ToString(), InquiryBody.ToString(), true, true, ButtonWithholdText.ToLocalizedString(), ButtonReleaseText.ToLocalizedString(), () => WithholdClan(), () => ReleaseClan()), true);
     }
 
@@ -192,7 +192,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
         textObject.SetTextVariable("RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N0"));
         textObject.SetTextVariable("RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
-        MessageHelper.SimpleMessage(textObject.ToString());
+        MessageHelper.SimpleMessage(textObject);
       }
     }
     public void ReleaseClan()
@@ -208,13 +208,13 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         textObject.SetTextVariable("INITILAL_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
         textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
         textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
-        MessageHelper.SimpleMessage(textObject.ToString());
+        MessageHelper.SimpleMessage(textObject);
       }
       if (TargetKingdom is null)
         (ClanBarterable as LeaveKingdomAsClanBarterable).Apply();
       else
         //Campaign.Current.BarterManager.ExecuteAiBarter((IFaction)LeavingClan, (IFaction)TargetKingdom, LeavingClan.Leader, TargetKingdom.Leader, ClanBarterable);
-        Patches.ExecuteAiBarterReversePatch.ExecuteAiBarter(Campaign.Current.BarterManager ?? BarterManager.Instance, (IFaction)LeavingClan, (IFaction)TargetKingdom, LeavingClan.Leader, TargetKingdom.Leader, ClanBarterable);        
+        Patches.ExecuteAiBarterReversePatch.ExecuteAiBarter(Campaign.Current.BarterManager ?? BarterManager.Instance, LeavingClan, TargetKingdom, LeavingClan.Leader, TargetKingdom.Leader, ClanBarterable);
     }
   }
 }

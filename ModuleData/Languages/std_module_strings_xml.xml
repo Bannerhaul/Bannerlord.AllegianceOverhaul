@@ -5,7 +5,13 @@
 	</tags>
 	<strings>
 		<string id="qfpqfAdz" text="Allegiance Overhaul" />
+		<!--
+		|||||||||||||||||||||| Load and initialization ||||||||||||||||||||||
+		-->
 		<string id="WddOMlv9" text="Loaded Allegiance Overhaul!" />
+		<string id="gRdUPEXU" text="Allegiance Overhaul failed to load! See details in the mod log." />
+		<string id="HOar731K" text="Error initialising Allegiance Overhaul! See details in the mod log. Error text: &quot;{EXCEPTION_MESSAGE}&quot;" />
+		<string id="WrIDeC1P" text="Allegiance Overhaul identified possible conflicts with other mods! See details in the mod log." />
 		<!--
 		|||||||||||||||||||||||||| Ensured Loyalty ||||||||||||||||||||||||||
 		-->
@@ -75,7 +81,7 @@
 		<string id="7oJXB1PA" text="Withhold them" />
 		<string id="BkX1Q6G6" text="Let them go" />
 		<!--
-		||||||||||||||||||||||||||| Mod Options |||||||||||||||||||||||||||
+		|||||||||||||||||||||||||||| Mod Options ||||||||||||||||||||||||||||
 		-->
 		<!-- Main or reused headings -->
 		<string id="yRuHl3O6" text="General settings" />
@@ -89,7 +95,10 @@
 		<string id="z3oSKZFE" text="Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom]." />
 		<string id="BRI2fuVk" text="Enabled" />
 		<string id="fnO8oC3s" text="Enables accounting for additional factors when faction evaluating kingdom value. Affects both leave or defection probability and actual bartering (may make it more pricey)." />
-		
+		<!-- Presets -->
+		<string id="s1ojXK7t" text="Suggested" />
+		<string id="ViCdJulG" text="Suggested with logging" />
+		<string id="3WYNEaOI" text="Technical" />
 		<!-- Dropdown values -->
 		<string id="COahS2f6" text="All kingdoms" />
 		<string id="JeehGy9z" text="Player's kingdom" />
@@ -122,7 +131,7 @@
 		<string id="Nff6KlEn" text="Defection modifier" />
 		<string id="0B87ROVp" text="Flat value that will be added to baseline if clan considering not just leaving, but defecting to another kingdom. Default = 0." />
 		<string id="5bJx7aO7" text="Landless clan modifier" />
-		<string id="QRmeDMie" text="Flat value that will be added to baseline if clan owns no land. Default = 20 (Landless clans tend to be less loyal)." />
+		<string id="QRmeDMie" text="Flat value that will be added to baseline if clan owns no land. Default = 20 (landless clans tend to be less loyal)." />
 		<string id="rHn5IY0P" text="Landless kingdom modifier" />
 		<string id="vSD05nAh" text="Flat value that will be added to baseline of all clans of the kingdom, except the ruling one, if kingdom owns no land. Default = 50 (none but most honorable vassals would tolerate this)." />
 		
@@ -165,5 +174,10 @@
 		<string id="uPYkZfKs" text="Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false." />
 		<string id="acsZWxWF" text="Technical debug messages" />
 		<string id="eBVb3S6S" text="Enables technical debug messages. These are not localized, poorly readable and extremely spammy. Default is false." />
+		
+		<string id="ZnT9o5HI" text="Harmony checkup on initialize" />
+		<string id="ELPI6N1Q" text="Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul." />
+		<string id="531Vobla" text="Ignore list" />
+		<string id="59KvCjXV" text="List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon." />
 	</strings>
 </base>

@@ -19,7 +19,7 @@ namespace AllegianceOverhaul.Patches
         if
         (
           !SettingsHelper.InDebugBranch || !Settings.Instance.EnableTechnicalDebugging
-          || (!SettingsHelper.FactionInScope(factionForEvaluation, Settings.Instance.EnsuredLoyaltyDebugScope) && !SettingsHelper.FactionInScope((IFaction)iOriginalOwnerClan, Settings.Instance.EnsuredLoyaltyDebugScope))
+          || (!SettingsHelper.FactionInScope(factionForEvaluation, Settings.Instance.EnsuredLoyaltyDebugScope) && !SettingsHelper.FactionInScope(iOriginalOwnerClan, Settings.Instance.EnsuredLoyaltyDebugScope))
         )
           return;
 
@@ -43,18 +43,18 @@ namespace AllegianceOverhaul.Patches
             if (iOriginalOwnerKingdom != null)
             {
               valueForFaction = new LeaveKingdomAsClanBarterable(iOriginalOwner, iOriginalParty).GetValueForFaction(factionForEvaluation);
-              if (!iTargetKingdom.IsAtWarWith((IFaction)iOriginalOwnerKingdom))
+              if (!iTargetKingdom.IsAtWarWith(iOriginalOwnerKingdom))
               {
                 settlementValue = iOriginalOwnerClan.CalculateSettlementValue(iOriginalOwnerKingdom);
                 CalculatedResult -= settlementValue;
               }
-              CalculatedResult += (float)valueForFaction;
+              CalculatedResult += valueForFaction;
             }
           }
           else if (factionForEvaluation.MapFaction == iTargetKingdom)
             CalculatedResult = ScoreOfKingdomToGetClan;
         }
-        string UnitValueDebugInfo = String.Format("JoinKingdom - UnitValueForFaction. factionForEvaluation: {0}." +
+        string UnitValueDebugInfo = string.Format("JoinKingdom - UnitValueForFaction. factionForEvaluation: {0}." +
           " ScoreOfClanToJoinKingdom = {1}. GetScoreOfKingdomToGetClan = {2}. ValueForFaction = {3}. SettlementValue = {4}. CalculatedResult = {5}. NativeResult = {6}",
           (factionForEvaluation != null) ? factionForEvaluation.Name.ToString() : "is null",
           ScoreOfClanToJoinKingdom.ToString("N"),

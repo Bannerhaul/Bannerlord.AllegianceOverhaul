@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using TaleWorlds.Core.ViewModelCollection;
@@ -10,7 +9,7 @@ using AllegianceOverhaul.ViewModels.Extensions;
 namespace AllegianceOverhaul.ViewModels.Patches
 {
   [HarmonyPatch(typeof(TooltipVMExtensions), "HeroAction")]
-  class TooltipVMExtensionsHeroActionPatch
+  public class TooltipVMExtensionsHeroActionPatch
   {
     [HarmonyPrefix]
     public static bool HeroActionPatch(TooltipVM tooltipVM, object[] args)

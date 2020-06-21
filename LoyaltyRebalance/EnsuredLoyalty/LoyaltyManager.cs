@@ -52,10 +52,9 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     private static int GetHonorModifier(Hero leader, bool Defecting = false)
     {
       int HonorLevel = leader.GetTraitLevel(DefaultTraits.Honor);
-      if (HonorLevel < 0)
-        return -HonorLevel * (Defecting ? Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Leaving);
-      else
-        return -HonorLevel * (Defecting ? Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Leaving);
+      return HonorLevel < 0
+          ? -HonorLevel * (Defecting ? Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Leaving)
+          : -HonorLevel * (Defecting ? Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Leaving);
     }
 
     public static int GetRelationThreshold(Clan clan, Kingdom kingdom = null)
@@ -87,7 +86,8 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", ResultFalse);
         DebugTextObject.SetTextVariable("REASON", ReasonIsNotEnabled);
         return false;
-      } else
+      }
+      else
       {
         if (!SettingsHelper.FactionInScope(clan, Settings.Instance.EnsuredLoyaltyScope))
         {
@@ -127,7 +127,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             ReasonRelation.SetTextVariable("WITHHOLD_PRICE_INFO", RelationCheckResult && ShouldPay ? WithholdPrice : TextObject.Empty);
             DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", RelationCheckResult ? (ShouldPay ? (HaveResources ? ResultDepends : ResultFalse) : ResultTrue) : ResultFalse);
             DebugTextObject.SetTextVariable("REASON", ReasonRelation.ToString());
-            return RelationCheckResult;
+            return RelationCheckResult && (!ShouldPay || HaveResources);
           }
           else
           {
@@ -162,7 +162,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           if (clan.Kingdom.RulingClan == Clan.PlayerClan)
           {
             if (costManager.WithholdCost != null)
+            {
+              if (!(clan.Kingdom.RulingClan.Influence > costManager.WithholdCost.InfluenceCost) || !(clan.Kingdom.Ruler.Gold > costManager.WithholdCost.GoldCost))
+                return false;
               costManager.AwaitPlayerDecision();
+            }
             return true;
           }
           else

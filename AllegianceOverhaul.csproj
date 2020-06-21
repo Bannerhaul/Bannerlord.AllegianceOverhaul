@@ -3,6 +3,9 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(SolutionDir)\AllegianceOverhaul\AllegianceOverhaul.props" />
   <PropertyGroup>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C9950240-53C6-459E-B676-E91BCDB93D9D}</ProjectGuid>
@@ -22,7 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,16 +39,16 @@
       <HintPath>..\packages\Lib.Harmony.2.0.1\lib\net472\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Bannerlord.UIExtenderEx, Version=0.0.11.13, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.8.1\lib\net472\Bannerlord.UIExtenderEx.dll</HintPath>
+      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\Bannerlord.UIExtenderEx.dll</HintPath>
     </Reference>
-    <Reference Include="MCMv3, Version=3.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.8.1\lib\net472\MCMv3.dll</HintPath>
+    <Reference Include="MCMv3, Version=3.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\MCMv3.dll</HintPath>
     </Reference>
-    <Reference Include="MCMv3.Implementation.v3.1.8, Version=3.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.8.1\lib\net472\MCMv3.Implementation.v3.1.8.dll</HintPath>
+    <Reference Include="MCMv3.Implementation.v3.1.9, Version=3.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\MCMv3.Implementation.v3.1.9.dll</HintPath>
     </Reference>
-    <Reference Include="MCMv3.UI.v3.1.8, Version=3.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.8.1\lib\net472\MCMv3.UI.v3.1.8.dll</HintPath>
+    <Reference Include="MCMv3.UI.v3.1.9, Version=3.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\MCMv3.UI.v3.1.9.dll</HintPath>
     </Reference>
     <Reference Include="SandBox">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\SandBox\bin\Win64_Shipping_Client\SandBox.dll</HintPath>
@@ -271,6 +273,7 @@
     <Compile Include="Extensions\Harmony\PatchesExtension.cs" />
     <Compile Include="Extensions\Harmony\PatchExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="HarmonyHelper.cs" />
     <Compile Include="LoggingHelper.cs" />
     <Compile Include="LoyaltyRebalance\LoyaltyDebugHelper.cs" />
     <Compile Include="LoyaltyRebalance\EnsuredLoyalty\LoyaltyCostManager.cs" />
@@ -302,6 +305,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="ModuleData\Languages\RU\std_module_strings_xml.xml" />
     <Content Include="ModuleData\Languages\std_module_strings_xml.xml" />
     <Content Include="SubModule.xml" />
     <ModuleData Include="ModuleData\**/*.*" />
@@ -311,8 +315,8 @@
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
     <Copy SourceFiles="$(TargetDir)\0Harmony.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
     <Copy SourceFiles="$(TargetDir)\MCMv3.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
-    <Copy SourceFiles="$(TargetDir)\MCMv3.Implementation.v3.1.8.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
-    <Copy SourceFiles="$(TargetDir)\MCMv3.UI.v3.1.8.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
+    <Copy SourceFiles="$(TargetDir)\MCMv3.Implementation.v3.1.9.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
+    <Copy SourceFiles="$(TargetDir)\MCMv3.UI.v3.1.9.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
     <Copy SourceFiles="$(TargetDir)\Bannerlord.UIExtenderEx.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
     <Copy SourceFiles="$(ProjectDir)\SubModule.xml" DestinationFolder="$(MOD_FOLDER)" />
     <Copy SourceFiles="@(ModuleData)" DestinationFolder="$(MOD_FOLDER)\ModuleData\%(RecursiveDir)" />
