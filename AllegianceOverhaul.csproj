@@ -85,6 +85,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -99,6 +100,7 @@
     <Reference Include="TaleWorlds.CampaignSystem">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
       <Private>False</Private>
+      <Aliases>global, TWCS</Aliases>
     </Reference>
     <Reference Include="TaleWorlds.CampaignSystem.ViewModelCollection">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.ViewModelCollection.dll</HintPath>
@@ -270,33 +272,73 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DebugHelper.cs" />
-    <Compile Include="Extensions\Harmony\PatchesExtension.cs" />
+    <Compile Include="AOEvents.cs" />
+    <Compile Include="AOGameModels.cs" />
+    <Compile Include="CampaignBehaviors\AORelationBehavior.cs" />
+    <Compile Include="CampaignBehaviors\AOCooldownBehavior.cs" />
+    <Compile Include="CampaignBehaviors\BehaviorManagers\AORelationManager.cs" />
+    <Compile Include="CampaignBehaviors\BehaviorManagers\AOCooldownManager.cs" />
+    <Compile Include="Extensions\CampaignExtensions.cs" />
+    <Compile Include="Extensions\KingdomExtensions.cs" />
+    <Compile Include="Extensions\MedianExtensions.cs" />
+    <Compile Include="Helpers\ElegantPairHelper.cs" />
+    <Compile Include="Helpers\FieldAccessHelper.cs" />
+    <Compile Include="Patches\Politics\GetAiChoicePatch.cs" />
+    <Compile Include="Patches\Politics\DeclareWarDecisionDetermineSupportPatch.cs" />
+    <Compile Include="Patches\Politics\MakePeaceKingdomDecisionDetermineSupportPatch.cs" />
+    <Compile Include="PoliticsRebalance\DecisionMaker.cs" />
+    <Compile Include="Models\DecisionSupportScoringModel.cs" />
+    <Compile Include="Models\DefaultModels\DefaultDecisionSupportScoringModel.cs" />
+    <Compile Include="SavableClasses\SegmentalFractionalScore.cs" />
+    <Compile Include="SavableClasses\KingdomDecisionConclusion.cs" />
+    <Compile Include="Helpers\DebugHelper.cs" />
+    <Compile Include="AOSaveableTypeDefiner.cs" />
+    <Compile Include="DropdownObject.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\Harmony\PatchesExtensions.cs" />
     <Compile Include="Extensions\Harmony\PatchExtension.cs" />
-    <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="HarmonyHelper.cs" />
-    <Compile Include="LoggingHelper.cs" />
+    <Compile Include="Extensions\HeroExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\HarmonyHelper.cs" />
+    <Compile Include="Helpers\AccessHelper.cs" />
+    <Compile Include="Helpers\LoggingHelper.cs" />
     <Compile Include="LoyaltyRebalance\LoyaltyDebugHelper.cs" />
     <Compile Include="LoyaltyRebalance\EnsuredLoyalty\LoyaltyCostManager.cs" />
     <Compile Include="LoyaltyRebalance\EnsuredLoyalty\LoyaltyManager.cs" />
-    <Compile Include="MessageHelper.cs" />
-    <Compile Include="Patches\ConsiderClanLeaveAsMercenaryPatch.cs" />
-    <Compile Include="Patches\ConsiderClanLeaveKingdomPatch.cs" />
-    <Compile Include="Patches\ExecuteAiBarterReversePatch.cs" />
-    <Compile Include="Patches\ConversationDefectionConditionPatch.cs" />
-    <Compile Include="Patches\GetScoreOfMercenaryToLeaveKingdom.cs" />
-    <Compile Include="Patches\GetScoreOfClanToLeaveKingdomPatch.cs" />
-    <Compile Include="Patches\GetUnitValueForFactionJoinKingdomPatch.cs" />
-    <Compile Include="Patches\GetScoreOfClanToJoinKingdomPatch.cs" />
-    <Compile Include="Patches\GetUnitValueForFactionLeaveKingdomPatch.cs" />
-    <Compile Include="Patches\ConsiderDefectionPatch.cs" />
+    <Compile Include="LoyaltyRebalance\RelativesHelper.cs" />
+    <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Patches\DenarsToInfluencePatch.cs" />
+    <Compile Include="Patches\Loyalty\ConsiderClanLeaveAsMercenaryPatch.cs" />
+    <Compile Include="Patches\Loyalty\ConsiderClanLeaveKingdomPatch.cs" />
+    <Compile Include="Patches\Loyalty\ExecuteAiBarterReversePatch.cs" />
+    <Compile Include="Patches\Loyalty\ConversationDefectionConditionPatch.cs" />
+    <Compile Include="Patches\Loyalty\GetScoreOfMercenaryToLeaveKingdom.cs" />
+    <Compile Include="Patches\Loyalty\GetScoreOfClanToLeaveKingdomPatch.cs" />
+    <Compile Include="Patches\Loyalty\GetUnitValueForFactionJoinKingdomPatch.cs" />
+    <Compile Include="Patches\Loyalty\GetScoreOfClanToJoinKingdomPatch.cs" />
+    <Compile Include="Patches\Politics\GetInfluenceRequiredToOverrideKingdomDecisionPatch.cs" />
+    <Compile Include="Patches\Loyalty\GetUnitValueForFactionLeaveKingdomPatch.cs" />
+    <Compile Include="Patches\Loyalty\ConsiderDefectionPatch.cs" />
+    <Compile Include="Patches\Politics\GetRandomPeaceDecisionPatch.cs" />
+    <Compile Include="Patches\Politics\GetRandomAnnexationDecisionPatch.cs" />
+    <Compile Include="Patches\Politics\GetRandomPolicyDecisionPatch.cs" />
+    <Compile Include="Patches\Politics\GetRandomWarDecisionPatch.cs" />
+    <Compile Include="Patches\Politics\ApplyChosenOutcomePatch.cs" />
+    <Compile Include="PoliticsRebalance\DebateRelationHandler.cs" />
+    <Compile Include="PoliticsRebalance\PoliticsDebugHelper.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SettingsHelper.cs" />
+    <Compile Include="Helpers\SettingsHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="SubModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Extensions\HeroVMcontactExtension.cs" />
     <Compile Include="ViewModels\Extensions\TooltipVMExtension.cs" />
     <Compile Include="ViewModels\Patches\EncyclopediaHeroPageVMRefreshPatch.cs" />
+    <Compile Include="ViewModels\Patches\KingdomSettlementVMSetCurrentSelectedSettlementPatch.cs" />
+    <Compile Include="ViewModels\Patches\KingdomDiplomacyVMOnSetPeaceItemPatch.cs" />
+    <Compile Include="ViewModels\Patches\KingdomClanVMSetCurrentSelectedClanPatch.cs" />
+    <Compile Include="ViewModels\Patches\KingdomPoliciesVMOnPolicySelectPatch.cs" />
+    <Compile Include="ViewModels\Patches\KingdomDiplomacyVMOnSetWarItemPatch.cs" />
     <Compile Include="ViewModels\Patches\TooltipVMExtensionsHeroActionPatch.cs" />
     <Compile Include="ViewModels\Patches\TooltipVMExtensionsUpdateTooltipPatch.cs" />
     <Compile Include="ViewModels\TooltipHelper.cs" />

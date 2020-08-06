@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AllegianceOverhaul")]
-[assembly: AssemblyDescription("Clan allegiance system overhaul for Bannerlord")]
+[assembly: AssemblyDescription("Clan allegiance system overhaul for Mount & Blade II: Bannerlord")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AllegianceOverhaul")]

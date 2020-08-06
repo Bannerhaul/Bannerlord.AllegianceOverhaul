@@ -23,14 +23,14 @@
 		<string id="hlIYCDRA" text="Отношения с {HERO}" />
 		<string id="AuJasuJQ" text="Верность" />
 		<!--TooltipInfoStrings-->
-		<string id="vhJZj4an" text="Соблюдает {SERVICE_TYPE} по крайней мере {REMAINING_DAYS} дней" />
+		<string id="vhJZj4an" text="Соблюдает {SERVICE_TYPE} по крайней мере {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}дней{?}{?REMAINING_DAYS.OTHER_PLURAL_FORM}дня{?}день{\?}{\?}" />
 		<string id="f0u5ZyFj" text="Верный" />
 		<string id="oeJtbs1u" text="Довольно верный" />
 		<string id="zI5tJrm5" text="Сомневающийся" />
 		<string id="9jecyxIV" text="Нет" />
 		<!--Log message about leaving or defecting-->
-		<string id="K23FeRhj" text="{CLAN_TYPE} {LEAVING_CLAN} {SERVICE_TYPE} {CURRENT_KINGDOM} обдумывает уход. Ценность королевства для них {LEAVE_BARTERABLE}, порог выхода {LEAVE_THRESHOLD}. В оригинале они бы {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
-		<string id="WNqBu5Ye" text="{CLAN_TYPE} {LEAVING_CLAN} {SERVICE_TYPE} {CURRENT_KINGDOM} рассматривает возможность ухода в {TARGET_KINGDOM}. Текущее королевство оценивается ими в {CURRENT_BARTERABLE}, а другое - в {TARGET_BARTERABLE}. В оригинале они бы {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
+		<string id="K23FeRhj" text="{?LEAVING_CLAN.MINOR_FACTION}Малая фракция{?}Клан{\\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}на службе у{?}из{\\?} {LEAVING_CLAN_KINGDOM.NAME} обдумывает уход. Ценность королевства для них {LEAVE_BARTERABLE}, порог выхода {LEAVE_THRESHOLD}. В оригинале они бы {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
+		<string id="WNqBu5Ye" text="{?LEAVING_CLAN.MINOR_FACTION}Малая фракция{?}Клан{\\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}на службе у{?}из{\\?} {LEAVING_CLAN_KINGDOM.NAME} рассматривает возможность ухода в {TARGET_KINGDOM.NAME}. Текущее королевство оценивается ими в {CURRENT_BARTERABLE}, а другое - в {TARGET_BARTERABLE}. В оригинале они бы {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
 		<!--CLAN_TYPE-->
 		<string id="uNS0QtqU" text="Малая фракция" />
 		<string id="zmR6sT03" text="Клан" />
@@ -54,7 +54,7 @@
 		<string id="RrhbXipK" text="на фракцию эта опция не распространяется" />
 		<string id="TJBHPB3s" text="отношения лидера клана с {KINGDOM_LEADER} {CHECK_RESULT} ({CURRENT_RELATION} при требуемых {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
 		<string id="jPA16DTJ" text="отношения лидера клана с {KINGDOM_LEADER} на это не влияют, и клан выполнил минимальные обязательства" />
-		<string id="7jtTAw2k" text="клан соблюдает {SERVICE_TYPE} только {DAYS_UNDER_SERVICE} дней из необходимых {REQUIRED_DAYS_UNDER_SERVICE}" />
+		<string id="7jtTAw2k" text="клан соблюдает {SERVICE_TYPE} только {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}дней{?}{?DAYS_UNDER_SERVICE.OTHER_PLURAL_FORM}дня{?}день{\?}{\?} из необходимых {REQUIRED_DAYS_UNDER_SERVICE}" />
 		<!--REASON OR TOOLTIP - SERVICE_TYPE -->
 		<string id="h3RHyeGO" text="клятву верности" />
 		<string id="s3RAXuiB" text="наемнический контракт" />

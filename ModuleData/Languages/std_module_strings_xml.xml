@@ -23,20 +23,14 @@
 		<string id="hlIYCDRA" text="Relation with {HERO}" />
 		<string id="AuJasuJQ" text="Loyalty" />
 		<!--TooltipInfoStrings-->
-		<string id="vhJZj4an" text="Under {SERVICE_TYPE} at least for {REMAINING_DAYS} days" />
+		<string id="vhJZj4an" text="Under {?HERO_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\?} at least for {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}days{?}day{\?}" />
 		<string id="f0u5ZyFj" text="Loyal" />
 		<string id="oeJtbs1u" text="Rather loyal" />
 		<string id="zI5tJrm5" text="Somewhat loyal" />
 		<string id="9jecyxIV" text="Not loyal" />
 		<!--Log message about leaving or defecting-->
-		<string id="K23FeRhj" text="{CLAN_TYPE} {LEAVING_CLAN} {SERVICE_TYPE} {CURRENT_KINGDOM} is considering leaving. Value of the kingdom for them is {LEAVE_BARTERABLE}, threshold is {LEAVE_THRESHOLD}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
-		<string id="WNqBu5Ye" text="{CLAN_TYPE} {LEAVING_CLAN} {SERVICE_TYPE} {CURRENT_KINGDOM} is considering defecting to {TARGET_KINGDOM}. Current kingdom worth {CURRENT_BARTERABLE} for them and other kingdom is valued at {TARGET_BARTERABLE}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
-		<!--CLAN_TYPE-->
-		<string id="uNS0QtqU" text="Minor faction" />
-		<string id="zmR6sT03" text="The clan" />
-		<!--SERVICE_TYPE-->
-		<string id="CYUKnxOH" text="under mercenary service of" />
-		<string id="rdpdUqkQ" text="of" />
+		<string id="K23FeRhj" text="{?LEAVING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\?} {LEAVING_CLAN_KINGDOM.NAME} is considering leaving. Value of the kingdom for them is {LEAVE_BARTERABLE}, threshold is {LEAVE_THRESHOLD}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
+		<string id="WNqBu5Ye" text="{?LEAVING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\?} {LEAVING_CLAN_KINGDOM.NAME} is considering defecting to {TARGET_KINGDOM.NAME}. Current kingdom worth {CURRENT_BARTERABLE} for them and other kingdom is valued at {TARGET_BARTERABLE}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
 		<!--CLAN_DECISION-->
 		<string id="KBPBbuE9" text="leave" />
 		<string id="GmDkOQ7C" text="stay" />
@@ -52,41 +46,38 @@
 		<!--REASON-->
 		<string id="ZNEdXaUc" text="it is not enabled" />
 		<string id="RrhbXipK" text="faction is out of scope" />
-		<string id="TJBHPB3s" text="clan leader's relationship with {KINGDOM_LEADER} is {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
-		<string id="jPA16DTJ" text="clan leader's relationship with {KINGDOM_LEADER} does not affect it and clan fulfilled minimal obligations" />
-		<string id="7jtTAw2k" text="clan is under {SERVICE_TYPE} for {DAYS_UNDER_SERVICE} days out of required {REQUIRED_DAYS_UNDER_SERVICE}" />
-		<!--REASON OR TOOLTIP - SERVICE_TYPE -->
-		<string id="h3RHyeGO" text="oath of fealty" />
-		<string id="s3RAXuiB" text="mercenary service" />
+		<string id="TJBHPB3s" text="clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} is {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
+		<string id="jPA16DTJ" text="clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not affect it and clan fulfilled minimal obligations" />
+		<string id="7jtTAw2k" text="clan is under {?LEAVING_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\?} for {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}days{?}day{\?} out of required {REQUIRED_DAYS_UNDER_SERVICE}" />
 		<!--REASON - CHECK_RESULT -->
 		<string id="nixfDSWU" text="too low" />
 		<string id="GYctexwu" text="high enough" />
 		<!--REASON - WITHHOLD_PRICE_INFO -->
-		<string id="qGEalMT7" text=" and {KINGDOM_LEADER} possesses resourceses to withhold the clan" />
-		<string id="DQ2ATMdL" text=" but {KINGDOM_LEADER} does not possess resources to withhold the clan" />
+		<string id="qGEalMT7" text=" and {LEAVING_CLAN_KINGDOM_LEADER.NAME} possesses resourceses to withhold the clan" />
+		<string id="DQ2ATMdL" text=" but {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not possess resources to withhold the clan" />
 		<!--Log message about withholding-->
-		<string id="MBVs126y" text="{KINGDOM_LEADER} decided to withhold {LEAVING_CLAN} in {CURRENT_KINGDOM}. Initially {KINGDOM_LEADER_PRONOUN} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} gold. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} gold. After intervention {KINGDOM_LEADER_PRONOUN} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} gold." />
-		<string id="PJSz7d09" text="{KINGDOM_LEADER} of {CURRENT_KINGDOM} decided to let {LEAVING_CLAN} go. At that moment {KINGDOM_LEADER_PRONOUN} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} gold. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} gold." />
-		<!--KINGDOM_LEADER_PRONOUN-->
-		<string id="w3OMVa7M" text="he" />
-		<string id="J5SxdaLi" text="she" />
+		<string id="MBVs126y" text="{LEAVING_CLAN_KINGDOM_LEADER.NAME} decided to withhold {LEAVING_CLAN.NAME} in {LEAVING_CLAN_KINGDOM.NAME}. Initially {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} denars. After intervention {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} denars." />
+		<string id="PJSz7d09" text="{LEAVING_CLAN_KINGDOM_LEADER.NAME} of {LEAVING_CLAN_KINGDOM.NAME} decided to let {LEAVING_CLAN.NAME} go. At that moment {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} denars." />
 		<!--Player inquiry about withholding - header-->
-		<string id="Jz9zbcJh" text="Clan {LEAVING_CLAN} is leaving!" />
+		<string id="Jz9zbcJh" text="Clan {LEAVING_CLAN.NAME} is leaving!" />
 		<!--Player inquiry about withholding - body-->
-		<string id="Gy4fCQV4" text="Clan {LEAVING_CLAN} is {ACTION_DESCRIPTION}! Will you intervene and insist they should stay? That would require {INFLUENCE_COST} influence and {GOLD_COST} gold." />
+		<string id="Gy4fCQV4" text="Clan {LEAVING_CLAN.NAME} is {ACTION_DESCRIPTION}! Will you intervene and insist they should stay? That would require {INFLUENCE_COST} influence and {GOLD_COST} denars." />
 		<!--ACTION_DESCRIPTION-->
 		<string id="4GvY6ohR" text="leaving your kingdom" />
-		<string id="soNby6VP" text="going to leave your kingdom and join the {TARGET_KINGDOM}" />
+		<string id="soNby6VP" text="going to leave your kingdom and join the {TARGET_KINGDOM.NAME}" />
 		<!--Player inquiry about withholding - buttons-->
 		<string id="7oJXB1PA" text="Withhold them" />
 		<string id="BkX1Q6G6" text="Let them go" />
+		<!--Custom ToString() definitions-->
+		<string id="J5SxdaLi" text="[Influence cost = {INFLUENCE_COST}; Gold cost = {GOLD_COST}]" />
 		<!--
 		|||||||||||||||||||||||||||| Mod Options ||||||||||||||||||||||||||||
-	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu,Gp9KcTuz,eoQCaS0r,GmyQQ5Cm,If18n1li,u9YiryQR,1bsT0jB0
+	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu
 		-->
 		<!-- Main or reused headings -->
 		<string id="yRuHl3O6" text="General settings" />
 		<string id="Ps6RgRH1" text="Ensured loyalty" />
+		<string id="1bsT0jB0" text="Politics rebalance" />
 		<string id="xNtFBSJF" text="Kingdom evaluation" />
 		<string id="fmUHcBME" text="Debug settings" />
 		
@@ -114,7 +105,7 @@
 		<string id="eMMKVjRU" text="Minimum mercenary service period" />
 		<string id="00arXPdi" text="Period in days after initiating mercenary service of kingdom, during which minor faction would not even consider leaving that kingdom. Default = 42 (half a game year)." />
 		<string id="Fxyb9iPM" text="Affect player conversations" />
-		<string id="ZaPJhkuk" text="Specify if ensured loyalty system should affect player conversations, making impossible to reqruit lords that are loyal to ther lieges." />
+		<string id="ZaPJhkuk" text="Specify if ensured loyalty system should affect player conversations, making it impossible to reqruit lords that are loyal to ther lieges." />
 		
 		<string id="mmUgw8hL" text="Achieve via relation" />
 		<string id="gj3cKWJo" text="Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom." />
@@ -154,7 +145,7 @@
 		<string id="bZH00rVn" text="Tolerance limit (millions)" />
 		<string id="moc7wRwB" text="Maximum amount, measured in millions, by which score of clan to leave kingdom may safely exceed threshold, not arising the need for ruler to intervene. Default = 0.5." />
 		<string id="siPJey6u" text="Influence cost multiplier" />
-		<string id="Tei4s42W" text="Multiplier for calculated influence cost to withhold the clan. Default = 2.5." />
+		<string id="Tei4s42W" text="Multiplier for calculated influence cost to withhold the clan. Default = 1.5." />
 		
 		<string id="rhvq8Yhb" text="Bribing" />
 		<string id="rJw4D3kJ" text="Specify if withholding the clan should cost money in addition to influence." />
@@ -180,8 +171,17 @@
 		<string id="ELPI6N1Q" text="Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul." />
 		<string id="531Vobla" text="Ignore list" />
 		<string id="59KvCjXV" text="List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon." />
+		
+		<!-- Policy and Relations -->
+		<string id="" text="" />
+		<string id="u9YiryQR" text="Enables specifying various adjustments regarding kingdom political life and relations between lords." />
+		<string id="If18n1li" text="Election rebalance" />
+		<string id="GmyQQ5Cm" text="Enables specifying various adjustments regarding kingdom elections." />
+
+		<string id="eoQCaS0r" text="Influence required to override decision" />
+		<string id="Gp9KcTuz" text="Specify desired way of calculating the influence, required to override popular decision with unpopular one. Ruler can pay 'Slight Favor', 'Strong Favor' or 'Full Push' decision costs for each lacking support point of unpopular decision, or just pay the exact amount of influence, that supporters of the popular decision spent in total. Native is [Override using 'Full Push' cost]. Suggested is [Flat influence override]." />
 		<!--
-	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu,Gp9KcTuz,eoQCaS0r,GmyQQ5Cm,If18n1li,u9YiryQR,1bsT0jB0
+	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu
 		-->
 	</strings>
 </base>

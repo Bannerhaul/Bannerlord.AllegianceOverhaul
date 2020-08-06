@@ -5,20 +5,23 @@ using TaleWorlds.Core.ViewModelCollection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
 using TaleWorlds.Library;
+using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {
   [HarmonyPatch(typeof(TooltipVMExtensions), "UpdateTooltip", new[] { typeof(TooltipVM), typeof(Hero) })]
-  public class TooltipVMExtensionsUpdateTooltipPatch
+  public static class TooltipVMExtensionsUpdateTooltipPatch
   {
     [HarmonyPostfix]
     public static void UpdateTooltipPatch(TooltipVM tooltipVM, Hero hero)
     {
       try
       {
-        if (!Settings.Instance.UseAdvancedHeroTooltips || !Settings.Instance.UseEnsuredLoyalty || hero.Clan is null || !SettingsHelper.FactionInScope(hero.Clan, Settings.Instance.EnsuredLoyaltyScope))
+        if (hero.Clan is null || !SettingsHelper.SubSystemEnabled(SubSystemType.LoyaltyTooltips, hero.Clan))
+        {
           return;
+        }
 
         if (hero.Clan.Kingdom != null && hero.Clan.Kingdom.RulingClan != hero.Clan && hero == hero.Clan.Leader)
         {
@@ -37,7 +40,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
     }
     public static bool Prepare()
     {
-      return Settings.Instance.UseAdvancedHeroTooltips && Settings.Instance.UseEnsuredLoyalty;
+      return SettingsHelper.SubSystemEnabled(SubSystemType.LoyaltyTooltips);
     }
   }
 }

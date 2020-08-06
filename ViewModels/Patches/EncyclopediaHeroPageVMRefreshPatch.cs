@@ -4,6 +4,7 @@ using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Encyclopedia;
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia;
+using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.ViewModels.Extensions;
 
 namespace AllegianceOverhaul.ViewModels.Patches
@@ -18,7 +19,9 @@ namespace AllegianceOverhaul.ViewModels.Patches
       {
         Hero PageHero = __instance.Obj as Hero;
         if (!Settings.Instance.UseAdvancedHeroTooltips || PageHero == Hero.MainHero)
+        {
           return;
+        }
         __instance.Allies.Clear();
         __instance.Enemies.Clear();
         EncyclopediaPage pageOf1 = Campaign.Current.EncyclopediaManager.GetPageOf(typeof(Hero));
@@ -27,9 +30,13 @@ namespace AllegianceOverhaul.ViewModels.Patches
           if (pageOf1.IsValidEncyclopediaItem(hero) && !hero.IsNotable && hero != PageHero)
           {
             if (PageHero.IsFriend(hero))
+            {
               __instance.Allies.Add(new HeroVMcontactExtension(hero, PageHero));
+            }
             else if (PageHero.IsEnemy(hero))
+            {
               __instance.Enemies.Add(new HeroVMcontactExtension(hero, PageHero));
+            }
           }
         }
       }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using AllegianceOverhaul.Extensions;
+using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 {
@@ -21,21 +23,26 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       }
       public override string ToString()
       {
-        return $"[InfluenceCost = {InfluenceCost}; GoldCost = {GoldCost}]";
+        Dictionary<string, TextObject> attributes = new Dictionary<string, TextObject>()
+        {
+          ["INFLUENCE_COST"] = new TextObject(InfluenceCost),
+          ["GOLD_COST"] = new TextObject(GoldCost)
+
+        };
+        return new TextObject(ComplexCostString, attributes).ToString();
       }
     }
 
-    //CPk4UlNb,PHLW0tH1,BbGZQujC,zMaP4T5X,9nAkgARf,Q4U1RxkS,xSYLqZ3q,UxXnDAyP,QvRH6auB,nnWihTh4
-    private const string LeaderIsMaleString = "{=w3OMVa7M}he";
-    private const string LeaderIsFemaleString = "{=J5SxdaLi}she";
+    //CPk4UlNb,PHLW0tH1,BbGZQujC,zMaP4T5X,9nAkgARf,Q4U1RxkS,xSYLqZ3q,UxXnDAyP,QvRH6auB,nnWihTh4,w3OMVa7M
+    private const string ComplexCostString = "{=J5SxdaLi}[Influence cost = {INFLUENCE_COST}; Gold cost = {GOLD_COST}]";
 
-    private const string WithholdPricePayed = "{=MBVs126y}{KINGDOM_LEADER} decided to withhold {LEAVING_CLAN} in {CURRENT_KINGDOM}. Initially {KINGDOM_LEADER_PRONOUN} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} gold. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} gold. After intervention {KINGDOM_LEADER_PRONOUN} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} gold.";
-    private const string WithholdPriceRejected = "{=PJSz7d09}{KINGDOM_LEADER} of {CURRENT_KINGDOM} decided to let {LEAVING_CLAN} go. At that moment {KINGDOM_LEADER_PRONOUN} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} gold. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} gold.";
+    private const string WithholdPricePayed = "{=MBVs126y}{LEAVING_CLAN_KINGDOM_LEADER.NAME} decided to withhold {LEAVING_CLAN.NAME} in {LEAVING_CLAN_KINGDOM.NAME}. Initially {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} denars. After intervention {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} denars.";
+    private const string WithholdPriceRejected = "{=PJSz7d09}{LEAVING_CLAN_KINGDOM_LEADER.NAME} of {LEAVING_CLAN_KINGDOM.NAME} decided to let {LEAVING_CLAN.NAME} go. At that moment {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} denars.";
 
     private const string ActionLeaving = "{=4GvY6ohR}leaving your kingdom";
-    private const string ActionDefecting = "{=soNby6VP}going to leave your kingdom and join the {TARGET_KINGDOM}";
-    private const string PlayerInquiryHeader = "{=Jz9zbcJh}Clan {LEAVING_CLAN} is leaving!";
-    private const string PlayerInquiryBody = "{=Gy4fCQV4}Clan {LEAVING_CLAN} is {ACTION_DESCRIPTION}! Will you intervene and insist they should stay? That would require {INFLUENCE_COST} influence and {GOLD_COST} gold.";
+    private const string ActionDefecting = "{=soNby6VP}going to leave your kingdom and join the {TARGET_KINGDOM.NAME}";
+    private const string PlayerInquiryHeader = "{=Jz9zbcJh}Clan {LEAVING_CLAN.NAME} is leaving!";
+    private const string PlayerInquiryBody = "{=Gy4fCQV4}Clan {LEAVING_CLAN.NAME} is {ACTION_DESCRIPTION}! Will you intervene and insist they should stay? That would require {INFLUENCE_COST} influence and {GOLD_COST} denars.";
 
     private const string ButtonWithholdText = "{=7oJXB1PA}Withhold them";
     private const string ButtonReleaseText = "{=BkX1Q6G6}Let them go";
@@ -57,7 +64,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     }
     private ComplexCost GetWithholdCost()
     {
-      if (!Settings.Instance.UseEnsuredLoyalty || !Settings.Instance.UseRelationForEnsuredLoyalty || !Settings.Instance.UseWithholdPrice || !SettingsHelper.FactionInScope(LeavingClan, Settings.Instance.EnsuredLoyaltyScope))
+      if (!SettingsHelper.SubSystemEnabled(SubSystemType.LoyaltyWithholding, LeavingClan))
         return null;
 
       if (TargetKingdom != null)
@@ -77,8 +84,9 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       }
 
       if (BarterableSum <= Settings.Instance.WithholdToleranceLimit * 1000000)
+      {
         return null;
-
+      }
       BaseCalculatedCost = Math.Sqrt(BarterableSum) / Math.Log10(BarterableSum);
 
       return
@@ -105,54 +113,61 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         }
       }
       double RelativeStrengthModifier = LeavingClan.TotalStrength / (LeavingClan.Kingdom.TotalStrength - LeavingClan.Kingdom.RulingClan.TotalStrength);
-      float SettlementValue = (TargetKingdom.IsAtWarWith(LeavingClan.Kingdom) && !LeavingClan.IsUnderMercenaryService) ? LeavingClan.CalculateSettlementValue(LeavingClan.Kingdom) : 0;
+      float SettlementValue = (TargetKingdom != null && TargetKingdom.IsAtWarWith(LeavingClan.Kingdom) && !LeavingClan.IsUnderMercenaryService) ? LeavingClan.CalculateSettlementValue(LeavingClan.Kingdom) : 0;
       double Result = (Campaign.Current.Models.DiplomacyModel.GetScoreOfKingdomToGetClan(LeavingClan.Kingdom, LeavingClan) + RelativeScoreToLeave) * (RelativeStrengthModifier + (LeavingClan.IsUnderMercenaryService ? 0.1 : 1)) + SettlementValue - CostScore * ClanCountModifier;
-      if (Settings.Instance.EnableTechnicalDebugging && SettingsHelper.FactionInScope(LeavingClan, Settings.Instance.EnsuredLoyaltyDebugScope))
+      if (SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical, LeavingClan))
+      {
         MessageHelper.TechnicalMessage($"Score for Kingdom {LeavingClan.Kingdom.Name} to withhold Clan {LeavingClan.Name}.\nRelativeScoreToLeave = {RelativeScoreToLeave:N}. CostScore = {CostScore:N}. ClanCountModifier = {ClanCountModifier}. ScoreOfKingdomToGetClan = {Campaign.Current.Models.DiplomacyModel.GetScoreOfKingdomToGetClan(LeavingClan.Kingdom, LeavingClan):N}. SettlementValue = {SettlementValue:N}. Result = {Result:N}.");
+      }
       return (int)Result;
     }
-    public bool CheckAIWithholdDesision()
+    public bool CheckAIWithholdDecision()
     {
       return
         WithholdCost is null
         || (LeavingClan.Kingdom.RulingClan.Influence > WithholdCost.InfluenceCost && LeavingClan.Kingdom.Ruler.Gold > WithholdCost.GoldCost && GetScoreForKingdomToWithholdClan() >= 0);
     }
-    public bool GetAIWithholdDesision()
+    public bool GetAIWithholdDecision()
     {
-      bool Desision = CheckAIWithholdDesision();
-      if (Settings.Instance.EnableGeneralDebugging && SettingsHelper.FactionInScope(LeavingClan, Settings.Instance.EnsuredLoyaltyDebugScope))
-        ApplyAIWithholdDesisionWithLogging(Desision);
+      bool decisionIsWithhold = CheckAIWithholdDecision();
+      if (SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.General, LeavingClan))
+      {
+        ApplyAIWithholdDecisionWithLogging(decisionIsWithhold);
+      }
       else
-        ApplyAIWithholdDesision(Desision);
-      return Desision;
+      {
+        ApplyAIWithholdDecision(decisionIsWithhold);
+      }
+      return decisionIsWithhold;
     }
-    private void ApplyAIWithholdDesisionWithLogging(bool Desision)
+    private void ApplyAIWithholdDecisionWithLogging(bool decisionIsWithhold)
     {
       if (WithholdCost is null)
+      {
         return;
+      }
       float InitialInfluence = LeavingClan.Kingdom.RulingClan.Influence;
       int InitilalGold = LeavingClan.Kingdom.Ruler.Gold;
-      TextObject textObject = new TextObject(Desision ? WithholdPricePayed : WithholdPriceRejected);
-      textObject.SetTextVariable("KINGDOM_LEADER", LeavingClan.Kingdom.Ruler.Name);
-      textObject.SetTextVariable("LEAVING_CLAN", LeavingClan.Name);
-      textObject.SetTextVariable("CURRENT_KINGDOM", LeavingClan.Kingdom.Name);
-      textObject.SetTextVariable("KINGDOM_LEADER_PRONOUN", LeavingClan.Kingdom.Ruler.IsFemale ? LeaderIsFemaleString : LeaderIsMaleString);
-      textObject.SetTextVariable("INITIAL_INFLUENCE", InitialInfluence.ToString("N0"));
-      textObject.SetTextVariable("INITILAL_GOLD", InitilalGold.ToString("N0"));
-      textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
-      textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
-      if (Desision)
+      TextObject textObject = new TextObject(decisionIsWithhold ? WithholdPricePayed : WithholdPriceRejected);
+      StringHelper.SetEntitiyProperties(textObject, "LEAVING_CLAN", LeavingClan, true);
+      StringHelper.SetNumericVariable(textObject, "INITIAL_INFLUENCE", InitialInfluence, "N0");
+      StringHelper.SetNumericVariable(textObject, "INITILAL_GOLD", InitilalGold, "N0");
+      StringHelper.SetNumericVariable(textObject, "INFLUENCE_COST", WithholdCost.InfluenceCost, "N0");
+      StringHelper.SetNumericVariable(textObject, "GOLD_COST", WithholdCost.GoldCost, "N0");
+      if (decisionIsWithhold)
       {
-        ApplyAIWithholdDesision(Desision);
-        textObject.SetTextVariable("RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N0"));
-        textObject.SetTextVariable("RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
+        ApplyAIWithholdDecision(decisionIsWithhold);
+        StringHelper.SetNumericVariable(textObject, "RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence, "N0");
+        StringHelper.SetNumericVariable(textObject, "RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold, "N0");
       }
       MessageHelper.SimpleMessage(textObject);
     }
-    private void ApplyAIWithholdDesision(bool Desision)
+    private void ApplyAIWithholdDecision(bool decisionIsWithhold)
     {
-      if (!Desision || WithholdCost is null)
+      if (!decisionIsWithhold || WithholdCost is null)
+      {
         return;
+      }
       LeavingClan.Kingdom.RulingClan.Influence = MBMath.ClampFloat(LeavingClan.Kingdom.RulingClan.Influence - WithholdCost.InfluenceCost, 0f, float.MaxValue);
       LeavingClan.Kingdom.Ruler.Gold = MBMath.ClampInt(LeavingClan.Kingdom.Ruler.Gold - WithholdCost.GoldCost, 0, int.MaxValue);
     }
@@ -160,61 +175,39 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     public void AwaitPlayerDecision()
     {
       TextObject InquiryHeader = new TextObject(PlayerInquiryHeader);
-      InquiryHeader.SetTextVariable("LEAVING_CLAN", LeavingClan.Name);
+      StringHelper.SetEntitiyProperties(InquiryHeader, "LEAVING_CLAN", LeavingClan);
 
       TextObject InquiryBody = new TextObject(PlayerInquiryBody);
-      InquiryBody.SetTextVariable("LEAVING_CLAN", LeavingClan.Name);
-      InquiryBody.SetTextVariable("ACTION_DESCRIPTION", TargetKingdom != null ? new TextObject(ActionDefecting).SetTextVariable("TARGET_KINGDOM", TargetKingdom.Name).ToString() : ActionLeaving);
-      InquiryBody.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
-      InquiryBody.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
+      StringHelper.SetEntitiyProperties(InquiryBody, "LEAVING_CLAN", LeavingClan);
+      StringHelper.SetEntitiyProperties(null, "TARGET_KINGDOM", TargetKingdom);
+      InquiryBody.SetTextVariable("ACTION_DESCRIPTION", new TextObject(TargetKingdom != null ? ActionDefecting : ActionLeaving));
+      StringHelper.SetNumericVariable(InquiryBody, "INFLUENCE_COST", WithholdCost.InfluenceCost, "N0");
+      StringHelper.SetNumericVariable(InquiryBody, "GOLD_COST", WithholdCost.GoldCost, "N0");
 
-      InformationManager.ShowInquiry(new InquiryData(InquiryHeader.ToString(), InquiryBody.ToString(), true, true, ButtonWithholdText.ToLocalizedString(), ButtonReleaseText.ToLocalizedString(), () => WithholdClan(), () => ReleaseClan()), true);
+      InformationManager.ShowInquiry(new InquiryData(InquiryHeader.ToString(), InquiryBody.ToString(), true, true, ButtonWithholdText.ToLocalizedString(), ButtonReleaseText.ToLocalizedString(), () => ApplyPlayerDecision(true), () => ApplyPlayerDecision(false)), true);
     }
 
-    public void WithholdClan()
+    public void ApplyPlayerDecision(bool decisionIsWithhold)
     {
-      float InitialInfluence = Clan.PlayerClan.Influence;
-      int InitilalGold = Hero.MainHero.Gold;
-
-      Clan.PlayerClan.Influence = MBMath.ClampFloat(Clan.PlayerClan.Influence - WithholdCost.InfluenceCost, 0, float.MaxValue);
-      Hero.MainHero.Gold = MBMath.ClampInt(Hero.MainHero.Gold - WithholdCost.GoldCost, 0, int.MaxValue);
-
-      if (Settings.Instance.EnableGeneralDebugging && SettingsHelper.FactionInScope(LeavingClan, Settings.Instance.EnsuredLoyaltyDebugScope))
+      if (SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.General, LeavingClan))
       {
-        TextObject textObject = new TextObject(WithholdPricePayed);
-        textObject.SetTextVariable("KINGDOM_LEADER", LeavingClan.Kingdom.Ruler.Name);
-        textObject.SetTextVariable("LEAVING_CLAN", LeavingClan.Name);
-        textObject.SetTextVariable("CURRENT_KINGDOM", LeavingClan.Kingdom.Name);
-        textObject.SetTextVariable("KINGDOM_LEADER_PRONOUN", LeavingClan.Kingdom.Ruler.IsFemale ? LeaderIsFemaleString : LeaderIsMaleString);
-        textObject.SetTextVariable("INITIAL_INFLUENCE", InitialInfluence.ToString("N0"));
-        textObject.SetTextVariable("INITILAL_GOLD", InitilalGold.ToString("N0"));
-        textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
-        textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
-        textObject.SetTextVariable("RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N0"));
-        textObject.SetTextVariable("RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
-        MessageHelper.SimpleMessage(textObject);
+        ApplyAIWithholdDecisionWithLogging(decisionIsWithhold);
       }
-    }
-    public void ReleaseClan()
-    {
-      if (Settings.Instance.EnableGeneralDebugging && SettingsHelper.FactionInScope(LeavingClan, Settings.Instance.EnsuredLoyaltyDebugScope))
-      {
-        TextObject textObject = new TextObject(WithholdPriceRejected);
-        textObject.SetTextVariable("KINGDOM_LEADER", LeavingClan.Kingdom.Ruler.Name);
-        textObject.SetTextVariable("LEAVING_CLAN", LeavingClan.Name);
-        textObject.SetTextVariable("CURRENT_KINGDOM", LeavingClan.Kingdom.Name);
-        textObject.SetTextVariable("KINGDOM_LEADER_PRONOUN", LeavingClan.Kingdom.Ruler.IsFemale ? LeaderIsFemaleString : LeaderIsMaleString);
-        textObject.SetTextVariable("INITIAL_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence.ToString("N0"));
-        textObject.SetTextVariable("INITILAL_GOLD", LeavingClan.Kingdom.Ruler.Gold.ToString("N0"));
-        textObject.SetTextVariable("INFLUENCE_COST", WithholdCost.InfluenceCost.ToString("N0"));
-        textObject.SetTextVariable("GOLD_COST", WithholdCost.GoldCost.ToString("N0"));
-        MessageHelper.SimpleMessage(textObject);
-      }
-      if (TargetKingdom is null)
-        (ClanBarterable as LeaveKingdomAsClanBarterable).Apply();
       else
-        //Campaign.Current.BarterManager.ExecuteAiBarter((IFaction)LeavingClan, (IFaction)TargetKingdom, LeavingClan.Leader, TargetKingdom.Leader, ClanBarterable);
-        Patches.ExecuteAiBarterReversePatch.ExecuteAiBarter(Campaign.Current.BarterManager ?? BarterManager.Instance, LeavingClan, TargetKingdom, LeavingClan.Leader, TargetKingdom.Leader, ClanBarterable);
+      {
+        ApplyAIWithholdDecision(decisionIsWithhold);
+      }
+      if (!decisionIsWithhold)
+      {
+        if (TargetKingdom is null)
+        {
+          (ClanBarterable as LeaveKingdomAsClanBarterable).Apply();
+        }
+        else
+        {
+          Patches.Loyalty.ExecuteAiBarterReversePatch.ExecuteAiBarter(Campaign.Current.BarterManager ?? BarterManager.Instance, LeavingClan, TargetKingdom, LeavingClan.Leader, TargetKingdom.Leader, ClanBarterable);
+        }
+      }
     }
   }
 }

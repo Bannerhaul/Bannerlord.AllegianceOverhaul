@@ -4,12 +4,13 @@ using HarmonyLib;
 using TaleWorlds.Core.ViewModelCollection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
+using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.ViewModels.Extensions;
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {
   [HarmonyPatch(typeof(TooltipVMExtensions), "HeroAction")]
-  public class TooltipVMExtensionsHeroActionPatch
+  public static class TooltipVMExtensionsHeroActionPatch
   {
     [HarmonyPrefix]
     public static bool HeroActionPatch(TooltipVM tooltipVM, object[] args)
