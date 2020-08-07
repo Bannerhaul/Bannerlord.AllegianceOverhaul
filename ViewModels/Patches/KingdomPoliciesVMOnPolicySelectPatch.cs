@@ -7,7 +7,6 @@ using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomDec
 using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
 using AllegianceOverhaul.Helpers;
 
-
 namespace AllegianceOverhaul.ViewModels.Patches
 {
   [HarmonyPatch(typeof(KingdomPoliciesVM), "OnPolicySelect")]

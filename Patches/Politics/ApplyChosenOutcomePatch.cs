@@ -70,7 +70,7 @@ namespace AllegianceOverhaul.Patches.Politics
 
     public static bool Prepare()
     {
-      return true;//SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldowns) || SettingsHelper.SystemDebugEnabled(AOSystems.PoliticsRebalance, DebugType.General);
+      return true; //SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldowns) || SettingsHelper.SystemDebugEnabled(AOSystems.PoliticsRebalance, DebugType.General);
     }
   }
 }

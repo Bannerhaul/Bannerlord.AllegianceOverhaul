@@ -19,7 +19,7 @@ namespace AllegianceOverhaul.Extensions
 
     public static IEnumerable<Kingdom> GetAdversaries(this Kingdom kingdom)
     {
-      return Kingdom.All.Where(k => k != kingdom && k.IsAtWarWith(kingdom)); ;
+      return Kingdom.All.Where(k => k != kingdom && k.IsAtWarWith(kingdom));
     }
 
     public static IEnumerable<Kingdom> GetAdversaries(this Kingdom kingdom, Kingdom kingdomToToggle)

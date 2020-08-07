@@ -37,6 +37,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
       else
         throw new ArgumentException(string.Format("{0} is not supported KingdomDecision type", decision.GetType().FullName), nameof(decision));
     }
+
     public static int GetRequiredDecisionCooldown(KingdomDecision decision)
     {
       switch (decision)
@@ -82,12 +83,17 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
         throw new ArgumentException(string.Format("{0} is not supported KingdomDecision type", decisionType.FullName), nameof(decisionType));
       }
     }
+
     public static bool HasDecisionCooldown(KingdomDecision decision)
+    {
+      return HasPrimaryDecisionCooldown(decision) || HasAlternativeDecisionCooldown(decision);
+    }
+
+    public static bool HasPrimaryDecisionCooldown(KingdomDecision decision)
     {
       return SupportedDecisionTypes.Contains(decision.GetType())
              && KingdomDecisionHistory.TryGetValue(decision, out KingdomDecisionConclusion decisionConclusion)
-             && decisionConclusion.ConclusionTime.ElapsedDaysUntilNow < GetRequiredDecisionCooldown(decision)
-             || HasAlternativeDecisionCooldown(decision);
+             && decisionConclusion.ConclusionTime.ElapsedDaysUntilNow < GetRequiredDecisionCooldown(decision);
     }
     public static bool HasAlternativeDecisionCooldown(KingdomDecision decision)
     {
@@ -100,12 +106,18 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
           return false;
       }
     }
+
     public static bool HasDecisionCooldown(KingdomDecision decision, out float elapsedDaysUntilNow)
     {
+      return HasPrimaryDecisionCooldown(decision, out elapsedDaysUntilNow) || HasAlternativeDecisionCooldown(decision, out elapsedDaysUntilNow);
+    }
+
+    public static bool HasPrimaryDecisionCooldown(KingdomDecision decision, out float elapsedDaysUntilNow)
+    {
+      elapsedDaysUntilNow = default;
       return SupportedDecisionTypes.Contains(decision.GetType())
              && KingdomDecisionHistory.TryGetValue(decision, out KingdomDecisionConclusion decisionConclusion)
-             && (elapsedDaysUntilNow = decisionConclusion.ConclusionTime.ElapsedDaysUntilNow) < GetRequiredDecisionCooldown(decision)
-             || HasAlternativeDecisionCooldown(decision, out elapsedDaysUntilNow);
+             && (elapsedDaysUntilNow = decisionConclusion.ConclusionTime.ElapsedDaysUntilNow) < GetRequiredDecisionCooldown(decision);
     }
     public static bool HasAlternativeDecisionCooldown(KingdomDecision decision, out float elapsedDaysUntilNow)
     {

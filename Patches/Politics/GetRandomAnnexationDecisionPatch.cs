@@ -46,7 +46,6 @@ namespace AllegianceOverhaul.Patches.Politics
                                                      && x.Fortifications.FirstOrDefault(f => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))) != null
                                                ).ToArray().GetRandomElement();
 
-
           Town randomFortification = SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldowns, clan)
               ? clan.Fortifications.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
               : clan.Fortifications.ToArray().GetRandomElement();

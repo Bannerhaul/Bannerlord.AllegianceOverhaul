@@ -19,8 +19,6 @@ namespace AllegianceOverhaul.Helpers
     private static readonly ReadOnlyCollection<int> RussianSingularNumerics = new ReadOnlyCollection<int>(new List<int>() { 1, 2, 3, 4 });
     private static readonly ReadOnlyCollection<string> RussianGroupLanguageIDs = new ReadOnlyCollection<string>(new List<string>() { "Russian", "Русский", "Ukrainian", "Українська" });
 
-    static StringHelper() { }
-
     private static RecursiveCaller GetRecursiveCaller(RecursiveCaller currentCaller, RecursiveCaller receivedCaller)
     {
       return (RecursiveCaller)Math.Max((byte)currentCaller, (byte)receivedCaller);

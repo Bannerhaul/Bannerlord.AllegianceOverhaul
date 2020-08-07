@@ -100,7 +100,7 @@ namespace AllegianceOverhaul.Patches.Politics
             PopularOptionSupportPoints, OverridingOptionSupportPoints,
             Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue, LackingPointsCompensationCost, 
             GetModifierApplied(decision.Kingdom.ActivePolicies.Contains(DefaultPolicies.RoyalPrivilege)), GetModifierApplied(decision.Kingdom.RulingClan != Clan.PlayerClan), GetModifierApplied(SettingsHelper.SubSystemEnabled(SubSystemType.FreeDecisionOverriding)),
-            CalculatedResult.ToString("N"), __result.ToString("N")); ;
+            CalculatedResult.ToString("N"), __result.ToString("N"));
 
           MessageHelper.TechnicalMessage(InfluenceRequiredDebugInfo);
         }

@@ -27,7 +27,6 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         {
           ["INFLUENCE_COST"] = new TextObject(InfluenceCost),
           ["GOLD_COST"] = new TextObject(GoldCost)
-
         };
         return new TextObject(ComplexCostString, attributes).ToString();
       }
