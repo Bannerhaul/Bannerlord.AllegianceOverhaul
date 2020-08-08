@@ -49,9 +49,9 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingEnsuredLoyalty)]
     public DefaultDropdown<string> EnsuredLoyaltyScope { get; set; } = new DefaultDropdown<string>(new string[]
     {
-      DropdownValueAll.ToLocalizedString(),
-      DropdownValuePlayers.ToLocalizedString(),
-      DropdownValueRuled.ToLocalizedString()
+      DropdownValueAll,
+      DropdownValuePlayers,
+      DropdownValueRuled
     }, 0);
 
     [SettingPropertyInteger("{=MIDoz9om}Faction oath of fealty limitation period", 0, 420, Order = 0, RequireRestart = false, HintText = "{=l5LWFlHv}Period in days after joining a kingdom, during which clan would not even consider leaving that kingdom. Default = 84 (a game year).")]
@@ -151,9 +151,9 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
     public DefaultDropdown<string> EnsuredLoyaltyDebugScope { get; set; } = new DefaultDropdown<string>(new string[]
     {
-      DropdownValueAll.ToLocalizedString(),
-      DropdownValuePlayers.ToLocalizedString(),
-      DropdownValueRuled.ToLocalizedString()
+      DropdownValueAll,
+      DropdownValuePlayers,
+      DropdownValueRuled
     }, 1);
 
     [SettingPropertyBool("{=xwz5YwZ8}Debug messages", Order = 1, RequireRestart = true, HintText = "{=uPYkZfKs}Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false.")]
@@ -213,9 +213,9 @@ namespace AllegianceOverhaul
         EnableTechnicalDebugging = true,
         EnsuredLoyaltyDebugScope = new DefaultDropdown<string>(new string[]
           {
-            DropdownValueAll.ToLocalizedString(),
-            DropdownValuePlayers.ToLocalizedString(),
-            DropdownValueRuled.ToLocalizedString()
+            DropdownValueAll,
+            DropdownValuePlayers,
+            DropdownValueRuled
           }, 0)
       });
       return basePresets;

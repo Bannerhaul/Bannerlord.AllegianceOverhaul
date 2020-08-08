@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lib.Harmony.2.0.1\lib\net472\0Harmony.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Bannerlord.UIExtenderEx, Version=0.0.11.13, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\Bannerlord.UIExtenderEx.dll</HintPath>
@@ -282,7 +283,7 @@
     <Compile Include="Patches\ConsiderClanLeaveAsMercenaryPatch.cs" />
     <Compile Include="Patches\ConsiderClanLeaveKingdomPatch.cs" />
     <Compile Include="Patches\ExecuteAiBarterReversePatch.cs" />
-	<Compile Include="Patches\ConversationDefectionConditionPatch.cs" />
+    <Compile Include="Patches\ConversationDefectionConditionPatch.cs" />
     <Compile Include="Patches\GetUnitValueForFactionJoinKingdomPatch.cs" />
     <Compile Include="Patches\GetUnitValueForFactionLeaveKingdomPatch.cs" />
     <Compile Include="Patches\ConsiderDefectionPatch.cs" />
@@ -313,7 +314,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
-    <Copy SourceFiles="$(TargetDir)\0Harmony.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
     <Copy SourceFiles="$(TargetDir)\MCMv3.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
     <Copy SourceFiles="$(TargetDir)\MCMv3.Implementation.v3.1.9.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
     <Copy SourceFiles="$(TargetDir)\MCMv3.UI.v3.1.9.dll" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
