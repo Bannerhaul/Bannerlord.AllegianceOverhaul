@@ -21,7 +21,7 @@ namespace AllegianceOverhaul
     protected override void OnSubModuleLoad()
     {
       base.OnSubModuleLoad();
-      Patched = HarmonyHelper.PatchAll(ref _allegianceOverhaulHarmonyInstance, "OnSubModuleLoad", "Initialization error - {0}");
+      //Reserved for future needs
     }
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
@@ -29,6 +29,7 @@ namespace AllegianceOverhaul
       base.OnBeforeInitialModuleScreenSetAsRoot();
       try
       {
+        Patched = HarmonyHelper.PatchAll(ref _allegianceOverhaulHarmonyInstance, "OnBeforeInitialModuleScreenSetAsRoot", "Initialization error - {0}");
         if (Patched)
           InformationManager.DisplayMessage(new InformationMessage(SLoaded.ToLocalizedString(), Color.FromUint(4282569842U)));
         else
@@ -45,5 +46,3 @@ namespace AllegianceOverhaul
     }
   }
 }
-//TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors
-//2 038 817 500

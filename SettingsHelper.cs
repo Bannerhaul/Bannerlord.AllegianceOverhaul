@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using MCM.Abstractions.Data;
+﻿using MCM.Abstractions.Dropdown;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 
 namespace AllegianceOverhaul
@@ -8,7 +8,7 @@ namespace AllegianceOverhaul
   {
     public static bool InDebugBranch { get; set; } = false;
 
-    public static bool FactionInScope(IFaction Faction, DefaultDropdown<string> Scope)
+    public static bool FactionInScope(IFaction Faction, DropdownDefault<string> Scope)
     {
       if (Faction is null || Faction.MapFaction is null || Scope.SelectedIndex < 0 || Scope.SelectedIndex > 2)
         return false;

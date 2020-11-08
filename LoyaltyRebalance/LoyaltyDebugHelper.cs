@@ -1,4 +1,4 @@
-﻿using MCM.Abstractions.Data;
+﻿using MCM.Abstractions.Dropdown;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.Localization;
@@ -54,7 +54,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance
     {
       bool DebugEnsuredLoyalty = Settings.Instance.EnableGeneralDebugging;
       SettingsHelper.InDebugBranch = true;
-      DefaultDropdown<string> DebugScope = Settings.Instance.EnsuredLoyaltyDebugScope;
+      DropdownDefault<string> DebugScope = Settings.Instance.EnsuredLoyaltyDebugScope;
       if (!DebugEnsuredLoyalty || !(SettingsHelper.FactionInScope(clan, DebugScope) || SettingsHelper.FactionInScope(kingdom, DebugScope)) || !SettingsHelper.InDebugBranch)
         return;
 

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using MCM.Abstractions.Data;
 using MCM.Abstractions.Settings.Base;
 using MCM.Abstractions.Settings.Base.Global;
 using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
+using MCM.Abstractions.Dropdown;
 using TaleWorlds.Localization;
 using AllegianceOverhaul.Extensions;
 
@@ -15,7 +15,7 @@ namespace AllegianceOverhaul
     public override string Id => "AllegianceOverhaul_v1";
     public override string DisplayName => $"{new TextObject("{=qfpqfAdz}Allegiance Overhaul")} {typeof(Settings).Assembly.GetName().Version.ToString(3)}";
     public override string FolderName => "Allegiance Overhaul";
-    public override string Format => "json";
+    public override string FormatType => "json";
 
     //Headings
     private const string HeadingGeneral = "{=yRuHl3O6}General settings";
@@ -41,13 +41,13 @@ namespace AllegianceOverhaul
     private const string DropdownValueRuled = "{=v2TacaMr}Kingdom ruled by player";
 
     //Ensured loyalty
-    [SettingPropertyBool("{=Ps6RgRH1}Ensured loyalty", RequireRestart = true, HintText = "{=QLii7mIG}Enables specifying conditions for clans to become unreservedly loyal to kingdoms.")]
-    [SettingPropertyGroup(HeadingEnsuredLoyalty, IsMainToggle = true)]
+    [SettingPropertyBool("{=Ps6RgRH1}Ensured loyalty", RequireRestart = true, IsToggle = true, HintText = "{=QLii7mIG}Enables specifying conditions for clans to become unreservedly loyal to kingdoms.")]
+    [SettingPropertyGroup(HeadingEnsuredLoyalty)]
     public bool UseEnsuredLoyalty { get; set; } = false;
 
     [SettingPropertyDropdown("{=yul4vp54}Applies to", RequireRestart = false, HintText = "{=y3ClkEcy}Specify if below rules should affect all kingdoms, or just the player's one. Default is [All kingdoms].")]
     [SettingPropertyGroup(HeadingEnsuredLoyalty)]
-    public DefaultDropdown<string> EnsuredLoyaltyScope { get; set; } = new DefaultDropdown<string>(new string[]
+    public DropdownDefault<string> EnsuredLoyaltyScope { get; set; } = new DropdownDefault<string>(new string[]
     {
       DropdownValueAll,
       DropdownValuePlayers,
@@ -68,8 +68,8 @@ namespace AllegianceOverhaul
     public bool UseLoyaltyInConversations { get; set; } = true;
 
     //Ensured loyalty via relation
-    [SettingPropertyBool("{=mmUgw8hL}Achieve via relation", RequireRestart = false, HintText = "{=gj3cKWJo}Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom.")]
-    [SettingPropertyGroup(HeadingEnsuredLoyaltyByRelation, GroupOrder = 0, IsMainToggle = true)]
+    [SettingPropertyBool("{=mmUgw8hL}Achieve via relation", RequireRestart = false, IsToggle = true, HintText = "{=gj3cKWJo}Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom.")]
+    [SettingPropertyGroup(HeadingEnsuredLoyaltyByRelation, GroupOrder = 0)]
     public bool UseRelationForEnsuredLoyalty { get; set; } = false;
 
     [SettingPropertyInteger("{=JvWw6eSp}Ensured loyalty baseline", -100, 100, RequireRestart = false, HintText = "{=XP7qtIkt}The minimum required relationship a clan leader must have with a kingdom leader in order for clan to never leave that kingdom. Being below that threshold does NOT mean clan will aitomatically leave. Serves as a baseline for other togglable modifiers. Default = 50.")]
@@ -77,8 +77,8 @@ namespace AllegianceOverhaul
     public int EnsuredLoyaltyBaseline { get; set; } = 50;
 
     //Ensured loyalty via relation - situational context
-    [SettingPropertyBool("{=m5JmQwFt}Modify by situational context", RequireRestart = false, HintText = "{=0oeDqVTM}Specify if situational context should affect minimum required relationship, at which loyalty is ensured.")]
-    [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext, GroupOrder = 0, IsMainToggle = true)]
+    [SettingPropertyBool("{=m5JmQwFt}Modify by situational context", RequireRestart = false, IsToggle = true, HintText = "{=0oeDqVTM}Specify if situational context should affect minimum required relationship, at which loyalty is ensured.")]
+    [SettingPropertyGroup(HeadingEnsuredLoyaltyByContext, GroupOrder = 0)]
     public bool UseContextForEnsuredLoyalty { get; set; } = false;
 
     [SettingPropertyInteger("{=AOnhwhiK}Blood relation modifier", 0, 50, Order = 0, RequireRestart = false, HintText = "{=gI3AplJv}Flat value that will be deducted from baseline if there is a kinship with the governing clan. The same value will be added to the baseline if clan considering defecting to a kingdom, ruled by kinsman. Default = 30 (blood relatives are loyal to and tend to join their kinsfolk).")]
@@ -98,8 +98,8 @@ namespace AllegianceOverhaul
     public int LandlessKingdomEnsuredLoyaltyModifier { get; set; } = 50;
 
     //Ensured loyalty via relation - honor
-    [SettingPropertyBool("{=eExUFCCQ}Modify by honor level", RequireRestart = false, HintText = "{=gIDkdZP8}Specify if clan leader's honor should affect minimum required relationship, at which loyalty is ensured.")]
-    [SettingPropertyGroup(HeadingEnsuredLoyaltyByHonor, GroupOrder = 1, IsMainToggle = true)]
+    [SettingPropertyBool("{=eExUFCCQ}Modify by honor level", RequireRestart = false, IsToggle = true, HintText = "{=gIDkdZP8}Specify if clan leader's honor should affect minimum required relationship, at which loyalty is ensured.")]
+    [SettingPropertyGroup(HeadingEnsuredLoyaltyByHonor, GroupOrder = 1)]
     public bool UseHonorForEnsuredLoyalty { get; set; } = false;
 
     [SettingPropertyInteger("{=1QhZZBVA}High honor step when leaving", 0, 30, Order = 0, RequireRestart = false, HintText = "{=SJ2OA4HM}Flat value that will be deducted from baseline for each positive honor level of a clan leader when considering leaving kingdom (positive honor makes leaders loyal at lower relation). Default = 5.")]
@@ -116,8 +116,8 @@ namespace AllegianceOverhaul
     public int NegativeHonorEnsuredLoyaltyModifier_Defecting { get; set; } = 20;
 
     //Ensured loyalty via relation - withhold price
-    [SettingPropertyBool("{=uXwgU2WE}Withhold price", RequireRestart = false, HintText = "{=BEiLWxeU}Specify if reaching certain relation level between clan leader and kingdom leader does not guarantee loyalty per se, but instead gives kingdom leader an option to withhold the clan that wishes to leave, using influence and money.")]
-    [SettingPropertyGroup(HeadingEnsuredLoyaltyPrice, GroupOrder = 2, IsMainToggle = true)]
+    [SettingPropertyBool("{=uXwgU2WE}Withhold price", RequireRestart = false, IsToggle = true, HintText = "{=BEiLWxeU}Specify if reaching certain relation level between clan leader and kingdom leader does not guarantee loyalty per se, but instead gives kingdom leader an option to withhold the clan that wishes to leave, using influence and money.")]
+    [SettingPropertyGroup(HeadingEnsuredLoyaltyPrice, GroupOrder = 2)]
     public bool UseWithholdPrice { get; set; } = false;
 
     [SettingPropertyFloatingInteger("{=bZH00rVn}Tolerance limit (millions)", 0.1f, 5f, Order = 0, RequireRestart = false, HintText = "{=moc7wRwB}Maximum amount, measured in millions, by which score of clan to leave kingdom may safely exceed threshold, not arising the need for ruler to intervene. Default = 0.5.")]
@@ -127,8 +127,8 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingEnsuredLoyaltyPrice)]
     public float WithholdInfluenceMultiplier { get; set; } = 2.5f;
 
-    [SettingPropertyBool("{=rhvq8Yhb}Bribing", RequireRestart = false, HintText = "{=rJw4D3kJ}Specify if withholding the clan should cost money in addition to influence.")]
-    [SettingPropertyGroup(HeadingEnsuredLoyaltyBribe, GroupOrder = 3, IsMainToggle = true)]
+    [SettingPropertyBool("{=rhvq8Yhb}Bribing", RequireRestart = false, IsToggle = true, HintText = "{=rJw4D3kJ}Specify if withholding the clan should cost money in addition to influence.")]
+    [SettingPropertyGroup(HeadingEnsuredLoyaltyBribe, GroupOrder = 3)]
     public bool UseWithholdBribing { get; set; } = false;
 
     [SettingPropertyFloatingInteger("{=cM9saCDB}Tolerance limit for bribing (millions)", 0.1f, 10f, Order = 3, RequireRestart = false, HintText = "{=tCqdcDuR}Maximum amount, measured in millions, by which score of clan to leave kingdom may exceed threshold, not arising the need for ruler to spend gold. Default = 1.0.")]
@@ -149,7 +149,7 @@ namespace AllegianceOverhaul
     //Debugging and loging
     [SettingPropertyDropdown("{=yul4vp54}Applies to", Order = 0, RequireRestart = false, HintText = "{=z3oSKZFE}Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom].")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
-    public DefaultDropdown<string> EnsuredLoyaltyDebugScope { get; set; } = new DefaultDropdown<string>(new string[]
+    public DropdownDefault<string> EnsuredLoyaltyDebugScope { get; set; } = new DropdownDefault<string>(new string[]
     {
       DropdownValueAll,
       DropdownValuePlayers,
@@ -164,8 +164,8 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
     public bool EnableTechnicalDebugging { get; set; } = false;
 
-    [SettingPropertyBool("{=ZnT9o5HI}Harmony checkup on initialize", RequireRestart = true, HintText = "{=ELPI6N1Q}Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul.")]
-    [SettingPropertyGroup(HeadingHarmonyCheckup, GroupOrder = 0, IsMainToggle = true)]
+    [SettingPropertyBool("{=ZnT9o5HI}Harmony checkup on initialize", RequireRestart = true, IsToggle = true, HintText = "{=ELPI6N1Q}Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul.")]
+    [SettingPropertyGroup(HeadingHarmonyCheckup, GroupOrder = 0)]
     public bool EnableHarmonyCheckup { get; set; } = false;
 
     [SettingPropertyText("{=531Vobla}Ignore list", RequireRestart = true, HintText = "{=59KvCjXV}List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon.")]
@@ -211,7 +211,7 @@ namespace AllegianceOverhaul
         UseAdvancedHeroTooltips = true,
         EnableGeneralDebugging = true,
         EnableTechnicalDebugging = true,
-        EnsuredLoyaltyDebugScope = new DefaultDropdown<string>(new string[]
+        EnsuredLoyaltyDebugScope = new DropdownDefault<string>(new string[]
           {
             DropdownValueAll,
             DropdownValuePlayers,
