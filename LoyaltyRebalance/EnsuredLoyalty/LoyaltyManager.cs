@@ -44,7 +44,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       int Count = 0;
       foreach (Clan clan in kingdom.Clans)
       {
-        Count += clan.Fortifications?.Count ?? 0;
+        Count += clan.Settlements?.Count ?? 0;
       }
       return Count;
     }
@@ -68,7 +68,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           kingdom != null && SettingsHelper.BloodRelatives(kingdom.RulingClan, clan) ? Settings.Instance.BloodRelativesEnsuredLoyaltyModifier : 0 +
           (clan.IsMinorFaction ? Settings.Instance.MinorFactionEnsuredLoyaltyModifier : 0) +
           (kingdom is null ? Settings.Instance.DefectionEnsuredLoyaltyModifier : 0) +
-          (clan.Fortifications?.Count < 1 ? Settings.Instance.LandlessClanEnsuredLoyaltyModifier : 0) +
+          (clan.Settlements?.Count < 1 ? Settings.Instance.LandlessClanEnsuredLoyaltyModifier : 0) +
           (KingdomFortificationsCount(clan.Kingdom) < 1 ? Settings.Instance.LandlessKingdomEnsuredLoyaltyModifier : 0);
       }
 

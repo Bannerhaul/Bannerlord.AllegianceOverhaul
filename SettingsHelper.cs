@@ -21,7 +21,7 @@ namespace AllegianceOverhaul
             return false;
           break;
         case 2:
-          if (Clan.PlayerClan.MapFaction is null || !Clan.PlayerClan.MapFaction.IsKingdomFaction || !(Faction.MapFaction.IsKingdomFaction && Faction.MapFaction.Leader != Hero.MainHero))
+          if (Clan.PlayerClan.MapFaction is null || !Clan.PlayerClan.MapFaction.IsKingdomFaction || !(Faction.MapFaction.IsKingdomFaction && Faction.MapFaction.Leader == Hero.MainHero))
             return false;
           break;
         default:
