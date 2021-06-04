@@ -1,8 +1,10 @@
 ﻿using System;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.Election;
-using AllegianceOverhaul.Helpers;
+
+using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.PoliticsRebalance
 {
@@ -37,7 +39,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
       {
         SetPossibleAction(out debugLogMessage, considerationType);
       }
-      StringHelper.SetEntitiyProperties(debugLogMessage, "REFLECTING_CLAN", clan);
+      SetEntityProperties(debugLogMessage, "REFLECTING_CLAN", clan);
     }
 
     public static void PrepareConsiderationDebugMessage(Clan clan, PolicyObject policyObject, KingdomDecision clanDecision, out TextObject debugLogMessage)
@@ -50,7 +52,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
       {
         SetPossibleAction(out debugLogMessage, ConsiderationType.ChangingKingdomPolicy);
       }
-      StringHelper.SetEntitiyProperties(debugLogMessage, "REFLECTING_CLAN", clan);
+      SetEntityProperties(debugLogMessage, "REFLECTING_CLAN", clan);
     }
 
     public static void PrepareConsiderationDebugMessage(Clan clan, Town fiefBeingAnnexed, KingdomDecision clanDecision, out TextObject debugLogMessage)
@@ -63,7 +65,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
       {
         SetPossibleAction(out debugLogMessage, ConsiderationType.AnnexingFief);
       }
-      StringHelper.SetEntitiyProperties(debugLogMessage, "REFLECTING_CLAN", clan);
+      SetEntityProperties(debugLogMessage, "REFLECTING_CLAN", clan);
     }
 
     private static void SetConsideredAction(out TextObject textObject, TextObject actionTargetName, KingdomDecision clanDecision, ConsiderationType considerationType, bool revertPolicy = false, Settlement annexedSettlement = null)
@@ -84,7 +86,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
           textObject.SetTextVariable("ACTION_DETAILS", TextObject.Empty);
           break;
         case ConsiderationType.AnnexingFief:
-          StringHelper.SetEntitiyProperties(null, "ANNEXED_SETTLEMENT", annexedSettlement);
+          SetEntityProperties(null, "ANNEXED_SETTLEMENT", annexedSettlement);
           textObject.SetTextVariable("CONSIDERED_ACTION", new TextObject(ActionAnnexingFief));
           textObject.SetTextVariable("ACTION_DETAILS", new TextObject(AnnexingFiefActionDetails));
           break;

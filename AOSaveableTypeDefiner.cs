@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.SaveSystem;
+
 using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
 using AllegianceOverhaul.SavableClasses;
 

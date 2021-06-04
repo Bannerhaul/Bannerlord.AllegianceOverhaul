@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AllegianceOverhaul.Extensions;
-using MCM.Abstractions.Data;
+
 using TaleWorlds.CampaignSystem;
+
+using MCM.Abstractions.Dropdown;
+
+using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul.Helpers
 {
   internal static class SettingsHelper
   {
-    public static bool FactionInScope(IFaction faction, DefaultDropdown<string> scope)
+    public static bool FactionInScope(IFaction faction, DropdownDefault<string> scope)
     {
       if (faction is null || faction.MapFaction is null || scope is null || scope.SelectedIndex < 0 || scope.SelectedIndex > 2)
         return false;
@@ -79,7 +82,7 @@ namespace AllegianceOverhaul.Helpers
       {
         return false;
       }
-      DefaultDropdown<string> scope = DetermineSubSystemScope(subSystem);
+      DropdownDefault<string> scope = DetermineSubSystemScope(subSystem);
       foreach (IFaction faction in factionList)
       {
         if (FactionInScope(faction, scope))
@@ -124,7 +127,7 @@ namespace AllegianceOverhaul.Helpers
       }
       return false;
     }
-    private static DefaultDropdown<string> DetermineSubSystemScope(SubSystemType subSystem)
+    private static DropdownDefault<string> DetermineSubSystemScope(SubSystemType subSystem)
     {
       switch ((int)subSystem)
       {

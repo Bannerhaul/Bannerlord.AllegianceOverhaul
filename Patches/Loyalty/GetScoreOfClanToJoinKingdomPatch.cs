@@ -1,9 +1,12 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance;
 
@@ -38,7 +41,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
         float CultureModifier = (float)(1.0 + (kingdom.Culture == clan.Culture ? 0.150000005960464 : -0.150000005960464));
         float CurSettlementValue = clan.CalculateSettlementValue(null);
         float NewSettlementValue = clan.CalculateSettlementValue(kingdom);
-        int ClanCmndrHeroCount = clan.CommanderHeroes.Count;
+        int ClanCmndrHeroCount = clan.CommanderLimit;
         float StlmntValPerHeroModifier = 0.0f;
         float KingdomCmndrHeroeCntModifier = 0.0f;
         float ValueOfTargetKingdomSettlements = 0.0f;
@@ -53,7 +56,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
           foreach (Clan clan1 in kingdom.Clans)
           {
             if (!clan1.IsMinorFaction || clan1 == Clan.PlayerClan)
-              TargetKingdomCmndrHeroeCount += clan1.CommanderHeroes.Count;
+              TargetKingdomCmndrHeroeCount += clan1.CommanderLimit;
           }
           StlmntValPerHeroModifier = ValueOfTargetKingdomSettlements / (TargetKingdomCmndrHeroeCount + ClanCmndrHeroCount);
           KingdomCmndrHeroeCntModifier = (float)-(TargetKingdomCmndrHeroeCount * TargetKingdomCmndrHeroeCount * 50.0);

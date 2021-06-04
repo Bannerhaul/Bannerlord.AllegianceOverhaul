@@ -1,12 +1,15 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Linq;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
+
 using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.PoliticsRebalance;
@@ -41,14 +44,14 @@ namespace AllegianceOverhaul.Patches.Politics
                                           && Settings.Instance.AnnexSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(FiefOwnershipConsideration.PossessionsFactor)
                                           && Settings.Instance.FiefsDeemedFairBaseline.SelectedValue.EnumValue != NumberOfFiefsCalculationMethod.WithoutRestrictions;
           Clan randomClan = kingdom.Clans.Where(x => x != clan
-                                                     && x.Fortifications.Count > 0
-                                                     && (x.GetRelationWithClan(clan) < -25 || (possessionsFactorApplied && Campaign.Current.GetAOGameModels().DecisionSupportScoringModel.GetNumberOfFiefsDeemedFair(x) < x.Fortifications.Count))
-                                                     && x.Fortifications.FirstOrDefault(f => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))) != null
+                                                     && x.Fiefs.Count > 0
+                                                     && (x.GetRelationWithClan(clan) < -25 || (possessionsFactorApplied && Campaign.Current.GetAOGameModels().DecisionSupportScoringModel.GetNumberOfFiefsDeemedFair(x) < x.Fiefs.Count))
+                                                     && x.Fiefs.FirstOrDefault(f => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))) != null
                                                ).ToArray().GetRandomElement();
 
           Town randomFortification = SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldowns, clan)
-              ? clan.Fortifications.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
-              : clan.Fortifications.ToArray().GetRandomElement();
+              ? clan.Fiefs.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
+              : clan.Fiefs.ToArray().GetRandomElement();
 
           //ConsiderAnnexDelegate deConsiderAnnex = AccessHelper.GetDelegate<ConsiderAnnexDelegate, KingdomDecisionProposalBehavior>(__instance, "ConsiderAnnex");
           if (randomClan != null && deConsiderAnnex(__instance, clan, kingdom, randomClan, randomFortification))

@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.Localization;
+
 using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
 using AllegianceOverhaul.Helpers;
+
+using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance
 {
@@ -30,9 +34,9 @@ namespace AllegianceOverhaul.LoyaltyRebalance
       bool NativeDecision = ClanBarterableValueForFaction <= StayThreshold;
 
       TextObject ResultTextObject = new TextObject(Debug_Leave);
-      StringHelper.SetEntitiyProperties(ResultTextObject, "LEAVING_CLAN", clan, true);
-      StringHelper.SetNumericVariable(ResultTextObject, "LEAVE_BARTERABLE", ClanBarterableValueForFaction, "N0");
-      StringHelper.SetNumericVariable(ResultTextObject, "LEAVE_THRESHOLD", StayThreshold, "N0");
+      SetEntityProperties(ResultTextObject, "LEAVING_CLAN", clan, true);
+      SetNumericVariable(ResultTextObject, "LEAVE_BARTERABLE", ClanBarterableValueForFaction, "N0");
+      SetNumericVariable(ResultTextObject, "LEAVE_THRESHOLD", StayThreshold, "N0");
       ResultTextObject.SetTextVariable("CLAN_DECISION", NativeDecision ? StayDecision : LeaveDecision);
 
       bool IsLoyaltyEnsured = LoyaltyManager.CheckLoyalty(clan, out TextObject LoyaltyTextObject);
@@ -55,10 +59,10 @@ namespace AllegianceOverhaul.LoyaltyRebalance
       bool NativeDecision = ClanBarterableValueForClan + ClanBarterableValueForKingdom <= 0;
 
       TextObject ResultTextObject = new TextObject(Debug_Defect);
-      StringHelper.SetEntitiyProperties(ResultTextObject, "LEAVING_CLAN", clan, true);
-      StringHelper.SetEntitiyProperties(ResultTextObject, "TARGET_KINGDOM", kingdom);
-      StringHelper.SetNumericVariable(ResultTextObject, "CURRENT_BARTERABLE", ClanBarterableValueForClan, "N0");
-      StringHelper.SetNumericVariable(ResultTextObject, "TARGET_BARTERABLE", ClanBarterableValueForKingdom, "N0");
+      SetEntityProperties(ResultTextObject, "LEAVING_CLAN", clan, true);
+      SetEntityProperties(ResultTextObject, "TARGET_KINGDOM", kingdom);
+      SetNumericVariable(ResultTextObject, "CURRENT_BARTERABLE", ClanBarterableValueForClan, "N0");
+      SetNumericVariable(ResultTextObject, "TARGET_BARTERABLE", ClanBarterableValueForKingdom, "N0");
       ResultTextObject.SetTextVariable("CLAN_DECISION", NativeDecision ? StayDecision : LeaveDecision);
 
       bool IsLoyaltyEnsured = LoyaltyManager.CheckLoyalty(clan, out TextObject LoyaltyTextObject, kingdom);

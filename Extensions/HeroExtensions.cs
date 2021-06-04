@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
 using TaleWorlds.Library;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance;
 
@@ -23,7 +25,7 @@ namespace AllegianceOverhaul.Extensions
 
     public static int GetModifiedRelation(this Hero hero, Hero otherHero)
     {
-      ExplainedNumber relationBetweenHeroes = new ExplainedNumber(CharacterRelationManager.GetHeroRelation(hero, otherHero), null, null);
+      ExplainedNumber relationBetweenHeroes = new ExplainedNumber(CharacterRelationManager.GetHeroRelation(hero, otherHero), false, null);
       deGetPersonalityEffects(Campaign.Current.Models.DiplomacyModel is DefaultDiplomacyModel defaultDiplomacyModel ? defaultDiplomacyModel : new DefaultDiplomacyModel(), ref relationBetweenHeroes, hero, otherHero);
       return MBMath.Round(MBMath.ClampFloat(relationBetweenHeroes.ResultNumber + (RelativesHelper.BloodRelatives(hero, otherHero) ? 30f : 0f), -100f, 100f));
     }

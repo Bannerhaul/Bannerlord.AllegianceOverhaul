@@ -1,8 +1,11 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.Extensions;
 

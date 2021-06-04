@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
+using TaleWorlds.Library;
+
+using AllegianceOverhaul.Extensions;
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.PoliticsRebalance;
-using AllegianceOverhaul.Extensions;
-using TaleWorlds.Library;
 
 namespace AllegianceOverhaul.Models.DefaultModels
 {

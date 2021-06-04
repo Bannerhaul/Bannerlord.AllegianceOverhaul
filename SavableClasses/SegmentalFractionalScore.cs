@@ -1,9 +1,10 @@
 ﻿using System;
+
 using TaleWorlds.SaveSystem;
 
 namespace AllegianceOverhaul.SavableClasses
 {
-  [SaveableStruct(901)]
+  //[SaveableStruct(901)]
   public struct SegmentalFractionalScore
   {
     [SaveableProperty(1)]

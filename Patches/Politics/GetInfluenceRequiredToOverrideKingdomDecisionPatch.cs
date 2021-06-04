@@ -1,10 +1,13 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Linq;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
+
 using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Politics

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using MCM.Abstractions.Data;
+
 using MCM.Abstractions.Settings.Base;
 using MCM.Abstractions.Settings.Base.Global;
+using MCM.Abstractions.Dropdown;
+
+using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul
 {
@@ -16,7 +19,7 @@ namespace AllegianceOverhaul
     public override IDictionary<string, Func<BaseSettings>> GetAvailablePresets()
     {
       IDictionary<string, Func<BaseSettings>> basePresets = base.GetAvailablePresets(); // include the 'Default' preset that MCM provides
-      basePresets.Add(PresetSuggested, () => new Settings()
+      basePresets.Add(PresetSuggested.ToLocalizedString(), () => new Settings()
       {
         UseEnsuredLoyalty = true,
         UseRelationForEnsuredLoyalty = true,
@@ -27,7 +30,7 @@ namespace AllegianceOverhaul
         FixMinorFactionVassals = true,
         UseAdvancedHeroTooltips = true
       });
-      basePresets.Add(PresetSLogging, () => new Settings()
+      basePresets.Add(PresetSLogging.ToLocalizedString(), () => new Settings()
       {
         UseEnsuredLoyalty = true,
         UseRelationForEnsuredLoyalty = true,
@@ -39,7 +42,7 @@ namespace AllegianceOverhaul
         UseAdvancedHeroTooltips = true,
         EnableGeneralDebugging = true
       });
-      basePresets.Add(PresetTechnical, () => new Settings()
+      basePresets.Add(PresetTechnical.ToLocalizedString(), () => new Settings()
       {
         UseEnsuredLoyalty = true,
         UseRelationForEnsuredLoyalty = true,
@@ -53,7 +56,7 @@ namespace AllegianceOverhaul
         UseElectionRebalance = true,
         EnableGeneralDebugging = true,
         EnableTechnicalDebugging = true,
-        DebugFactionScope = new DefaultDropdown<string>(new string[]
+        DebugFactionScope = new DropdownDefault<string>(new string[]
           {
             DropdownValueAllFactions,
             DropdownValuePlayers,

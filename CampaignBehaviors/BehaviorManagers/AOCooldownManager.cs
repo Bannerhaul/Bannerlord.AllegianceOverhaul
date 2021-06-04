@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.SaveSystem;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.SavableClasses;
 
 namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
 {
-  [SaveableClass(100)]
+  //[SaveableClass(100)]
   public class AOCooldownManager
   {
     [SaveableField(1)]

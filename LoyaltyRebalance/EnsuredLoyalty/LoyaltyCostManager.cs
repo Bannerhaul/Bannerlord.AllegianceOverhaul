@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+
 using AllegianceOverhaul.Extensions;
 using AllegianceOverhaul.Helpers;
+
+using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 {
@@ -23,7 +27,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       }
       public override string ToString()
       {
-        Dictionary<string, TextObject> attributes = new Dictionary<string, TextObject>()
+        Dictionary<string, object> attributes = new Dictionary<string, object>()
         {
           ["INFLUENCE_COST"] = new TextObject(InfluenceCost),
           ["GOLD_COST"] = new TextObject(GoldCost)
@@ -148,16 +152,16 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       float InitialInfluence = LeavingClan.Kingdom.RulingClan.Influence;
       int InitilalGold = LeavingClan.Kingdom.Ruler.Gold;
       TextObject textObject = new TextObject(decisionIsWithhold ? WithholdPricePayed : WithholdPriceRejected);
-      StringHelper.SetEntitiyProperties(textObject, "LEAVING_CLAN", LeavingClan, true);
-      StringHelper.SetNumericVariable(textObject, "INITIAL_INFLUENCE", InitialInfluence, "N0");
-      StringHelper.SetNumericVariable(textObject, "INITILAL_GOLD", InitilalGold, "N0");
-      StringHelper.SetNumericVariable(textObject, "INFLUENCE_COST", WithholdCost.InfluenceCost, "N0");
-      StringHelper.SetNumericVariable(textObject, "GOLD_COST", WithholdCost.GoldCost, "N0");
+      SetEntityProperties(textObject, "LEAVING_CLAN", LeavingClan, true);
+      SetNumericVariable(textObject, "INITIAL_INFLUENCE", InitialInfluence, "N0");
+      SetNumericVariable(textObject, "INITILAL_GOLD", InitilalGold, "N0");
+      SetNumericVariable(textObject, "INFLUENCE_COST", WithholdCost.InfluenceCost, "N0");
+      SetNumericVariable(textObject, "GOLD_COST", WithholdCost.GoldCost, "N0");
       if (decisionIsWithhold)
       {
         ApplyAIWithholdDecision(decisionIsWithhold);
-        StringHelper.SetNumericVariable(textObject, "RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence, "N0");
-        StringHelper.SetNumericVariable(textObject, "RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold, "N0");
+        SetNumericVariable(textObject, "RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence, "N0");
+        SetNumericVariable(textObject, "RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold, "N0");
       }
       MessageHelper.SimpleMessage(textObject);
     }
@@ -174,14 +178,14 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     public void AwaitPlayerDecision()
     {
       TextObject InquiryHeader = new TextObject(PlayerInquiryHeader);
-      StringHelper.SetEntitiyProperties(InquiryHeader, "LEAVING_CLAN", LeavingClan);
+      SetEntityProperties(InquiryHeader, "LEAVING_CLAN", LeavingClan);
 
       TextObject InquiryBody = new TextObject(PlayerInquiryBody);
-      StringHelper.SetEntitiyProperties(InquiryBody, "LEAVING_CLAN", LeavingClan);
-      StringHelper.SetEntitiyProperties(null, "TARGET_KINGDOM", TargetKingdom);
+      SetEntityProperties(InquiryBody, "LEAVING_CLAN", LeavingClan);
+      SetEntityProperties(null, "TARGET_KINGDOM", TargetKingdom);
       InquiryBody.SetTextVariable("ACTION_DESCRIPTION", new TextObject(TargetKingdom != null ? ActionDefecting : ActionLeaving));
-      StringHelper.SetNumericVariable(InquiryBody, "INFLUENCE_COST", WithholdCost.InfluenceCost, "N0");
-      StringHelper.SetNumericVariable(InquiryBody, "GOLD_COST", WithholdCost.GoldCost, "N0");
+      SetNumericVariable(InquiryBody, "INFLUENCE_COST", WithholdCost.InfluenceCost, "N0");
+      SetNumericVariable(InquiryBody, "GOLD_COST", WithholdCost.GoldCost, "N0");
 
       InformationManager.ShowInquiry(new InquiryData(InquiryHeader.ToString(), InquiryBody.ToString(), true, true, ButtonWithholdText.ToLocalizedString(), ButtonReleaseText.ToLocalizedString(), () => ApplyPlayerDecision(true), () => ApplyPlayerDecision(false)), true);
     }

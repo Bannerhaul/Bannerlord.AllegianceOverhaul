@@ -12,7 +12,7 @@ namespace AllegianceOverhaul.ViewModels.Extensions
       OtherHero = otherHero;
     }
 
-    protected override void ExecuteBeginHint()
+    public override void ExecuteBeginHint()
     {
       if (Hero == null)
         return;

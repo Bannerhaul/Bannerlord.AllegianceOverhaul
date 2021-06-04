@@ -1,9 +1,13 @@
 ﻿extern alias TWCS;
+
 using HarmonyLib;
+
 using System;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance;
 
@@ -30,7 +34,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
         float CultureModifier = (float)(1.0 + (kingdom.Culture == clan.Culture ? 0.150000005960464 : -0.150000005960464));
         float NewSettlementValue = clan.CalculateSettlementValue(null);
         float CurSettlementValue = clan.CalculateSettlementValue(kingdom);
-        int ClanCmndrHeroeCount = clan.CommanderHeroes.Count;
+        int ClanCmndrHeroeCount = clan.CommanderLimit;
         float StlmntValPerHeroModifier = 0.0f;
         float ValueOfKingdomSettlements = 0.0f;
         if (!clan.IsMinorFaction)
@@ -43,14 +47,14 @@ namespace AllegianceOverhaul.Patches.Loyalty
           foreach (Clan clan1 in kingdom.Clans)
           {
             if (!clan1.IsMinorFaction || clan1 == Clan.PlayerClan)
-              KingdomCmndrHeroeCount += clan1.CommanderHeroes.Count;
+              KingdomCmndrHeroeCount += clan1.CommanderLimit;
           }
           StlmntValPerHeroModifier = ValueOfKingdomSettlements / (KingdomCmndrHeroeCount + ClanCmndrHeroeCount);
         }
         float ClanStrengthModifier = (float)((clan.TotalStrength + 150.0 * ClanCmndrHeroeCount) * 10.0);
         float ReliabilityConstant = TWCS::Helpers.HeroHelper.CalculateReliabilityConstant(clan.Leader, 1f);
         float DaysWithFactionModifier = 2000f * (float)(10.0 - Math.Sqrt(Math.Min(100.0, (CampaignTime.Now - clan.LastFactionChangeTime).ToDays)));
-        int ClanFortificationsModifier = 40000 + (clan.Fortifications != null ? clan.Fortifications.Count : 0) * 20000;
+        int ClanFortificationsModifier = 40000 + (clan.Fiefs != null ? clan.Fiefs.Count : 0) * 20000;
         float ComputedResult =
           (float)(-(StlmntValPerHeroModifier * Math.Sqrt(ClanCmndrHeroeCount) * 0.300000011920929 + ReliabilityConstant * (ClanFortificationsModifier + (double)ClanStrengthModifier) + DaysWithFactionModifier) *
             (RelationModifier * (double)CultureModifier) + (NewSettlementValue - (double)CurSettlementValue) + (kingdom.Ruler == Hero.MainHero ? -70000.0 : 0.0));

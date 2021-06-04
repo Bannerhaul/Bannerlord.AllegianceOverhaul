@@ -4,7 +4,7 @@ using TaleWorlds.SaveSystem;
 
 namespace AllegianceOverhaul.SavableClasses
 {
-  [SaveableClass(1)]
+  //[SaveableClass(1)]
   internal class KingdomDecisionConclusion
   {
     [SaveableProperty(1)]

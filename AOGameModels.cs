@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+
 using AllegianceOverhaul.Models;
 
 namespace AllegianceOverhaul

@@ -1,14 +1,16 @@
-﻿using TaleWorlds.CampaignSystem;
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using TaleWorlds.CampaignSystem.Election;
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.SavableClasses;
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using AllegianceOverhaul.Extensions;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
+using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Election;
+
+using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.SavableClasses;
 
 namespace AllegianceOverhaul.CampaignBehaviors
 {

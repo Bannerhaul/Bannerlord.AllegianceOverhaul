@@ -1,12 +1,14 @@
-﻿using System;
-using HarmonyLib;
+﻿using HarmonyLib;
+
+using System;
+
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-using AllegianceOverhaul.Extensions;
-using TaleWorlds.CampaignSystem;
-//using Bannerlord.UIExtenderEx;
+
 using AllegianceOverhaul.CampaignBehaviors;
+using AllegianceOverhaul.Extensions;
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.Models.DefaultModels;
 
@@ -28,19 +30,7 @@ namespace AllegianceOverhaul
     protected override void OnSubModuleLoad()
     {
       base.OnSubModuleLoad();
-      Patched = HarmonyHelper.PatchAll(ref _allegianceOverhaulHarmonyInstance, "OnSubModuleLoad", "Initialization error - {0}");
-      /*
-      try
-      {
-        _extender.Register();
-        _extender.Enable();
-      }
-      catch (Exception ex)
-      {
-        DebugHelper.HandleException(ex, "OnSubModuleLoad", "Initialization error - {0}", string.Empty);
-        Patched = false;
-      }
-      */
+      //Reserved for future needs
     }
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
@@ -48,6 +38,7 @@ namespace AllegianceOverhaul
       base.OnBeforeInitialModuleScreenSetAsRoot();
       try
       {
+        Patched = HarmonyHelper.PatchAll(ref _allegianceOverhaulHarmonyInstance, "OnSubModuleLoad", "Initialization error - {0}");
         if (Patched)
           InformationManager.DisplayMessage(new InformationMessage(SLoaded.ToLocalizedString(), Color.FromUint(4282569842U)));
         else

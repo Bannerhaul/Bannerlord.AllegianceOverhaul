@@ -1,9 +1,13 @@
 ﻿using System;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+
 using AllegianceOverhaul.Extensions;
 using AllegianceOverhaul.Helpers;
+
+using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 {
@@ -42,7 +46,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       int Count = 0;
       foreach (Clan clan in kingdom.Clans)
       {
-        Count += clan.Fortifications?.Count ?? 0;
+        Count += clan.Settlements?.Count ?? 0;
       }
       return Count;
     }
@@ -69,15 +73,15 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           return false;
         case ELState.UnderRequiredService:
           TextObject ReasonPeriod = new TextObject(ReasonServicePeriod);
-          StringHelper.SetNumericVariable(ReasonPeriod, "DAYS_UNDER_SERVICE", DaysWithKingdom);
-          StringHelper.SetNumericVariable(ReasonPeriod, "REQUIRED_DAYS_UNDER_SERVICE", RequiredDays);
+          SetNumericVariable(ReasonPeriod, "DAYS_UNDER_SERVICE", DaysWithKingdom);
+          SetNumericVariable(ReasonPeriod, "REQUIRED_DAYS_UNDER_SERVICE", RequiredDays);
           DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", ResultTrue);
           DebugTextObject.SetTextVariable("REASON", ReasonPeriod.ToString());
           return true;
         case ELState.UnaffectedByRelations:
           DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", ResultFalse);
           TextObject ReasonDisabled = new TextObject(ReasonRelationDisabled);
-          StringHelper.SetEntitiyProperties(ReasonDisabled, "LEAVING_CLAN", clan, true);
+          SetEntityProperties(ReasonDisabled, "LEAVING_CLAN", clan, true);
           DebugTextObject.SetTextVariable("REASON", ReasonDisabled);
           return false;
         case ELState.AffectedByRelations:
@@ -88,12 +92,12 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           bool HaveResources = clan.Kingdom.RulingClan.Influence > (costManager.WithholdCost?.InfluenceCost ?? 0) && clan.Kingdom.Ruler.Gold > (costManager.WithholdCost?.GoldCost ?? 0);
           bool ShouldPay = Settings.Instance.UseWithholdPrice && Settings.Instance.WithholdToleranceLimit * 1000000 < costManager.BarterableSum;
           TextObject WithholdPrice = new TextObject(HaveResources ? LeaderHasResources : LeaderHasNoResources);
-          StringHelper.SetEntitiyProperties(WithholdPrice, "LEAVING_CLAN", clan, true);
+          SetEntityProperties(WithholdPrice, "LEAVING_CLAN", clan, true);
           TextObject ReasonRelation = new TextObject(ReasonRelationEnabled);
           ReasonRelation.SetTextVariable("CHECK_RESULT", RelationCheckResult ? RelationHigh : RelationLow);
-          StringHelper.SetEntitiyProperties(ReasonRelation, "LEAVING_CLAN", clan, true);
-          StringHelper.SetNumericVariable(ReasonRelation, "CURRENT_RELATION", CurrentRelation);
-          StringHelper.SetNumericVariable(ReasonRelation, "REQUIRED_RELATION", RequiredRelation);
+          SetEntityProperties(ReasonRelation, "LEAVING_CLAN", clan, true);
+          SetNumericVariable(ReasonRelation, "CURRENT_RELATION", CurrentRelation);
+          SetNumericVariable(ReasonRelation, "REQUIRED_RELATION", RequiredRelation);
           ReasonRelation.SetTextVariable("WITHHOLD_PRICE_INFO", RelationCheckResult && ShouldPay ? WithholdPrice : TextObject.Empty);
           DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", RelationCheckResult ? (ShouldPay ? (HaveResources ? ResultDepends : ResultFalse) : ResultTrue) : ResultFalse);
           DebugTextObject.SetTextVariable("REASON", ReasonRelation.ToString());
@@ -114,7 +118,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           kingdom != null && RelativesHelper.BloodRelatives(kingdom.RulingClan, clan) ? Settings.Instance.BloodRelativesEnsuredLoyaltyModifier : 0 +
           (clan.IsMinorFaction ? Settings.Instance.MinorFactionEnsuredLoyaltyModifier : 0) +
           (kingdom is null ? Settings.Instance.DefectionEnsuredLoyaltyModifier : 0) +
-          (clan.Fortifications?.Count < 1 ? Settings.Instance.LandlessClanEnsuredLoyaltyModifier : 0) +
+          (clan.Settlements?.Count < 1 ? Settings.Instance.LandlessClanEnsuredLoyaltyModifier : 0) +
           (GetKingdomFortificationsCount(clan.Kingdom) < 1 ? Settings.Instance.LandlessKingdomEnsuredLoyaltyModifier : 0);
       }
 
@@ -211,8 +215,8 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       if (clan.Kingdom != null && DaysWithKingdom <= RequiredDays)
       {
         TextObject ReasonPeriod = new TextObject(TooltipOathLoyal);
-        StringHelper.SetEntitiyProperties(ReasonPeriod, "HERO_CLAN", clan);
-        StringHelper.SetNumericVariable(ReasonPeriod, "REMAINING_DAYS", RequiredDays - DaysWithKingdom);
+        SetEntityProperties(ReasonPeriod, "HERO_CLAN", clan);
+        SetNumericVariable(ReasonPeriod, "REMAINING_DAYS", RequiredDays - DaysWithKingdom);
         text = ReasonPeriod.ToString();
         color = Colors.Green;
         return;

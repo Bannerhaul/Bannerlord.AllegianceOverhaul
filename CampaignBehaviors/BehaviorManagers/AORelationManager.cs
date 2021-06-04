@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.Library;
 using TaleWorlds.ObjectSystem;
 using TaleWorlds.SaveSystem;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.SavableClasses;
 
+using Bannerlord.ButterLib.Common.Helpers;
+
 namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
 {
-  [SaveableClass(101)]
+  //[SaveableClass(101)]
   public class AORelationManager
   {
     [SaveableField(1)]

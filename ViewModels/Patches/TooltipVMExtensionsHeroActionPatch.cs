@@ -1,9 +1,12 @@
-﻿using System;
+﻿using HarmonyLib;
+
+using System;
 using System.Reflection;
-using HarmonyLib;
+
 using TaleWorlds.Core.ViewModelCollection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.ViewModels.Extensions;
 

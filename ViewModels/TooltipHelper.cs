@@ -1,6 +1,7 @@
 ﻿using TaleWorlds.Localization;
 using TaleWorlds.Library;
 using TaleWorlds.CampaignSystem;
+
 using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul.ViewModels

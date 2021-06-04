@@ -1,8 +1,8 @@
 ﻿using System;
-using MCM.Abstractions.Data;
 using MCM.Abstractions.Settings.Base.Global;
 using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
+using MCM.Abstractions.Dropdown;
 using TaleWorlds.Localization;
 using AllegianceOverhaul.Extensions;
 
@@ -10,10 +10,10 @@ namespace AllegianceOverhaul
 {
   public partial class Settings : AttributeGlobalSettings<Settings>
   {
-    public override string Id => "AllegianceOverhaul_v1";
+    public override string Id => "AllegianceOverhaul_v2";
     public override string DisplayName => $"{new TextObject("{=qfpqfAdz}Allegiance Overhaul")} {typeof(Settings).Assembly.GetName().Version.ToString(3)}";
     public override string FolderName => "Allegiance Overhaul";
-    public override string Format => "json";
+    public override string FormatType => "json";
 
     //Headings
     private const string HeadingGeneral = "{=yRuHl3O6}General settings";
@@ -48,7 +48,7 @@ namespace AllegianceOverhaul
     //Debugging and loging
     [SettingPropertyDropdown("{=yul4vp54}Applies to", Order = 0, RequireRestart = false, HintText = "{=z3oSKZFE}Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom].")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
-    public DefaultDropdown<string> DebugFactionScope { get; set; } = new DefaultDropdown<string>(new string[]
+    public DropdownDefault<string> DebugFactionScope { get; set; } = new DropdownDefault<string>(new string[]
     {
       DropdownValueAllFactions,
       DropdownValuePlayers,
@@ -57,7 +57,7 @@ namespace AllegianceOverhaul
 
     [SettingPropertyDropdown("{=}Systems of interest", Order = 1, RequireRestart = false, HintText = "{=}Specify if you interested in debugging all of the mod functionality, or just some particular systems. Default is [All systems].")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
-    public DefaultDropdown<DropdownObject<AOSystems>> DebugSystemScope { get; set; } = new DefaultDropdown<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 0);
+    public DropdownDefault<DropdownObject<AOSystems>> DebugSystemScope { get; set; } = new DropdownDefault<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 0);
 
     [SettingPropertyBool("{=xwz5YwZ8}Debug messages", Order = 2, RequireRestart = true, HintText = "{=uPYkZfKs}Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false.")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
@@ -67,8 +67,8 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
     public bool EnableTechnicalDebugging { get; set; } = false;
 
-    [SettingPropertyBool("{=ZnT9o5HI}Harmony checkup on initialize", RequireRestart = true, HintText = "{=ELPI6N1Q}Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul.")]
-    [SettingPropertyGroup(HeadingHarmonyCheckup, GroupOrder = 0, IsMainToggle = true)]
+    [SettingPropertyBool("{=ZnT9o5HI}Harmony checkup on initialize", RequireRestart = true, IsToggle = true, HintText = "{=ELPI6N1Q}Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul.")]
+    [SettingPropertyGroup(HeadingHarmonyCheckup, GroupOrder = 0)]
     public bool EnableHarmonyCheckup { get; set; } = true;
 
     [SettingPropertyText("{=531Vobla}Ignore list", RequireRestart = true, HintText = "{=59KvCjXV}List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon.")]
@@ -76,24 +76,24 @@ namespace AllegianceOverhaul
     public string HarmonyCheckupIgnoreList { get; set; } = "";
 
     //Testing settings
-    [SettingPropertyBool("{=}Testing settings", RequireRestart = true, HintText = "{=}These settings are intended for mod testing purposes, do not use them in actual gameplay.")]
-    [SettingPropertyGroup(HeadingTesting, GroupOrder = 101, IsMainToggle = true)]
+    [SettingPropertyBool("{=}Testing settings", RequireRestart = true, IsToggle = true, HintText = "{=}These settings are intended for mod testing purposes, do not use them in actual gameplay.")]
+    [SettingPropertyGroup(HeadingTesting, GroupOrder = 101)]
     public bool UseTestingSettings { get; set; } = false;
 
     [SettingPropertyBool("{=}Free decision overriding", Order = 0, RequireRestart = true, HintText = "{=}Override kingdom decisions for free. Cheat!")]
     [SettingPropertyGroup(HeadingTesting)]
     public bool FreeDecisionOverriding { get; set; } = false;
 
-    [SettingPropertyBool("{=}Destabilize join kingdom evaluation", Order = 0, RequireRestart = true, HintText = "{=}Destabilize the evaluation of the ScoreOfClanToJoinKingdom.")]
-    [SettingPropertyGroup(HeadingDestabilizeJoining, GroupOrder = 0, IsMainToggle = true)]
+    [SettingPropertyBool("{=}Destabilize join kingdom evaluation", Order = 0, RequireRestart = true, IsToggle = true, HintText = "{=}Destabilize the evaluation of the ScoreOfClanToJoinKingdom.")]
+    [SettingPropertyGroup(HeadingDestabilizeJoining, GroupOrder = 0)]
     public bool DestabilizeJoinEvaluation { get; set; } = false;
 
     [SettingPropertyFloatingInteger("{=}Join kingdom score flat modifier", -10f, 10f, Order = 0, RequireRestart = false, HintText = "{=}Negative score modifier makes harder for clans to defect, positive score modifier increases probability of defection. Measured in millions.  Default = 10.0.")]
     [SettingPropertyGroup(HeadingDestabilizeJoining)]
     public float JoinScoreFlatModifier { get; set; } = 10f;
 
-    [SettingPropertyBool("{=}Destabilize leave kingdom evaluation", Order = 1, RequireRestart = true, HintText = "{=}Destabilize the evaluation of the ScoreOfClanToLeaveKingdom.")]
-    [SettingPropertyGroup(HeadingDestabilizeLeaving, GroupOrder = 1, IsMainToggle = true)]
+    [SettingPropertyBool("{=}Destabilize leave kingdom evaluation", Order = 1, RequireRestart = true, IsToggle = true, HintText = "{=}Destabilize the evaluation of the ScoreOfClanToLeaveKingdom.")]
+    [SettingPropertyGroup(HeadingDestabilizeLeaving, GroupOrder = 1)]
     public bool DestabilizeLeaveEvaluation { get; set; } = false;
 
     [SettingPropertyFloatingInteger("{=}Leave kingdom score flat modifier", -10f, 10f, Order = 0, RequireRestart = false, HintText = "{=}Negative score modifier makes harder for clans to leave, positive score modifier increases probability of clans leaving kingdoms. Measured in millions. Default = 10.0.")]
@@ -109,13 +109,15 @@ namespace AllegianceOverhaul
     None = 0,
     [System.ComponentModel.Description("{=Ps6RgRH1}Ensured loyalty")]
     EnsuredLoyalty = 1,
+    [System.ComponentModel.Description("{=}Migration tweaks")]
+    MigrationTweaks = 2,
     [System.ComponentModel.Description("{=1bsT0jB0}Politics rebalance")]
-    PoliticsRebalance = 2,
+    PoliticsRebalance = 4,
     [System.ComponentModel.Description("{=}Relation overhaul")]
-    RelationOverhaul = 4,
+    RelationOverhaul = 8,
     //Groups
     [System.ComponentModel.Description("{=}All systems")]
-    All = EnsuredLoyalty | PoliticsRebalance | RelationOverhaul
+    All = EnsuredLoyalty | MigrationTweaks | PoliticsRebalance | RelationOverhaul
   }
   public enum ODCostCalculationMethod : byte
   {
