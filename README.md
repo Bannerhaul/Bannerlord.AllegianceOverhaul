@@ -1,5 +1,6 @@
 # Bannerlord.AllegianceOverhaul
 <p align="center">
+        <a href="https://github.com/XAMPPRocky/tokei"><img src="https://tokei.rs/b1/github/artifixer/Bannerlord.AllegianceOverhaul?category=code" /></a>        
         <a href="https://www.codefactor.io/repository/github/artifixer/bannerlord.allegianceoverhaul">
         <img src="https://www.codefactor.io/repository/github/artifixer/bannerlord.allegianceoverhaul/badge?s=f163b98709f885a36702dbef30f7bbfcd35c3b19" alt="CodeFactor" /></a>
         <a href="https://www.nexusmods.com/mountandblade2bannerlord/mods/1750" alt="Nexus Allegiance Overhaul">
