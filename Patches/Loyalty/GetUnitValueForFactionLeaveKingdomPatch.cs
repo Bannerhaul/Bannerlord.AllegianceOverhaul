@@ -1,8 +1,11 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance;
 
@@ -19,7 +22,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
         Clan iOriginalOwnerClan = iOriginalOwner.Clan;
         Kingdom iOriginalOwnerKingdom = iOriginalOwnerClan.Kingdom;
 
-        if (!Settings.Instance.FixMinorFactionVassals && (!LoyaltyDebugHelper.InDebugBranch || !SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical, faction)))
+        if (!Settings.Instance!.FixMinorFactionVassals && (!LoyaltyDebugHelper.InDebugBranch || !SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical, faction)))
           return;
 
         IFaction mapFaction = iOriginalOwner.MapFaction;
@@ -54,13 +57,13 @@ namespace AllegianceOverhaul.Patches.Loyalty
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for LeaveKingdomAsClanBarterable.GetUnitValueForFaction");
       }
     }
     public static bool Prepare()
     {
-      return Settings.Instance.FixMinorFactionVassals || SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical);
+      return Settings.Instance!.FixMinorFactionVassals || SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical);
     }
   }
 }

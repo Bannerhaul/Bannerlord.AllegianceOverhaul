@@ -6,8 +6,7 @@ using TaleWorlds.Localization;
 
 using AllegianceOverhaul.Extensions;
 using AllegianceOverhaul.Helpers;
-
-using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
+using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 {
@@ -55,11 +54,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     {
       int HonorLevel = leader.GetTraitLevel(DefaultTraits.Honor);
       return HonorLevel < 0
-          ? -HonorLevel * (Defecting ? Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.NegativeHonorEnsuredLoyaltyModifier_Leaving)
-          : -HonorLevel * (Defecting ? Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance.PositiveHonorEnsuredLoyaltyModifier_Leaving);
+          ? -HonorLevel * (Defecting ? Settings.Instance!.NegativeHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance!.NegativeHonorEnsuredLoyaltyModifier_Leaving)
+          : -HonorLevel * (Defecting ? Settings.Instance!.PositiveHonorEnsuredLoyaltyModifier_Defecting : Settings.Instance!.PositiveHonorEnsuredLoyaltyModifier_Leaving);
     }
 
-    private static bool SetDebugResult(ELState state, TextObject DebugTextObject, Clan clan = null, Kingdom kingdom = null, int DaysWithKingdom = 0, int RequiredDays = 0)
+    private static bool SetDebugResult(ELState state, TextObject DebugTextObject, Clan? clan = null, Kingdom? kingdom = null, int DaysWithKingdom = 0, int RequiredDays = 0)
     {
       switch (state)
       {
@@ -85,12 +84,12 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
           DebugTextObject.SetTextVariable("REASON", ReasonDisabled);
           return false;
         case ELState.AffectedByRelations:
-          int CurrentRelation = clan.Leader.GetRelation(clan.Kingdom.Ruler);
+          int CurrentRelation = clan!.Leader.GetRelation(clan.Kingdom.Ruler);
           int RequiredRelation = GetRelationThreshold(clan, kingdom);
           bool RelationCheckResult = CurrentRelation >= RequiredRelation;
           LoyaltyCostManager costManager = new LoyaltyCostManager(clan, kingdom);
           bool HaveResources = clan.Kingdom.RulingClan.Influence > (costManager.WithholdCost?.InfluenceCost ?? 0) && clan.Kingdom.Ruler.Gold > (costManager.WithholdCost?.GoldCost ?? 0);
-          bool ShouldPay = Settings.Instance.UseWithholdPrice && Settings.Instance.WithholdToleranceLimit * 1000000 < costManager.BarterableSum;
+          bool ShouldPay = Settings.Instance!.UseWithholdPrice && Settings.Instance.WithholdToleranceLimit * 1000000 < costManager.BarterableSum;
           TextObject WithholdPrice = new TextObject(HaveResources ? LeaderHasResources : LeaderHasNoResources);
           SetEntityProperties(WithholdPrice, "LEAVING_CLAN", clan, true);
           TextObject ReasonRelation = new TextObject(ReasonRelationEnabled);
@@ -107,9 +106,9 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       }
     }
 
-    public static int GetRelationThreshold(Clan clan, Kingdom kingdom = null)
+    public static int GetRelationThreshold(Clan clan, Kingdom? kingdom = null)
     {
-      int RelationThreshold = Settings.Instance.EnsuredLoyaltyBaseline;
+      int RelationThreshold = Settings.Instance!.EnsuredLoyaltyBaseline;
 
       if (Settings.Instance.UseContextForEnsuredLoyalty)
       {
@@ -128,10 +127,10 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       return RelationThreshold;
     }
 
-    public static bool CheckLoyalty(Clan clan, out TextObject DebugTextObject, Kingdom kingdom = null)
+    public static bool CheckLoyalty(Clan clan, out TextObject DebugTextObject, Kingdom? kingdom = null)
     {
       DebugTextObject = new TextObject(Debug_EnsuredLoyalty);
-      if (!Settings.Instance.UseEnsuredLoyalty)
+      if (!Settings.Instance!.UseEnsuredLoyalty)
       {
         return SetDebugResult(ELState.SystemDisabled, DebugTextObject);
       }
@@ -161,7 +160,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       }
     }
 
-    public static bool CheckLoyalty(Clan clan, Kingdom kingdom = null)
+    public static bool CheckLoyalty(Clan clan, Kingdom? kingdom = null)
     {
       if (!SettingsHelper.SubSystemEnabled(SubSystemType.EnsuredLoyalty, clan))
         return false;
@@ -169,24 +168,24 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
       if
         (
-          (clan.IsUnderMercenaryService && DaysWithKingdom <= Settings.Instance.MinorFactionServicePeriod) ||
-          (!clan.IsUnderMercenaryService && clan.Kingdom != null && DaysWithKingdom <= (clan.IsMinorFaction ? Settings.Instance.MinorFactionOathPeriod : Settings.Instance.FactionOathPeriod))
+          (clan.IsUnderMercenaryService && DaysWithKingdom <= Settings.Instance!.MinorFactionServicePeriod) ||
+          (!clan.IsUnderMercenaryService && clan.Kingdom != null && DaysWithKingdom <= (clan.IsMinorFaction ? Settings.Instance!.MinorFactionOathPeriod : Settings.Instance!.FactionOathPeriod))
         )
         return true;
 
-      if (Settings.Instance.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
+      if (Settings.Instance!.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
       {
-        if (!(clan.Leader.GetRelation(clan.Kingdom.Ruler) >= GetRelationThreshold(clan, kingdom)))
+        if (!(clan.Leader.GetRelation(clan.Kingdom?.Ruler) >= GetRelationThreshold(clan, kingdom)))
           return false;
         else
         if (Settings.Instance.UseWithholdPrice)
         {
           LoyaltyCostManager costManager = new LoyaltyCostManager(clan, kingdom);
-          if (clan.Kingdom.RulingClan == Clan.PlayerClan)
+          if (clan.Kingdom?.RulingClan == Clan.PlayerClan)
           {
             if (costManager.WithholdCost != null)
             {
-              if (!(clan.Kingdom.RulingClan.Influence > costManager.WithholdCost.InfluenceCost) || !(clan.Kingdom.Ruler.Gold > costManager.WithholdCost.GoldCost))
+              if (!(clan.Kingdom?.RulingClan.Influence > costManager.WithholdCost.InfluenceCost) || !(clan.Kingdom?.Ruler.Gold > costManager.WithholdCost.GoldCost))
                 return false;
               costManager.AwaitPlayerDecision();
             }
@@ -211,7 +210,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       }
 
       int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
-      int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance.MinorFactionServicePeriod : (clan.IsMinorFaction ? Settings.Instance.MinorFactionOathPeriod : Settings.Instance.FactionOathPeriod);
+      int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance!.MinorFactionServicePeriod : (clan.IsMinorFaction ? Settings.Instance!.MinorFactionOathPeriod : Settings.Instance!.FactionOathPeriod);
       if (clan.Kingdom != null && DaysWithKingdom <= RequiredDays)
       {
         TextObject ReasonPeriod = new TextObject(TooltipOathLoyal);

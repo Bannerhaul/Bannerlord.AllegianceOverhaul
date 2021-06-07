@@ -9,8 +9,7 @@ using TaleWorlds.Localization;
 
 using AllegianceOverhaul.Extensions;
 using AllegianceOverhaul.Helpers;
-
-using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
+using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 {
@@ -51,13 +50,13 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     private const string ButtonReleaseText = "{=BkX1Q6G6}Let them go";
 
     public Clan LeavingClan { get; }
-    public Kingdom TargetKingdom { get; }
-    public ComplexCost WithholdCost { get; }
+    public Kingdom? TargetKingdom { get; }
+    public ComplexCost? WithholdCost { get; }
     public double BarterableSum { get; private set; }
     public double BaseCalculatedCost { get; private set; }
-    protected Barterable ClanBarterable { get; private set; }
+    protected Barterable? ClanBarterable { get; private set; }
 
-    public LoyaltyCostManager(Clan clan, Kingdom targetKingdom = null)
+    public LoyaltyCostManager(Clan clan, Kingdom? targetKingdom = null)
     {
       LeavingClan = clan;
       TargetKingdom = targetKingdom;
@@ -65,7 +64,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       BaseCalculatedCost = 0;
       WithholdCost = GetWithholdCost();
     }
-    private ComplexCost GetWithholdCost()
+    private ComplexCost? GetWithholdCost()
     {
       if (!SettingsHelper.SubSystemEnabled(SubSystemType.LoyaltyWithholding, LeavingClan))
         return null;
@@ -86,7 +85,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         BarterableSum = ClanBarterableValueForFaction - (LeavingClan.IsMinorFaction ? 500 : 0);
       }
 
-      if (BarterableSum <= Settings.Instance.WithholdToleranceLimit * 1000000)
+      if (BarterableSum <= Settings.Instance!.WithholdToleranceLimit * 1000000)
       {
         return null;
       }
@@ -103,7 +102,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     {
       double RelativeScoreToLeave = new LeaveKingdomAsClanBarterable(LeavingClan.Leader, null).GetValueForFaction(LeavingClan) - (LeavingClan.IsMinorFaction ? 500 : 0);
       RelativeScoreToLeave = Math.Sqrt(Math.Abs(RelativeScoreToLeave)) * (RelativeScoreToLeave >= 0 ? -500 : 250); //invert it as negative is good for us
-      double CostScore = WithholdCost.InfluenceCost / Math.Max(0.001, LeavingClan.Kingdom.RulingClan.Influence) * WithholdCost.InfluenceCost * 1000 + WithholdCost.GoldCost / Math.Max(0.001, LeavingClan.Kingdom.Ruler.Gold) * WithholdCost.GoldCost;
+      double CostScore = WithholdCost!.InfluenceCost / Math.Max(0.001, LeavingClan.Kingdom.RulingClan.Influence) * WithholdCost.InfluenceCost * 1000 + WithholdCost.GoldCost / Math.Max(0.001, LeavingClan.Kingdom.Ruler.Gold) * WithholdCost.GoldCost;
       double ClanCountModifier = 0;
       foreach (Clan clan in LeavingClan.Kingdom.Clans)
       {
@@ -184,7 +183,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       SetEntityProperties(InquiryBody, "LEAVING_CLAN", LeavingClan);
       SetEntityProperties(null, "TARGET_KINGDOM", TargetKingdom);
       InquiryBody.SetTextVariable("ACTION_DESCRIPTION", new TextObject(TargetKingdom != null ? ActionDefecting : ActionLeaving));
-      SetNumericVariable(InquiryBody, "INFLUENCE_COST", WithholdCost.InfluenceCost, "N0");
+      SetNumericVariable(InquiryBody, "INFLUENCE_COST", WithholdCost!.InfluenceCost, "N0");
       SetNumericVariable(InquiryBody, "GOLD_COST", WithholdCost.GoldCost, "N0");
 
       InformationManager.ShowInquiry(new InquiryData(InquiryHeader.ToString(), InquiryBody.ToString(), true, true, ButtonWithholdText.ToLocalizedString(), ButtonReleaseText.ToLocalizedString(), () => ApplyPlayerDecision(true), () => ApplyPlayerDecision(false)), true);
@@ -204,11 +203,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
       {
         if (TargetKingdom is null)
         {
-          (ClanBarterable as LeaveKingdomAsClanBarterable).Apply();
+          (ClanBarterable as LeaveKingdomAsClanBarterable)!.Apply();
         }
         else
         {
-          Patches.Loyalty.ExecuteAiBarterReversePatch.ExecuteAiBarter(Campaign.Current.BarterManager ?? BarterManager.Instance, LeavingClan, TargetKingdom, LeavingClan.Leader, TargetKingdom.Leader, ClanBarterable);
+          Patches.Loyalty.ExecuteAiBarterReversePatch.ExecuteAiBarter(Campaign.Current.BarterManager ?? BarterManager.Instance, LeavingClan, TargetKingdom, LeavingClan.Leader, TargetKingdom.Leader, ClanBarterable!);
         }
       }
     }

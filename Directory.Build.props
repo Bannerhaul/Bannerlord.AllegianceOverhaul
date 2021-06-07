@@ -1,0 +1,37 @@
+﻿<Project>
+  <PropertyGroup>
+    <IsStable>false</IsStable>
+    <IsStable Condition="$(Configuration.Contains('Stable'))">true</IsStable>
+    <IsBeta>false</IsBeta>
+    <IsBeta Condition="$(Configuration.Contains('Beta'))">true</IsBeta>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsDebug>false</IsDebug>
+    <IsDebug Condition="$(Configuration.Contains('Debug'))">true</IsDebug>
+    <IsRelease>false</IsRelease>
+    <IsRelease Condition="$(Configuration.Contains('Release'))">true</IsRelease>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsDebug)" >
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsRelease)" >
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsStable)" >
+    <DefineConstants>$(DefineConstants);STABLE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsBeta)" >
+    <DefineConstants>$(DefineConstants);BETA</DefineConstants>
+  </PropertyGroup>
+</Project>

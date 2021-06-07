@@ -9,7 +9,7 @@ namespace AllegianceOverhaul
 {
   public sealed class AOGameModels : GameModelsManager
   {
-    public DecisionSupportScoringModel DecisionSupportScoringModel { get; private set; }
+    public DecisionSupportScoringModel? DecisionSupportScoringModel { get; private set; }
 
     public AOGameModels(IEnumerable<GameModel> inputComponents) : base(inputComponents)
     {
@@ -34,6 +34,6 @@ namespace AllegianceOverhaul
           yield return gameModel;
       }
     }
-    public static AOGameModels Instance { get; internal set; }
+    public static AOGameModels? Instance { get; internal set; }
   }
 }

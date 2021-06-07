@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace AllegianceOverhaul.Extensions
 {
+#pragma warning disable CS8629 // Nullable value type may be null.
   public static class MedianExtensions
   {
     public static double Median(this IEnumerable<int> source)
@@ -26,6 +27,7 @@ namespace AllegianceOverhaul.Extensions
       {
         throw new ArgumentNullException("source");
       }
+
       int[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
       return data.Length == 0
           ? null
@@ -186,4 +188,5 @@ namespace AllegianceOverhaul.Extensions
       return source.Select(selector).Median();
     }
   }
+#pragma warning restore CS8629 // Nullable value type may be null.
 }

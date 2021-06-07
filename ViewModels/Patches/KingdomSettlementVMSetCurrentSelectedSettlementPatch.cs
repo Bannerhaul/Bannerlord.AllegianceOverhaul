@@ -29,7 +29,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomSettlementVM. SetCurrentSelectedSettlement");
       }
     }

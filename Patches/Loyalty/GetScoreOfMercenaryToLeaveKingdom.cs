@@ -1,8 +1,11 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance;
 
@@ -30,7 +33,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for GetScoreOfMercenaryToLeaveKingdom");
       }
     }

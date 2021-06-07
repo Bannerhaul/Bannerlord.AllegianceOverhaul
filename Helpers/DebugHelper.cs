@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Reflection;
+
 using TaleWorlds.Localization;
 
 namespace AllegianceOverhaul.Helpers
 {
   internal static class DebugHelper
   {
-    public static void HandleException(Exception ex, MethodInfo methodInfo, string sectionName)
+    public static void HandleException(Exception ex, MethodInfo? methodInfo, string sectionName)
     {
       MessageHelper.ErrorMessage(string.Format("Allegiance Overhaul - error occured in [{1}]{0} - {2} See details in the mod log.", methodInfo != null ? " in " + methodInfo.Name : "", sectionName, ex.Message));
       LoggingHelper.Log(string.Format("Error occured{0} - {1}", methodInfo != null ? $" in {methodInfo}" : "", ex.ToString()), sectionName);

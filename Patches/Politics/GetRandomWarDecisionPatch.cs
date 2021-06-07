@@ -1,12 +1,15 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Linq;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
+
 using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.PoliticsRebalance;
@@ -17,10 +20,10 @@ namespace AllegianceOverhaul.Patches.Politics
   public class GetRandomWarDecisionPatch
   {
     private delegate bool ConsiderWarDelegate(KingdomDecisionProposalBehavior instance, Clan clan, Kingdom kingdom, IFaction otherFaction);
-    private static readonly ConsiderWarDelegate deConsiderWar = AccessHelper.GetDelegate<ConsiderWarDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderWar");
+    private static readonly ConsiderWarDelegate? deConsiderWar = AccessHelper.GetDelegate<ConsiderWarDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderWar");
 
     [HarmonyPriority(Priority.VeryHigh)]
-    public static bool Prefix(Clan clan, ref KingdomDecision __result, KingdomDecisionProposalBehavior __instance) //Bool prefixes compete with each other and skip others, as well as original, if return false
+    public static bool Prefix(Clan clan, ref KingdomDecision? __result, KingdomDecisionProposalBehavior __instance) //Bool prefixes compete with each other and skip others, as well as original, if return false
     {
       try
       {
@@ -43,7 +46,7 @@ namespace AllegianceOverhaul.Patches.Politics
                                                    ).ToArray().GetRandomElement();
 
           //ConsiderWarDelegate deConsiderWar = AccessHelper.GetDelegate<ConsiderWarDelegate, KingdomDecisionProposalBehavior>(__instance, "ConsiderWar");
-          if (randomElement != null && deConsiderWar(__instance, clan, kingdom, randomElement))
+          if (randomElement != null && deConsiderWar!(__instance, clan, kingdom, randomElement))
             __result = new DeclareWarDecision(clan, randomElement);
 
           if (SystemDebugEnabled)
@@ -56,7 +59,7 @@ namespace AllegianceOverhaul.Patches.Politics
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomDecisionProposalBehavior. GetRandomWarDecision");
         return true;
       }

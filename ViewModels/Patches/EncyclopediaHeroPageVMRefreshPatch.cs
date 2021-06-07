@@ -1,9 +1,12 @@
-﻿using System;
+﻿using HarmonyLib;
+
+using System;
 using System.Reflection;
-using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Encyclopedia;
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.ViewModels.Extensions;
 
@@ -17,8 +20,8 @@ namespace AllegianceOverhaul.ViewModels.Patches
     {
       try
       {
-        Hero PageHero = __instance.Obj as Hero;
-        if (!Settings.Instance.UseAdvancedHeroTooltips || PageHero == Hero.MainHero)
+        Hero? PageHero = __instance.Obj as Hero;
+        if (!Settings.Instance!.UseAdvancedHeroTooltips || PageHero == Hero.MainHero)
         {
           return;
         }
@@ -29,7 +32,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
         {
           if (pageOf1.IsValidEncyclopediaItem(hero) && !hero.IsNotable && hero != PageHero)
           {
-            if (PageHero.IsFriend(hero))
+            if (PageHero!.IsFriend(hero))
             {
               __instance.Allies.Add(new HeroVMcontactExtension(hero, PageHero));
             }
@@ -42,13 +45,13 @@ namespace AllegianceOverhaul.ViewModels.Patches
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for EncyclopediaHeroPageVM.Refresh");
       }
     }
     public static bool Prepare()
     {
-      return Settings.Instance.UseAdvancedHeroTooltips;
+      return Settings.Instance!.UseAdvancedHeroTooltips;
     }
   }
 }

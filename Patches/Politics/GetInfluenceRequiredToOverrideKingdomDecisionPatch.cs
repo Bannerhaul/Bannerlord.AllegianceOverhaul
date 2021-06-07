@@ -34,7 +34,7 @@ namespace AllegianceOverhaul.Patches.Politics
         case ODCostCalculationMethod.FullyPush:
           return (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.FullyPush);
         default:
-          throw new ArgumentOutOfRangeException(nameof(Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue), Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue, null);
+          throw new ArgumentOutOfRangeException(nameof(Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue), Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue, null);
       }
     }
     private static float ApplySupport(ref float popularOptionSupportPoints, ref float overridingOptionSupportPoints, KingdomDecision decision)
@@ -80,7 +80,7 @@ namespace AllegianceOverhaul.Patches.Politics
         float LackingPointsCompensationCost = 0;
         if (PopularOptionSupportPoints > OverridingOptionSupportPoints)
         {
-          LackingPointsCompensationCost = GetBaseCompensationCost(Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue, popularOption, overridingOption, decision);
+          LackingPointsCompensationCost = GetBaseCompensationCost(Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue, popularOption, overridingOption, decision);
           if (decision.Kingdom.ActivePolicies.Contains(DefaultPolicies.RoyalPrivilege))
             LackingPointsCompensationCost *= 0.8f;
           if (decision.Kingdom.RulingClan != Clan.PlayerClan)
@@ -101,7 +101,7 @@ namespace AllegianceOverhaul.Patches.Politics
             "CalculatedResult = {11}. NativeResult = {12}",
             decision.Kingdom.Name, decision.GetGeneralTitle(), popularOption.GetDecisionTitle(), overridingOption.GetDecisionTitle(),
             PopularOptionSupportPoints, OverridingOptionSupportPoints,
-            Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue, LackingPointsCompensationCost, 
+            Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue, LackingPointsCompensationCost, 
             GetModifierApplied(decision.Kingdom.ActivePolicies.Contains(DefaultPolicies.RoyalPrivilege)), GetModifierApplied(decision.Kingdom.RulingClan != Clan.PlayerClan), GetModifierApplied(SettingsHelper.SubSystemEnabled(SubSystemType.FreeDecisionOverriding)),
             CalculatedResult.ToString("N"), __result.ToString("N"));
 
@@ -113,7 +113,7 @@ namespace AllegianceOverhaul.Patches.Politics
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for DefaultClanPoliticsModel. GetInfluenceRequiredToOverrideKingdomDecision");
       }
     }

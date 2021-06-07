@@ -21,10 +21,10 @@ namespace AllegianceOverhaul.Patches.Politics
   public class GetRandomAnnexationDecisionPatch
   {
     private delegate bool ConsiderAnnexDelegate(KingdomDecisionProposalBehavior instance, Clan clan, Kingdom kingdom, Clan targetClan, Town targetSettlement);
-    private static readonly ConsiderAnnexDelegate deConsiderAnnex = AccessHelper.GetDelegate<ConsiderAnnexDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderAnnex");
+    private static readonly ConsiderAnnexDelegate? deConsiderAnnex = AccessHelper.GetDelegate<ConsiderAnnexDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderAnnex");
 
     [HarmonyPriority(Priority.VeryHigh)]
-    public static bool Prefix(Clan clan, ref KingdomDecision __result, KingdomDecisionProposalBehavior __instance) //Bool prefixes compete with each other and skip others, as well as original, if return false
+    public static bool Prefix(Clan clan, ref KingdomDecision? __result, KingdomDecisionProposalBehavior __instance) //Bool prefixes compete with each other and skip others, as well as original, if return false
     {
       try
       {
@@ -41,11 +41,11 @@ namespace AllegianceOverhaul.Patches.Politics
         if (kingdom.UnresolvedDecisions.FirstOrDefault(x => x is SettlementClaimantPreliminaryDecision) == null && clan.Influence >= 300.0)
         {
           bool possessionsFactorApplied = SettingsHelper.SubSystemEnabled(SubSystemType.AnnexationSupportRebalance, clan)
-                                          && Settings.Instance.AnnexSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(FiefOwnershipConsideration.PossessionsFactor)
-                                          && Settings.Instance.FiefsDeemedFairBaseline.SelectedValue.EnumValue != NumberOfFiefsCalculationMethod.WithoutRestrictions;
+                                          && Settings.Instance!.AnnexSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(FiefOwnershipConsideration.PossessionsFactor)
+                                          && Settings.Instance!.FiefsDeemedFairBaseline.SelectedValue.EnumValue != NumberOfFiefsCalculationMethod.WithoutRestrictions;
           Clan randomClan = kingdom.Clans.Where(x => x != clan
                                                      && x.Fiefs.Count > 0
-                                                     && (x.GetRelationWithClan(clan) < -25 || (possessionsFactorApplied && Campaign.Current.GetAOGameModels().DecisionSupportScoringModel.GetNumberOfFiefsDeemedFair(x) < x.Fiefs.Count))
+                                                     && (x.GetRelationWithClan(clan) < -25 || (possessionsFactorApplied && Campaign.Current.GetAOGameModels()!.DecisionSupportScoringModel!.GetNumberOfFiefsDeemedFair(x) < x.Fiefs.Count))
                                                      && x.Fiefs.FirstOrDefault(f => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))) != null
                                                ).ToArray().GetRandomElement();
 
@@ -53,8 +53,7 @@ namespace AllegianceOverhaul.Patches.Politics
               ? clan.Fiefs.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
               : clan.Fiefs.ToArray().GetRandomElement();
 
-          //ConsiderAnnexDelegate deConsiderAnnex = AccessHelper.GetDelegate<ConsiderAnnexDelegate, KingdomDecisionProposalBehavior>(__instance, "ConsiderAnnex");
-          if (randomClan != null && deConsiderAnnex(__instance, clan, kingdom, randomClan, randomFortification))
+          if (randomClan != null && deConsiderAnnex!(__instance, clan, kingdom, randomClan, randomFortification))
             __result = new SettlementClaimantPreliminaryDecision(clan, randomFortification.Settlement);
 
           if (SystemDebugEnabled)
@@ -68,7 +67,7 @@ namespace AllegianceOverhaul.Patches.Politics
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomDecisionProposalBehavior. GetRandomAnnexationDecision");
         return true;
       }

@@ -1,8 +1,11 @@
-﻿using System;
+﻿using HarmonyLib;
+
+using System;
 using System.Reflection;
-using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
+
 using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Loyalty
@@ -20,7 +23,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for ConsiderClanLeaveKingdom");
       }
     }
@@ -34,7 +37,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for ConsiderClanLeaveKingdom");
         return true;
       }
@@ -42,7 +45,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
 
     public static bool Prepare()
     {
-      return Settings.Instance.UseEnsuredLoyalty || SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Any);
+      return Settings.Instance!.UseEnsuredLoyalty || SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Any);
     }
   }
 }

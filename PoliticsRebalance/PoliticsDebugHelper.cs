@@ -4,7 +4,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.Election;
 
-using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
+using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.PoliticsRebalance
 {
@@ -29,7 +29,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
     private const string NoFactionFound = "{=}{?REFLECTING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\\?} {REFLECTING_CLAN.NAME} {?REFLECTING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\\?} {REFLECTING_CLAN_KINGDOM.NAME} {POSSIBLE_ACTION}, but found no suitable candidates.";
     private const string ConsiderationDescription = "{=}{?REFLECTING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\\?} {REFLECTING_CLAN.NAME} {?REFLECTING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\\?} {REFLECTING_CLAN_KINGDOM.NAME} considered {CONSIDERED_ACTION} {ACTION_TARGET}{ACTION_DETAILS}. {CONSIDER_OUTCOME}";
 
-    public static void PrepareConsiderationDebugMessage(ConsiderationType considerationType, Clan clan, IFaction otherFaction, KingdomDecision clanDecision, out TextObject debugLogMessage)
+    public static void PrepareConsiderationDebugMessage(ConsiderationType considerationType, Clan clan, IFaction? otherFaction, KingdomDecision? clanDecision, out TextObject debugLogMessage)
     {
       if (otherFaction != null)
       {
@@ -42,7 +42,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
       SetEntityProperties(debugLogMessage, "REFLECTING_CLAN", clan);
     }
 
-    public static void PrepareConsiderationDebugMessage(Clan clan, PolicyObject policyObject, KingdomDecision clanDecision, out TextObject debugLogMessage)
+    public static void PrepareConsiderationDebugMessage(Clan clan, PolicyObject? policyObject, KingdomDecision? clanDecision, out TextObject debugLogMessage)
     {
       if (policyObject != null)
       {
@@ -55,7 +55,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
       SetEntityProperties(debugLogMessage, "REFLECTING_CLAN", clan);
     }
 
-    public static void PrepareConsiderationDebugMessage(Clan clan, Town fiefBeingAnnexed, KingdomDecision clanDecision, out TextObject debugLogMessage)
+    public static void PrepareConsiderationDebugMessage(Clan clan, Town fiefBeingAnnexed, KingdomDecision? clanDecision, out TextObject debugLogMessage)
     {
       if (fiefBeingAnnexed != null)
       {
@@ -68,7 +68,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
       SetEntityProperties(debugLogMessage, "REFLECTING_CLAN", clan);
     }
 
-    private static void SetConsideredAction(out TextObject textObject, TextObject actionTargetName, KingdomDecision clanDecision, ConsiderationType considerationType, bool revertPolicy = false, Settlement annexedSettlement = null)
+    private static void SetConsideredAction(out TextObject textObject, TextObject actionTargetName, KingdomDecision? clanDecision, ConsiderationType considerationType, bool revertPolicy = false, Settlement? annexedSettlement = null)
     {
       textObject = new TextObject(ConsiderationDescription);
       switch (considerationType)

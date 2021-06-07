@@ -1,19 +1,20 @@
-﻿using System.Text;
+﻿using HarmonyLib;
+
+using System.Text;
 using System.Collections.ObjectModel;
 using System.Linq;
-using HarmonyLib;
 
 namespace AllegianceOverhaul.Extensions.Harmony
 {
   public static class PatchesExtensions
   {
-    public static bool CheckForCompetition(this HarmonyLib.Patches patches, HarmonyLib.Harmony domesticHarmoy, out string debugInfo, ReadOnlyCollection<string> ignoreList = null)
+    public static bool CheckForCompetition(this HarmonyLib.Patches patches, HarmonyLib.Harmony domesticHarmoy, out string debugInfo, ReadOnlyCollection<string>? ignoreList = null)
     {
       bool Result = CheckForCompetition(patches, domesticHarmoy, out StringBuilder debugInfoBuilder, ignoreList);
       debugInfo = debugInfoBuilder.ToString();
       return Result;
     }
-    public static bool CheckForCompetition(this HarmonyLib.Patches patches, HarmonyLib.Harmony domesticHarmoy, out StringBuilder debugInfoBuilder, ReadOnlyCollection<string> ignoreList = null)
+    public static bool CheckForCompetition(this HarmonyLib.Patches patches, HarmonyLib.Harmony domesticHarmoy, out StringBuilder debugInfoBuilder, ReadOnlyCollection<string>? ignoreList = null)
     {
       debugInfoBuilder = new StringBuilder(string.Empty);
       patches.GetBoolPrefixes(out ReadOnlyCollection<Patch> BoolPrefixes);
@@ -30,7 +31,7 @@ namespace AllegianceOverhaul.Extensions.Harmony
       boolPrefixes = patches.Prefixes.Where(patch => patch.PatchMethod.ReturnType == typeof(bool)).ToList().AsReadOnly();
     }
 
-    private static bool CheckCollectionForCompetition(ReadOnlyCollection<Patch> collection, HarmonyLib.Harmony domesticHarmoy, string patchTypeName, ref StringBuilder debugInfoBuilder, ReadOnlyCollection<string> ignoreList = null)
+    private static bool CheckCollectionForCompetition(ReadOnlyCollection<Patch> collection, HarmonyLib.Harmony domesticHarmoy, string patchTypeName, ref StringBuilder debugInfoBuilder, ReadOnlyCollection<string>? ignoreList = null)
     {
       bool PatchHasCompetitors = false;
       bool PatchDoesCompete = false;
@@ -40,7 +41,7 @@ namespace AllegianceOverhaul.Extensions.Harmony
       {
         if (patch.owner != domesticHarmoy.Id)
         {
-          if (!ignoreList.Contains(patch.PatchMethod.DeclaringType.Assembly.GetName().Name))
+          if (ignoreList is null || !ignoreList.Contains(patch.PatchMethod.DeclaringType.Assembly.GetName().Name))
           {
             PatchHasCompetitors = true;
             if (ForeignPatchesInfo.Length > 0)
@@ -68,19 +69,19 @@ namespace AllegianceOverhaul.Extensions.Harmony
       return Result;
     }
 
-    private static bool CheckCollectionForCanceling(ReadOnlyCollection<Patch> collection, ReadOnlyCollection<Patch> boolPrefixes, string patchTypeName, ref StringBuilder debugInfoBuilder, ReadOnlyCollection<string> ignoreList = null)
+    private static bool CheckCollectionForCanceling(ReadOnlyCollection<Patch> collection, ReadOnlyCollection<Patch> boolPrefixes, string patchTypeName, ref StringBuilder debugInfoBuilder, ReadOnlyCollection<string>? ignoreList = null)
     {
       bool PossibleUnexpectedSkip = false;
       StringBuilder SkippedPatchesInfo = new StringBuilder(string.Empty);
       if (boolPrefixes != null)
         foreach (Patch patch in collection)
         {
-          if (!ignoreList.Contains(patch.PatchMethod.DeclaringType.Assembly.GetName().Name))
+          if (ignoreList is null || !ignoreList.Contains(patch.PatchMethod.DeclaringType.Assembly.GetName().Name))
           {
             StringBuilder SkippingPatchesInfo = new StringBuilder(string.Empty);
             foreach (Patch prefix in boolPrefixes)
             {
-              if (patch.owner != prefix.owner && !ignoreList.Contains(prefix.PatchMethod.DeclaringType.Assembly.GetName().Name))
+              if (patch.owner != prefix.owner && (ignoreList is null || !ignoreList.Contains(prefix.PatchMethod.DeclaringType.Assembly.GetName().Name)))
               {
                 PossibleUnexpectedSkip = true;
                 if (SkippingPatchesInfo.Length > 0)

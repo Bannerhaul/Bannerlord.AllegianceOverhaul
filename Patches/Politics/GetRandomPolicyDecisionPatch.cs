@@ -1,12 +1,15 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Linq;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
+
 using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.PoliticsRebalance;
@@ -17,10 +20,10 @@ namespace AllegianceOverhaul.Patches.Politics
   public class GetRandomPolicyDecisionPatch
   {
     private delegate bool ConsiderPolicyDelegate(KingdomDecisionProposalBehavior instance, Clan clan, Kingdom kingdom, PolicyObject policy, bool invert);
-    private static readonly ConsiderPolicyDelegate deConsiderPolicy = AccessHelper.GetDelegate<ConsiderPolicyDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderPolicy");
+    private static readonly ConsiderPolicyDelegate? deConsiderPolicy = AccessHelper.GetDelegate<ConsiderPolicyDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderPolicy");
 
     [HarmonyPriority(Priority.VeryHigh)]
-    public static bool Prefix(Clan clan, ref KingdomDecision __result, KingdomDecisionProposalBehavior __instance) //Bool prefixes compete with each other and skip others, as well as original, if return false
+    public static bool Prefix(Clan clan, ref KingdomDecision? __result, KingdomDecisionProposalBehavior __instance) //Bool prefixes compete with each other and skip others, as well as original, if return false
     {
       try
       {
@@ -41,7 +44,7 @@ namespace AllegianceOverhaul.Patches.Politics
           bool revertPolicy = kingdom.ActivePolicies.Contains(randomElement);
 
           //ConsiderPolicyDelegate deConsiderPolicy = AccessHelper.GetDelegate<ConsiderPolicyDelegate, KingdomDecisionProposalBehavior>(__instance, "ConsiderPolicy");
-          if (randomElement != null && deConsiderPolicy(__instance, clan, kingdom, randomElement, revertPolicy))
+          if (randomElement != null && deConsiderPolicy!(__instance, clan, kingdom, randomElement, revertPolicy))
             __result = new KingdomPolicyDecision(clan, randomElement, revertPolicy);
 
           if (SystemDebugEnabled)
@@ -55,7 +58,7 @@ namespace AllegianceOverhaul.Patches.Politics
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomDecisionProposalBehavior. GetRandomPolicyDecision");
         return true;
       }

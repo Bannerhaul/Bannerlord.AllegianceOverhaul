@@ -1,8 +1,11 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.Extensions;
 
@@ -15,7 +18,7 @@ namespace AllegianceOverhaul.Patches.Politics
     {
       try
       {
-        float newResult = Campaign.Current.GetAOGameModels().DecisionSupportScoringModel.DetermineSupport(clan, __instance, possibleOutcome);
+        float newResult = Campaign.Current.GetAOGameModels()!.DecisionSupportScoringModel!.DetermineSupport(clan, __instance, possibleOutcome);
         if (SettingsHelper.SystemDebugEnabled(AOSystems.PoliticsRebalance, DebugType.Technical, clan))
         {
           MessageHelper.TechnicalMessage(string.Format("Support of {0} for {1} making peace with {2}.\nNative result = {3}. Rebalanced result = {4}",
@@ -30,7 +33,7 @@ namespace AllegianceOverhaul.Patches.Politics
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for MakePeaceKingdomDecision. DetermineSupport");
       }
     }

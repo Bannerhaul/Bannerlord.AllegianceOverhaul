@@ -20,10 +20,10 @@ namespace AllegianceOverhaul.Patches.Politics
   public static class GetRandomPeaceDecisionPatch
   {
     private delegate bool ConsiderPeaceDelegate(KingdomDecisionProposalBehavior instance, Clan clan, Clan otherClan, Kingdom kingdom, IFaction otherFaction, out MakePeaceKingdomDecision decision);
-    private static readonly ConsiderPeaceDelegate deConsiderPeace = AccessHelper.GetDelegate<ConsiderPeaceDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderPeace");
+    private static readonly ConsiderPeaceDelegate? deConsiderPeace = AccessHelper.GetDelegate<ConsiderPeaceDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderPeace");
 
     [HarmonyPriority(Priority.VeryHigh)]
-    public static bool Prefix(Clan clan, ref KingdomDecision __result, KingdomDecisionProposalBehavior __instance) //Bool prefixes compete with each other and skip others, as well as original, if return false
+    public static bool Prefix(Clan clan, ref KingdomDecision? __result, KingdomDecisionProposalBehavior __instance) //Bool prefixes compete with each other and skip others, as well as original, if return false
     {
       try
       {
@@ -42,8 +42,7 @@ namespace AllegianceOverhaul.Patches.Politics
                                                          && !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new MakePeaceKingdomDecision(clan, x, applyResults: false)))
                                                    ).ToArray().GetRandomElement();
 
-          //ConsiderPeaceDelegate deConsiderPeace = AccessHelper.GetDelegate<ConsiderPeaceDelegate, KingdomDecisionProposalBehavior>(__instance, "ConsiderPeace");
-          if (randomElement != null && deConsiderPeace(__instance, clan, randomElement.RulingClan, kingdom, randomElement, out MakePeaceKingdomDecision decision))
+          if (randomElement != null && deConsiderPeace!(__instance, clan, randomElement.RulingClan, kingdom, randomElement, out MakePeaceKingdomDecision decision))
             __result = decision;
 
           if (SystemDebugEnabled)
@@ -56,7 +55,7 @@ namespace AllegianceOverhaul.Patches.Politics
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomDecisionProposalBehavior. GetRandomPeaceDecision");
         return true;
       }

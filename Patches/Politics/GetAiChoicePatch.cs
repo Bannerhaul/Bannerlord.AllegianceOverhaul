@@ -31,13 +31,13 @@ namespace AllegianceOverhaul.Patches.Politics
         }
         if (searchedIndex > -1)
         {
-          codes[searchedIndex] = codes[searchedIndex].Clone(Settings.Instance.OverrideDecisionScoreThreshold);
+          codes[searchedIndex] = codes[searchedIndex].Clone(Settings.Instance!.OverrideDecisionScoreThreshold);
         }
         return codes.AsEnumerable();
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony transpiler for KingdomElection. GetAiChoice");
         return instructions;
       }

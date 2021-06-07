@@ -1,9 +1,12 @@
-﻿using System;
+﻿using HarmonyLib;
+
+using System;
 using System.Reflection;
-using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Localization;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance;
 
@@ -34,7 +37,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for conversation_lord_from_ruling_clan_on_condition");
       }
     }

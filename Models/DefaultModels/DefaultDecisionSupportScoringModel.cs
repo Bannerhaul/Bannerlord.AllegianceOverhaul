@@ -17,7 +17,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
   public class DefaultDecisionSupportScoringModel : DecisionSupportScoringModel
   {
     private delegate float CalculateShareFactorDelegate(Clan clan);
-    private static readonly CalculateShareFactorDelegate deCalculateShareFactor = AccessHelper.GetDelegate<CalculateShareFactorDelegate>(typeof(DefaultClanFinanceModel), "CalculateShareFactor");
+    private static readonly CalculateShareFactorDelegate? deCalculateShareFactor = AccessHelper.GetDelegate<CalculateShareFactorDelegate>(typeof(DefaultClanFinanceModel), "CalculateShareFactor");
 
     //Public overrides
     public override IEnumerable<DecisionMaker> GetDecisionMakers(Clan clan)
@@ -45,7 +45,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
 
     public override int GetNumberOfFiefsDesired(DecisionMaker decisionMaker)
     {
-      int baseNumber = CalculateBaseNumberOfFiefs(decisionMaker.Hero.Clan, Settings.Instance.DesiredFiefsBaseline.SelectedValue.EnumValue);
+      int baseNumber = CalculateBaseNumberOfFiefs(decisionMaker.Hero.Clan, Settings.Instance!.DesiredFiefsBaseline.SelectedValue.EnumValue);
       return baseNumber >= 0
           ? Math.Max(0, baseNumber + Settings.Instance.DesiredFiefsModifier + CalculateTraitsModifierForDesiredFiefs(decisionMaker, Settings.Instance.DesiredFiefsBaseline.SelectedValue.EnumValue))
           : baseNumber;
@@ -53,7 +53,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
 
     public override int GetNumberOfFiefsDeemedFair(Clan clan)
     {
-      int baseNumber = CalculateBaseNumberOfFiefs(clan, Settings.Instance.FiefsDeemedFairBaseline.SelectedValue.EnumValue);
+      int baseNumber = CalculateBaseNumberOfFiefs(clan, Settings.Instance!.FiefsDeemedFairBaseline.SelectedValue.EnumValue);
       return baseNumber >= 0
           ? Math.Max(0, baseNumber + Settings.Instance.FiefsDeemedFairModifier)
           : baseNumber;
@@ -104,7 +104,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
       int valueForClan = new PeaceBarterable(makePeaceDecision.Kingdom, makePeaceDecision.FactionToMakePeaceWith, CampaignTime.Years(1f)).GetValueForFaction(clan) - Campaign.Current.Models.DiplomacyModel.GetValueOfDailyTribute(makePeaceDecision.DailyTributeToBePaid);
 
       float situationalFactorValue = 0;
-      if (Settings.Instance.PeaceSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.SituationalFactor))
+      if (Settings.Instance!.PeaceSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.SituationalFactor))
       {
         situationalFactorValue = ApplySituationalFactor(makePeaceDecision, ref valueForClan);
       }
@@ -119,7 +119,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
       int valueForClan = new DeclareWarBarterable(declareWarDecision.Kingdom, declareWarDecision.FactionToDeclareWarOn).GetValueForFaction(clan);
 
       float situationalFactorValue = 0;
-      if (Settings.Instance.WarSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.SituationalFactor))
+      if (Settings.Instance!.WarSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.SituationalFactor))
       {
         situationalFactorValue = ApplySituationalFactor(declareWarDecision, ref valueForClan);
       }
@@ -144,11 +144,11 @@ namespace AllegianceOverhaul.Models.DefaultModels
     {
       double traitScore = decisionMaker.Hero.GetTraitLevel(DefaultTraits.Mercy) * 10;
 
-      double relationshipFactorValue = Settings.Instance.PeaceSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.RelationshipFactor)
+      double relationshipFactorValue = Settings.Instance!.PeaceSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.RelationshipFactor)
           ? CalculateRelationshipFactor(decisionMaker, makePeaceDecision.FactionToMakePeaceWith) * Settings.Instance.MakePeaceRelationshipFactorStrength
           : 0;
 
-      double tributeFactorValue = Settings.Instance.PeaceSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.TributeFactor)
+      double tributeFactorValue = Settings.Instance!.PeaceSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.TributeFactor)
           ? CalculateTributeFactor(decisionMaker, makePeaceDecision.FactionToMakePeaceWith, makePeaceDecision.DailyTributeToBePaid) * Settings.Instance.MakePeaceTributeFactorStrength
           : 0;
 
@@ -161,11 +161,11 @@ namespace AllegianceOverhaul.Models.DefaultModels
     {
       double traitScore = decisionMaker.Hero.GetTraitLevel(DefaultTraits.Valor) * 20 - decisionMaker.Hero.GetTraitLevel(DefaultTraits.Mercy) * 10;
 
-      double relationshipFactorValue = Settings.Instance.WarSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.RelationshipFactor)
+      double relationshipFactorValue = Settings.Instance!.WarSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.RelationshipFactor)
           ? CalculateRelationshipFactor(decisionMaker, declareWarDecision.FactionToDeclareWarOn) * Settings.Instance.DeclareWarRelationshipFactorStrength
           : 0;
 
-      double tributeFactorValue = Settings.Instance.WarSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.TributeFactor)
+      double tributeFactorValue = Settings.Instance!.WarSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(PeaceAndWarConsideration.TributeFactor)
           ? CalculateTributeFactor(decisionMaker, declareWarDecision.FactionToDeclareWarOn) * Settings.Instance.DeclareWarTributeFactorStrength
           : 0;
 
@@ -195,14 +195,14 @@ namespace AllegianceOverhaul.Models.DefaultModels
     {
       (float value, int multiplier) = CalculateSituationalFactor(makePeaceDecision.Kingdom, makePeaceDecision.FactionToMakePeaceWith);
       valueForClan /= multiplier;
-      return value * Settings.Instance.MakePeaceSituationalFactorStrength;
+      return value * Settings.Instance!.MakePeaceSituationalFactorStrength;
     }
 
     private float ApplySituationalFactor(DeclareWarDecision declareWarDecision, ref int valueForClan)
     {
       (float value, int multiplier) = CalculateSituationalFactor(declareWarDecision.Kingdom, declareWarDecision.FactionToDeclareWarOn);
       valueForClan /= multiplier;
-      return value * Settings.Instance.DeclareWarSituationalFactorStrength;
+      return value * Settings.Instance!.DeclareWarSituationalFactorStrength;
     }
 
     //CalculateSituationalFactor
@@ -249,7 +249,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
       double GetReputationScoreModifierAtPeace() => GetTraitLevelModifier(-decisionMaker.Hero.GetTraitLevel(DefaultTraits.Honor) - decisionMaker.Hero.GetTraitLevel(DefaultTraits.Generosity));
 
       double weightedDailyTribute = dailyTributeToBePaid * (atWar ? GetReputationScoreModifierAtWar() : GetReputationScoreModifierAtPeace()) * 0.25 //This is reputational consideration part (uses faction tribute as whole)
-                                    + (dailyTributeToBePaid * deCalculateShareFactor(decisionMaker.Hero.Clan) //This is clan financial consideration part (assesses clan income)
+                                    + (dailyTributeToBePaid * deCalculateShareFactor!(decisionMaker.Hero.Clan) //This is clan financial consideration part (assesses clan income)
                                        * GetTraitLevelModifier(decisionMaker.Hero.GetTraitLevel(DefaultTraits.Calculating) - decisionMaker.Hero.GetTraitLevel(DefaultTraits.Generosity)));
 
       return Campaign.Current.Models.DiplomacyModel.GetValueOfDailyTribute((int)weightedDailyTribute) * Campaign.Current.Models.DiplomacyModel.DenarsToInfluence();
@@ -283,7 +283,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
       int fairFiefNumber = GetNumberOfFiefsDeemedFair(decisionMaker.Hero.Clan);
       int baseFiefNumber = CalculateBaseNumberOfFiefs(decisionMaker.Hero.Clan, calculationMethod);
 
-      if (fairFiefNumber <= baseFiefNumber + Settings.Instance.DesiredFiefsModifier
+      if (fairFiefNumber <= baseFiefNumber + Settings.Instance!.DesiredFiefsModifier
           && decisionMaker.Hero.GetTraitLevel(DefaultTraits.Honor) > 0
           && decisionMaker.Hero.GetTraitLevel(DefaultTraits.Honor) > GetTraitLevelModifier(decisionMaker.Hero.GetTraitLevel(DefaultTraits.Calculating) - decisionMaker.Hero.GetTraitLevel(DefaultTraits.Generosity)))
       {

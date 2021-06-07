@@ -1,10 +1,13 @@
-﻿using System;
+﻿using HarmonyLib;
+
+using System;
 using System.Reflection;
-using HarmonyLib;
-using TaleWorlds.Core.ViewModelCollection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
+using TaleWorlds.Core.ViewModelCollection;
 using TaleWorlds.Library;
+
 using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
 
@@ -34,7 +37,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for TooltipVMExtensions.UpdateTooltip");
       }
     }

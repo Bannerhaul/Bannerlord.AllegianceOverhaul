@@ -6,8 +6,7 @@ using TaleWorlds.Localization;
 
 using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
 using AllegianceOverhaul.Helpers;
-
-using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
+using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance
 {
@@ -30,7 +29,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance
       InDebugBranch = true;
       LeaveKingdomAsClanBarterable asClanBarterable = new LeaveKingdomAsClanBarterable(clan.Leader, null);
       int ClanBarterableValueForFaction = asClanBarterable.GetValueForFaction(clan);
-      int StayThreshold = (Settings.Instance.FixMinorFactionVassals ? clan.IsUnderMercenaryService : clan.IsMinorFaction) ? 500 : 0;
+      int StayThreshold = (Settings.Instance!.FixMinorFactionVassals ? clan.IsUnderMercenaryService : clan.IsMinorFaction) ? 500 : 0;
       bool NativeDecision = ClanBarterableValueForFaction <= StayThreshold;
 
       TextObject ResultTextObject = new TextObject(Debug_Leave);

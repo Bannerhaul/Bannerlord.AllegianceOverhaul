@@ -24,7 +24,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
         {
           if (SettingsHelper.SubSystemEnabled(SubSystemType.DestabilizeLeaveEvaluation))
           {
-            __result += Settings.Instance.LeaveScoreFlatModifier * 1000000f;
+            __result += Settings.Instance!.LeaveScoreFlatModifier * 1000000f;
           }
           return;
         }
@@ -61,7 +61,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
 
         if (SettingsHelper.SubSystemEnabled(SubSystemType.DestabilizeLeaveEvaluation))
         {
-          __result += Settings.Instance.LeaveScoreFlatModifier * 1000000f;
+          __result += Settings.Instance!.LeaveScoreFlatModifier * 1000000f;
         }
 
         string UnitValueDebugInfo = string.Format("ScoreOfClanToLeaveKingdom. RelationBetweenClans = {0}. RelationModifier = {1}, CultureModifier = {2}. ClanCmndrHeroeCount = {3}. " +
@@ -75,7 +75,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for GetScoreOfClanToLeaveKingdom");
       }
     }

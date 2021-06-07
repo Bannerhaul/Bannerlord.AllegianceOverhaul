@@ -11,7 +11,7 @@ namespace AllegianceOverhaul.Helpers
 {
   internal static class SettingsHelper
   {
-    public static bool FactionInScope(IFaction faction, DropdownDefault<string> scope)
+    public static bool FactionInScope(IFaction faction, DropdownDefault<string>? scope)
     {
       if (faction is null || faction.MapFaction is null || scope is null || scope.SelectedIndex < 0 || scope.SelectedIndex > 2)
         return false;
@@ -42,33 +42,33 @@ namespace AllegianceOverhaul.Helpers
       switch (subSystem)
       {
         //Loyalty
-        case SubSystemType.EnsuredLoyalty: return Settings.Instance.UseEnsuredLoyalty;
-        case SubSystemType.LoyaltyWithholding: return Settings.Instance.UseEnsuredLoyalty && Settings.Instance.UseRelationForEnsuredLoyalty && Settings.Instance.UseWithholdPrice;
-        case SubSystemType.LoyaltyInConversations: return Settings.Instance.UseEnsuredLoyalty && Settings.Instance.UseLoyaltyInConversations;
-        case SubSystemType.LoyaltyTooltips: return Settings.Instance.UseAdvancedHeroTooltips && Settings.Instance.UseEnsuredLoyalty;
+        case SubSystemType.EnsuredLoyalty: return Settings.Instance!.UseEnsuredLoyalty;
+        case SubSystemType.LoyaltyWithholding: return Settings.Instance!.UseEnsuredLoyalty && Settings.Instance.UseRelationForEnsuredLoyalty && Settings.Instance.UseWithholdPrice;
+        case SubSystemType.LoyaltyInConversations: return Settings.Instance!.UseEnsuredLoyalty && Settings.Instance.UseLoyaltyInConversations;
+        case SubSystemType.LoyaltyTooltips: return Settings.Instance!.UseAdvancedHeroTooltips && Settings.Instance.UseEnsuredLoyalty;
         //Politics
-        case SubSystemType.ElectionRebalance: return Settings.Instance.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance;
-        case SubSystemType.DecisionSupportRebalance: return Settings.Instance.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance;
+        case SubSystemType.ElectionRebalance: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance;
+        case SubSystemType.DecisionSupportRebalance: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance;
         case SubSystemType.MakePeaceSupportRebalance:
-          return Settings.Instance.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
+          return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
                  && Settings.Instance.PeaceSupportCalculationMethod.SelectedValue.EnumValue != PeaceAndWarConsideration.Native;
         case SubSystemType.DeclareWarSupportRebalance:
-          return Settings.Instance.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
+          return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
                  && Settings.Instance.WarSupportCalculationMethod.SelectedValue.EnumValue != PeaceAndWarConsideration.Native;
         case SubSystemType.SettlementClaimantSupportRebalance:
-          return Settings.Instance.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
+          return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
                  && Settings.Instance.FiefOwnershipSupportCalculationMethod.SelectedValue.EnumValue != FiefOwnershipConsideration.Native;
         case SubSystemType.AnnexationSupportRebalance:
-          return Settings.Instance.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
+          return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
                  && Settings.Instance.AnnexSupportCalculationMethod.SelectedValue.EnumValue != FiefOwnershipConsideration.Native;
-        case SubSystemType.ElectionCooldowns: return Settings.Instance.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns;
-        case SubSystemType.ElectionCooldownsForPlayer: return Settings.Instance.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns && Settings.Instance.UseElectionCooldownsForPlayer;
+        case SubSystemType.ElectionCooldowns: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns;
+        case SubSystemType.ElectionCooldownsForPlayer: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns && Settings.Instance.UseElectionCooldownsForPlayer;
         //General
-        case SubSystemType.AdvancedHeroTooltips: return Settings.Instance.UseAdvancedHeroTooltips;
+        case SubSystemType.AdvancedHeroTooltips: return Settings.Instance!.UseAdvancedHeroTooltips;
         //Testing
-        case SubSystemType.FreeDecisionOverriding: return Settings.Instance.UseTestingSettings && Settings.Instance.FreeDecisionOverriding;
-        case SubSystemType.DestabilizeJoinEvaluation: return Settings.Instance.UseTestingSettings && Settings.Instance.DestabilizeJoinEvaluation;
-        case SubSystemType.DestabilizeLeaveEvaluation: return Settings.Instance.UseTestingSettings && Settings.Instance.DestabilizeLeaveEvaluation;
+        case SubSystemType.FreeDecisionOverriding: return Settings.Instance!.UseTestingSettings && Settings.Instance.FreeDecisionOverriding;
+        case SubSystemType.DestabilizeJoinEvaluation: return Settings.Instance!.UseTestingSettings && Settings.Instance.DestabilizeJoinEvaluation;
+        case SubSystemType.DestabilizeLeaveEvaluation: return Settings.Instance!.UseTestingSettings && Settings.Instance.DestabilizeLeaveEvaluation;
         default: return false;
       }
     }
@@ -82,7 +82,7 @@ namespace AllegianceOverhaul.Helpers
       {
         return false;
       }
-      DropdownDefault<string> scope = DetermineSubSystemScope(subSystem);
+      DropdownDefault<string>? scope = DetermineSubSystemScope(subSystem);
       foreach (IFaction faction in factionList)
       {
         if (FactionInScope(faction, scope))
@@ -100,17 +100,17 @@ namespace AllegianceOverhaul.Helpers
     {
       switch (debugType)
       {
-        case DebugType.General: return Settings.Instance.EnableGeneralDebugging && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue);
-        case DebugType.Technical: return Settings.Instance.EnableTechnicalDebugging && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue);
+        case DebugType.General: return Settings.Instance!.EnableGeneralDebugging && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue);
+        case DebugType.Technical: return Settings.Instance!.EnableTechnicalDebugging && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue);
         case DebugType.Any:
-          return (Settings.Instance.EnableGeneralDebugging || Settings.Instance.EnableTechnicalDebugging)
+          return (Settings.Instance!.EnableGeneralDebugging || Settings.Instance.EnableTechnicalDebugging)
                  && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue);
         default: return false;
       }
     }
     public static bool SystemDebugEnabled(AOSystems system, DebugType debugType, IFaction faction)
     {
-      return SystemDebugEnabled(system, debugType) && FactionInScope(faction, Settings.Instance.DebugFactionScope);
+      return SystemDebugEnabled(system, debugType) && FactionInScope(faction, Settings.Instance!.DebugFactionScope);
     }
     public static bool SystemDebugEnabled(AOSystems system, DebugType debugType, List<IFaction> factionList)
     {
@@ -120,19 +120,19 @@ namespace AllegianceOverhaul.Helpers
       }
       foreach (IFaction faction in factionList)
       {
-        if (FactionInScope(faction, Settings.Instance.DebugFactionScope))
+        if (FactionInScope(faction, Settings.Instance!.DebugFactionScope))
         {
           return true;
         }
       }
       return false;
     }
-    private static DropdownDefault<string> DetermineSubSystemScope(SubSystemType subSystem)
+    private static DropdownDefault<string>? DetermineSubSystemScope(SubSystemType subSystem)
     {
       switch ((int)subSystem)
       {
-        case int subSystemIdx when (subSystemIdx < 50): return Settings.Instance.EnsuredLoyaltyScope;
-        case int subSystemIdx when (subSystemIdx >= 50 && subSystemIdx < 100): return Settings.Instance.PoliticsRebalanceScope;
+        case int subSystemIdx when (subSystemIdx < 50): return Settings.Instance!.EnsuredLoyaltyScope;
+        case int subSystemIdx when (subSystemIdx >= 50 && subSystemIdx < 100): return Settings.Instance!.PoliticsRebalanceScope;
         default: return null;
       }
     }

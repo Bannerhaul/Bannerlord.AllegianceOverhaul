@@ -1,482 +1,216 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <Import Project="$(SolutionDir)\AllegianceOverhaul\AllegianceOverhaul.props" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- General -->
   <PropertyGroup>
-    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <Version>2.0.0.1</Version>
+    <ModuleName>$(MSBuildProjectName)</ModuleName>
+    <DisplayName>Allegiance Overhaul</DisplayName>
+	<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <Copyright>Copyright © 2021 artifixer</Copyright>
+	<Description>Clan allegiance system overhaul for Mount &amp; Blade II: Bannerlord</Description>
   </PropertyGroup>
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C9950240-53C6-459E-B676-E91BCDB93D9D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AllegianceOverhaul</RootNamespace>
-    <AssemblyName>AllegianceOverhaul</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <TargetFramework>net472</TargetFramework>
+    <Platforms>x64</Platforms>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <Configurations>Stable_Debug;Stable_Release;Beta_Debug;Beta_Release</Configurations>
+    <RootNamespace>$(DisplayName)</RootNamespace>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+
+  <!-- Versions of Major Dependencies (For Package References & SubModule.xml Substitution) -->
+  <PropertyGroup>
+    <BuildResourcesVersion>1.0.0.33</BuildResourcesVersion>
+    <ButterLibVersion>1.0.22</ButterLibVersion>
+    <HarmonyVersion>2.0.4</HarmonyVersion>
+    <HarmonyExtensionsVersion>2.0.0.39</HarmonyExtensionsVersion>
+    <MCMVersion>4.3.10</MCMVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <!-- Game Versions for Stable and Beta -->
+  <PropertyGroup>
+    <GameVersion Condition="$(IsStable) == 'true'">1.5.9</GameVersion>
+    <GameVersion Condition="$(IsBeta) == 'true'">1.5.10</GameVersion>
   </PropertyGroup>
+
+  <!-- Game Folder(s) -->
+  <PropertyGroup>
+    <!--
+    Bannerlord's Root Folder. Leave empty if you want to try autoresolution. Recommended setup is to set, as an
+    environment variable, BANNERLORD_GAME_DIR in the common case that you have only one game folder. If you have
+    separate game folders for the stable and beta versions of the game, likewise set BANNERLORD_STABLE_DIR and
+    BANNERLORD_BETA_DIR.
+    -->
+    <GameFolder Condition="$(IsStable) == 'true'">$(BANNERLORD_STABLE_DIR)</GameFolder>
+    <GameFolder Condition="$(IsBeta) == 'true'">$(BANNERLORD_BETA_DIR)</GameFolder>
+    <GameFolder Condition="$(GameFolder) == ''">$(BANNERLORD_GAME_DIR)</GameFolder>
+  </PropertyGroup>
+
+  <!-- Automatic Game Folder Resolution -->
+  <PropertyGroup>
+    <!--Windows-->
+    <!--Get from Registry (not working with dotnet right now)-->
+    <GameFolder Condition="!Exists($(GameFolder)) AND $(OS) == 'Windows_NT'">$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 261550@InstallLocation)</GameFolder>
+    <!--Set a default value if registry value is missing-->
+    <GameFolder Condition="!Exists($(GameFolder)) AND $(OS) == 'Windows_NT'">C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</GameFolder>
+    <!--Unix-->
+    <GameFolder Condition="!Exists($(GameFolder)) AND $(OS) == 'Unix'">~/.steam/root/steamapps/common/Mount &amp; Blade II Bannerlord</GameFolder>
+  </PropertyGroup>
+
+  <!-- Mod Folder -->
+  <PropertyGroup>
+    <ModFolder Condition="$(ModFolder) == ''">$(GameFolder)\Modules\$(ModuleName)</ModFolder>
+  </PropertyGroup>
+
+  <!-- STABLE, BETA, and e.g., e157 / e158 Constants Defined in Code -->
+  <PropertyGroup>
+    <GameVersionConstant>e$([System.String]::Copy('$(GameVersion)').Replace('.',''))</GameVersionConstant>
+    <DefineConstants>$(DefineConstants);$(GameVersionConstant)</DefineConstants>
+  </PropertyGroup>
+  
+  <!-- Extra Substitution Variables to Use in SubModule.xml -->
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.2.0.4\lib\net472\0Harmony.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Bannerlord.ButterLib, Version=1.0.22.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Bannerlord.ButterLib.1.0.22\lib\net472\Bannerlord.ButterLib.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Bannerlord.UIExtenderEx, Version=0.0.11.13, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\Bannerlord.UIExtenderEx.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MCMv3, Version=3.1.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\MCMv3.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MCMv3.Implementation.v3.1.9, Version=3.1.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\MCMv3.Implementation.v3.1.9.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MCMv3.UI.v3.1.9, Version=3.1.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bannerlord.MCM.Integrated.3.1.9\lib\net472\MCMv3.UI.v3.1.9.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MCMv4, Version=4.3.10.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Bannerlord.MCM.4.3.10\lib\net472\MCMv4.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="SandBox">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\SandBox\bin\Win64_Shipping_Client\SandBox.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="SandBox.GauntletUI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\SandBox\bin\Win64_Shipping_Client\SandBox.GauntletUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="SandBox.View">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\SandBox\bin\Win64_Shipping_Client\SandBox.View.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="SandBox.ViewModelCollection">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\SandBox\bin\Win64_Shipping_Client\SandBox.ViewModelCollection.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.2.8.0\lib\net46\Serilog.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Serilog.Extensions.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Extensions.Logging.3.0.1\lib\netstandard2.0\Serilog.Extensions.Logging.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="StoryMode">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="StoryMode.GauntletUI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode.GauntletUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="StoryMode.View">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode.View.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="StoryMode.ViewModelCollection">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode.ViewModelCollection.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Collections.Immutable, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.5.0.0\lib\net461\System.Collections.Immutable.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Reflection.Metadata, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reflection.Metadata.5.0.0\lib\net461\System.Reflection.Metadata.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="TaleWorlds.BattlEye.Client">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.BattlEye.Client.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.CampaignSystem">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
-      <Private>False</Private>
-      <Aliases>global, TWCS</Aliases>
-    </Reference>
-    <Reference Include="TaleWorlds.CampaignSystem.ViewModelCollection">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.ViewModelCollection.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Core">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Core.ViewModelCollection">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Core.ViewModelCollection.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Diamond">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Diamond.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Diamond.AccessProvider.Epic">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Diamond.AccessProvider.Epic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Diamond.AccessProvider.Steam">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Diamond.AccessProvider.Steam.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Diamond.AccessProvider.Test">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Diamond.AccessProvider.Test.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.DotNet">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.DotNet.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.DotNet.AutoGenerated">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.DotNet.AutoGenerated.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Engine">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Engine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Engine.AutoGenerated">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Engine.AutoGenerated.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Engine.GauntletUI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Engine.GauntletUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.GauntletUI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.GauntletUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.GauntletUI.Data">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.GauntletUI.Data.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.GauntletUI.ExtraWidgets">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.GauntletUI.ExtraWidgets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.GauntletUI.PrefabSystem">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.GauntletUI.PrefabSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.GauntletUI.TooltipExtensions">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.GauntletUI.TooltipExtensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.InputSystem">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.InputSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Library">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Localization">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.AutoGenerated">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.AutoGenerated.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.CustomBattle">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\CustomBattle\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.CustomBattle.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.Diamond">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.Diamond.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.GauntletUI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\Native\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.GauntletUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.GauntletUI.Widgets">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.GauntletUI.Widgets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.Helpers">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.Helpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.View">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\Native\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.View.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.MountAndBlade.ViewModelCollection">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.ViewModelCollection.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.NavigationSystem">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.NavigationSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Network">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Network.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.ObjectSystem">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.PlatformService">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.PlatformService.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.PlatformService.Epic">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.PlatformService.Epic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.PlatformService.Steam">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.PlatformService.Steam.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.PlayerServices">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.PlayerServices.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.PSAI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.PSAI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.SaveSystem">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.SaveSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Starter.DotNetCore">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Starter.DotNetCore.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.Starter.Library">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.Starter.Library.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.TwoDimension">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.TwoDimension.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="TaleWorlds.TwoDimension.Standalone">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.TwoDimension.Standalone.dll</HintPath>
+    <SubModuleOverrides Include="DisplayName">
+      <Regex>\$displayname\$</Regex>
+      <Replacement>$(DisplayName)</Replacement>
+    </SubModuleOverrides>
+    <SubModuleOverrides Include="MCMVersion">
+      <Regex>\$mcmversion\$</Regex>
+      <Replacement>$(MCMVersion)</Replacement>
+    </SubModuleOverrides>
+  </ItemGroup>
+  
+  <!-- NuGet Packages -->
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="$(HarmonyVersion)" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.ButterLib" Version="$(ButterLibVersion)" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="$(MCMVersion)" IncludeAssets="compile" />
+    <!-- Microsoft.CSharp is used for its source-only 'dynamic' implementation. -->
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" IncludeAssets="compile" />
+    <!-- Enable NET5 Features on NET472 -->
+    <PackageReference Include="IsExternalInit" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Nullable" Version="1.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- Directly-Referenced Game Assemblies -->
+  <ItemGroup>
+    <Reference Include="$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.*.dll" Exclude="$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.Native.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(GameFolder)\Modules\Native\bin\Win64_Shipping_Client\*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(GameFolder)\Modules\SandBox\bin\Win64_Shipping_Client\*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(GameFolder)\Modules\SandBoxCore\bin\Win64_Shipping_Client\*.dll">
+      <HintPath>%(Identity)</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="$(GameFolder)\Modules\StoryMode\bin\Win64_Shipping_Client\*.dll">
+      <HintPath>%(Identity)</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AOEvents.cs" />
-    <Compile Include="AOGameModels.cs" />
-    <Compile Include="CampaignBehaviors\AORelationBehavior.cs" />
-    <Compile Include="CampaignBehaviors\AOCooldownBehavior.cs" />
-    <Compile Include="CampaignBehaviors\BehaviorManagers\AORelationManager.cs" />
-    <Compile Include="CampaignBehaviors\BehaviorManagers\AOCooldownManager.cs" />
-    <Compile Include="Extensions\CampaignExtensions.cs" />
-    <Compile Include="Extensions\KingdomExtensions.cs" />
-    <Compile Include="Extensions\MedianExtensions.cs" />
-    <Compile Include="Helpers\FieldAccessHelper.cs" />
-    <Compile Include="Patches\Politics\GetAiChoicePatch.cs" />
-    <Compile Include="Patches\Politics\DeclareWarDecisionDetermineSupportPatch.cs" />
-    <Compile Include="Patches\Politics\MakePeaceKingdomDecisionDetermineSupportPatch.cs" />
-    <Compile Include="PoliticsRebalance\DecisionMaker.cs" />
-    <Compile Include="Models\DecisionSupportScoringModel.cs" />
-    <Compile Include="Models\DefaultModels\DefaultDecisionSupportScoringModel.cs" />
-    <Compile Include="SavableClasses\SegmentalFractionalScore.cs" />
-    <Compile Include="SavableClasses\KingdomDecisionConclusion.cs" />
-    <Compile Include="Helpers\DebugHelper.cs" />
-    <Compile Include="AOSaveableTypeDefiner.cs" />
-    <Compile Include="DropdownObject.cs" />
-    <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Extensions\Harmony\PatchesExtensions.cs" />
-    <Compile Include="Extensions\Harmony\PatchExtension.cs" />
-    <Compile Include="Extensions\HeroExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Helpers\HarmonyHelper.cs" />
-    <Compile Include="Helpers\AccessHelper.cs" />
-    <Compile Include="Helpers\LoggingHelper.cs" />
-    <Compile Include="LoyaltyRebalance\LoyaltyDebugHelper.cs" />
-    <Compile Include="LoyaltyRebalance\EnsuredLoyalty\LoyaltyCostManager.cs" />
-    <Compile Include="LoyaltyRebalance\EnsuredLoyalty\LoyaltyManager.cs" />
-    <Compile Include="LoyaltyRebalance\RelativesHelper.cs" />
-    <Compile Include="Helpers\MessageHelper.cs" />
-    <Compile Include="Patches\DenarsToInfluencePatch.cs" />
-    <Compile Include="Patches\Loyalty\ConsiderClanLeaveAsMercenaryPatch.cs" />
-    <Compile Include="Patches\Loyalty\ConsiderClanLeaveKingdomPatch.cs" />
-    <Compile Include="Patches\Loyalty\ExecuteAiBarterReversePatch.cs" />
-    <Compile Include="Patches\Loyalty\ConversationDefectionConditionPatch.cs" />
-    <Compile Include="Patches\Loyalty\GetScoreOfMercenaryToLeaveKingdom.cs" />
-    <Compile Include="Patches\Loyalty\GetScoreOfClanToLeaveKingdomPatch.cs" />
-    <Compile Include="Patches\Loyalty\GetUnitValueForFactionJoinKingdomPatch.cs" />
-    <Compile Include="Patches\Loyalty\GetScoreOfClanToJoinKingdomPatch.cs" />
-    <Compile Include="Patches\Politics\GetInfluenceRequiredToOverrideKingdomDecisionPatch.cs" />
-    <Compile Include="Patches\Loyalty\GetUnitValueForFactionLeaveKingdomPatch.cs" />
-    <Compile Include="Patches\Loyalty\ConsiderDefectionPatch.cs" />
-    <Compile Include="Patches\Politics\GetRandomPeaceDecisionPatch.cs" />
-    <Compile Include="Patches\Politics\GetRandomAnnexationDecisionPatch.cs" />
-    <Compile Include="Patches\Politics\GetRandomPolicyDecisionPatch.cs" />
-    <Compile Include="Patches\Politics\GetRandomWarDecisionPatch.cs" />
-    <Compile Include="Patches\Politics\ApplyChosenOutcomePatch.cs" />
-    <Compile Include="PoliticsRebalance\DebateRelationHandler.cs" />
-    <Compile Include="PoliticsRebalance\PoliticsDebugHelper.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Settings.EnsuredLoyalty.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Settings.PoliticsRebalance.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Settings.RelationOverhaul.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Settings.Presets.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\SettingsHelper.cs" />
-    <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="SubModule.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\Extensions\HeroVMcontactExtension.cs" />
-    <Compile Include="ViewModels\Extensions\TooltipVMExtension.cs" />
-    <Compile Include="ViewModels\Patches\EncyclopediaHeroPageVMRefreshPatch.cs" />
-    <Compile Include="ViewModels\Patches\KingdomSettlementVMSetCurrentSelectedSettlementPatch.cs" />
-    <Compile Include="ViewModels\Patches\KingdomDiplomacyVMOnSetPeaceItemPatch.cs" />
-    <Compile Include="ViewModels\Patches\KingdomClanVMSetCurrentSelectedClanPatch.cs" />
-    <Compile Include="ViewModels\Patches\KingdomPoliciesVMOnPolicySelectPatch.cs" />
-    <Compile Include="ViewModels\Patches\KingdomDiplomacyVMOnSetWarItemPatch.cs" />
-    <Compile Include="ViewModels\Patches\TooltipVMExtensionsHeroActionPatch.cs" />
-    <Compile Include="ViewModels\Patches\TooltipVMExtensionsUpdateTooltipPatch.cs" />
-    <Compile Include="ViewModels\TooltipHelper.cs" />
+    <Reference Update="C:\Program Files %28x86%29\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll">
+      <Aliases>global,TWCS</Aliases>
+    </Reference>
   </ItemGroup>
+
+  <!-- Hide from Solution Explorer -->
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="std_module_strings_xml.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Update="*.md" Visible="false" />
+    <None Update="LICENSE" Visible="false" />
+    <None Update="*.xsd" Visible="false" />
+    <None Update="packages.config" Visible="false" />
+    <None Update=".gitignore" Visible="false" />
   </ItemGroup>
-  <ItemGroup />
+
+  <!-- Game version in Assembly attributes -->
+  <Target Name="AddGameVersionMetadaAssemblyAttributes" BeforeTargets="CoreGenerateAssemblyInfo">
+    <ItemGroup>
+      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+        <_Parameter1>GameVersion</_Parameter1>
+        <_Parameter2>$(GameVersionConstant)</_Parameter2>
+      </AssemblyAttribute>
+    </ItemGroup>
+  </Target>	
+	
+  <!-- Post-build copying to game folder -->
   <ItemGroup>
-    <Content Include="ModuleData\Languages\RU\std_module_strings_xml.xml" />
-    <Content Include="ModuleData\Languages\std_module_strings_xml.xml" />
-    <Content Include="SubModule.xml" />
-    <ModuleData Include="ModuleData\**/*.*" />
+	<ModuleData Include="$(ProjectDir)\ModuleData\**/*.*" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MOD_FOLDER)\bin\Win64_Shipping_Client\" />
-    <Copy SourceFiles="$(ProjectDir)\SubModule.xml" DestinationFolder="$(MOD_FOLDER)" />
-    <Copy SourceFiles="@(ModuleData)" DestinationFolder="$(MOD_FOLDER)\ModuleData\%(RecursiveDir)" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModFolder)\bin\Win64_Shipping_Client\" />
+	<Copy SourceFiles="$(ProjectDir)\SubModule.xml" DestinationFolder="$(ModFolder)\" />        
+    <Copy SourceFiles="@(ModuleData)" DestinationFolder="$(ModFolder)\ModuleData\%(RecursiveDir)" />		
   </Target>
+  <Target Name="PostBuildFillSubModule" AfterTargets="PostBuildEvent" Condition="$(ModuleName) != '' AND Exists($(ModFolder))">
+    <ItemGroup>
+      <SubModuleOverrides Include="ModuleName">
+        <Regex>\$modulename\$</Regex>
+        <Replacement>$(ModuleName)</Replacement>
+      </SubModuleOverrides>
+      <SubModuleOverrides Include="Version">
+        <Regex>\$version\$</Regex>
+        <Replacement>$(Version)</Replacement>
+      </SubModuleOverrides>
+      <SubModuleOverrides Include="GameVersion" Condition="$(GameVersion) != ''">
+        <Regex>\$gameversion\$</Regex>
+        <Replacement>$(GameVersion)</Replacement>
+      </SubModuleOverrides>
+      <SubModuleOverrides Include="HarmonyVersion" Condition="$(HarmonyVersion) != ''">
+        <Regex>\$harmonyversion\$</Regex>
+        <Replacement>$(HarmonyVersion)</Replacement>
+      </SubModuleOverrides>
+      <SubModuleOverrides Include="ButterLibVersion" Condition="$(ButterLibVersion) != ''">
+        <Regex>\$butterlibversion\$</Regex>
+        <Replacement>$(ButterLibVersion)</Replacement>
+      </SubModuleOverrides>
+      <SubModuleOverrides Include="UIExtenderExVersion" Condition="$(UIExtenderExVersion) != ''">
+        <Regex>\$uiextenderexversion\$</Regex>
+        <Replacement>$(UIExtenderExVersion)</Replacement>
+      </SubModuleOverrides>
+      <SubModuleOverrides Include="ModuleLoaderVersion" Condition="$(ModuleLoaderVersion) != ''">
+        <Regex>\$moduleloaderversion\$</Regex>
+        <Replacement>$(ModuleLoaderVersion)</Replacement>
+      </SubModuleOverrides>
+    </ItemGroup>
+
+    <ReplaceFileText
+      Condition="'@(SubModuleOverrides->Count())' &gt; 0"
+      File="$(GameFolder)/Modules/$(ModuleName)/SubModule.xml"
+      Regex="%(SubModuleOverrides.Regex)"
+      ReplacementText="%(SubModuleOverrides.Replacement)" />
+  </Target>
+  <UsingTask
+    TaskName="ReplaceFileText"
+    TaskFactory="RoslynCodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <File ParameterType="System.String" Required="true" />
+      <Regex ParameterType="System.String" Required="true" />
+      <ReplacementText ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+          System.IO.File.WriteAllText(
+          File,
+          System.Text.RegularExpressions.Regex.Replace(System.IO.File.ReadAllText(File), Regex, ReplacementText));
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>	
 </Project>

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using HarmonyLib;
+
+using System;
 using System.Reflection;
-using HarmonyLib;
+
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+
 using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches
@@ -13,11 +16,11 @@ namespace AllegianceOverhaul.Patches
     {
       try
       {
-        __result = 1f / Settings.Instance.InfluenceToDenars;
+        __result = 1f / Settings.Instance!.InfluenceToDenars;
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for DefaultDiplomacyModel. DenarsToInfluence");
       }
     }

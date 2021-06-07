@@ -1,9 +1,12 @@
 ﻿using HarmonyLib;
+
 using System;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomDiplomacy;
+
 using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
 using AllegianceOverhaul.Helpers;
 
@@ -26,7 +29,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomDiplomacyVM. OnSetWarItem");
       }
     }

@@ -3,7 +3,7 @@
 using TaleWorlds.Localization;
 
 using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using static Bannerlord.ButterLib.Common.Helpers.LocalizationHelper;
+using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.Helpers
 {

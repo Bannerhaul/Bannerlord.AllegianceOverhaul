@@ -1,11 +1,14 @@
-﻿using System;
+﻿using HarmonyLib;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
+
 using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Politics
@@ -24,12 +27,12 @@ namespace AllegianceOverhaul.Patches.Politics
       {
         foreach (DecisionOutcome decisionOutcome in  kingdomElection.PossibleOutcomes)
         {
-          AOEvents.Instance.OnRelationShift(decisionOutcome.SponsorClan?.Leader ?? Hero.MainHero, Hero.MainHero.Spouse, new SavableClasses.SegmentalFractionalScore(decisionOutcome.TotalSupportPoints, 0));
+          AOEvents.Instance!.OnRelationShift(decisionOutcome.SponsorClan?.Leader ?? Hero.MainHero, Hero.MainHero.Spouse, new SavableClasses.SegmentalFractionalScore(decisionOutcome.TotalSupportPoints, 0));
         }
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomElection. ApplyChosenOutcome");
       }
     }
@@ -62,7 +65,7 @@ namespace AllegianceOverhaul.Patches.Politics
       }
       catch (Exception ex)
       {
-        MethodInfo methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony transpiler for KingdomElection. ApplyChosenOutcome");
         return instructions;
       }
@@ -70,7 +73,7 @@ namespace AllegianceOverhaul.Patches.Politics
 
     public static bool Prepare()
     {
-      return true; //SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldowns) || SettingsHelper.SystemDebugEnabled(AOSystems.PoliticsRebalance, DebugType.General);
+      return false; //Its a blank for the Relation overhaul
     }
   }
 }

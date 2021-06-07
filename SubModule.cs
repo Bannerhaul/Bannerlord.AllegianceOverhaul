@@ -21,11 +21,9 @@ namespace AllegianceOverhaul
     private const string SErrorInitialising = "{=HOar731K}Error initialising Allegiance Overhaul! See details in the mod log. Error text: \"{EXCEPTION_MESSAGE}\"";
     private const string SConflicted = "{=WrIDeC1P}Allegiance Overhaul identified possible conflicts with other mods! See details in the mod log.";
 
-    //public static readonly UIExtender _extender = new UIExtender("AllegianceOverhaul");
-
     public bool Patched { get; private set; }
-    private Harmony _allegianceOverhaulHarmonyInstance;
-    public Harmony AllegianceOverhaulHarmonyInstance { get => _allegianceOverhaulHarmonyInstance; private set => _allegianceOverhaulHarmonyInstance = value; }
+    private Harmony? _allegianceOverhaulHarmonyInstance;
+    public Harmony? AllegianceOverhaulHarmonyInstance { get => _allegianceOverhaulHarmonyInstance; private set => _allegianceOverhaulHarmonyInstance = value; }
 
     protected override void OnSubModuleLoad()
     {
@@ -45,7 +43,7 @@ namespace AllegianceOverhaul
           MessageHelper.ErrorMessage(SErrorLoading.ToLocalizedString());
 
         //check for possible conflicts
-        if (Settings.Instance.EnableHarmonyCheckup && HarmonyHelper.ReportCompatibilityIssues(AllegianceOverhaulHarmonyInstance, "Checkup on initialize"))
+        if (Settings.Instance!.EnableHarmonyCheckup && HarmonyHelper.ReportCompatibilityIssues(AllegianceOverhaulHarmonyInstance, "Checkup on initialize"))
           MessageHelper.SimpleMessage(SConflicted.ToLocalizedString());
       }
       catch (Exception ex)
