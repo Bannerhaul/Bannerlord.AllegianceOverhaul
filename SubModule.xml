@@ -30,7 +30,7 @@
 		<SubModule>
 			<Name value="$modulename$" />
 			<DLLName value="$modulename$.dll" />
-			<SubModuleClassType value="$displayname$.SubModule" />
+			<SubModuleClassType value="$modulename$.SubModule" />
 			<Tags />
 		</SubModule>
 	</SubModules>
