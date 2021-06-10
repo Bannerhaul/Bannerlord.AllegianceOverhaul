@@ -18,7 +18,7 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingRelationOverhaul, GroupOrder = 2)]
     public bool UseRelationOverhaul { get; set; } = false;
 
-    [SettingPropertyDropdown("{=yul4vp54}Applies to", RequireRestart = false, HintText = "{=y3ClkEcy}Specify if below rules should affect all kingdoms, or just the player's one. Default is [All kingdoms].")]
+    [SettingPropertyDropdown("{=mNeDsYqbr}Applies to", RequireRestart = false, HintText = "{=EgueYDtnH}Specify if below rules should affect all kingdoms, or just the player's one. Default is [All kingdoms].")]
     [SettingPropertyGroup(HeadingRelationOverhaul)]
     public DropdownDefault<string> RelationOverhaulScope { get; set; } = new DropdownDefault<string>(new string[]
     {

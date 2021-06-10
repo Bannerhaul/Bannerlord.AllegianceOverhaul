@@ -17,6 +17,7 @@ using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul.Patches.Politics
 {
+  /*
   [HarmonyPatch(typeof(KingdomDecisionProposalBehavior), "GetRandomAnnexationDecision")]
   public class GetRandomAnnexationDecisionPatch
   {
@@ -78,4 +79,5 @@ namespace AllegianceOverhaul.Patches.Politics
       return SettingsHelper.SubSystemEnabled(SubSystemType.ElectionRebalance) || SettingsHelper.SystemDebugEnabled(AOSystems.PoliticsRebalance, DebugType.General);
     }
   }
+  */
 }

@@ -36,18 +36,18 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
     }
 
     //CPk4UlNb,PHLW0tH1,BbGZQujC,zMaP4T5X,9nAkgARf,Q4U1RxkS,xSYLqZ3q,UxXnDAyP,QvRH6auB,nnWihTh4,w3OMVa7M
-    private const string ComplexCostString = "{=J5SxdaLi}[Influence cost = {INFLUENCE_COST}; Gold cost = {GOLD_COST}]";
+    private const string ComplexCostString = "{=3MafquFdR}[Influence cost = {INFLUENCE_COST}; Gold cost = {GOLD_COST}]";
 
-    private const string WithholdPricePayed = "{=MBVs126y}{LEAVING_CLAN_KINGDOM_LEADER.NAME} decided to withhold {LEAVING_CLAN.NAME} in {LEAVING_CLAN_KINGDOM.NAME}. Initially {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} denars. After intervention {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} denars.";
-    private const string WithholdPriceRejected = "{=PJSz7d09}{LEAVING_CLAN_KINGDOM_LEADER.NAME} of {LEAVING_CLAN_KINGDOM.NAME} decided to let {LEAVING_CLAN.NAME} go. At that moment {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} denars.";
+    private const string WithholdPricePayed = "{=M040sU1dF}{LEAVING_CLAN_KINGDOM_LEADER.NAME} decided to withhold {LEAVING_CLAN.NAME} in {LEAVING_CLAN_KINGDOM.NAME}. Initially {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} denars. After intervention {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} denars.";
+    private const string WithholdPriceRejected = "{=ldZNb5zjx}{LEAVING_CLAN_KINGDOM_LEADER.NAME} of {LEAVING_CLAN_KINGDOM.NAME} decided to let {LEAVING_CLAN.NAME} go. At that moment {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} denars.";
 
-    private const string ActionLeaving = "{=4GvY6ohR}leaving your kingdom";
-    private const string ActionDefecting = "{=soNby6VP}going to leave your kingdom and join the {TARGET_KINGDOM.NAME}";
-    private const string PlayerInquiryHeader = "{=Jz9zbcJh}Clan {LEAVING_CLAN.NAME} is leaving!";
-    private const string PlayerInquiryBody = "{=Gy4fCQV4}Clan {LEAVING_CLAN.NAME} is {ACTION_DESCRIPTION}! Will you intervene and insist they should stay? That would require {INFLUENCE_COST} influence and {GOLD_COST} denars.";
+    private const string ActionLeaving = "{=8xWUKmRwi}leaving your kingdom";
+    private const string ActionDefecting = "{=BD9jEJQgV}going to leave your kingdom and join the {TARGET_KINGDOM.NAME}";
+    private const string PlayerInquiryHeader = "{=bnrPhGr8M}Clan {LEAVING_CLAN.NAME} is leaving!";
+    private const string PlayerInquiryBody = "{=4MgHKVMDz}Clan {LEAVING_CLAN.NAME} is {ACTION_DESCRIPTION}! Will you intervene and insist they should stay? That would require {INFLUENCE_COST} influence and {GOLD_COST} denars.";
 
-    private const string ButtonWithholdText = "{=7oJXB1PA}Withhold them";
-    private const string ButtonReleaseText = "{=BkX1Q6G6}Let them go";
+    private const string ButtonWithholdText = "{=iyyixqbbN}Withhold them";
+    private const string ButtonReleaseText = "{=E0WvZ3AzI}Let them go";
 
     public Clan LeavingClan { get; }
     public Kingdom? TargetKingdom { get; }

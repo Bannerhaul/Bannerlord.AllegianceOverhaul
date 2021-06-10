@@ -10,8 +10,8 @@ namespace AllegianceOverhaul.ViewModels
   {
     public static Color DefaultTooltipColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
     //1gqZN4op,eABKeDAv,CnfTEQxp,m7kD2tc5,hIPaEV34,vTefFHTT,jqY89njY,xduBOxJW
-    private const string TooltipRelationHeader = "{=hlIYCDRA}Relation with {HERO}";
-    private const string TooltipLoyaltyHeader = "{=AuJasuJQ}Loyalty";
+    private const string TooltipRelationHeader = "{=YCgmy4haM}Relation with {HERO}";
+    private const string TooltipLoyaltyHeader = "{=YJmaYz7il}Loyalty";
 
     public static string GetTooltipRelationHeader(Hero hero)
     {

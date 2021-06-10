@@ -55,12 +55,14 @@ namespace AllegianceOverhaul.Helpers
         case SubSystemType.DeclareWarSupportRebalance:
           return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
                  && Settings.Instance.WarSupportCalculationMethod.SelectedValue.EnumValue != PeaceAndWarConsideration.Native;
+        /*
         case SubSystemType.SettlementClaimantSupportRebalance:
           return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
                  && Settings.Instance.FiefOwnershipSupportCalculationMethod.SelectedValue.EnumValue != FiefOwnershipConsideration.Native;
         case SubSystemType.AnnexationSupportRebalance:
           return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
                  && Settings.Instance.AnnexSupportCalculationMethod.SelectedValue.EnumValue != FiefOwnershipConsideration.Native;
+        */
         case SubSystemType.ElectionCooldowns: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns;
         case SubSystemType.ElectionCooldownsForPlayer: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns && Settings.Instance.UseElectionCooldownsForPlayer;
         //General
@@ -98,15 +100,13 @@ namespace AllegianceOverhaul.Helpers
     }
     public static bool SystemDebugEnabled(AOSystems system, DebugType debugType)
     {
-      switch (debugType)
+      return debugType switch
       {
-        case DebugType.General: return Settings.Instance!.EnableGeneralDebugging && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue);
-        case DebugType.Technical: return Settings.Instance!.EnableTechnicalDebugging && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue);
-        case DebugType.Any:
-          return (Settings.Instance!.EnableGeneralDebugging || Settings.Instance.EnableTechnicalDebugging)
-                 && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue);
-        default: return false;
-      }
+        DebugType.General => Settings.Instance!.EnableGeneralDebugging && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue),
+        DebugType.Technical => Settings.Instance!.EnableTechnicalDebugging && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue),
+        DebugType.Any => (Settings.Instance!.EnableGeneralDebugging || Settings.Instance.EnableTechnicalDebugging) && SystemInScope(system, Settings.Instance.DebugSystemScope.SelectedValue.EnumValue),
+        _ => false,
+      };
     }
     public static bool SystemDebugEnabled(AOSystems system, DebugType debugType, IFaction faction)
     {
@@ -129,12 +129,12 @@ namespace AllegianceOverhaul.Helpers
     }
     private static DropdownDefault<string>? DetermineSubSystemScope(SubSystemType subSystem)
     {
-      switch ((int)subSystem)
+      return (int)subSystem switch
       {
-        case int subSystemIdx when (subSystemIdx < 50): return Settings.Instance!.EnsuredLoyaltyScope;
-        case int subSystemIdx when (subSystemIdx >= 50 && subSystemIdx < 100): return Settings.Instance!.PoliticsRebalanceScope;
-        default: return null;
-      }
+        int subSystemIdx when (subSystemIdx < (int)SubSystemType.ElectionRebalance) => Settings.Instance!.EnsuredLoyaltyScope,
+        int subSystemIdx when (subSystemIdx >= (int)SubSystemType.ElectionRebalance && subSystemIdx < 100) => Settings.Instance!.PoliticsRebalanceScope,
+        _ => null,
+      };
     }
   }
   public enum DebugType : byte

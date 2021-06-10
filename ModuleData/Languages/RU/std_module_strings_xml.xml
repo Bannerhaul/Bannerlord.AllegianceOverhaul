@@ -4,180 +4,89 @@
 		<tag language="Русский" />
 	</tags>
 	<strings>
-		<string id="qfpqfAdz" text="Пересмотр Верноподданства" />
+		<string id="rQWGD5PzD" text="Пересмотр Верноподданства" />
 		<!--
 		|||||||||||||||||||||| Load and initialization ||||||||||||||||||||||
 		-->
-		<string id="WddOMlv9" text="Загружен Пересмотр Верноподданства!" />
-		<string id="gRdUPEXU" text="Не удалось загрузить Пересмотр Верноподданства! Смотрите детали в файле лога мода." />
-		<string id="HOar731K" text="Ошибка при инициализации Пересмотра Верноподданства! Смотрите детали в файле лога мода. Текст ошибки: &quot;{EXCEPTION_MESSAGE}&quot;" />
-		<string id="WrIDeC1P" text="Пересмотр Верноподданства выявил потенциальные конфликты с другими модами! Смотрите детали в файле лога мода." />
+		<string id="D9F5e8huP" text="Загружен Пересмотр Верноподданства!" />
+		<string id="HZ03jxuzC" text="Не удалось загрузить Пересмотр Верноподданства! Смотрите детали в файле лога мода." />
+		<string id="AE6zntclu" text="Ошибка при инициализации Пересмотра Верноподданства! Смотрите детали в файле лога мода. Текст ошибки: &quot;{EXCEPTION_MESSAGE}&quot;" />
+		<string id="9PyDYijvk" text="Пересмотр Верноподданства выявил потенциальные конфликты с другими модами! Смотрите детали в файле лога мода." />
 		<!--
-		|||||||||||||||||||||||||| Ensured Loyalty ||||||||||||||||||||||||||
-		-->
-		<!--Lord dialog lines-->
-		<string id="v3Qivf00" text="У меня нет желания обсуждать подобные вопросы с посторонними." />
-		<string id="nWsVjhjz" text="Не думаю, что нам стоит продолжать этот разговор." />
-		<string id="aLEqW60A" text="Прости, мой друг, но нам не стоит продолжать этот разговор." />
-		<!--TooltipInfoCategories-->
-		<string id="hlIYCDRA" text="Отношения с {HERO}" />
-		<string id="AuJasuJQ" text="Верность" />
-		<!--TooltipInfoStrings-->
-		<string id="vhJZj4an" text="Соблюдает {SERVICE_TYPE} по крайней мере {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}дней{?}{?REMAINING_DAYS.OTHER_PLURAL_FORM}дня{?}день{\?}{\?}" />
-		<string id="f0u5ZyFj" text="Верный" />
-		<string id="oeJtbs1u" text="Довольно верный" />
-		<string id="zI5tJrm5" text="Сомневающийся" />
-		<string id="9jecyxIV" text="Нет" />
-		<!--Log message about leaving or defecting-->
-		<string id="K23FeRhj" text="{?LEAVING_CLAN.MINOR_FACTION}Малая фракция{?}Клан{\\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}на службе у{?}из{\\?} {LEAVING_CLAN_KINGDOM.NAME} обдумывает уход. Ценность королевства для них {LEAVE_BARTERABLE}, порог выхода {LEAVE_THRESHOLD}. В оригинале они бы {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
-		<string id="WNqBu5Ye" text="{?LEAVING_CLAN.MINOR_FACTION}Малая фракция{?}Клан{\\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}на службе у{?}из{\\?} {LEAVING_CLAN_KINGDOM.NAME} рассматривает возможность ухода в {TARGET_KINGDOM.NAME}. Текущее королевство оценивается ими в {CURRENT_BARTERABLE}, а другое - в {TARGET_BARTERABLE}. В оригинале они бы {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
-		<!--CLAN_TYPE-->
-		<string id="uNS0QtqU" text="Малая фракция" />
-		<string id="zmR6sT03" text="Клан" />
-		<!--SERVICE_TYPE-->
-		<string id="CYUKnxOH" text="на службе у" />
-		<string id="rdpdUqkQ" text="из" />
-		<!--CLAN_DECISION-->
-		<string id="KBPBbuE9" text="покинули королевство" />
-		<string id="GmDkOQ7C" text="остались" />
-		<!--ENSURED_LOYALTY_RESULT-->
-		<string id="4R4kwdpa" text=" {TRANSITION_PART} {LOYALTY_CHECK_RESULT} гарантирована, так как {REASON}." />
-		<!--TRANSITION_PART-->
-		<string id="5EjuUUvH" text="Более того," />
-		<string id="PKqNif5j" text="Но" />
-		<!--LOYALTY_CHECK_RESULT-->
-		<string id="rpZFLb2V" text="верность будет" />
-		<string id="9Ml0rRQw" text="верность не будет" />
-		<string id="adoPNE7R" text="верность может быть" />
-		<!--REASON-->
-		<string id="ZNEdXaUc" text="эта опция выключена" />
-		<string id="RrhbXipK" text="на фракцию эта опция не распространяется" />
-		<string id="TJBHPB3s" text="отношения лидера клана с {KINGDOM_LEADER} {CHECK_RESULT} ({CURRENT_RELATION} при требуемых {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
-		<string id="jPA16DTJ" text="отношения лидера клана с {KINGDOM_LEADER} на это не влияют, и клан выполнил минимальные обязательства" />
-		<string id="7jtTAw2k" text="клан соблюдает {SERVICE_TYPE} только {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}дней{?}{?DAYS_UNDER_SERVICE.OTHER_PLURAL_FORM}дня{?}день{\?}{\?} из необходимых {REQUIRED_DAYS_UNDER_SERVICE}" />
-		<!--REASON OR TOOLTIP - SERVICE_TYPE -->
-		<string id="h3RHyeGO" text="клятву верности" />
-		<string id="s3RAXuiB" text="наемнический контракт" />
-		<!--REASON - CHECK_RESULT -->
-		<string id="nixfDSWU" text="недостаточно высоки" />
-		<string id="GYctexwu" text="достаточно высоки" />
-		<!--REASON - WITHHOLD_PRICE_INFO -->
-		<string id="qGEalMT7" text=" и {KINGDOM_LEADER} обладает ресурсами, чобы удержать клан" />
-		<string id="DQ2ATMdL" text=", но у {KINGDOM_LEADER} не хватает ресурсов, чобы удержать клан" />
-		<!--Log message about withholding-->
-		<string id="MBVs126y" text="{KINGDOM_LEADER} решает удержать {LEAVING_CLAN} в {CURRENT_KINGDOM}. Изначально у {KINGDOM_LEADER_PRONOUN} имелось {INITIAL_INFLUENCE} влияния и {INITILAL_GOLD} золотых. Удержание потребовало {INFLUENCE_COST} влияния и {GOLD_COST} золотых. После вмешательства у {KINGDOM_LEADER_PRONOUN} имеется {RESULT_INFLUENCE} влияния и {RESULT_GOLD} золотых." />
-		<string id="PJSz7d09" text="{KINGDOM_LEADER} из {CURRENT_KINGDOM} отпускает {LEAVING_CLAN}. В тот момент у {KINGDOM_LEADER_PRONOUN} имелось {INITIAL_INFLUENCE} влияния и {INITILAL_GOLD} золотых. Удержание клана потребовало бы {INFLUENCE_COST} влияния и {GOLD_COST} золотых." />
-		<!--KINGDOM_LEADER_PRONOUN-->
-		<string id="w3OMVa7M" text="него" />
-		<string id="J5SxdaLi" text="неё" />
-		<!--Player inquiry about withholding - header-->
-		<string id="Jz9zbcJh" text="Клан {LEAVING_CLAN} покидает королевство!" />
-		<!--Player inquiry about withholding - body-->
-		<string id="Gy4fCQV4" text="Клан {LEAVING_CLAN} {ACTION_DESCRIPTION}! Станете ли вы вмешиваться и настаивать, чтобы они остались? Это потребует {INFLUENCE_COST} влияния и {GOLD_COST} золотых." />
-		<!--ACTION_DESCRIPTION-->
-		<string id="4GvY6ohR" text="покидает ваше королевство" />
-		<string id="soNby6VP" text="собирается покинуть ваше королевство и присоединиться к {TARGET_KINGDOM}" />
-		<!--Player inquiry about withholding - buttons-->
-		<string id="7oJXB1PA" text="Удержать" />
-		<string id="BkX1Q6G6" text="Позволить уйти" />
-		<!--
-		||||||||||||||||||||||||||| Mod Options |||||||||||||||||||||||||||
+		|||||||||||||||||||||||||||| Mod Options ||||||||||||||||||||||||||||
 		-->
 		<!-- Main or reused headings -->
-		<string id="yRuHl3O6" text="Общие настройки" />
-		<string id="Ps6RgRH1" text="Гарантированная верность" />
-		<string id="xNtFBSJF" text="Kingdom evaluation" />
-		<string id="fmUHcBME" text="Отладочные настройки" />
+		<string id="TfOZojdUe" text="Общие настройки" />
+		<string id="qvoCfbvzC" text="Гарантированная верность" />
+		<string id="cMaAPsPG7" text="Migration tweaks" />
+		<string id="36iqZfxor" text="Politics rebalance" />		
+		<string id="EYZduHauC" text="Отладочные настройки" />
+		<string id="xveQEwa3t" text="Testing settings" />
 		
 		<!-- Reused settings and hints -->
-		<string id="yul4vp54" text="Распространяется на" />
-		<string id="y3ClkEcy" text="Укажите, должны ли приведенные ниже правила затрагивать все королевства или только королевство игрока. По умолчанию [Все королевства]." />
-		<string id="z3oSKZFE" text="Укажите, хотите ли вы использовать отладочные настройки для всех королевств или только для королевства игрока. По умолчанию [Королевство игрока]." />
-		<string id="BRI2fuVk" text="Разрешено" />
-		<string id="fnO8oC3s" text="Включает учет дополнительных факторов при оценке ценности королевства фракцией. Влияет как на вероятность ухода или дезертирства, так и на торг с игроком (может сделать его более дорогим)." />
+		<string id="mNeDsYqbr" text="Распространяется на" />
+		<string id="EgueYDtnH" text="Укажите, должны ли приведенные ниже правила затрагивать все королевства или только королевство игрока. По умолчанию [Все королевства]." />
+		<string id="eJ4E8HeZd" text="Укажите, хотите ли вы использовать отладочные настройки для всех королевств или только для королевства игрока. По умолчанию [Королевство игрока]." />
+		<string id="bmXYOS8oR" text="Разрешено" />
+		<string id="47Abt5foN" text="Включает учет дополнительных факторов при оценке ценности королевства фракцией. Влияет как на вероятность ухода или дезертирства, так и на торг с игроком (может сделать его более дорогим)." />
 		<!-- Presets -->
-		<string id="s1ojXK7t" text="Рекомендуемые" />
-		<string id="ViCdJulG" text="Рекомендуемые с логированием" />
-		<string id="3WYNEaOI" text="Технические" />
-		<!-- Dropdown values -->
-		<string id="COahS2f6" text="Все королевства" />
-		<string id="JeehGy9z" text="Королевство игрока" />
-		<string id="v2TacaMr" text="Королевство, возглавляемое игроком" />		
-		
-		<!-- Ensured loyalty -->
-		<string id="QLii7mIG" text="Позволяет задавать условия, при которых кланы могут стать безоговорочно верными королевствам." />
-		<string id="MIDoz9om" text="Срок действия вассальной клятвы" />
-		<string id="l5LWFlHv" text="Период в днях после присоединения к королевству, в течение которого клан не станет даже рассматривать уход из него. По умолчанию = 84 (игровой год)." />
-		<string id="Az4K6FiF" text="Срок действия вассальной клятвы малой фракции" />
-		<string id="qRnwZFts" text="Период в днях после присоединения к королевству, в течение которого малая фракция не станет даже рассматривать уход из него. По умолчанию = 63 (три четверти игрового года)." />
-		<string id="eMMKVjRU" text="Минимальный срок службы наёмников" />
-		<string id="00arXPdi" text="Период в днях после начала наёмной службы в королевстве, в течение которого малая фракция не станет даже рассматривать уход из него. По умолчанию = 42 (половина игрового года)." />
-		<string id="Fxyb9iPM" text="Влияет на беседы с игроком" />
-		<string id="ZaPJhkuk" text="Укажите, должна ли гарантированная система лояльности влиять на беседы с игроком, делая невозможным вербовку лордов, которые верны своим сюзеренам." />
-		
-		<string id="mmUgw8hL" text="Достичь через отношения" />
-		<string id="gj3cKWJo" text="Укажите, должно ли достижение определенного уровня отношений с лидером королевства сделать клан безоговорочно верным этому королевству." />
-		
-		<string id="JvWw6eSp" text="Базовый уровень отношений" />
-		<string id="XP7qtIkt" text="Минимально необходимый уровень отношений между лидером клана и лидером королевства, при котором клан не покинет это королевство. Отношения ниже этого порога НЕ означают, что клан обязательно уйдет. Служит основой для других настраиваемых модификаторов. По умолчанию = 50." />
-		
-		<string id="m5JmQwFt" text="Изменять в зависимости от обстоятельств" />
-		<string id="0oeDqVTM" text="Укажите, должены ли обстоятельства влиять на минимально необходимые отношения, при которых обеспечивается верность." />
-		
-		<string id="AOnhwhiK" text="Модификатор кровного родства" />
-		<string id="gI3AplJv" text="Фиксированная величина, которая будет вычтена из базового значения при родстве с правящим кланом. Та же величина будет добавлена к базовому значению, если клан рассматривает уход в королевство, управляемое родственником. По умолчанию = 30 (кровные родственники верны и склонны присоединяться к своей родне)." />
-		<string id="Rbo96zKF" text="Модификатор малой фракции" />
-		<string id="BFnZrVGK" text="Фиксированная величина, которая будет добавлена к базовому значению, если малая фракция рассматривает возможность выхода из своего королевства. По умолчанию = 10 (малые фракции как правило менее лояльны)." />
-		<string id="Nff6KlEn" text="Модификатор дезертирства" />
-		<string id="0B87ROVp" text="Фиксированная величина, которая будет добавлена ​​к базовому значению, если клан собирается не просто уйти, а дезертировать в другое королевство. По умолчанию = 0." />
-		<string id="5bJx7aO7" text="Модификатор для безземельных кланов" />
-		<string id="QRmeDMie" text="Фиксированная величина, которая будет добавлена ​​к базовому значению, если клан не имеет земельных наделов. По умолчанию = 20 (Безземельные кланы как правило менее лояльны)." />
-		<string id="rHn5IY0P" text="Модификатор для безземельных королевств" />
-		<string id="vSD05nAh" text="Фиксированная величина, которая будет добавлена ​​к базовому значению всех кланов королевства, кроме правящего, если у королевства нет своих владений. По умолчанию = 50 (никто, кроме самых благородных вассалов, не потерпит этого)." />
-		
-		<string id="eExUFCCQ" text="Зависимость от уровня чести" />
-		<string id="gIDkdZP8" text="Укажите, должна ли честь лидера клана влиять на минимально необходимые отношения, при которых обеспечивается верность." />
-		
-		<string id="1QhZZBVA" text="Влияние высокого уровня чести при уходе" />
-		<string id="SJ2OA4HM" text="Фиксированная величина, которая будет вычитаться из базового значения за каждый положительный уровень чести лидера клана при рассмотрении вопроса о выходе из королевства (благородные лидеры остаются верными даже при более низком уровне отношений). По умолчанию = 5." />
-		<string id="QJFQ5eSy" text="Влияние низкого уровня чести при уходе" />
-		<string id="bp2jDgN4" text="Фиксированная величина, которая будет добавлена ​​к базовому значению за каждый отрицательный уровень чести лидера клана при рассмотрении вопроса о выходе из королевства (беспринципные лидеры требуют более высокого уровня отношений, чтобы стать верными). По умолчанию = 5." />
-		<string id="Flo6n1rf" text="Высокий уровень чести при дезертирстве" />
-		<string id="6TOUjrrQ" text="Фиксированная величина, которая будет вычитаться из базового значения за каждый положительный уровень чести лидера клана при рассмотрении перехода в другое королевство (благородные лидеры остаются верными даже при более низком уровне отношений). По умолчанию = 15." />
-		<string id="ZZxrdAfn" text="Низкий уровень чести при дезертирстве" />
-		<string id="rNiMWcE4" text="Фиксированная величина, которая будет добавлена ​​к базовому значению за каждый отрицательный уровень чести лидера клана при рассмотрении перехода в другое королевство (беспринципные лидеры требуют более высокого уровня отношений, чтобы стать верными). Поумолчнию = 20." />
-		
-		<string id="uXwgU2WE" text="Цена удержания" />
-		<string id="BEiLWxeU" text="Укажите, должно ли достижение определенного уровня отношений между лидерами клана и королевства не гарантировать верность само по себе, но вместо этого давать лидеру королевства возможность удержать клан, который хочет уйти, используя влияние и золото." />
-		
-		<string id="bZH00rVn" text="Допустимое превышение (в миллионах)" />
-		<string id="moc7wRwB" text="Максимальная величина, измеряемая в миллионах, на которую клан, покидающий королевство, может безопасно превысить пороговое значение ухода или дезертирства, не требуя вмешательства правителя. По умолчанию = 0.5." />
-		<string id="siPJey6u" text="Множитель стоимости в очках влияния" />
-		<string id="Tei4s42W" text="Множитель рассчитанной стоимости влияния, необходимого для удержания клана. По умолчанию = 2.5." />
-		
-		<string id="rhvq8Yhb" text="Подкуп" />
-		<string id="rJw4D3kJ" text="Укажите, должно ли удержание клана требовать не только затрат влияния, но и денег." />
-		
-		<string id="cM9saCDB" text="Допустимое превышение для подкупа (в миллионах)" />
-		<string id="tCqdcDuR" text="Максимальная величина, измеряемая в миллионах, на которую клан, покидающий королевство, может безопасно превысить пороговое значение ухода или дезертирства, не требуя финансовых звтрат для удержания. По умолчанию = 1.0." />
-		<string id="2JzGpjwk" text="Множитель стоимости в золоте" />
-		<string id="6TbpFzJk" text="Множитель рассчитанной стоимости в золоте, необходимой для удержания клана. Рекомендованное значение - где-то между 100 и 1000. По умолчанию = 1000." />
-		
+		<string id="R1fvUUG3F" text="Рекомендуемые" />
+		<string id="TwYyQD6LF" text="Рекомендуемые с логированием" />
+		<string id="gYrl8ux8o" text="Технические" />
+		<!-- Dropdown values - scopes -->
+		<string id="F1recvlEK" text="Все королевства" />
+		<string id="d7Lm9By8Y" text="Королевство игрока" />
+		<string id="rE0tAgMYX" text="Королевство, возглавляемое игроком" />
+		<!-- Dropdown values - systems -->
+		<string id="5F7vaCncU" text="None" />
+		<string id="Tku0VzTa5" text="All systems" />
+		<!-- Dropdown values - influence for overrides -->
+		<string id="zWf4os3fg" text="Flat influence override" />
+		<string id="3Z8OCjcgX" text="Override using 'Slight Favor' cost" />
+		<string id="S1FwBcuBB" text="Override using 'Strong Favor' cost" />
+		<string id="vuZpjgfjv" text="Override using 'Full Push' cost" />
+		<!-- Dropdown values - peace and war factors -->
+		<string id="LI9tc4Xuc" text="Use native logic" />
+		<string id="s1KlQUCzS" text="Apply situational factor" />
+		<string id="J19R7g9RJ" text="Apply relationship factor" />
+		<string id="mYcC08wjI" text="Apply tribute factor" />
+		<string id="FmJLrbHHr" text="Apply situational and relationship factors" />
+		<string id="clynUPKFE" text="Apply situational and tribute factors" />
+		<string id="70VVVTVQo" text="Apply relationship and tribute factors" />
+		<string id="KwgG3HrlM" text="Apply all the factors" />
+
 		<!-- General settings -->
-		<string id="Fok4pGDs" text="Малые вассальные фракции следуют общим правилам" />
-		<string id="1J0XkdxB" text="Укажите, должны ли малые фракции, являющиеся вассалами, использовать стандартную логику при рассмотрении вопроса о выходе из своих королевств. Если отключено, малые фракции будут использовать логику наемников, даже будучи вассалами. Включение рекомендовано, считайте это исправлением ошибки." />
-		<string id="UgeDMBZE" text="Расширенные всплывающие подсказки для героев" />
-		<string id="13W8p9hd" text="Включить добавление дополнительной информации к всплывающим подсказкам для героев в игровой энциклопедии. Добавляет информацию об отношениях, лояльности итд - в зависимости от включенных систем." />
+		<string id="tRpMRCEhN" text="Influence to denars ratio" />
+		<string id="NKOFiv68M" text="The amount of denars that is interconvertible to one influence point. Native is 500. Default = 1000." />
+		<string id="0F8Q0KWEY" text="Малые вассальные фракции следуют общим правилам" />
+		<string id="JL391Jf8S" text="Укажите, должны ли малые фракции, являющиеся вассалами, использовать стандартную логику при рассмотрении вопроса о выходе из своих королевств. Если отключено, малые фракции будут использовать логику наемников, даже будучи вассалами. Включение рекомендовано, считайте это исправлением ошибки." />
+		<string id="KJJRsb9mD" text="Расширенные всплывающие подсказки для героев" />
+		<string id="myaps1StY" text="Включить добавление дополнительной информации к всплывающим подсказкам для героев в игровой энциклопедии. Добавляет информацию об отношениях, лояльности итд - в зависимости от включенных систем." />
 		
 		<!-- Debug settings -->
-		<string id="xwz5YwZ8" text="Отладочные сообщения" />
-		<string id="uPYkZfKs" text="Включает общие отладочные сообщения. Они информативны, но могут перегружать игровой лог. По умолчанию выключены." />
-		<string id="acsZWxWF" text="Технические отладочные сообщения" />
-		<string id="eBVb3S6S" text="Включает технические отладочные сообщения. Они не локализованы, плохо читаются и сильно перегружают игровой лог. По умолчанию выключены." />
+		<string id="hDblsNGNu" text="Systems of interest" />
+		<string id="vHBc3PR0d" text="Specify if you interested in debugging all of the mod functionality, or just some particular systems. Default is [All systems]." />
+		<string id="IcSqRbFXO" text="Отладочные сообщения" />
+		<string id="FBXsJfTus" text="Включает общие отладочные сообщения. Они информативны, но могут перегружать игровой лог. По умолчанию выключены." />
+		<string id="3OLm7uYVa" text="Технические отладочные сообщения" />
+		<string id="wFmHefFVf" text="Включает технические отладочные сообщения. Они не локализованы, плохо читаются и сильно перегружают игровой лог. По умолчанию выключены." />
 		
-		<string id="ZnT9o5HI" text="Harmony - проверка при инициализации" />
-		<string id="ELPI6N1Q" text="Укажите, необходима ли проверка на возможные конфликты с другими модами, которые модифицируют те же самые игровые методы, что и Пересмотр Верноподданства." />
-		<string id="531Vobla" text="Спискок игнорируемых модов" />
-		<string id="59KvCjXV" text="Список ID модов, которые должны игнорироваться при проверке на возможные конфликты. В качестве разделителя используйте точку с запятой." />
+		<string id="7miQNTkyK" text="Harmony - проверка при инициализации" />
+		<string id="FHAoyeQ1l" text="Укажите, необходима ли проверка на возможные конфликты с другими модами, которые модифицируют те же самые игровые методы, что и Пересмотр Верноподданства." />
+		<string id="Am6g9MuBh" text="Спискок игнорируемых модов" />
+		<string id="QjPIOBo4f" text="Список ID модов, которые должны игнорироваться при проверке на возможные конфликты. В качестве разделителя используйте точку с запятой." />
+			
+		<!-- Testing settings -->
+		<string id="lfkh9U9h2" text="These settings are intended for mod testing purposes, do not use them in actual gameplay." />
+		<string id="mAHbl2rzh" text="Free decision overriding" />
+		<string id="CB1vpOzra" text="Override kingdom decisions for free. Cheat!" />
+		<string id="2QJJZSvAj" text="Destabilize join kingdom evaluation" />
+		<string id="ylTfKfJtR" text="Destabilize the evaluation of the ScoreOfClanToJoinKingdom." />
+		<string id="jT31LaKLD" text="Join kingdom score flat modifier" />
+		<string id="L2S3TSjyg" text="Negative score modifier makes harder for clans to defect, positive score modifier increases probability of defection. Measured in millions.  Default = 10.0." />
+		<string id="UGM3kBQaI" text="Destabilize leave kingdom evaluation" />
+		<string id="lxP0giGYl" text="Destabilize the evaluation of the ScoreOfClanToLeaveKingdom." />
+		<string id="xZVeNSyJ7" text="Leave kingdom score flat modifier" />
+		<string id="4k9YXqh3E" text="Negative score modifier makes harder for clans to leave, positive score modifier increases probability of clans leaving kingdoms. Measured in millions. Default = 10.0." />
 	</strings>
 </base>

@@ -67,7 +67,7 @@ namespace AllegianceOverhaul.Extensions
     }
     public static IEnumerable<T> GetPossibleVariations<T>(this T value, bool accountForZeros = false) where T : struct
     {
-      int CountSetBits(int n)
+      static int CountSetBits(int n)
       {
         int count = 0;
         while (n > 0)

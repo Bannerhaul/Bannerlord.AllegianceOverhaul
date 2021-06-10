@@ -23,19 +23,14 @@ namespace AllegianceOverhaul.Patches.Politics
     {
       float PopularOptionSupportPoints = popularOption.TotalSupportPoints;
       float OverridingOptionSupportPoints = overridingOption.TotalSupportPoints + 3f;
-      switch (calculationMethod)
+      return calculationMethod switch
       {
-        case ODCostCalculationMethod.FlatInfluenceOverride:
-          return popularOption.SupporterList.Sum(sup => decision.GetInfluenceCostOfSupport(sup.SupportWeight));
-        case ODCostCalculationMethod.SlightlyFavor:
-          return (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.SlightlyFavor);
-        case ODCostCalculationMethod.StronglyFavor:
-          return (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.StronglyFavor);
-        case ODCostCalculationMethod.FullyPush:
-          return (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.FullyPush);
-        default:
-          throw new ArgumentOutOfRangeException(nameof(Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue), Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue, null);
-      }
+        ODCostCalculationMethod.FlatInfluenceOverride => popularOption.SupporterList.Sum(sup => decision.GetInfluenceCostOfSupport(sup.SupportWeight)),
+        ODCostCalculationMethod.SlightlyFavor => (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.SlightlyFavor),
+        ODCostCalculationMethod.StronglyFavor => (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.StronglyFavor),
+        ODCostCalculationMethod.FullyPush => (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.FullyPush),
+        _ => throw new ArgumentOutOfRangeException(nameof(Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue), Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue, null),
+      };
     }
     private static float ApplySupport(ref float popularOptionSupportPoints, ref float overridingOptionSupportPoints, KingdomDecision decision)
     {

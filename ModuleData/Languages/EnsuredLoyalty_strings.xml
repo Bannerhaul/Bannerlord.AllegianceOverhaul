@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+	<tags>
+		<tag language="English" />
+	</tags>
+	<strings>
+		<!--Lord dialog lines-->
+		<string id="5lThJhdEu" text="I have no will to discuss such matters with outsiders." />
+		<string id="P0bzqgjMT" text="I don't think this conversation will take us anywhere." />
+		<string id="K9L6J9ZIy" text="I'm sorry, my friend, but I don't think this conversation will take us anywhere." />
+		<!--TooltipInfoCategories-->
+		<string id="YCgmy4haM" text="Relation with {HERO}" />
+		<string id="YJmaYz7il" text="Loyalty" />
+		<!--TooltipInfoStrings-->
+		<string id="BbMvJCYUm" text="Under {?HERO_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\?} at least for {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}days{?}day{\?}" />
+		<string id="oYpHpgDPr" text="Loyal" />
+		<string id="1TGDgTZq0" text="Rather loyal" />
+		<string id="7XAyqN3Ch" text="Somewhat loyal" />
+		<string id="IoE7Wy6Xl" text="Not loyal" />
+		<!--Log message about leaving or defecting-->
+		<string id="9UJCxwEOJ" text="{?LEAVING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\?} {LEAVING_CLAN_KINGDOM.NAME} is considering leaving. Value of the kingdom for them is {LEAVE_BARTERABLE}, threshold is {LEAVE_THRESHOLD}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
+		<string id="uCLx8xqZs" text="{?LEAVING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\?} {LEAVING_CLAN_KINGDOM.NAME} is considering defecting to {TARGET_KINGDOM.NAME}. Current kingdom worth {CURRENT_BARTERABLE} for them and other kingdom is valued at {TARGET_BARTERABLE}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
+		<!--CLAN_DECISION-->
+		<string id="YHZngi0zT" text="leave" />
+		<string id="1UE7qhyNL" text="stay" />
+		<!--ENSURED_LOYALTY_RESULT-->
+		<string id="Ylieuk9mQ" text=" {TRANSITION_PART} {LOYALTY_CHECK_RESULT} ensured, as {REASON}." />
+		<!--TRANSITION_PART-->
+		<string id="sppJOtpCT" text="Furthermore," />
+		<string id="HXSXF5RyA" text="But" />
+		<!--LOYALTY_CHECK_RESULT-->
+		<string id="Ov9Rb3lOw" text="loyalty will be" />
+		<string id="7hG7FBx9B" text="loyalty won't be" />
+		<string id="2RYEI726V" text="loyalty might be" />
+		<!--REASON-->
+		<string id="7LsNUEwPJ" text="it is not enabled" />
+		<string id="uTQ8JIJNf" text="faction is out of scope" />
+		<string id="xnwSHHbB2" text="clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} is {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
+		<string id="uyOFtcDGq" text="clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not affect it and clan fulfilled minimal obligations" />
+		<string id="hn7Jf5Z2c" text="clan is under {?LEAVING_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\?} for {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}days{?}day{\?} out of required {REQUIRED_DAYS_UNDER_SERVICE}" />
+		<!--REASON - CHECK_RESULT -->
+		<string id="qeyOXdC7w" text="too low" />
+		<string id="Yx08KpCot" text="high enough" />
+		<!--REASON - WITHHOLD_PRICE_INFO -->
+		<string id="saCtWp5d3" text=" and {LEAVING_CLAN_KINGDOM_LEADER.NAME} possesses resourceses to withhold the clan" />
+		<string id="ORDtiWoMr" text=" but {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not possess resources to withhold the clan" />
+		<!--Log message about withholding-->
+		<string id="M040sU1dF" text="{LEAVING_CLAN_KINGDOM_LEADER.NAME} decided to withhold {LEAVING_CLAN.NAME} in {LEAVING_CLAN_KINGDOM.NAME}. Initially {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} denars. After intervention {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} denars." />
+		<string id="ldZNb5zjx" text="{LEAVING_CLAN_KINGDOM_LEADER.NAME} of {LEAVING_CLAN_KINGDOM.NAME} decided to let {LEAVING_CLAN.NAME} go. At that moment {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} denars." />
+		<!--Player inquiry about withholding - header-->
+		<string id="bnrPhGr8M" text="Clan {LEAVING_CLAN.NAME} is leaving!" />
+		<!--Player inquiry about withholding - body-->
+		<string id="4MgHKVMDz" text="Clan {LEAVING_CLAN.NAME} is {ACTION_DESCRIPTION}! Will you intervene and insist they should stay? That would require {INFLUENCE_COST} influence and {GOLD_COST} denars." />
+		<!--ACTION_DESCRIPTION-->
+		<string id="8xWUKmRwi" text="leaving your kingdom" />
+		<string id="BD9jEJQgV" text="going to leave your kingdom and join the {TARGET_KINGDOM.NAME}" />
+		<!--Player inquiry about withholding - buttons-->
+		<string id="iyyixqbbN" text="Withhold them" />
+		<string id="E0WvZ3AzI" text="Let them go" />
+		<!--Custom ToString() definitions-->
+		<string id="3MafquFdR" text="[Influence cost = {INFLUENCE_COST}; Gold cost = {GOLD_COST}]" />
+		<!--
+		|||||||||||||||||||||||||||| Mod Options ||||||||||||||||||||||||||||
+		-->
+		<string id="7kFDB4UUU" text="Enables specifying conditions for clans to become unreservedly loyal to kingdoms." />
+		<string id="7R4UBeQQ0" text="Faction oath of fealty limitation period" />
+		<string id="LHA5p7XIj" text="Period in days after joining a kingdom, during which clan would not even consider leaving that kingdom. Default = 84 (a game year)." />
+		<string id="pTWZuG5gT" text="Minor faction oath of fealty limitation period" />
+		<string id="XAmM2cPa4" text="Period in days after joining a kingdom, during which minor faction would not even consider leaving that kingdom. Default = 63 (three quarters of a game year)." />
+		<string id="DBIbrK44a" text="Minimum mercenary service period" />
+		<string id="tWVhVRqab" text="Period in days after initiating mercenary service of kingdom, during which minor faction would not even consider leaving that kingdom. Default = 42 (half a game year)." />
+		<string id="xnelIRbsx" text="Affect player conversations" />
+		<string id="62XGqQ3T1" text="Specify if ensured loyalty system should affect player conversations, making it impossible to reqruit lords that are loyal to ther lieges." />
+
+		<string id="NHSdwRezs" text="Achieve via relation" />
+		<string id="sDS9CVleW" text="Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom." />
+
+		<string id="FWaSJv1ew" text="Ensured loyalty baseline" />
+		<string id="01oFFSZay" text="The minimum required relationship a clan leader must have with a kingdom leader in order for clan to never leave that kingdom. Being below that threshold does NOT mean clan will aitomatically leave. Serves as a baseline for other togglable modifiers. Default = 50." />
+
+		<string id="CyQfExNwt" text="Modify by situational context" />
+		<string id="kyRgBrRB5" text="Specify if situational context should affect minimum required relationship, at which loyalty is ensured." />
+
+		<string id="71i0lndOs" text="Blood relation modifier" />
+		<string id="W72OrEIX0" text="Flat value that will be deducted from baseline if there is a kinship with the governing clan. The same value will be added to the baseline if clan considering defecting to a kingdom, ruled by kinsman. Default = 30 (blood relatives are loyal to and tend to join their kinsfolk)." />
+		<string id="JtjeW4Rer" text="Minor faction modifier" />
+		<string id="DObmEU4ws" text="Flat value that will be added to baseline if minor faction considering leaving its kingdom. Default = 10 (minor factions tend to be less loyal)." />
+		<string id="iExnuT7fJ" text="Defection modifier" />
+		<string id="TjH9KMmq1" text="Flat value that will be added to baseline if clan considering not just leaving, but defecting to another kingdom. Default = 0." />
+		<string id="5QH7Ho5lw" text="Landless clan modifier" />
+		<string id="qDISZ8y7X" text="Flat value that will be added to baseline if clan owns no land. Default = 20 (landless clans tend to be less loyal)." />
+		<string id="Y1qKYOEYS" text="Landless kingdom modifier" />
+		<string id="4Zoc3nZxs" text="Flat value that will be added to baseline of all clans of the kingdom, except the ruling one, if kingdom owns no land. Default = 50 (none but most honorable vassals would tolerate this)." />
+
+		<string id="djnL4Zdsh" text="Modify by honor level" />
+		<string id="ac9wgFwlB" text="Specify if clan leader's honor should affect minimum required relationship, at which loyalty is ensured." />
+
+		<string id="Ni7IrF2Mr" text="High honor step when leaving" />
+		<string id="YdpGFRihV" text="Flat value that will be deducted from baseline for each positive honor level of a clan leader when considering leaving kingdom (positive honor makes leaders loyal at lower relation). Default = 5." />
+		<string id="AO6j3y5Sc" text="Low honor step when leaving" />
+		<string id="VRKD1Js1C" text="Flat value that will be added to baseline for each negative honor level of a clan leader when considering leaving kingdom (negative honor requires higher relation for leaders to become loyal). Default = 5." />
+		<string id="3eL8FuPGx" text="High honor step when defecting" />
+		<string id="Q2u15dsoI" text="Flat value that will be deducted from baseline for each positive honor level of a clan leader when considering defection from kingdom (positive honor makes leaders loyal at lower relation). Default = 15." />
+		<string id="m02D3oQHX" text="Low honor step when defecting" />
+		<string id="E7opeS9Z1" text="Flat value that will be added to baseline for each negative honor level of a clan leader when considering defection from kingdom (negative honor requires higher relation for leaders to become loyal). Default = 20." />
+
+		<string id="SqzwL7txS" text="Withhold price" />
+		<string id="uWflyATMk" text="Specify if reaching certain relation level between clan leader and kingdom leader does not guarantee loyalty per se, but instead gives kingdom leader an option to withhold the clan that wishes to leave, using influence and money." />
+
+		<string id="L92TepzxY" text="Tolerance limit (millions)" />
+		<string id="Nz207kdl4" text="Maximum amount, measured in millions, by which score of clan to leave kingdom may safely exceed threshold, not arising the need for ruler to intervene. Default = 0.5." />
+		<string id="3348wg7Ke" text="Influence cost multiplier" />
+		<string id="rjy6sldJM" text="Multiplier for calculated influence cost to withhold the clan. Default = 1.5." />
+
+		<string id="yLmNJ0Rne" text="Bribing" />
+		<string id="gqQJol1Jv" text="Specify if withholding the clan should cost money in addition to influence." />
+
+		<string id="99gdptWF8" text="Tolerance limit for bribing (millions)" />
+		<string id="auUSqmZYu" text="Maximum amount, measured in millions, by which score of clan to leave kingdom may exceed threshold, not arising the need for ruler to spend gold. Default = 1.0." />
+		<string id="axp519JSq" text="Gold cost multiplier" />
+		<string id="d1fl6A6Ov" text="Multiplier for calculated gold cost to withhold the clan. Suggested value would be somewhere between 100 and 1000. Default = 1000." />
+	</strings>
+</base>

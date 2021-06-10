@@ -11,9 +11,9 @@ namespace AllegianceOverhaul
 {
   public partial class Settings : AttributeGlobalSettings<Settings>
   {
-    private const string PresetSuggested = "{=s1ojXK7t}Suggested";
-    private const string PresetSLogging = "{=ViCdJulG}Suggested with logging";
-    private const string PresetTechnical = "{=3WYNEaOI}Technical";
+    private const string PresetSuggested = "{=R1fvUUG3F}Suggested";
+    private const string PresetSLogging = "{=TwYyQD6LF}Suggested with logging";
+    private const string PresetTechnical = "{=gYrl8ux8o}Technical";
 
     //Presets
     public override IDictionary<string, Func<BaseSettings>> GetAvailablePresets()

@@ -30,7 +30,7 @@
   <!-- Game Versions for Stable and Beta -->
   <PropertyGroup>
     <GameVersion Condition="$(IsStable) == 'true'">1.5.9</GameVersion>
-    <GameVersion Condition="$(IsBeta) == 'true'">1.5.10</GameVersion>
+    <GameVersion Condition="$(IsBeta) == 'true'">1.6.0</GameVersion>
   </PropertyGroup>
 
   <!-- Game Folder(s) -->
@@ -132,7 +132,7 @@
   <ItemGroup>
     <None Update="*.md" Visible="false" />
     <None Update="LICENSE" Visible="false" />
-    <None Update="*.xsd" Visible="false" />
+	<None Update="*.xsd" Visible="false" />
     <None Update="packages.config" Visible="false" />
     <None Update=".gitignore" Visible="false" />
   </ItemGroup>
@@ -150,6 +150,9 @@
   <!-- Post-build copying to game folder -->
   <ItemGroup>
 	<ModuleData Include="$(ProjectDir)\ModuleData\**/*.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <ModuleData Remove="ModuleData\Languages\RU\PoliticsRebalance_strings.xml" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModFolder)\bin\Win64_Shipping_Client\" />
@@ -188,16 +191,9 @@
       </SubModuleOverrides>
     </ItemGroup>
 
-    <ReplaceFileText
-      Condition="'@(SubModuleOverrides->Count())' &gt; 0"
-      File="$(GameFolder)/Modules/$(ModuleName)/SubModule.xml"
-      Regex="%(SubModuleOverrides.Regex)"
-      ReplacementText="%(SubModuleOverrides.Replacement)" />
+    <ReplaceFileText Condition="'@(SubModuleOverrides-&gt;Count())' &gt; 0" File="$(GameFolder)/Modules/$(ModuleName)/SubModule.xml" Regex="%(SubModuleOverrides.Regex)" ReplacementText="%(SubModuleOverrides.Replacement)" />
   </Target>
-  <UsingTask
-    TaskName="ReplaceFileText"
-    TaskFactory="RoslynCodeTaskFactory"
-    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+  <UsingTask TaskName="ReplaceFileText" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
     <ParameterGroup>
       <File ParameterType="System.String" Required="true" />
       <Regex ParameterType="System.String" Required="true" />

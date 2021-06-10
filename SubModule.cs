@@ -16,10 +16,10 @@ namespace AllegianceOverhaul
 {
   public class SubModule : MBSubModuleBase
   {
-    private const string SLoaded = "{=WddOMlv9}Loaded Allegiance Overhaul!";
-    private const string SErrorLoading = "{=gRdUPEXU}Allegiance Overhaul failed to load! See details in the mod log.";
-    private const string SErrorInitialising = "{=HOar731K}Error initialising Allegiance Overhaul! See details in the mod log. Error text: \"{EXCEPTION_MESSAGE}\"";
-    private const string SConflicted = "{=WrIDeC1P}Allegiance Overhaul identified possible conflicts with other mods! See details in the mod log.";
+    private const string SLoaded = "{=D9F5e8huP}Loaded Allegiance Overhaul!";
+    private const string SErrorLoading = "{=HZ03jxuzC}Allegiance Overhaul failed to load! See details in the mod log.";
+    private const string SErrorInitialising = "{=AE6zntclu}Error initialising Allegiance Overhaul! See details in the mod log. Error text: \"{EXCEPTION_MESSAGE}\"";
+    private const string SConflicted = "{=9PyDYijvk}Allegiance Overhaul identified possible conflicts with other mods! See details in the mod log.";
 
     public bool Patched { get; private set; }
     private Harmony? _allegianceOverhaulHarmonyInstance;

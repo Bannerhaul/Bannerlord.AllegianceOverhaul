@@ -25,9 +25,11 @@ namespace AllegianceOverhaul.Models
 
     public abstract float CalculateWarSuccessScore(Kingdom decidingKingdom, IFaction factionAtWar);
 
+    /*
     public abstract int GetNumberOfFiefsDesired(DecisionMaker decisionMaker);
 
     public abstract int GetNumberOfFiefsDeemedFair(Clan clan);
+    */
 
     protected abstract float GetGeneralSupportScore(Clan clan, KingdomDecision decision, DecisionOutcome possibleOutcome);
 
@@ -46,6 +48,6 @@ namespace AllegianceOverhaul.Models
 
     protected abstract double GetSupportScoreOfDecisionMaker(DecisionMaker decisionMaker, KingdomDecision decision, DecisionOutcome possibleOutcome);
 
-    protected abstract int CalculateBaseNumberOfFiefs(Clan clan, NumberOfFiefsCalculationMethod calculationMethod);
+    //protected abstract int CalculateBaseNumberOfFiefs(Clan clan, NumberOfFiefsCalculationMethod calculationMethod);
   }
 }

@@ -11,42 +11,42 @@ namespace AllegianceOverhaul
   public partial class Settings : AttributeGlobalSettings<Settings>
   {
     public override string Id => "AllegianceOverhaul_v2";
-    public override string DisplayName => $"{new TextObject("{=qfpqfAdz}Allegiance Overhaul")} {typeof(Settings).Assembly.GetName().Version.ToString(3)}";
+    public override string DisplayName => $"{new TextObject("{=rQWGD5PzD}Allegiance Overhaul")} {typeof(Settings).Assembly.GetName().Version.ToString(3)}";
     public override string FolderName => "Allegiance Overhaul";
     public override string FormatType => "json";
 
     //Headings
-    private const string HeadingGeneral = "{=yRuHl3O6}General settings";
-    //private const string HeadingGeneralSub = "/{=yRuHl3O6}General settings";
-    private const string HeadingDebug = "{=fmUHcBME}Debug settings";
-    //private const string HeadingDebugSub = "/{=fmUHcBME}Debug settings";
-    private const string HeadingTesting = "{=}Testing settings";
+    private const string HeadingGeneral = "{=TfOZojdUe}General settings";
+    //private const string HeadingGeneralSub = "/{=TfOZojdUe}General settings";
+    private const string HeadingDebug = "{=EYZduHauC}Debug settings";
+    //private const string HeadingDebugSub = "/{=EYZduHauC}Debug settings";
+    private const string HeadingTesting = "{=xveQEwa3t}Testing settings";
 
-    private const string HeadingHarmonyCheckup = HeadingDebug + "/{=ZnT9o5HI}Harmony checkup on initialize";
+    private const string HeadingHarmonyCheckup = HeadingDebug + "/{=7miQNTkyK}Harmony checkup on initialize";
 
-    private const string HeadingDestabilizeJoining = HeadingTesting + "/{=}Destabilize join kingdom evaluation";
-    private const string HeadingDestabilizeLeaving = HeadingTesting + "/{=}Destabilize leave kingdom evaluation";
+    private const string HeadingDestabilizeJoining = HeadingTesting + "/{=2QJJZSvAj}Destabilize join kingdom evaluation";
+    private const string HeadingDestabilizeLeaving = HeadingTesting + "/{=UGM3kBQaI}Destabilize leave kingdom evaluation";
 
     //Reused settings, hints and values
-    private const string DropdownValueAllFactions = "{=COahS2f6}All kingdoms";
-    private const string DropdownValuePlayers = "{=JeehGy9z}Player's kingdom";
-    private const string DropdownValueRuledBy = "{=v2TacaMr}Kingdom ruled by player";
+    private const string DropdownValueAllFactions = "{=F1recvlEK}All kingdoms";
+    private const string DropdownValuePlayers = "{=d7Lm9By8Y}Player's kingdom";
+    private const string DropdownValueRuledBy = "{=rE0tAgMYX}Kingdom ruled by player";
 
     //General settings
-    [SettingPropertyInteger("{=}Influence to denars ratio", 100, 2000, Order = 0, RequireRestart = false, HintText = "{=}The amount of denars that is interconvertible to one influence point. Native is 500. Default = 1000.")]
+    [SettingPropertyInteger("{=tRpMRCEhN}Influence to denars ratio", 100, 2000, Order = 0, RequireRestart = false, HintText = "{=NKOFiv68M}The amount of denars that is interconvertible to one influence point. Native is 500. Default = 1000.")]
     [SettingPropertyGroup(HeadingGeneral, GroupOrder = 99)]
     public int InfluenceToDenars { get; set; } = 1000;
 
-    [SettingPropertyBool("{=Fok4pGDs}Vassal minor factions follow general rules", Order = 1, RequireRestart = true, HintText = "{=1J0XkdxB}Specify if vassal minor factions should use general logic when considering leaving their kingdoms. If disabled, minor factions will use mercenary logic even being vassals. Enabling is suggested, consider this a bug fix.")]
+    [SettingPropertyBool("{=0F8Q0KWEY}Vassal minor factions follow general rules", Order = 1, RequireRestart = true, HintText = "{=JL391Jf8S}Specify if vassal minor factions should use general logic when considering leaving their kingdoms. If disabled, minor factions will use mercenary logic even being vassals. Enabling is suggested, consider this a bug fix.")]
     [SettingPropertyGroup(HeadingGeneral, GroupOrder = 99)]
     public bool FixMinorFactionVassals { get; set; } = false;
 
-    [SettingPropertyBool("{=UgeDMBZE}Advanced hero tooltips", Order = 2, RequireRestart = true, HintText = "{=13W8p9hd}Enable adding additional info to hero tooltips in game Encyclopedia. That adds info about relations, loyalty etc - depending on enabled systems.")]
+    [SettingPropertyBool("{=KJJRsb9mD}Advanced hero tooltips", Order = 2, RequireRestart = true, HintText = "{=myaps1StY}Enable adding additional info to hero tooltips in game Encyclopedia. That adds info about relations, loyalty etc - depending on enabled systems.")]
     [SettingPropertyGroup(HeadingGeneral, GroupOrder = 99)]
     public bool UseAdvancedHeroTooltips { get; set; } = false;
 
     //Debugging and loging
-    [SettingPropertyDropdown("{=yul4vp54}Applies to", Order = 0, RequireRestart = false, HintText = "{=z3oSKZFE}Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom].")]
+    [SettingPropertyDropdown("{=mNeDsYqbr}Applies to", Order = 0, RequireRestart = false, HintText = "{=eJ4E8HeZd}Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom].")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
     public DropdownDefault<string> DebugFactionScope { get; set; } = new DropdownDefault<string>(new string[]
     {
@@ -55,48 +55,48 @@ namespace AllegianceOverhaul
       DropdownValueRuledBy
     }, 1);
 
-    [SettingPropertyDropdown("{=}Systems of interest", Order = 1, RequireRestart = false, HintText = "{=}Specify if you interested in debugging all of the mod functionality, or just some particular systems. Default is [All systems].")]
+    [SettingPropertyDropdown("{=hDblsNGNu}Systems of interest", Order = 1, RequireRestart = false, HintText = "{=vHBc3PR0d}Specify if you interested in debugging all of the mod functionality, or just some particular systems. Default is [All systems].")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
     public DropdownDefault<DropdownObject<AOSystems>> DebugSystemScope { get; set; } = new DropdownDefault<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 0);
 
-    [SettingPropertyBool("{=xwz5YwZ8}Debug messages", Order = 2, RequireRestart = true, HintText = "{=uPYkZfKs}Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false.")]
+    [SettingPropertyBool("{=IcSqRbFXO}Debug messages", Order = 2, RequireRestart = true, HintText = "{=FBXsJfTus}Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false.")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
     public bool EnableGeneralDebugging { get; set; } = false;
 
-    [SettingPropertyBool("{=acsZWxWF}Technical debug messages", Order = 2, RequireRestart = true, HintText = "{=eBVb3S6S}Enables technical debug messages. These are not localized, poorly readable and extremely spammy. Default is false.")]
+    [SettingPropertyBool("{=3OLm7uYVa}Technical debug messages", Order = 2, RequireRestart = true, HintText = "{=wFmHefFVf}Enables technical debug messages. These are not localized, poorly readable and extremely spammy. Default is false.")]
     [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
     public bool EnableTechnicalDebugging { get; set; } = false;
 
-    [SettingPropertyBool("{=ZnT9o5HI}Harmony checkup on initialize", RequireRestart = true, IsToggle = true, HintText = "{=ELPI6N1Q}Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul.")]
+    [SettingPropertyBool("{=7miQNTkyK}Harmony checkup on initialize", RequireRestart = true, IsToggle = true, HintText = "{=FHAoyeQ1l}Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul.")]
     [SettingPropertyGroup(HeadingHarmonyCheckup, GroupOrder = 0)]
     public bool EnableHarmonyCheckup { get; set; } = true;
 
-    [SettingPropertyText("{=531Vobla}Ignore list", RequireRestart = true, HintText = "{=59KvCjXV}List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon.")]
+    [SettingPropertyText("{=Am6g9MuBh}Ignore list", RequireRestart = true, HintText = "{=QjPIOBo4f}List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon.")]
     [SettingPropertyGroup(HeadingHarmonyCheckup)]
     public string HarmonyCheckupIgnoreList { get; set; } = "";
 
     //Testing settings
-    [SettingPropertyBool("{=}Testing settings", RequireRestart = true, IsToggle = true, HintText = "{=}These settings are intended for mod testing purposes, do not use them in actual gameplay.")]
+    [SettingPropertyBool("{=xveQEwa3t}Testing settings", RequireRestart = true, IsToggle = true, HintText = "{=lfkh9U9h2}These settings are intended for mod testing purposes, do not use them in actual gameplay.")]
     [SettingPropertyGroup(HeadingTesting, GroupOrder = 101)]
     public bool UseTestingSettings { get; set; } = false;
 
-    [SettingPropertyBool("{=}Free decision overriding", Order = 0, RequireRestart = true, HintText = "{=}Override kingdom decisions for free. Cheat!")]
+    [SettingPropertyBool("{=mAHbl2rzh}Free decision overriding", Order = 0, RequireRestart = true, HintText = "{=CB1vpOzra}Override kingdom decisions for free. Cheat!")]
     [SettingPropertyGroup(HeadingTesting)]
     public bool FreeDecisionOverriding { get; set; } = false;
 
-    [SettingPropertyBool("{=}Destabilize join kingdom evaluation", Order = 0, RequireRestart = true, IsToggle = true, HintText = "{=}Destabilize the evaluation of the ScoreOfClanToJoinKingdom.")]
+    [SettingPropertyBool("{=2QJJZSvAj}Destabilize join kingdom evaluation", Order = 0, RequireRestart = true, IsToggle = true, HintText = "{=ylTfKfJtR}Destabilize the evaluation of the ScoreOfClanToJoinKingdom.")]
     [SettingPropertyGroup(HeadingDestabilizeJoining, GroupOrder = 0)]
     public bool DestabilizeJoinEvaluation { get; set; } = false;
 
-    [SettingPropertyFloatingInteger("{=}Join kingdom score flat modifier", -10f, 10f, Order = 0, RequireRestart = false, HintText = "{=}Negative score modifier makes harder for clans to defect, positive score modifier increases probability of defection. Measured in millions.  Default = 10.0.")]
+    [SettingPropertyFloatingInteger("{=jT31LaKLD}Join kingdom score flat modifier", -10f, 10f, Order = 0, RequireRestart = false, HintText = "{=L2S3TSjyg}Negative score modifier makes harder for clans to defect, positive score modifier increases probability of defection. Measured in millions.  Default = 10.0.")]
     [SettingPropertyGroup(HeadingDestabilizeJoining)]
     public float JoinScoreFlatModifier { get; set; } = 10f;
 
-    [SettingPropertyBool("{=}Destabilize leave kingdom evaluation", Order = 1, RequireRestart = true, IsToggle = true, HintText = "{=}Destabilize the evaluation of the ScoreOfClanToLeaveKingdom.")]
+    [SettingPropertyBool("{=UGM3kBQaI}Destabilize leave kingdom evaluation", Order = 1, RequireRestart = true, IsToggle = true, HintText = "{=lxP0giGYl}Destabilize the evaluation of the ScoreOfClanToLeaveKingdom.")]
     [SettingPropertyGroup(HeadingDestabilizeLeaving, GroupOrder = 1)]
     public bool DestabilizeLeaveEvaluation { get; set; } = false;
 
-    [SettingPropertyFloatingInteger("{=}Leave kingdom score flat modifier", -10f, 10f, Order = 0, RequireRestart = false, HintText = "{=}Negative score modifier makes harder for clans to leave, positive score modifier increases probability of clans leaving kingdoms. Measured in millions. Default = 10.0.")]
+    [SettingPropertyFloatingInteger("{=xZVeNSyJ7}Leave kingdom score flat modifier", -10f, 10f, Order = 0, RequireRestart = false, HintText = "{=4k9YXqh3E}Negative score modifier makes harder for clans to leave, positive score modifier increases probability of clans leaving kingdoms. Measured in millions. Default = 10.0.")]
     [SettingPropertyGroup(HeadingDestabilizeLeaving)]
     public float LeaveScoreFlatModifier { get; set; } = 10f;
   }
@@ -105,54 +105,57 @@ namespace AllegianceOverhaul
   [Flags]
   public enum AOSystems : byte
   {
-    [System.ComponentModel.Description("{=}None")]
+    [System.ComponentModel.Description("{=5F7vaCncU}None")]
     None = 0,
-    [System.ComponentModel.Description("{=Ps6RgRH1}Ensured loyalty")]
+    [System.ComponentModel.Description("{=qvoCfbvzC}Ensured loyalty")]
     EnsuredLoyalty = 1,
-    [System.ComponentModel.Description("{=}Migration tweaks")]
+    [System.ComponentModel.Description("{=cMaAPsPG7}Migration tweaks")]
     MigrationTweaks = 2,
-    [System.ComponentModel.Description("{=1bsT0jB0}Politics rebalance")]
+    [System.ComponentModel.Description("{=36iqZfxor}Politics rebalance")]
     PoliticsRebalance = 4,
+    /*
     [System.ComponentModel.Description("{=}Relation overhaul")]
     RelationOverhaul = 8,
+    */
     //Groups
-    [System.ComponentModel.Description("{=}All systems")]
-    All = EnsuredLoyalty | MigrationTweaks | PoliticsRebalance | RelationOverhaul
+    [System.ComponentModel.Description("{=Tku0VzTa5}All systems")]
+    All = EnsuredLoyalty | MigrationTweaks | PoliticsRebalance //| RelationOverhaul
   }
   public enum ODCostCalculationMethod : byte
   {
-    [System.ComponentModel.Description("{=}Flat influence override")]
+    [System.ComponentModel.Description("{=zWf4os3fg}Flat influence override")]
     FlatInfluenceOverride = 0,
-    [System.ComponentModel.Description("{=}Override using 'Slight Favor' cost")]
+    [System.ComponentModel.Description("{=3Z8OCjcgX}Override using 'Slight Favor' cost")]
     SlightlyFavor = 1,
-    [System.ComponentModel.Description("{=}Override using 'Strong Favor' cost")]
+    [System.ComponentModel.Description("{=S1FwBcuBB}Override using 'Strong Favor' cost")]
     StronglyFavor = 2,
-    [System.ComponentModel.Description("{=}Override using 'Full Push' cost")]
+    [System.ComponentModel.Description("{=vuZpjgfjv}Override using 'Full Push' cost")]
     FullyPush = 3
   }
 
   [Flags]
   public enum PeaceAndWarConsideration : byte
   {
-    [System.ComponentModel.Description("{=}Use native logic")]
+    [System.ComponentModel.Description("{=LI9tc4Xuc}Use native logic")]
     Native = 0,
-    [System.ComponentModel.Description("{=}Apply situational factor")]
+    [System.ComponentModel.Description("{=s1KlQUCzS}Apply situational factor")]
     SituationalFactor = 1,
-    [System.ComponentModel.Description("{=}Apply relationship factor")]
+    [System.ComponentModel.Description("{=J19R7g9RJ}Apply relationship factor")]
     RelationshipFactor = 2,
-    [System.ComponentModel.Description("{=}Apply tribute factor")]
+    [System.ComponentModel.Description("{=mYcC08wjI}Apply tribute factor")]
     TributeFactor = 4,
     //Groups
-    [System.ComponentModel.Description("{=}Apply situational and relationship factors")]
+    [System.ComponentModel.Description("{=FmJLrbHHr}Apply situational and relationship factors")]
     FirstPair = SituationalFactor | RelationshipFactor,
-    [System.ComponentModel.Description("{=}Apply situational and tribute factors")]
+    [System.ComponentModel.Description("{=clynUPKFE}Apply situational and tribute factors")]
     SecondPair = SituationalFactor | TributeFactor,
-    [System.ComponentModel.Description("{=}Apply relationship and tribute factors")]
+    [System.ComponentModel.Description("{=70VVVTVQo}Apply relationship and tribute factors")]
     ThirdPair = RelationshipFactor | TributeFactor,
-    [System.ComponentModel.Description("{=}Apply all the factors")]
+    [System.ComponentModel.Description("{=KwgG3HrlM}Apply all the factors")]
     All = SituationalFactor | RelationshipFactor | TributeFactor
   }
 
+  /*
   [Flags]
   public enum FiefOwnershipConsideration : byte
   {
@@ -174,7 +177,7 @@ namespace AllegianceOverhaul
     [System.ComponentModel.Description("{=}Apply all the factors")]
     All = PossessionsFactor | PersonalityFactor | BenefitFactor
   }
-
+  
   public enum NumberOfFiefsCalculationMethod : byte
   {
     [System.ComponentModel.Description("{=}Without restrictions")]
@@ -184,4 +187,5 @@ namespace AllegianceOverhaul
     [System.ComponentModel.Description("{=}Based on the number of clan members")]
     ByClanMembers = 2
   }
+  */
 }

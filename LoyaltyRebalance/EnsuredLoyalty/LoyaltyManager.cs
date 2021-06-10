@@ -13,32 +13,32 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
   public static class LoyaltyManager
   {
     //BB49Q65v,xJ9hsFLS,xCyQmsJJ,QH0E2w6p,yttWp6ez,4bAtdf3F,wpPwwxHp,CMYzDghV,h3RHyeGO,s3RAXuiB,CYUKnxOH,rdpdUqkQ,uNS0QtqU,zmR6sT03
-    private const string TooltipOathLoyal = "{=vhJZj4an}Under {?HERO_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\\?} at least for {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}days{?}day{\\?}";
-    private const string TooltipLoyal = "{=f0u5ZyFj}Loyal";
-    private const string TooltipRatherLoyal = "{=oeJtbs1u}Rather loyal";
-    private const string TooltipSomewhatLoyal = "{=zI5tJrm5}Somewhat loyal";
-    private const string TooltipNotLoyal = "{=9jecyxIV}Not loyal";
+    private const string TooltipOathLoyal = "{=BbMvJCYUm}Under {?HERO_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\\?} at least for {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}days{?}day{\\?}";
+    private const string TooltipLoyal = "{=oYpHpgDPr}Loyal";
+    private const string TooltipRatherLoyal = "{=1TGDgTZq0}Rather loyal";
+    private const string TooltipSomewhatLoyal = "{=7XAyqN3Ch}Somewhat loyal";
+    private const string TooltipNotLoyal = "{=IoE7Wy6Xl}Not loyal";
 
-    internal const string TransitionFromSame = "{=5EjuUUvH}Furthermore,";
-    internal const string TransitionFromDifferent = "{=PKqNif5j}But";
+    internal const string TransitionFromSame = "{=sppJOtpCT}Furthermore,";
+    internal const string TransitionFromDifferent = "{=HXSXF5RyA}But";
 
-    private const string ResultTrue = "{=rpZFLb2V}loyalty will be";
-    private const string ResultFalse = "{=9Ml0rRQw}loyalty won't be";
-    private const string ResultDepends = "{=adoPNE7R}loyalty might be";
+    private const string ResultTrue = "{=Ov9Rb3lOw}loyalty will be";
+    private const string ResultFalse = "{=7hG7FBx9B}loyalty won't be";
+    private const string ResultDepends = "{=2RYEI726V}loyalty might be";
 
-    private const string RelationLow = "{=nixfDSWU}too low";
-    private const string RelationHigh = "{=GYctexwu}high enough";
+    private const string RelationLow = "{=qeyOXdC7w}too low";
+    private const string RelationHigh = "{=Yx08KpCot}high enough";
 
-    private const string LeaderHasResources = "{=qGEalMT7} and {LEAVING_CLAN_KINGDOM_LEADER.NAME} possesses resourceses to withhold the clan";
-    private const string LeaderHasNoResources = "{=DQ2ATMdL} but {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not possess resources to withhold the clan";
+    private const string LeaderHasResources = "{=saCtWp5d3} and {LEAVING_CLAN_KINGDOM_LEADER.NAME} possesses resourceses to withhold the clan";
+    private const string LeaderHasNoResources = "{=ORDtiWoMr} but {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not possess resources to withhold the clan";
 
-    private const string ReasonIsNotEnabled = "{=ZNEdXaUc}it is not enabled";
-    private const string ReasonOutOfScope = "{=RrhbXipK}faction is out of scope";
-    private const string ReasonRelationEnabled = "{=TJBHPB3s}clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} is {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}";
-    private const string ReasonRelationDisabled = "{=jPA16DTJ}clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not affect it and clan fulfilled minimal obligations";
-    private const string ReasonServicePeriod = "{=7jtTAw2k}clan is under {?LEAVING_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\\?} for {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}days{?}day{\\?} out of required {REQUIRED_DAYS_UNDER_SERVICE}";
+    private const string ReasonIsNotEnabled = "{=7LsNUEwPJ}it is not enabled";
+    private const string ReasonOutOfScope = "{=uTQ8JIJNf}faction is out of scope";
+    private const string ReasonRelationEnabled = "{=xnwSHHbB2}clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} is {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}";
+    private const string ReasonRelationDisabled = "{=uyOFtcDGq}clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not affect it and clan fulfilled minimal obligations";
+    private const string ReasonServicePeriod = "{=hn7Jf5Z2c}clan is under {?LEAVING_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\\?} for {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}days{?}day{\\?} out of required {REQUIRED_DAYS_UNDER_SERVICE}";
 
-    private const string Debug_EnsuredLoyalty = "{=4R4kwdpa} {TRANSITION_PART} {LOYALTY_CHECK_RESULT} ensured, as {REASON}.";
+    private const string Debug_EnsuredLoyalty = "{=Ylieuk9mQ} {TRANSITION_PART} {LOYALTY_CHECK_RESULT} ensured, as {REASON}.";
 
     private static int GetKingdomFortificationsCount(Kingdom kingdom)
     {

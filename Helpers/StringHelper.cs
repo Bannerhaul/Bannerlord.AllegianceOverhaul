@@ -9,7 +9,7 @@ namespace AllegianceOverhaul.Helpers
 {
   public static class StringHelper
   {
-    public const string DECISION_IS_ON_COOLDOWN = "{=}This proposal is on cooldown for {NUMBER_OF_DAYS} {?NUMBER_OF_DAYS.PLURAL_FORM}days{?}day{\\?}.";
+    public const string DECISION_IS_ON_COOLDOWN = "{=7GoBlY9o4}This proposal is on cooldown for {NUMBER_OF_DAYS} {?NUMBER_OF_DAYS.PLURAL_FORM}days{?}day{\\?}.";
 
     public static TextObject GetCooldownText(Type decisionType, float elapsedDaysUntilNow)
     {

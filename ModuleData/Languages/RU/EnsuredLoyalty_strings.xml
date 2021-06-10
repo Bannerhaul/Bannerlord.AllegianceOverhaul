@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+	<tags>
+		<tag language="Русский" />
+	</tags>
+	<strings>
+		<!--Lord dialog lines-->
+		<string id="5lThJhdEu" text="У меня нет желания обсуждать подобные вопросы с посторонними." />
+		<string id="P0bzqgjMT" text="Не думаю, что нам стоит продолжать этот разговор." />
+		<string id="K9L6J9ZIy" text="Прости, мой друг, но нам не стоит продолжать этот разговор." />
+		<!--TooltipInfoCategories-->
+		<string id="YCgmy4haM" text="Отношения с {HERO}" />
+		<string id="YJmaYz7il" text="Верность" />
+		<!--TooltipInfoStrings-->
+		<string id="BbMvJCYUm" text="Соблюдает {?HERO_CLAN.UNDER_CONTRACT}наемнический контракт{?}клятву верности{\?} по крайней мере {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}дней{?}{?REMAINING_DAYS.OTHER_PLURAL_FORM}дня{?}день{\?}{\?}" />
+		<string id="oYpHpgDPr" text="Верный" />
+		<string id="1TGDgTZq0" text="Довольно верный" />
+		<string id="7XAyqN3Ch" text="Сомневающийся" />
+		<string id="IoE7Wy6Xl" text="Нет" />
+		<!--Log message about leaving or defecting-->
+		<string id="9UJCxwEOJ" text="{?LEAVING_CLAN.MINOR_FACTION}Малая фракция{?}Клан{\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}на службе у{?}из{\?} {LEAVING_CLAN_KINGDOM.NAME} обдумывает уход. Ценность королевства для них {LEAVE_BARTERABLE}, порог выхода {LEAVE_THRESHOLD}. В оригинале они бы {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
+		<string id="uCLx8xqZs" text="{?LEAVING_CLAN.MINOR_FACTION}Малая фракция{?}Клан{\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}на службе у{?}из{\?} {LEAVING_CLAN_KINGDOM.NAME} рассматривает возможность ухода в {TARGET_KINGDOM.NAME}. Текущее королевство оценивается ими в {CURRENT_BARTERABLE}, а другое - в {TARGET_BARTERABLE}. В оригинале они бы {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
+		<!--CLAN_DECISION-->
+		<string id="YHZngi0zT" text="покинули королевство" />
+		<string id="1UE7qhyNL" text="остались" />
+		<!--ENSURED_LOYALTY_RESULT-->
+		<string id="Ylieuk9mQ" text=" {TRANSITION_PART} {LOYALTY_CHECK_RESULT} гарантирована, так как {REASON}." />
+		<!--TRANSITION_PART-->
+		<string id="sppJOtpCT" text="Более того," />
+		<string id="HXSXF5RyA" text="Но" />
+		<!--LOYALTY_CHECK_RESULT-->
+		<string id="Ov9Rb3lOw" text="верность будет" />
+		<string id="7hG7FBx9B" text="верность не будет" />
+		<string id="2RYEI726V" text="верность может быть" />
+		<!--REASON-->
+		<string id="7LsNUEwPJ" text="эта опция выключена" />
+		<string id="uTQ8JIJNf" text="на фракцию эта опция не распространяется" />
+		<string id="xnwSHHbB2" text="отношения лидера клана с {LEAVING_CLAN_KINGDOM_LEADER.NAME} {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
+		<string id="uyOFtcDGq" text="отношения лидера клана с {LEAVING_CLAN_KINGDOM_LEADER.NAME} на это не влияют, и клан выполнил минимальные обязательства" />
+		<string id="hn7Jf5Z2c" text="клан соблюдает {?LEAVING_CLAN.UNDER_CONTRACT}наемнический контракт{?}клятву верности{\?} только {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}дней{?}{?DAYS_UNDER_SERVICE.OTHER_PLURAL_FORM}дня{?}день{\?}{\?} из необходимых {REQUIRED_DAYS_UNDER_SERVICE}" />
+		<!--REASON - CHECK_RESULT -->
+		<string id="qeyOXdC7w" text="недостаточно высоки" />
+		<string id="Yx08KpCot" text="достаточно высоки" />
+		<!--REASON - WITHHOLD_PRICE_INFO -->
+		<string id="saCtWp5d3" text=" и {LEAVING_CLAN_KINGDOM_LEADER.NAME} обладает ресурсами, чобы удержать клан" />
+		<string id="ORDtiWoMr" text=", но у {LEAVING_CLAN_KINGDOM_LEADER.NAME} не хватает ресурсов, чобы удержать клан" />
+		<!--Log message about withholding-->
+		<string id="M040sU1dF" text="{LEAVING_CLAN_KINGDOM_LEADER.NAME} решает удержать {LEAVING_CLAN.NAME} в {LEAVING_CLAN_KINGDOM.NAME}. Изначально у {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}неё{?}него{\?} имелось {INITIAL_INFLUENCE} влияния и {INITILAL_GOLD} золотых. Удержание потребовало {INFLUENCE_COST} влияния и {GOLD_COST} золотых. После вмешательства у {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}неё{?}него{\?} имеется {RESULT_INFLUENCE} влияния и {RESULT_GOLD} золотых." />
+		<string id="ldZNb5zjx" text="{LEAVING_CLAN_KINGDOM_LEADER.NAME} из {LEAVING_CLAN_KINGDOM.NAME} отпускает {LEAVING_CLAN.NAME}. В тот момент у {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}неё{?}него{\?} имелось {INITIAL_INFLUENCE} влияния и {INITILAL_GOLD} золотых. Удержание клана потребовало бы {INFLUENCE_COST} влияния и {GOLD_COST} золотых." />
+		<!--Player inquiry about withholding - header-->
+		<string id="bnrPhGr8M" text="Клан {LEAVING_CLAN.NAME} покидает королевство!" />
+		<!--Player inquiry about withholding - body-->
+		<string id="4MgHKVMDz" text="Клан {LEAVING_CLAN.NAME} {ACTION_DESCRIPTION}! Станете ли вы вмешиваться и настаивать, чтобы они остались? Это потребует {INFLUENCE_COST} влияния и {GOLD_COST} золотых." />
+		<!--ACTION_DESCRIPTION-->
+		<string id="8xWUKmRwi" text="покидает ваше королевство" />
+		<string id="BD9jEJQgV" text="собирается покинуть ваше королевство и присоединиться к {TARGET_KINGDOM.NAME}" />
+		<!--Player inquiry about withholding - buttons-->
+		<string id="iyyixqbbN" text="Удержать" />
+		<string id="E0WvZ3AzI" text="Позволить уйти" />
+		<!--Custom ToString() definitions-->
+		<string id="3MafquFdR" text="[Требуется влияния = {INFLUENCE_COST}; Требуется золотых = {GOLD_COST}]" />
+		<!--
+		||||||||||||||||||||||||||| Mod Options |||||||||||||||||||||||||||
+		-->
+		<string id="7kFDB4UUU" text="Позволяет задавать условия, при которых кланы могут стать безоговорочно верными королевствам." />
+		<string id="7R4UBeQQ0" text="Срок действия вассальной клятвы" />
+		<string id="LHA5p7XIj" text="Период в днях после присоединения к королевству, в течение которого клан не станет даже рассматривать уход из него. По умолчанию = 84 (игровой год)." />
+		<string id="pTWZuG5gT" text="Срок действия вассальной клятвы малой фракции" />
+		<string id="XAmM2cPa4" text="Период в днях после присоединения к королевству, в течение которого малая фракция не станет даже рассматривать уход из него. По умолчанию = 63 (три четверти игрового года)." />
+		<string id="DBIbrK44a" text="Минимальный срок службы наёмников" />
+		<string id="tWVhVRqab" text="Период в днях после начала наёмной службы в королевстве, в течение которого малая фракция не станет даже рассматривать уход из него. По умолчанию = 42 (половина игрового года)." />
+		<string id="xnelIRbsx" text="Влияет на беседы с игроком" />
+		<string id="62XGqQ3T1" text="Укажите, должна ли гарантированная система лояльности влиять на беседы с игроком, делая невозможным вербовку лордов, которые верны своим сюзеренам." />
+
+		<string id="NHSdwRezs" text="Достичь через отношения" />
+		<string id="sDS9CVleW" text="Укажите, должно ли достижение определенного уровня отношений с лидером королевства сделать клан безоговорочно верным этому королевству." />
+
+		<string id="FWaSJv1ew" text="Базовый уровень отношений" />
+		<string id="01oFFSZay" text="Минимально необходимый уровень отношений между лидером клана и лидером королевства, при котором клан не покинет это королевство. Отношения ниже этого порога НЕ означают, что клан обязательно уйдет. Служит основой для других настраиваемых модификаторов. По умолчанию = 50." />
+
+		<string id="CyQfExNwt" text="Изменять в зависимости от обстоятельств" />
+		<string id="kyRgBrRB5" text="Укажите, должены ли обстоятельства влиять на минимально необходимые отношения, при которых обеспечивается верность." />
+
+		<string id="71i0lndOs" text="Модификатор кровного родства" />
+		<string id="W72OrEIX0" text="Фиксированная величина, которая будет вычтена из базового значения при родстве с правящим кланом. Та же величина будет добавлена к базовому значению, если клан рассматривает уход в королевство, управляемое родственником. По умолчанию = 30 (кровные родственники верны и склонны присоединяться к своей родне)." />
+		<string id="JtjeW4Rer" text="Модификатор малой фракции" />
+		<string id="DObmEU4ws" text="Фиксированная величина, которая будет добавлена к базовому значению, если малая фракция рассматривает возможность выхода из своего королевства. По умолчанию = 10 (малые фракции как правило менее лояльны)." />
+		<string id="iExnuT7fJ" text="Модификатор дезертирства" />
+		<string id="TjH9KMmq1" text="Фиксированная величина, которая будет добавлена ​​к базовому значению, если клан собирается не просто уйти, а дезертировать в другое королевство. По умолчанию = 0." />
+		<string id="5QH7Ho5lw" text="Модификатор для безземельных кланов" />
+		<string id="qDISZ8y7X" text="Фиксированная величина, которая будет добавлена ​​к базовому значению, если клан не имеет земельных наделов. По умолчанию = 20 (Безземельные кланы как правило менее лояльны)." />
+		<string id="Y1qKYOEYS" text="Модификатор для безземельных королевств" />
+		<string id="4Zoc3nZxs" text="Фиксированная величина, которая будет добавлена ​​к базовому значению всех кланов королевства, кроме правящего, если у королевства нет своих владений. По умолчанию = 50 (никто, кроме самых благородных вассалов, не потерпит этого)." />
+
+		<string id="djnL4Zdsh" text="Зависимость от уровня чести" />
+		<string id="ac9wgFwlB" text="Укажите, должна ли честь лидера клана влиять на минимально необходимые отношения, при которых обеспечивается верность." />
+
+		<string id="Ni7IrF2Mr" text="Влияние высокого уровня чести при уходе" />
+		<string id="YdpGFRihV" text="Фиксированная величина, которая будет вычитаться из базового значения за каждый положительный уровень чести лидера клана при рассмотрении вопроса о выходе из королевства (благородные лидеры остаются верными даже при более низком уровне отношений). По умолчанию = 5." />
+		<string id="AO6j3y5Sc" text="Влияние низкого уровня чести при уходе" />
+		<string id="VRKD1Js1C" text="Фиксированная величина, которая будет добавлена ​​к базовому значению за каждый отрицательный уровень чести лидера клана при рассмотрении вопроса о выходе из королевства (беспринципные лидеры требуют более высокого уровня отношений, чтобы стать верными). По умолчанию = 5." />
+		<string id="3eL8FuPGx" text="Высокий уровень чести при дезертирстве" />
+		<string id="Q2u15dsoI" text="Фиксированная величина, которая будет вычитаться из базового значения за каждый положительный уровень чести лидера клана при рассмотрении перехода в другое королевство (благородные лидеры остаются верными даже при более низком уровне отношений). По умолчанию = 15." />
+		<string id="m02D3oQHX" text="Низкий уровень чести при дезертирстве" />
+		<string id="E7opeS9Z1" text="Фиксированная величина, которая будет добавлена ​​к базовому значению за каждый отрицательный уровень чести лидера клана при рассмотрении перехода в другое королевство (беспринципные лидеры требуют более высокого уровня отношений, чтобы стать верными). Поумолчнию = 20." />
+
+		<string id="SqzwL7txS" text="Цена удержания" />
+		<string id="uWflyATMk" text="Укажите, должно ли достижение определенного уровня отношений между лидерами клана и королевства не гарантировать верность само по себе, но вместо этого давать лидеру королевства возможность удержать клан, который хочет уйти, используя влияние и золото." />
+
+		<string id="L92TepzxY" text="Допустимое превышение (в миллионах)" />
+		<string id="Nz207kdl4" text="Максимальная величина, измеряемая в миллионах, на которую клан, покидающий королевство, может безопасно превысить пороговое значение ухода или дезертирства, не требуя вмешательства правителя. По умолчанию = 0.5." />
+		<string id="3348wg7Ke" text="Множитель стоимости в очках влияния" />
+		<string id="rjy6sldJM" text="Множитель рассчитанной стоимости влияния, необходимого для удержания клана. По умолчанию = 2.5." />
+
+		<string id="yLmNJ0Rne" text="Подкуп" />
+		<string id="gqQJol1Jv" text="Укажите, должно ли удержание клана требовать не только затрат влияния, но и денег." />
+
+		<string id="99gdptWF8" text="Допустимое превышение для подкупа (в миллионах)" />
+		<string id="auUSqmZYu" text="Максимальная величина, измеряемая в миллионах, на которую клан, покидающий королевство, может безопасно превысить пороговое значение ухода или дезертирства, не требуя финансовых звтрат для удержания. По умолчанию = 1.0." />
+		<string id="axp519JSq" text="Множитель стоимости в золоте" />
+		<string id="d1fl6A6Ov" text="Множитель рассчитанной стоимости в золоте, необходимой для удержания клана. Рекомендованное значение - где-то между 100 и 1000. По умолчанию = 1000." />
+	</strings>
+</base>

@@ -4,184 +4,128 @@
 		<tag language="English" />
 	</tags>
 	<strings>
-		<string id="qfpqfAdz" text="Allegiance Overhaul" />
+		<string id="rQWGD5PzD" text="Allegiance Overhaul" />
 		<!--
 		|||||||||||||||||||||| Load and initialization ||||||||||||||||||||||
 		-->
-		<string id="WddOMlv9" text="Loaded Allegiance Overhaul!" />
-		<string id="gRdUPEXU" text="Allegiance Overhaul failed to load! See details in the mod log." />
-		<string id="HOar731K" text="Error initialising Allegiance Overhaul! See details in the mod log. Error text: &quot;{EXCEPTION_MESSAGE}&quot;" />
-		<string id="WrIDeC1P" text="Allegiance Overhaul identified possible conflicts with other mods! See details in the mod log." />
-		<!--
-		|||||||||||||||||||||||||| Ensured Loyalty ||||||||||||||||||||||||||
-		-->
-		<!--Lord dialog lines-->
-		<string id="v3Qivf00" text="I have no will to discuss such matters with outsiders." />
-		<string id="nWsVjhjz" text="I don't think this conversation will take us anywhere." />
-		<string id="aLEqW60A" text="I'm sorry, my friend, but I don't think this conversation will take us anywhere." />
-		<!--TooltipInfoCategories-->
-		<string id="hlIYCDRA" text="Relation with {HERO}" />
-		<string id="AuJasuJQ" text="Loyalty" />
-		<!--TooltipInfoStrings-->
-		<string id="vhJZj4an" text="Under {?HERO_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\?} at least for {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}days{?}day{\?}" />
-		<string id="f0u5ZyFj" text="Loyal" />
-		<string id="oeJtbs1u" text="Rather loyal" />
-		<string id="zI5tJrm5" text="Somewhat loyal" />
-		<string id="9jecyxIV" text="Not loyal" />
-		<!--Log message about leaving or defecting-->
-		<string id="K23FeRhj" text="{?LEAVING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\?} {LEAVING_CLAN_KINGDOM.NAME} is considering leaving. Value of the kingdom for them is {LEAVE_BARTERABLE}, threshold is {LEAVE_THRESHOLD}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
-		<string id="WNqBu5Ye" text="{?LEAVING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\?} {LEAVING_CLAN_KINGDOM.NAME} is considering defecting to {TARGET_KINGDOM.NAME}. Current kingdom worth {CURRENT_BARTERABLE} for them and other kingdom is valued at {TARGET_BARTERABLE}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}" />
-		<!--CLAN_DECISION-->
-		<string id="KBPBbuE9" text="leave" />
-		<string id="GmDkOQ7C" text="stay" />
-		<!--ENSURED_LOYALTY_RESULT-->
-		<string id="4R4kwdpa" text=" {TRANSITION_PART} {LOYALTY_CHECK_RESULT} ensured, as {REASON}." />
-		<!--TRANSITION_PART-->
-		<string id="5EjuUUvH" text="Furthermore," />
-		<string id="PKqNif5j" text="But" />
-		<!--LOYALTY_CHECK_RESULT-->
-		<string id="rpZFLb2V" text="loyalty will be" />
-		<string id="9Ml0rRQw" text="loyalty won't be" />
-		<string id="adoPNE7R" text="loyalty might be" />
-		<!--REASON-->
-		<string id="ZNEdXaUc" text="it is not enabled" />
-		<string id="RrhbXipK" text="faction is out of scope" />
-		<string id="TJBHPB3s" text="clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} is {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
-		<string id="jPA16DTJ" text="clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not affect it and clan fulfilled minimal obligations" />
-		<string id="7jtTAw2k" text="clan is under {?LEAVING_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\?} for {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}days{?}day{\?} out of required {REQUIRED_DAYS_UNDER_SERVICE}" />
-		<!--REASON - CHECK_RESULT -->
-		<string id="nixfDSWU" text="too low" />
-		<string id="GYctexwu" text="high enough" />
-		<!--REASON - WITHHOLD_PRICE_INFO -->
-		<string id="qGEalMT7" text=" and {LEAVING_CLAN_KINGDOM_LEADER.NAME} possesses resourceses to withhold the clan" />
-		<string id="DQ2ATMdL" text=" but {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not possess resources to withhold the clan" />
-		<!--Log message about withholding-->
-		<string id="MBVs126y" text="{LEAVING_CLAN_KINGDOM_LEADER.NAME} decided to withhold {LEAVING_CLAN.NAME} in {LEAVING_CLAN_KINGDOM.NAME}. Initially {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} denars. After intervention {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} denars." />
-		<string id="PJSz7d09" text="{LEAVING_CLAN_KINGDOM_LEADER.NAME} of {LEAVING_CLAN_KINGDOM.NAME} decided to let {LEAVING_CLAN.NAME} go. At that moment {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding the clan would require {INFLUENCE_COST} influence and {GOLD_COST} denars." />
-		<!--Player inquiry about withholding - header-->
-		<string id="Jz9zbcJh" text="Clan {LEAVING_CLAN.NAME} is leaving!" />
-		<!--Player inquiry about withholding - body-->
-		<string id="Gy4fCQV4" text="Clan {LEAVING_CLAN.NAME} is {ACTION_DESCRIPTION}! Will you intervene and insist they should stay? That would require {INFLUENCE_COST} influence and {GOLD_COST} denars." />
-		<!--ACTION_DESCRIPTION-->
-		<string id="4GvY6ohR" text="leaving your kingdom" />
-		<string id="soNby6VP" text="going to leave your kingdom and join the {TARGET_KINGDOM.NAME}" />
-		<!--Player inquiry about withholding - buttons-->
-		<string id="7oJXB1PA" text="Withhold them" />
-		<string id="BkX1Q6G6" text="Let them go" />
-		<!--Custom ToString() definitions-->
-		<string id="J5SxdaLi" text="[Influence cost = {INFLUENCE_COST}; Gold cost = {GOLD_COST}]" />
+		<string id="D9F5e8huP" text="Loaded Allegiance Overhaul!" />
+		<string id="HZ03jxuzC" text="Allegiance Overhaul failed to load! See details in the mod log." />
+		<string id="AE6zntclu" text="Error initialising Allegiance Overhaul! See details in the mod log. Error text: &quot;{EXCEPTION_MESSAGE}&quot;" />
+		<string id="9PyDYijvk" text="Allegiance Overhaul identified possible conflicts with other mods! See details in the mod log." />
 		<!--
 		|||||||||||||||||||||||||||| Mod Options ||||||||||||||||||||||||||||
-	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu
 		-->
 		<!-- Main or reused headings -->
-		<string id="yRuHl3O6" text="General settings" />
-		<string id="Ps6RgRH1" text="Ensured loyalty" />
-		<string id="1bsT0jB0" text="Politics rebalance" />
-		<string id="xNtFBSJF" text="Kingdom evaluation" />
-		<string id="fmUHcBME" text="Debug settings" />
+		<string id="TfOZojdUe" text="General settings" />
+		<string id="qvoCfbvzC" text="Ensured loyalty" />
+		<string id="cMaAPsPG7" text="Migration tweaks" />
+		<string id="36iqZfxor" text="Politics rebalance" />
+		<string id="EYZduHauC" text="Debug settings" />
+		<string id="xveQEwa3t" text="Testing settings" />
 		
 		<!-- Reused settings and hints -->
-		<string id="yul4vp54" text="Applies to" />
-		<string id="y3ClkEcy" text="Specify if below rules should affect all kingdoms, or just the player's one. Default is [All kingdoms]." />
-		<string id="z3oSKZFE" text="Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom]." />
-		<string id="BRI2fuVk" text="Enabled" />
-		<string id="fnO8oC3s" text="Enables accounting for additional factors when faction evaluating kingdom value. Affects both leave or defection probability and actual bartering (may make it more pricey)." />
+		<string id="mNeDsYqbr" text="Applies to" />
+		<string id="EgueYDtnH" text="Specify if below rules should affect all kingdoms, or just the player's one. Default is [All kingdoms]." />
+		<string id="eJ4E8HeZd" text="Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom]." />
+		<string id="bmXYOS8oR" text="Enabled" />
+		<string id="47Abt5foN" text="Enables accounting for additional factors when faction evaluating kingdom value. Affects both leave or defection probability and actual bartering (may make it more pricey)." />
 		<!-- Presets -->
-		<string id="s1ojXK7t" text="Suggested" />
-		<string id="ViCdJulG" text="Suggested with logging" />
-		<string id="3WYNEaOI" text="Technical" />
-		<!-- Dropdown values -->
-		<string id="COahS2f6" text="All kingdoms" />
-		<string id="JeehGy9z" text="Player's kingdom" />
-		<string id="v2TacaMr" text="Kingdom ruled by player" />
-		
-		<!-- Ensured loyalty -->
-		<string id="QLii7mIG" text="Enables specifying conditions for clans to become unreservedly loyal to kingdoms." />
-		<string id="MIDoz9om" text="Faction oath of fealty limitation period" />
-		<string id="l5LWFlHv" text="Period in days after joining a kingdom, during which clan would not even consider leaving that kingdom. Default = 84 (a game year)." />
-		<string id="Az4K6FiF" text="Minor faction oath of fealty limitation period" />
-		<string id="qRnwZFts" text="Period in days after joining a kingdom, during which minor faction would not even consider leaving that kingdom. Default = 63 (three quarters of a game year)." />
-		<string id="eMMKVjRU" text="Minimum mercenary service period" />
-		<string id="00arXPdi" text="Period in days after initiating mercenary service of kingdom, during which minor faction would not even consider leaving that kingdom. Default = 42 (half a game year)." />
-		<string id="Fxyb9iPM" text="Affect player conversations" />
-		<string id="ZaPJhkuk" text="Specify if ensured loyalty system should affect player conversations, making it impossible to reqruit lords that are loyal to ther lieges." />
-		
-		<string id="mmUgw8hL" text="Achieve via relation" />
-		<string id="gj3cKWJo" text="Specify if reaching certain relation level with kingdom leader should make clan unreservedly loyal to that kingdom." />
-		
-		<string id="JvWw6eSp" text="Ensured loyalty baseline" />
-		<string id="XP7qtIkt" text="The minimum required relationship a clan leader must have with a kingdom leader in order for clan to never leave that kingdom. Being below that threshold does NOT mean clan will aitomatically leave. Serves as a baseline for other togglable modifiers. Default = 50." />
-		
-		<string id="m5JmQwFt" text="Modify by situational context" />
-		<string id="0oeDqVTM" text="Specify if situational context should affect minimum required relationship, at which loyalty is ensured." />
-		
-		<string id="AOnhwhiK" text="Blood relation modifier" />
-		<string id="gI3AplJv" text="Flat value that will be deducted from baseline if there is a kinship with the governing clan. The same value will be added to the baseline if clan considering defecting to a kingdom, ruled by kinsman. Default = 30 (blood relatives are loyal to and tend to join their kinsfolk)." />
-		<string id="Rbo96zKF" text="Minor faction modifier" />
-		<string id="BFnZrVGK" text="Flat value that will be added to baseline if minor faction considering leaving its kingdom. Default = 10 (minor factions tend to be less loyal)." />
-		<string id="Nff6KlEn" text="Defection modifier" />
-		<string id="0B87ROVp" text="Flat value that will be added to baseline if clan considering not just leaving, but defecting to another kingdom. Default = 0." />
-		<string id="5bJx7aO7" text="Landless clan modifier" />
-		<string id="QRmeDMie" text="Flat value that will be added to baseline if clan owns no land. Default = 20 (landless clans tend to be less loyal)." />
-		<string id="rHn5IY0P" text="Landless kingdom modifier" />
-		<string id="vSD05nAh" text="Flat value that will be added to baseline of all clans of the kingdom, except the ruling one, if kingdom owns no land. Default = 50 (none but most honorable vassals would tolerate this)." />
-		
-		<string id="eExUFCCQ" text="Modify by honor level" />
-		<string id="gIDkdZP8" text="Specify if clan leader's honor should affect minimum required relationship, at which loyalty is ensured." />
-		
-		<string id="1QhZZBVA" text="High honor step when leaving" />
-		<string id="SJ2OA4HM" text="Flat value that will be deducted from baseline for each positive honor level of a clan leader when considering leaving kingdom (positive honor makes leaders loyal at lower relation). Default = 5." />
-		<string id="QJFQ5eSy" text="Low honor step when leaving" />
-		<string id="bp2jDgN4" text="Flat value that will be added to baseline for each negative honor level of a clan leader when considering leaving kingdom (negative honor requires higher relation for leaders to become loyal). Default = 5." />
-		<string id="Flo6n1rf" text="High honor step when defecting" />
-		<string id="6TOUjrrQ" text="Flat value that will be deducted from baseline for each positive honor level of a clan leader when considering defection from kingdom (positive honor makes leaders loyal at lower relation). Default = 15." />
-		<string id="ZZxrdAfn" text="Low honor step when defecting" />
-		<string id="rNiMWcE4" text="Flat value that will be added to baseline for each negative honor level of a clan leader when considering defection from kingdom (negative honor requires higher relation for leaders to become loyal). Default = 20." />
-		
-		<string id="uXwgU2WE" text="Withhold price" />
-		<string id="BEiLWxeU" text="Specify if reaching certain relation level between clan leader and kingdom leader does not guarantee loyalty per se, but instead gives kingdom leader an option to withhold the clan that wishes to leave, using influence and money." />
-		
-		<string id="bZH00rVn" text="Tolerance limit (millions)" />
-		<string id="moc7wRwB" text="Maximum amount, measured in millions, by which score of clan to leave kingdom may safely exceed threshold, not arising the need for ruler to intervene. Default = 0.5." />
-		<string id="siPJey6u" text="Influence cost multiplier" />
-		<string id="Tei4s42W" text="Multiplier for calculated influence cost to withhold the clan. Default = 1.5." />
-		
-		<string id="rhvq8Yhb" text="Bribing" />
-		<string id="rJw4D3kJ" text="Specify if withholding the clan should cost money in addition to influence." />
-		
-		<string id="cM9saCDB" text="Tolerance limit for bribing (millions)" />
-		<string id="tCqdcDuR" text="Maximum amount, measured in millions, by which score of clan to leave kingdom may exceed threshold, not arising the need for ruler to spend gold. Default = 1.0." />
-		<string id="2JzGpjwk" text="Gold cost multiplier" />
-		<string id="6TbpFzJk" text="Multiplier for calculated gold cost to withhold the clan. Suggested value would be somewhere between 100 and 1000. Default = 1000." />
+		<string id="R1fvUUG3F" text="Suggested" />
+		<string id="TwYyQD6LF" text="Suggested with logging" />
+		<string id="gYrl8ux8o" text="Technical" />
+		<!-- Dropdown values - scopes -->
+		<string id="F1recvlEK" text="All kingdoms" />
+		<string id="d7Lm9By8Y" text="Player's kingdom" />
+		<string id="rE0tAgMYX" text="Kingdom ruled by player" />
+		<!-- Dropdown values - systems -->
+		<string id="5F7vaCncU" text="None" />
+		<string id="Tku0VzTa5" text="All systems" />
+		<!-- Dropdown values - influence for overrides -->
+		<string id="zWf4os3fg" text="Flat influence override" />
+		<string id="3Z8OCjcgX" text="Override using 'Slight Favor' cost" />
+		<string id="S1FwBcuBB" text="Override using 'Strong Favor' cost" />
+		<string id="vuZpjgfjv" text="Override using 'Full Push' cost" />
+		<!-- Dropdown values - peace and war factors -->
+		<string id="LI9tc4Xuc" text="Use native logic" />
+		<string id="s1KlQUCzS" text="Apply situational factor" />
+		<string id="J19R7g9RJ" text="Apply relationship factor" />
+		<string id="mYcC08wjI" text="Apply tribute factor" />
+		<string id="FmJLrbHHr" text="Apply situational and relationship factors" />
+		<string id="clynUPKFE" text="Apply situational and tribute factors" />
+		<string id="70VVVTVQo" text="Apply relationship and tribute factors" />
+		<string id="KwgG3HrlM" text="Apply all the factors" />
 		
 		<!-- General settings -->
-		<string id="Fok4pGDs" text="Vassal minor factions follow general rules" />
-		<string id="1J0XkdxB" text="Specify if vassal minor factions should use general logic when considering leaving their kingdoms. If disabled, minor factions will use mercenary logic even being vassals. Enabling is suggested, consider this a bug fix." />
-		<string id="UgeDMBZE" text="Advanced hero tooltips" />
-		<string id="13W8p9hd" text="Enable adding additional info to hero tooltips in game Encyclopedia. Adds info about relations, loyalty etc - depending on enabled systems." />
+		<string id="tRpMRCEhN" text="Influence to denars ratio" />
+		<string id="NKOFiv68M" text="The amount of denars that is interconvertible to one influence point. Native is 500. Default = 1000." />
+		<string id="0F8Q0KWEY" text="Vassal minor factions follow general rules" />
+		<string id="JL391Jf8S" text="Specify if vassal minor factions should use general logic when considering leaving their kingdoms. If disabled, minor factions will use mercenary logic even being vassals. Enabling is suggested, consider this a bug fix." />
+		<string id="KJJRsb9mD" text="Advanced hero tooltips" />
+		<string id="myaps1StY" text="Enable adding additional info to hero tooltips in game Encyclopedia. Adds info about relations, loyalty etc - depending on enabled systems." />
 		
 		<!-- Debug settings -->
-		<string id="xwz5YwZ8" text="Debug messages" />
-		<string id="uPYkZfKs" text="Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false." />
-		<string id="acsZWxWF" text="Technical debug messages" />
-		<string id="eBVb3S6S" text="Enables technical debug messages. These are not localized, poorly readable and extremely spammy. Default is false." />
+		<string id="hDblsNGNu" text="Systems of interest" />
+		<string id="vHBc3PR0d" text="Specify if you interested in debugging all of the mod functionality, or just some particular systems. Default is [All systems]." />
+		<string id="IcSqRbFXO" text="Debug messages" />
+		<string id="FBXsJfTus" text="Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false." />
+		<string id="3OLm7uYVa" text="Technical debug messages" />
+		<string id="wFmHefFVf" text="Enables technical debug messages. These are not localized, poorly readable and extremely spammy. Default is false." />
 		
-		<string id="ZnT9o5HI" text="Harmony checkup on initialize" />
-		<string id="ELPI6N1Q" text="Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul." />
-		<string id="531Vobla" text="Ignore list" />
-		<string id="59KvCjXV" text="List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon." />
+		<string id="7miQNTkyK" text="Harmony checkup on initialize" />
+		<string id="FHAoyeQ1l" text="Specify if there should be a checkup for possible conflicts with other mods, that are using Harmony patches on same methods as Allegiance Overhaul." />
+		<string id="Am6g9MuBh" text="Ignore list" />
+		<string id="QjPIOBo4f" text="List of IDs of the mods that should be ignored when checking for possible conflicts. Those IDs should be separated by semicolon." />
 		
-		<!-- Policy and Relations -->
+		<!-- Testing settings -->
+		<string id="lfkh9U9h2" text="These settings are intended for mod testing purposes, do not use them in actual gameplay." />
+		<string id="mAHbl2rzh" text="Free decision overriding" />
+		<string id="CB1vpOzra" text="Override kingdom decisions for free. Cheat!" />		
+		<string id="2QJJZSvAj" text="Destabilize join kingdom evaluation" />
+		<string id="ylTfKfJtR" text="Destabilize the evaluation of the ScoreOfClanToJoinKingdom." />
+		<string id="jT31LaKLD" text="Join kingdom score flat modifier" />
+		<string id="L2S3TSjyg" text="Negative score modifier makes harder for clans to defect, positive score modifier increases probability of defection. Measured in millions.  Default = 10.0." />
+		<string id="UGM3kBQaI" text="Destabilize leave kingdom evaluation" />
+		<string id="lxP0giGYl" text="Destabilize the evaluation of the ScoreOfClanToLeaveKingdom." />
+		<string id="xZVeNSyJ7" text="Leave kingdom score flat modifier" />
+		<string id="4k9YXqh3E" text="Negative score modifier makes harder for clans to leave, positive score modifier increases probability of clans leaving kingdoms. Measured in millions. Default = 10.0." />
+		
+		<!-- Reserved -->
 		<string id="" text="" />
-		<string id="u9YiryQR" text="Enables specifying various adjustments regarding kingdom political life and relations between lords." />
-		<string id="If18n1li" text="Election rebalance" />
-		<string id="GmyQQ5Cm" text="Enables specifying various adjustments regarding kingdom elections." />
-
-		<string id="eoQCaS0r" text="Influence required to override decision" />
-		<string id="Gp9KcTuz" text="Specify desired way of calculating the influence, required to override popular decision with unpopular one. Ruler can pay 'Slight Favor', 'Strong Favor' or 'Full Push' decision costs for each lacking support point of unpopular decision, or just pay the exact amount of influence, that supporters of the popular decision spent in total. Native is [Override using 'Full Push' cost]. Suggested is [Flat influence override]." />
 		<!--
-	tdqHBqm0,CI1MWM00,nGSWgxMN,7whxjdXM,QeSRJA8B,berm45Sm,qQGhbaGz,cyJR2UBA,VwLX5pFN,AYCG7yVC,D1tufx3m,SkZJ4c5D,uOtMe3h2,V0GimxGh,E1jnTM4o,iLT745Le,sUZ33Ql4,kcZqa5DW,P9dL6ocE,IQkYJ5Es,ibaZtxH8,h703vu3F,oQcRS1c0,1dCwPqOb,AlIBmmuu
+		Z9gFQltEf, Qok8SqsLu, AIHbTqpRC, JjEhOZ27b, 0pWzAa45X, j0wWhzAsa, IR7RLjsYK, PzGbQeWTo, 8PfgirWkS, lCirrWxa2, PkFmuoKAp, eoa5hTynU, nQTyAEvmi, uxKycrwsj, wadr9BfPk, LMCnI9G6L, JSkHYOkNV, OWX0d8Zam, I2r5mdSZR, a8Vs1Zrik, 9jLPIeILT, 79MNfKW5n, 0s2MgS00L, a2J3d8uMy,
+		fFbAghVw7, Km4VQfhWp, hb6bSBlWx, bIjaXByoh, 80ObK9XBX, 3K8SpAmrE, yNPz7M7nR, rWWHIIq4Q, e2NlBZ6zS, v5UoucpPK, ifDuPQGpX, XgfuElkGr, frGueaXGg, r5bHW4oRT, GnlvLMyvr, En9VxsOKP, 7BDh2ozcL, tgKiCLG7R, wRr0UIu1q, zw6BkPEhZ, Ev0FPbVoP, mcsjsAQa2, lCDx2azxr, Y9zXmi3Jk,
+		Qh76rU0kt, BnlyX5DKY, d3UBgxHvs, lOaodmykF, divQLnfzN, YrHCWQZ6c, i9lPIYzSp, wGlRFeTGg, KNyV38mAg, RWlwptPTq, RlpUdMyHL, jZdj5aJck, xh3xj7cmh, 2fuxe30sP, zTGc9qING, DH45m4Z0V, DZFcPSYqj, 6Flr3MjAt, z7ORTcaLZ, cdSiDchtt, H0kNvlUn1, OX7BNJ8Xw, oFem0ZmDu, on53YTKxB,
+		1w421RURd, VA2kFaGtw, 2PAlsi9EH, DN6V4ogyk, FgGOhFh3j, WhwkKiAhJ, U2PIdCW8z, GGzh4LUEX, mjzQ4o1p8, csgwEkbYX, DhXqzd1sC, 6Ona3MsWl, rdX7FIlTK, Darp8ap4Y, ctWGMwcm3, pWiNa0bnh, jBZ216506, Z1qwKHTWI, WiqmdYVkO, rSrDzsJ6k, S1xyt44mE, KMo0ywvlM, 5ffwn27zZ, qBk8pKIPI,
+		jC5Wwt2hN, sD1wilmV9, uUTou8DXL, l8do2dkUj, f6y75srps, KFGAfZdX5, YyGADdOsP, zdUHyXWJo, zPnz63Zg8, WhaZpvBa7, mEbWanTge, VrXh3mjKH, eYCfhqrPa, 7FNJEUtdv, isbwq7QMK, 7hBuKl2o4, XliXPbquS, 9lEF948iA, D9jeEqUbD, AgKvJ7EPr, Wz2E4NgsE, zGzT18cDI, ZZaSxhQpF, bSqVKZjBd,
+		VGctR8icU, K4Vhqah5h, wYa0SO3b4, NBPISWzeV, BfPwBy46j, hoAJ5osxU, g8gJnVETz, HUgOoRnpT, wjRTjoCzC, 1mVvaWbeu, GTmtf9Mb4, j1butNImD, HpnpQqZ8F, glIIEqNVs, RYul9FA9M, rwtp4FOsF, wlv0vjUEY, JgVehibnv, SD8vQiF4P, 5jZfx3qGg, 6VGrYprAP, 7V0ww0h6z, ofaeJyAom, anErzjht4,
+		KP5k22hlF, W76Yfvlvo, 4H6oSKUMd, t788k810b, rhsou8NLW, AtjmyFmgY, 6Ph6TPlKI, Jv8cJW5qK, FfoSNv5ID, VLFyfnFNb, tibFFh2is, OndP0nioP, b6iyw1rio, myjWhi4Mk, mLnbL9UCS, suQapx7Jq, EpJEYkGdR, E2gJGg6t8, lP6zZ4WD0, xLOUcH1qh, GJFeHxFLs, yuAcMHk9G, pJHVgRaHF, v9gdeAnzQ,
+		xGLC49YQ1, C8dY6R8jh, hjMGkN9kc, QH605Gc44, CB9cuNDwQ, s3UWyZmg3, W3Mmc0Lk1, Agtw40ZUx, p1AbjRzSc, Ygouqvuoa, h2Yb6moJC, kCdgG5VkY, sngaOtsJJ, QgpigQumF, dsKY596Y7, dy8OAcCI8, PLE1lmTAN, nZZYyKaNd, 4cSKwv1sH, xRpqBEQyl, SpKHnHTzY, lvvj3PQYx, q3wKNriG0, 7RIwCRnXz,
+		hz3aetNXI, TdPNfIMWc, VTixucZl4, p7D07q83t, icSNkW8fV, nhEe675Iw, epY7b9XVL, GRueXnHFb, ZQVLP4ptk, xZGzgwile, iWhn33lbk, kYX6Uhmjv, h70isZCuM, IydaHREHR, LZfV8nnB5, yzCQ1w0he, 6X1fzXVu3, t0bgl2KBu, xKFKt0XyE, JMVQv2421, jzdQeLCOD, z1qNWvvkJ, Ur66EjaFu, Hw9PmPE4K,
+		taSFmE2T4, yepG26k6c, 30cXQMN6w, 1UO2IVVes, hBtV8VxAU, QxdU7XOZz, yNeXQ7Lii, MNtMnDOJT, 4MGg4Z5Ov, 0p4KtqEjO, zFBYeiTJI, V3v0nzfty, gxyX2D2zA, HX2dHE9Mx, l6kEBoWzu, Ed4DTk9YH, usngHBqC3, Zx7xP796b, AGgHlqTip, MxZ3Tmwvq, IiYT27RxF, cgUvVAVqc, A5pRZJjIW, cg9AGQHHB,
+		ymDS2ogSq, W0d1V9f93, BROG18Owd, YvJ5IfHLy, fTxhyai7I, nQd8ZxyL7, wjYQFK2fZ, oZLRfDypX, L8oCbBZ9w, hAdTjnXGK, IWpSxWeHQ, d3xTDPPUQ, 0TTLTVbN1, NiZ20hCGR, GlzVOmPoT, lNSw9vJO6, kPv4yI2UH, YDz8pebTU, ZfqpiXQfQ, 6guCUaBa9, bMGuSG1nV, 7tDkaCA6k, 57IEIaCcf, ZpLKsLVqU,
+		I65aRSQg1, f4pLEbPmz, BNyJ5h6Rq, yDogm7VpM, TBweI2Ecy, YUbLCoLVi, MgyeeY1ZU, j0WaVXOeI, 9gWU9rV0X, DGR2yRItA, DJcw6AQra, qrmyzgVMF, AvYoD2F87, hozqFZrcz, 0IRgrV5JD, IZQewi2qR, ELkNnfRtV, nXTV5UCjm, H1eHmF7Wd, jMJzmFhLU, r81UQaKSa, 4WaZrzIdp, bxaJcLYAR, n4m2bH9JG,
+		B6R6vDObs, KZfBtD62p, 2FKKlKyuS, dzOYHTfh5, Y8zyna4ra, PXlkLxKvZ, bfs8LLtGC, 15SfF6tEh, CQPMq9HMj, b44j4MZK5, pBOon31m1, zYyJnJAQy, BqmNb4lGA, TnIOJPSqc, pnPxg3uNq, HXuPBzSqV, 2tnACkFzA, p5VwpDRdY, AI4MhtzBd, JAtoG3Ddd, cvEolXc5L, pN3U4TbFB, FngwiVeM0, tJP83EPkz,
+		fjfLDw45d, G9Jx53X3d, Tgxhg3cle, VuGDgWFLv, aHTovMFlh, bvhKxEnov, 29ZFoM6wc, 4NHZeWtCl, 6a5rkYduZ, XqA17LcYu, eC51EywZb, nI6TDXiZL, Om4YzrV8Z, n7aTcJ7Xr, Svbx49eHy, M2FSP9Rmz, RiMKQmBu1, dJNfexDcW, lw2TEEUaS, ijyUicoke, mZ94NL0tg, Z2w7hkNKI, voiADPaGn, 3jI7BhwuN,
+		O8Eyt7woQ, dmIgPRkra, ilBVq2kgJ, ltnAs1k1u, d4IxUK8wM, GktO7SLqv, GzAxHk7Qf, 8t1ir5icF, e2Fj8xcxZ, TTm5A0u9Z, KfynRtL7J, vHadJy9K1, ISEW0ENWj, gpu3sh2M0, 133xg6bzi, KlPvIdQrR, 50kjv96IY, cTSZohdSA, jucxIF14c, 1Uo3la2HS, WUrViZHal, mQrPbjznN, l362lLcq9, 2IxOx1rfP,
+		2kp0GIP54, v8qmr1Gg0, IMOIVrqXB, VFn3fnq4w, 8GijPsMjY, DDi3FGZ2p, dyXvR41Ua, G6xF0J3Rq, pToseT7S6, 8ElAd2pU1, LXtx9A0vK, LdzikT7nw, niQTe3P9o, hXCVjM7QK, HyJs1XKMP, oEodIBWmt, GXqyhTLOM, rmMsj3GCi, GOv8fkmNw, BBOCd7Q0o, qkHQHwh4d, mTDPY3tOX, gNgbqAjsg, l6pIKbQMQ,
+		m5HHwLjGG, OmltqHODu, ciZn6O5fc, SBZxOXvkL, uZizydnQn, uLAd7B1Ti, LScXn6Uma, I5L39ZINu, 3gSYLNtlX, uRnXyUu8O, FKDJYhdTz, yw1XsYbwy, YcJncuTnX, E3Gg038rQ, rmInVM3cl, kqkGiEVQJ, JcqvBZlxO, qxZE0ymmJ, xqrhEg1CV, f8SC89SDt, xJdcNdbHR, PqxYfrYjr, aehCUFWsM, tgLJUVHe1,
+		jOtZbTwAy, OPCJeqWeA, 76KvfdI9O, acIcFabwC, o41gncihL, dQdAtbyTL, BeVJ1OskZ, hM5xAeQmZ, 9PP3RCSDQ, VcWP1Bwap, icIYv7fQy, 70rmyR046, 2jTqUrDZj, pwkqtYadE, JHXNoECQN, vjAG30cUr, nMCYE7zAO, lxhcCQBS7, 6N2g7qHmI, JnWPdQso2, fUhgwcTI8, d3pj0iVQf, E6PB5JaGP, RCfdwRfCG,
+		IgS4Ve8YN, F3VfwXNYq, SU3lRSvtX, NznQh607F, CRUCzELkl, nW1UnbbvB, zEBhcO7gy, lBuBlCVqw, qii2kB3Pa, rIgd8NA3q, 9tJUvXJdF, TIwMlYiHV, UgKbW7NKV, PasinX8Mr, BIYgG7nl6, KD0wQgnSW, QPPJ3Ym18, OARDRiYmu, uDHhmm9iA, A6Sumfigi, UlyBpytJU, QV0Jb8RGd, 2Q231PeKA, PptT73tgS,
+		gNLjlusCM, VNey3Yq74, w5HuJXL3H, EHpDHmejM, BL58jdroU, wvecgG3OT, oSR5RuELU, jj59WaTo5, y8HpI8JnA, 16AeE1ffV, ixjO6EvPC, i0jJudEdi, 7tAF2kEaw, HaEVJPPTW, idxosSQYj, uWuAOH7Pm, uEIMZm7Pm, oe5FknBaZ, BUoXtcJNu, ZkRrBM4Bh, Em7crqJ8Y, TD6kr8skg, 8O1Z857fi, 5KSNuAHv8,
+		v0xuJid19, ZuMLvzfSy, JgdEln16p, 0cKtQDxSe, r31V08cix, zawYOhI3P, kiXv47AhJ, 19A23e7yD, CHGhmDgvP, 8EozycUHz, uSdcHtbT0, VxrDSZuhZ, mv1dyULfV, mPn8kCuaM, bRfngVBLJ, RMIJ2fqJE, hVcrQUd9r, DxNS5CV19, pJPtqKyrd, 6GNv5XoRI, QPhg7vbs9, EyyqNpZbT, Gzj7TI7Fr, OL2WEP4nt,
+		CojDeK0Qk, 9cwymZvOh, 8RbsSgMMH, 0luNkd34G, fOC7fyUN4, T92qp4T7m, 4VOPoUZLa, 7rKkPJOE6, DYTtT6SHS, rzGtKTDNY, oj3lnyPww, GjTqaKqUY, G7DnPuLK5, GFkkapIsc, g5cfFaiEs, 7HyyGROvi, cuU7Q5QK8, DUBJ1Fxze, sqAkwFZ8P, qHwYXTWEX, fx9vechyb, 02bFMGVSu, rIYDr3az0, iYqwUlcnc,
+		mDhTMwiVv, cAUFDhHML, VnHZyNaqz, v4kHom5Kg, 9TVFiZwY5, YwychuHGO, L414idyiz, mRMz4D0fN, ygECiePcf, xqUE95DCu, LQmJSpdJ2, cMSh4b7xm, pQtZHqgV7, BiOVYF9C2, B2jkjqR0g, 1i3hGxSTE, 00RhLN284, wjrXWBg4h, 7UYqrosBT, pF5VoZrOE, xDZSFgpsR, OEZV8q8oS, pCdcHwy4S, qTB7rhHhf,
+		NOmg2Z6Ii, 0CUTg15PB, xOMg3dwGj, xZcjaxJQG, 6Y5y9wt6q, 8mHRJp5hm, KHEp6ouq4, 3ca5RtLmX, 7p6R2wn0I, KxmiWnNrA, h4h4WP8Ku, sj8XivMY7, noZxSGGSN, 6CL6062fc, r98AxcWzv, 2sWf0wh4U, ipwUtbvkh, S1ymWhyP2, AtmZpNiTT, mSHHwCJ7K, Y4t9dPTpH, fd0FuYind, iC1Vq8EPX, lXp3wzav4,
+		dlZS1pstR, KlupvNCEq, WGI2mNPgS, vyWtgWcm9, C2oUuAu6I, 86uwh9j17, W4kvmYB5q, jtN1NNp33, 4XQ7THgfB, jO9QiflNc, UlXV4q5cR, 17l8HE9U7, vylmaUuSk, cmX6Yd9io, p7nlVwPpA, dAtzD7ZRq, g0rgvwKCE, vDSebVfgo, shh3lT7Tv, paT92LJXp, qSkL2Jh03, e2kqfyY1x, qT8uB1zNH, rky7HHTDC,
+		cnkt9FVN5, 7zV1uq1Z9, HfkS6A6Ll, 1yJKoZHKC, 6oGqVpPXl, csNM6IzaY, rpxxgNkPn, eF0zIZ8RJ, fbyXxJiVd, q7AsXXGJC, UvNEyV6cP, iUkiOHTEV, mwOpe7SKJ, 4fEVFmAOq, YBMcDycck, OVLfYJH1w, jaU6CoHvt, GyN4DM5z7, TLDPwiQKs, 7H2PE7MyP, o3ncdusjZ, fVzOPuFDI, 20whgEVHz, pggqFfixL,
+		ncR8Vg6qg, i0BQmOffV, DCEHyjFUw, WBwEPDleb, bVX0Z0yqo, m8ojLlLgz, bDfaiJwOg, uuE8RNo1D, OkgHMY4l7, u1clRccje, LbRFiKUIW, NE7JBcbT9, DLeL5xo9y, 0AfaspExI, woWw7A3yv, t28P1OGym, O32OqiMn5, uO9arQ8lR, tbMNtundY, zEJgamQba, OpnHojWFE, cnN1HCKY3, UlqtX7b96, gLW1z8xHp,
+		4EOUMc5Fk, mIVMeQugu, 0iarqQOfD, J1maarG5Z, QPTEiYvlB, 5yx2giYGn, uNPQXT3mq, QPM7fRQ2S, ufqrlLbED, nxooaaxlg, 5wDFWX8cr, j81opHaG6, XbIoipWIZ, ume0kZsp7, dj2tR36OQ, EUOXcMWOR, EI7zeXkgH, Aw5vJfO26, 2yc0U4hGQ, QT6Oay9ku, mg9IQoLTi, vqIkAOuQZ, 3OaAe15bt, PNBOannff,
+		0xUoiHRlj, KKtnFuvav, ZOsY6wtOt, nAbLvjvfU, 2iQ6hpsy9, YoCdV2Eiw, vIQoWitZY, ApE1TknXI, Hf9TI3x9R, wfXCyJ2na, 6s9hdrtov, NN3dsHHAw, Dd9SS30U9, 7ApYSJ4xy, oRF9RsxZ7, cHVrjGUOo, ZP2SZRfuA, xxyrgF6bO, BJTjFmVpG, 4Hh3myFbA, Mwk4tswE6, eehrChrHC, 5DLyaF1vX, QbUdtCXYc,
+		MFs5Wx5Aj, LOJc6HIzB, QgIiOdtfj, lif9w87S9, Eb5RFrGvQ, 0BMWpQdb3, FYOSCEvMO, 5TfL38Bdb, BcOfe8lX5, BxpHYJQOp, arFagTi3r, wW9iUWw7Y, uIYfcJyYT, PAcVuUVdt, fLoXdd2qI, K0C8SjMXn, c3FkttyKP, 54ImPnIa5, JEf0yg3zn, DgANw5mhG, cEnEfI9V8, ujxzKGCqv, kKfChLjsW, 34U3w9VuQ,
+		Tmt7I7Agw, uRrB9UHnz, T0wVAGLCX, RNLK8XMYh, h4ITbaGVm, dlESEA8qc, HRk4KbXmn, qUrdf6WbB, KrrIR5Ghi, 79hA9ZTAO, 8gT9NZJNo, EwBXqkTnC, mV1zpIGAX, d8YWuIip5, mEhMM8cd4, bDFfv140k, 1NIjsuMMg, BuwuBwGwv, ViFnHuWit, Su4lkLN1Y, Gz740CTVn, Bphrdp9pY, 04XWSff0S, CdqgQIDzb,
+		vFkRgUPGb, hWAEc6zYd, UvxnyHy5y, weEAzxv9T, fsOiHwj44, HBkQjKo9b, HXPsnmwyy, c1fga34BH, MyOpKDl0C, hO31LAunZ, 7zBovLYXT, ZcbWUdOyB, X0Ou7rvR6, b8xvkWokR, Ji7rVIDFQ, yxHPZNbJc, IMnjGzXTj, scn2nCBwR, oNVb8ehCM, d37pNKxhG, JN3HhxdTD, 1YeQ9qo2Q, dEN0glMY4, yLncNgJaW,
+		40y2Xy6gk, WbBGWY3sI, jht3VozWN, H7D839GvJ, XaUzac79Z, 04Gh8Um3r, q9flKsRfV, g3xbLRIwj, mlMTdZg6M, N0cdUV5L7, OUEwq5kM0, ZZKClL1sA, wb3y7btgb, taw7SjXfx, 4ymcIHKvE, 13Y8NuKUS, WCoiQxsow, RzO5SBUgJ, U3BvXUXgJ, JuvIOEmNh, CqcPzOwVt, taaRCPcrR, x47mq54mF, wV0pIOvEg,
+		ey1dxwam7, IA3iGGsYf, JhJW9KQcw, NAlAH3pJk, 0DEJNa14n
 		-->
 	</strings>
 </base>

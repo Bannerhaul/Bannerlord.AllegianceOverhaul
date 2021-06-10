@@ -42,7 +42,8 @@ namespace AllegianceOverhaul.Models.DefaultModels
       }
       return 0;
     }
-
+    
+    /*
     public override int GetNumberOfFiefsDesired(DecisionMaker decisionMaker)
     {
       int baseNumber = CalculateBaseNumberOfFiefs(decisionMaker.Hero.Clan, Settings.Instance!.DesiredFiefsBaseline.SelectedValue.EnumValue);
@@ -58,34 +59,34 @@ namespace AllegianceOverhaul.Models.DefaultModels
           ? Math.Max(0, baseNumber + Settings.Instance.FiefsDeemedFairModifier)
           : baseNumber;
     }
+    */
 
     //Protected overrides
     protected override float GetGeneralSupportScore(Clan clan, KingdomDecision decision, DecisionOutcome possibleOutcome)
     {
-      switch (decision)
+      return decision switch
       {
-        case MakePeaceKingdomDecision makePeaceDecision: return GetGeneralSupportScore(clan, makePeaceDecision, possibleOutcome);
-        case DeclareWarDecision declareWarDecision: return GetGeneralSupportScore(clan, declareWarDecision, possibleOutcome);
-        case SettlementClaimantDecision claimantDecision: return GetGeneralSupportScore(clan, claimantDecision, possibleOutcome);
-        case SettlementClaimantPreliminaryDecision annexationDecision: return GetGeneralSupportScore(clan, annexationDecision, possibleOutcome);
-        default:
-          throw new ArgumentOutOfRangeException(nameof(decision), string.Format("Kingdom decision of type {0} is not supported.", decision.GetType().FullName));
-      }
+        MakePeaceKingdomDecision makePeaceDecision => GetGeneralSupportScore(clan, makePeaceDecision, possibleOutcome),
+        DeclareWarDecision declareWarDecision => GetGeneralSupportScore(clan, declareWarDecision, possibleOutcome),
+        SettlementClaimantDecision claimantDecision => GetGeneralSupportScore(clan, claimantDecision, possibleOutcome),
+        SettlementClaimantPreliminaryDecision annexationDecision => GetGeneralSupportScore(clan, annexationDecision, possibleOutcome),
+        _ => throw new ArgumentOutOfRangeException(nameof(decision), string.Format("Kingdom decision of type {0} is not supported.", decision.GetType().FullName)),
+      };
     }
 
     protected override double GetSupportScoreOfDecisionMaker(DecisionMaker decisionMaker, KingdomDecision decision, DecisionOutcome possibleOutcome)
     {
-      switch (decision)
+      return decision switch
       {
-        case MakePeaceKingdomDecision makePeaceDecision: return GetSupportScoreOfDecisionMaker(decisionMaker, makePeaceDecision, possibleOutcome) * decisionMaker.DecisionWeight;
-        case DeclareWarDecision declareWarDecision: return GetSupportScoreOfDecisionMaker(decisionMaker, declareWarDecision, possibleOutcome) * decisionMaker.DecisionWeight;
-        case SettlementClaimantDecision claimantDecision: return GetSupportScoreOfDecisionMaker(decisionMaker, claimantDecision, possibleOutcome) * decisionMaker.DecisionWeight;
-        case SettlementClaimantPreliminaryDecision annexationDecision: return GetSupportScoreOfDecisionMaker(decisionMaker, annexationDecision, possibleOutcome) * decisionMaker.DecisionWeight;
-        default:
-          throw new ArgumentOutOfRangeException(nameof(decision), string.Format("Kingdom decision of type {0} is not supported.", decision.GetType().FullName));
-      }
+        MakePeaceKingdomDecision makePeaceDecision => GetSupportScoreOfDecisionMaker(decisionMaker, makePeaceDecision, possibleOutcome) * decisionMaker.DecisionWeight,
+        DeclareWarDecision declareWarDecision => GetSupportScoreOfDecisionMaker(decisionMaker, declareWarDecision, possibleOutcome) * decisionMaker.DecisionWeight,
+        SettlementClaimantDecision claimantDecision => GetSupportScoreOfDecisionMaker(decisionMaker, claimantDecision, possibleOutcome) * decisionMaker.DecisionWeight,
+        SettlementClaimantPreliminaryDecision annexationDecision => GetSupportScoreOfDecisionMaker(decisionMaker, annexationDecision, possibleOutcome) * decisionMaker.DecisionWeight,
+        _ => throw new ArgumentOutOfRangeException(nameof(decision), string.Format("Kingdom decision of type {0} is not supported.", decision.GetType().FullName)),
+      };
     }
 
+    /*
     protected override int CalculateBaseNumberOfFiefs(Clan clan, NumberOfFiefsCalculationMethod calculationMethod)
     {
       switch (calculationMethod)
@@ -97,6 +98,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
           throw new ArgumentOutOfRangeException(nameof(calculationMethod), calculationMethod, "Is not supported NumberOfFiefsCalculationMethod value.");
       }
     }
+    */
 
     //GetGeneralSupportScore internal - per decision type
     private float GetGeneralSupportScore(Clan clan, MakePeaceKingdomDecision makePeaceDecision, DecisionOutcome possibleOutcome)
@@ -277,6 +279,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
       return 1; //if (traitLevel == 0)
     }
 
+    /*
     //CalculateTraitsModifierForDesiredFiefs
     private int CalculateTraitsModifierForDesiredFiefs(DecisionMaker decisionMaker, NumberOfFiefsCalculationMethod calculationMethod)
     {
@@ -293,6 +296,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
       double modifierValue = (baseFiefNumber * GetTraitLevelModifier(decisionMaker.Hero.GetTraitLevel(DefaultTraits.Calculating) - decisionMaker.Hero.GetTraitLevel(DefaultTraits.Generosity), 0.5)) - baseFiefNumber;
       return (int)Math.Truncate(modifierValue);
     }
+    */
 
     //CalculateNativeForSettlementClaimantDecision
     private double CalculateNativeForSettlementClaimantDecision(DecisionMaker decisionMaker, SettlementClaimantDecision claimantDecision, DecisionOutcome possibleOutcome)
@@ -315,15 +319,17 @@ namespace AllegianceOverhaul.Models.DefaultModels
       return basicScoreForOutcome * calculatingModifier * (outcomeIsClanOfDM ? 2f : 1f);
     }
 
+    /*
     //CalculateTributeFactor
     private double CalculatePossessionsFactor(DecisionMaker decisionMaker, Clan clanToAssess, Settlement settlementToAssess, bool isBeingAnnexed)
     {
-      /*
+      //
       if decisionMaker.Hero.Clan
       clanToAssess.Settlements.Count(s => !s.Town.IsOwnerUnassigned)
-      */
+      //
 
       return 0;
     }
+    */
   }
 }
