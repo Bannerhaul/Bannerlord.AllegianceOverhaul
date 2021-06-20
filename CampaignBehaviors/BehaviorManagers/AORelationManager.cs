@@ -81,6 +81,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
     {
       Dictionary<long, int> nativeRelations = new Dictionary<long, int>(FieldAccessHelper.heroRelationsByRef(FieldAccessHelper.heroRelationsInstanceByRef(CharacterRelationManager.Instance)));
       Dictionary<ulong, int> heroRelations = new Dictionary<ulong, int>();
+#if STABLE
       foreach (Hero baseHero in Hero.All.Where(h => (h.IsNoble || h.IsWanderer) && h != Hero.MainHero))
       {
         foreach (Hero otherHero in Hero.All.Where(h => (h.IsNoble || h.IsWanderer) && h != baseHero))
@@ -88,6 +89,15 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
           heroRelations.Add(ElegantPairHelper.Pair(baseHero.Id, otherHero.Id), nativeRelations.TryGetValue(MBGUID.GetHash2(baseHero.Id, otherHero.Id), out int relation) ? relation : 0);
         }
       }
+#else
+      foreach (Hero baseHero in Hero.AllAliveHeroes.Where(h => (h.IsNoble || h.IsWanderer) && h != Hero.MainHero))
+      {
+        foreach (Hero otherHero in Hero.AllAliveHeroes.Where(h => (h.IsNoble || h.IsWanderer) && h != baseHero))
+        {
+          heroRelations.Add(ElegantPairHelper.Pair(baseHero.Id, otherHero.Id), nativeRelations.TryGetValue(MBGUID.GetHash2(baseHero.Id, otherHero.Id), out int relation) ? relation : 0);
+        }
+      }
+#endif
       _AOHeroRelations = heroRelations;
     }
 

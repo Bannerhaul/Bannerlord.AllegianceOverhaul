@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+	<tags>
+		<tag language="English" />
+	</tags>
+	<strings>
+		<!--Player inquiry about AI joining - header-->
+		<string id="0DEJNa14n" text="A clan wishes to join your kingdom!" />
+		<!--Player inquiry about AI joining - body-->
+		<string id="NAlAH3pJk" text="The {JOINING_CLAN.NAME} clan is looking to join your kingdom{?JOINING_CLAN.UNDER_CONTRACT} as mercenary{?}{\?}! They have {TROOPS_DESCRIPTION} and {FIEFS_DESCRIPTION}. Their leader {RELATION} towards you. What say ye?" />
+		<!--Player inquiry about AI joining - buttons-->
+		<string id="ey1dxwam7" text="Welcome them" />
+		<string id="wV0pIOvEg" text="Turn them away" />
+		<!--TROOPS_DESCRIPTION-->
+		<string id="JhJW9KQcw" text="{TROOPS} {?TROOPS.PLURAL_FORM}able warriors{?}able warrior{\?} across {WAR_PARTIES} {?WAR_PARTIES.PLURAL_FORM}war parties{?}war party{\?}" />
+		<!--FIEFS_DESCRIPTION-->
+		<string id="IA3iGGsYf" text="{FIEFS} {?FIEFS.PLURAL_FORM}fiefs{?}fief{\?} that they {?AT_WAR}will{?}won't be able to{\?} bring with them" />
+		<string id="RzO5SBUgJ" text="no fiefs" />
+		<!--RELATION-->
+		<string id="x47mq54mF" text="very friendly" />
+		<string id="taaRCPcrR" text="friendly" />
+		<string id="CqcPzOwVt" text="neutral" />
+		<string id="JuvIOEmNh" text="aggravated" />
+		<string id="U3BvXUXgJ" text="hostile" />
+		<!--
+		|||||||||||||||||||||||||||| Mod Options ||||||||||||||||||||||||||||
+		-->
+		<string id="WCoiQxsow" text="Enables a variety of tweaks regarding clans migration between kingdoms. Due to the nature of these changes, they always apply to every clan in the game." />
+		<string id="13Y8NuKUS" text="Allow join requests" />
+		<string id="4ymcIHKvE" text="Specify if AI clans should consider player kingdom when they are deciding which kingdom to join or defect to." />
+		<string id="taw7SjXfx" text="Allow hire requests" />
+		<string id="wb3y7btgb" text="Specify if AI clans should consider player kingdom when they are deciding which kingdom to join as mercenaries." />
+		<string id="ZZKClL1sA" text="Determined kingdom pick logic" />
+		<string id="OUEwq5kM0" text="Specify if AI clans should always pick the most attractive kingdom instead of a random one when considering joining some kingdom or defecting. Enabling this can potentially increase intensity of clan migration between kingdoms." />
+	</strings>
+</base>

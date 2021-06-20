@@ -16,7 +16,7 @@ namespace AllegianceOverhaul
 
     //Politics rebalance
     [SettingPropertyBool("{=36iqZfxor}Politics rebalance", RequireRestart = true, IsToggle = true, HintText = "{=SSc734kI8}Enables specifying various adjustments regarding kingdom political life and relations between lords.")]
-    [SettingPropertyGroup(HeadingPoliticsRebalance, GroupOrder = 1)]
+    [SettingPropertyGroup(HeadingPoliticsRebalance, GroupOrder = 2)]
     public bool UsePoliticsRebalance { get; set; } = false;
 
     [SettingPropertyDropdown("{=mNeDsYqbr}Applies to", RequireRestart = false, HintText = "{=EgueYDtnH}Specify if below rules should affect all kingdoms, or just the player's one. Default is [All kingdoms].")]

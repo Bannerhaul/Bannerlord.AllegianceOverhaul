@@ -28,7 +28,11 @@ namespace AllegianceOverhaul.ViewModels.Patches
         __instance.Allies.Clear();
         __instance.Enemies.Clear();
         EncyclopediaPage pageOf1 = Campaign.Current.EncyclopediaManager.GetPageOf(typeof(Hero));
+#if STABLE
         foreach (Hero hero in Hero.All)
+#else
+        foreach (Hero hero in Hero.AllAliveHeroes)
+#endif
         {
           if (pageOf1.IsValidEncyclopediaItem(hero) && !hero.IsNotable && hero != PageHero)
           {

@@ -5,7 +5,7 @@
     <ModuleName>$(MSBuildProjectName)</ModuleName>
     <DisplayName>Allegiance Overhaul</DisplayName>
 	<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <Copyright>Copyright © 2021 artifixer</Copyright>
+    <Copyright>Copyright © 2020-2021 artifixer</Copyright>
 	<Description>Clan allegiance system overhaul for Mount &amp; Blade II: Bannerlord</Description>
   </PropertyGroup>
 
@@ -20,10 +20,8 @@
 
   <!-- Versions of Major Dependencies (For Package References & SubModule.xml Substitution) -->
   <PropertyGroup>
-    <BuildResourcesVersion>1.0.0.33</BuildResourcesVersion>
-    <ButterLibVersion>1.0.22</ButterLibVersion>
+    <ButterLibVersion>1.0.24</ButterLibVersion>
     <HarmonyVersion>2.0.4</HarmonyVersion>
-    <HarmonyExtensionsVersion>2.0.0.39</HarmonyExtensionsVersion>
     <MCMVersion>4.3.10</MCMVersion>
   </PropertyGroup>
 
@@ -150,9 +148,6 @@
   <!-- Post-build copying to game folder -->
   <ItemGroup>
 	<ModuleData Include="$(ProjectDir)\ModuleData\**/*.*" />
-  </ItemGroup>
-  <ItemGroup>
-    <ModuleData Remove="ModuleData\Languages\RU\PoliticsRebalance_strings.xml" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModFolder)\bin\Win64_Shipping_Client\" />

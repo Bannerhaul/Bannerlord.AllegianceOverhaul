@@ -4,9 +4,11 @@ using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
 
 using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.MigrationTweaks;
 
 namespace AllegianceOverhaul.Patches
 {
@@ -50,7 +52,21 @@ namespace AllegianceOverhaul.Patches
     {
       try
       {
-        return !LoyaltyRebalance.EnsuredLoyalty.LoyaltyManager.CheckLoyalty(clan1, kingdom);
+        if (kingdom.Leader != Hero.MainHero)
+        {
+          return true;
+        }
+
+        JoinKingdomAsClanBarterable asClanBarterable = new JoinKingdomAsClanBarterable(clan1.Leader, kingdom);
+        int valueForFaction1 = asClanBarterable.GetValueForFaction(clan1);
+        int valueForFaction2 = asClanBarterable.GetValueForFaction(kingdom);
+        int checkSum = valueForFaction1 + valueForFaction2;
+        int num2 = (valueForFaction1 < 0) ? -valueForFaction1 : 0;
+        if (checkSum <= 0 || num2 > kingdom.Leader.Gold * 0.5)
+          return false;
+
+        MigrationManager.AwaitPlayerDecision(clan1);
+        return false;
       }
       catch (Exception ex)
       {
@@ -62,7 +78,7 @@ namespace AllegianceOverhaul.Patches
 
     public static bool Prepare()
     {
-      return Settings.Instance!.UseEnsuredLoyalty || SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Any);
+      return Settings.Instance!.UseEnsuredLoyalty || SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Any) || Settings.Instance!.UseMigrationTweaks;
     }
   }
 }

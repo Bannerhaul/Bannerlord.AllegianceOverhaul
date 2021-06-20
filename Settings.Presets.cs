@@ -21,12 +21,21 @@ namespace AllegianceOverhaul
       IDictionary<string, Func<BaseSettings>> basePresets = base.GetAvailablePresets(); // include the 'Default' preset that MCM provides
       basePresets.Add(PresetSuggested.ToLocalizedString(), () => new Settings()
       {
+        //Loyalty
         UseEnsuredLoyalty = true,
         UseRelationForEnsuredLoyalty = true,
         UseContextForEnsuredLoyalty = true,
         UseHonorForEnsuredLoyalty = true,
         UseWithholdPrice = true,
         UseWithholdBribing = true,
+        //Migration
+        UseMigrationTweaks = true,
+        //Politics
+        UsePoliticsRebalance = true,
+        UseElectionRebalance = true,
+        UseDecisionSupportRebalance = true,
+        UseElectionCooldowns = true,
+        //General
         FixMinorFactionVassals = true,
         UseAdvancedHeroTooltips = true
       });
@@ -38,9 +47,24 @@ namespace AllegianceOverhaul
         UseHonorForEnsuredLoyalty = true,
         UseWithholdPrice = true,
         UseWithholdBribing = true,
+        //Migration
+        UseMigrationTweaks = true,
+        //Politics
+        UsePoliticsRebalance = true,
+        UseElectionRebalance = true,
+        UseDecisionSupportRebalance = true,
+        UseElectionCooldowns = true,
+        //General
         FixMinorFactionVassals = true,
         UseAdvancedHeroTooltips = true,
-        EnableGeneralDebugging = true
+        EnableGeneralDebugging = true,
+        DebugFactionScope = new DropdownDefault<string>(new string[]
+          {
+            DropdownValueAllFactions,
+            DropdownValuePlayers,
+            DropdownValueRuledBy
+          }, 1),
+        DebugSystemScope = new DropdownDefault<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 7)
       });
       basePresets.Add(PresetTechnical.ToLocalizedString(), () => new Settings()
       {
@@ -50,10 +74,16 @@ namespace AllegianceOverhaul
         UseHonorForEnsuredLoyalty = true,
         UseWithholdPrice = true,
         UseWithholdBribing = true,
-        FixMinorFactionVassals = true,
-        UseAdvancedHeroTooltips = true,
+        //Migration
+        UseMigrationTweaks = true,
+        //Politics
         UsePoliticsRebalance = true,
         UseElectionRebalance = true,
+        UseDecisionSupportRebalance = true,
+        UseElectionCooldowns = true,
+        //General
+        FixMinorFactionVassals = true,
+        UseAdvancedHeroTooltips = true,
         EnableGeneralDebugging = true,
         EnableTechnicalDebugging = true,
         DebugFactionScope = new DropdownDefault<string>(new string[]
@@ -61,7 +91,8 @@ namespace AllegianceOverhaul
             DropdownValueAllFactions,
             DropdownValuePlayers,
             DropdownValueRuledBy
-          }, 0)
+          }, 0),
+        DebugSystemScope = new DropdownDefault<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 7)
       });
       return basePresets;
     }

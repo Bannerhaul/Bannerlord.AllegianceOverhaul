@@ -39,8 +39,13 @@ namespace AllegianceOverhaul.Patches.Politics
         __result = null;
         if (kingdom.UnresolvedDecisions.FirstOrDefault(x => x is KingdomPolicyDecision) == null && clan.Influence >= 200.0)
         {
+#if STABLE
           PolicyObject randomElement = DefaultPolicies.All.Where(x => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new KingdomPolicyDecision(clan, x, kingdom.ActivePolicies.Contains(x))))
                                                                 ).ToArray().GetRandomElement();
+#else
+          PolicyObject randomElement = PolicyObject.All.Where(x => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new KingdomPolicyDecision(clan, x, kingdom.ActivePolicies.Contains(x))))
+                                                             ).ToArray().GetRandomElement();
+#endif
           bool revertPolicy = kingdom.ActivePolicies.Contains(randomElement);
 
           //ConsiderPolicyDelegate deConsiderPolicy = AccessHelper.GetDelegate<ConsiderPolicyDelegate, KingdomDecisionProposalBehavior>(__instance, "ConsiderPolicy");

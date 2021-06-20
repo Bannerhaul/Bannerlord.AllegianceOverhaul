@@ -28,9 +28,9 @@ namespace AllegianceOverhaul
     private const string HeadingDestabilizeLeaving = HeadingTesting + "/{=UGM3kBQaI}Destabilize leave kingdom evaluation";
 
     //Reused settings, hints and values
-    private const string DropdownValueAllFactions = "{=F1recvlEK}All kingdoms";
-    private const string DropdownValuePlayers = "{=d7Lm9By8Y}Player's kingdom";
-    private const string DropdownValueRuledBy = "{=rE0tAgMYX}Kingdom ruled by player";
+    internal const string DropdownValueAllFactions = "{=F1recvlEK}All kingdoms";
+    internal const string DropdownValuePlayers = "{=d7Lm9By8Y}Player's kingdom";
+    internal const string DropdownValueRuledBy = "{=rE0tAgMYX}Kingdom ruled by player";
 
     //General settings
     [SettingPropertyInteger("{=tRpMRCEhN}Influence to denars ratio", 100, 2000, Order = 0, RequireRestart = false, HintText = "{=NKOFiv68M}The amount of denars that is interconvertible to one influence point. Native is 500. Default = 1000.")]

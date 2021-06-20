@@ -46,6 +46,11 @@ namespace AllegianceOverhaul.Helpers
         case SubSystemType.LoyaltyWithholding: return Settings.Instance!.UseEnsuredLoyalty && Settings.Instance.UseRelationForEnsuredLoyalty && Settings.Instance.UseWithholdPrice;
         case SubSystemType.LoyaltyInConversations: return Settings.Instance!.UseEnsuredLoyalty && Settings.Instance.UseLoyaltyInConversations;
         case SubSystemType.LoyaltyTooltips: return Settings.Instance!.UseAdvancedHeroTooltips && Settings.Instance.UseEnsuredLoyalty;
+        //Migration
+        case SubSystemType.MigrationTweaks: return Settings.Instance!.UseMigrationTweaks;
+        case SubSystemType.AllowJoinRequests: return Settings.Instance!.UseMigrationTweaks && Settings.Instance.AllowJoinRequests;
+        case SubSystemType.AllowHireRequests: return Settings.Instance!.UseMigrationTweaks && Settings.Instance.AllowHireRequests;
+        case SubSystemType.UseDeterminedKingdomPick: return Settings.Instance!.UseMigrationTweaks && Settings.Instance.UseDeterminedKingdomPick;
         //Politics
         case SubSystemType.ElectionRebalance: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance;
         case SubSystemType.DecisionSupportRebalance: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance;
@@ -129,10 +134,12 @@ namespace AllegianceOverhaul.Helpers
     }
     private static DropdownDefault<string>? DetermineSubSystemScope(SubSystemType subSystem)
     {
+      DropdownDefault<string> defaultGlobalScope = new DropdownDefault<string>(new string[] { Settings.DropdownValueAllFactions, Settings.DropdownValuePlayers, Settings.DropdownValueRuledBy }, 0);
       return (int)subSystem switch
       {
-        int subSystemIdx when (subSystemIdx < (int)SubSystemType.ElectionRebalance) => Settings.Instance!.EnsuredLoyaltyScope,
-        int subSystemIdx when (subSystemIdx >= (int)SubSystemType.ElectionRebalance && subSystemIdx < 100) => Settings.Instance!.PoliticsRebalanceScope,
+        int subSystemIdx when subSystemIdx < (int)SubSystemType.MigrationTweaks => Settings.Instance!.EnsuredLoyaltyScope,
+        int subSystemIdx when subSystemIdx is >= (int)SubSystemType.MigrationTweaks and < (int)SubSystemType.ElectionRebalance => defaultGlobalScope,
+        int subSystemIdx when subSystemIdx is >= (int)SubSystemType.ElectionRebalance and < 150 => Settings.Instance!.PoliticsRebalanceScope,
         _ => null,
       };
     }
@@ -153,17 +160,22 @@ namespace AllegianceOverhaul.Helpers
     LoyaltyInConversations = 11,
     //LoyaltyVM
     LoyaltyTooltips = 20,
+    //Migration
+    MigrationTweaks = 50,
+    AllowJoinRequests = 51,
+    AllowHireRequests = 52,
+    UseDeterminedKingdomPick = 55,
     //Politics
-    ElectionRebalance = 50,
+    ElectionRebalance = 100,
     //Politics - DecisionSupportRebalance
-    DecisionSupportRebalance = 60,
-    MakePeaceSupportRebalance = 61,
-    DeclareWarSupportRebalance = 62,
-    SettlementClaimantSupportRebalance = 63,
-    AnnexationSupportRebalance = 64,
+    DecisionSupportRebalance = 110,
+    MakePeaceSupportRebalance = 111,
+    DeclareWarSupportRebalance = 112,
+    SettlementClaimantSupportRebalance = 113,
+    AnnexationSupportRebalance = 114,
     //Politics - ElectionCooldowns
-    ElectionCooldowns = 70,
-    ElectionCooldownsForPlayer = 71,
+    ElectionCooldowns = 120,
+    ElectionCooldownsForPlayer = 121,
     //GeneralVM
     AdvancedHeroTooltips = 200,
     //TestingSettings
