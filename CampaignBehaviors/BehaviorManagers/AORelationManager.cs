@@ -19,9 +19,9 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
   //[SaveableClass(101)]
   public class AORelationManager
   {
-    [SaveableField(1)]
+    //[SaveableField(1)]
     private Dictionary<ulong, SegmentalFractionalScore> _fractionalHeroRelations;
-    [SaveableField(2)]
+    //[SaveableField(2)]
     private Dictionary<ulong, int> _AOHeroRelations;
 
     public bool HeroRelationsInitialized => _AOHeroRelations.Count > 0;

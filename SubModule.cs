@@ -66,7 +66,7 @@ namespace AllegianceOverhaul
         AOGameModels.Instance = new AOGameModels(AOGameModels.GetAOGameModels(gameStarter));
         //Behaviors
         gameStarter.AddBehavior(new AOCooldownBehavior());
-        gameStarter.AddBehavior(new AORelationBehavior());
+        //gameStarter.AddBehavior(new AORelationBehavior());
       }
     }
   }

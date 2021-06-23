@@ -18,17 +18,21 @@ namespace AllegianceOverhaul
       //ComplexSavableClasses (51 through 99)
       //BehaviorManagers (100 through 150)
       base.AddClassDefinition(typeof(AOCooldownManager), 100);
-      base.AddClassDefinition(typeof(AORelationManager), 101);
+      //base.AddClassDefinition(typeof(AORelationManager), 101);
     }
+    /*
     protected override void DefineStructTypes()
     {
       this.AddStructDefinition(typeof(SegmentalFractionalScore), 901);
     }
+    */
     protected override void DefineContainerDefinitions()
     {
       base.ConstructContainerDefinition(typeof(Dictionary<KingdomDecision, KingdomDecisionConclusion>));
+      /*
       base.ConstructContainerDefinition(typeof(Dictionary<ulong, SegmentalFractionalScore>));
       base.ConstructContainerDefinition(typeof(Dictionary<ulong, int>));
+      */
     }
   }
 }

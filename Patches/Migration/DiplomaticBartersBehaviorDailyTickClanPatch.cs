@@ -13,7 +13,6 @@ using TaleWorlds.Core;
 
 using AllegianceOverhaul.Helpers;
 
-
 namespace AllegianceOverhaul.Patches.Migration
 {
   [HarmonyPatch(typeof(DiplomaticBartersBehavior), "DailyTickClan")]
@@ -76,6 +75,10 @@ namespace AllegianceOverhaul.Patches.Migration
       //local methods
       static bool NotApplicable(Clan clan, Clan? clanToDefectTo) =>
         clanToDefectTo is null
+        || clan.Kingdom is null
+#if STABLE
+        || clan.IsUnderMercenaryService
+#endif
         || clanToDefectTo.Kingdom == null
         || clan.Kingdom == clanToDefectTo.Kingdom
         || !clanToDefectTo.MapFaction.IsKingdomFaction
@@ -109,11 +112,11 @@ namespace AllegianceOverhaul.Patches.Migration
         }
         if (clan.IsMinorFaction)
         {
-          deConsiderClanJoinAsMercenary!(instance, clan, kingdomToJoin);
+          deConsiderClanJoinAsMercenary!(instance, clan, kingdomToJoin!);
         }
         else
         {
-          deConsiderClanJoin!(instance, clan, kingdomToJoin);
+          deConsiderClanJoin!(instance, clan, kingdomToJoin!);
         }
       }
       catch (Exception ex)
@@ -133,7 +136,9 @@ namespace AllegianceOverhaul.Patches.Migration
             num1 += 10;
           }
           else
+          {
             ++num1;
+          }
         }
         int num2 = (int)(MBRandom.RandomFloat * num1);
         foreach (Kingdom kingdom2 in Kingdom.All)
@@ -143,7 +148,10 @@ namespace AllegianceOverhaul.Patches.Migration
             num2 -= 10;
           }
           else
+          {
             --num2;
+          }
+
           if (num2 < 0)
           {
             kingdom1 = kingdom2;

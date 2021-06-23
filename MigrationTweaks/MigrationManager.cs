@@ -23,7 +23,6 @@ namespace AllegianceOverhaul.MigrationTweaks
     private const string RelationAggravated = "{=JuvIOEmNh}aggravated";
     private const string RelationHostile = "{=U3BvXUXgJ}hostile";
 
-
     private const string ButtonWelcomeText = "{=ey1dxwam7}Welcome them";
     private const string ButtonTurnAway = "{=wV0pIOvEg}Turn them away";
 

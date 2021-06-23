@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <!-- General -->
   <PropertyGroup>
-    <Version>2.0.0.1</Version>
+    <Version>2.0.0.2</Version>
     <ModuleName>$(MSBuildProjectName)</ModuleName>
     <DisplayName>Allegiance Overhaul</DisplayName>
 	<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>

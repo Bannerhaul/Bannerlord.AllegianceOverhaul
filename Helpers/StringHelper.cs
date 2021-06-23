@@ -17,7 +17,6 @@ namespace AllegianceOverhaul.Helpers
       TextObject cooldownText = new TextObject(DECISION_IS_ON_COOLDOWN);
       SetNumericVariable(cooldownText, "NUMBER_OF_DAYS", RemainingDays);
       return cooldownText;
-      
     }
   }
 }

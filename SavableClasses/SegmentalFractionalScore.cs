@@ -7,9 +7,9 @@ namespace AllegianceOverhaul.SavableClasses
   //[SaveableStruct(901)]
   public struct SegmentalFractionalScore
   {
-    [SaveableProperty(1)]
+    //[SaveableProperty(1)]
     public double PositiveScore { get; private set; }
-    [SaveableProperty(2)]
+    //[SaveableProperty(2)]
     public double NegativeScore { get; private set; }
 
     public SegmentalFractionalScore(double positiveScore, double negativeScore)
