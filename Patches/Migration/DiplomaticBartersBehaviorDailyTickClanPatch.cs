@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Text;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
 using TaleWorlds.Core;
 
+using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Extensions.Harmony;
 using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Migration
@@ -83,7 +86,7 @@ namespace AllegianceOverhaul.Patches.Migration
         || clan.Kingdom == clanToDefectTo.Kingdom
         || !clanToDefectTo.MapFaction.IsKingdomFaction
         || clanToDefectTo.IsEliminated
-        || (!SettingsHelper.SubSystemEnabled(SubSystemType.AllowJoinRequests) && (clanToDefectTo == Clan.PlayerClan || clanToDefectTo.MapFaction.Leader == Hero.MainHero));
+        || ((clanToDefectTo == Clan.PlayerClan || clanToDefectTo.MapFaction.Leader == Hero.MainHero) && (!SettingsHelper.SubSystemEnabled(SubSystemType.AllowJoinRequests) || AOCooldownManager.HasPlayerRequestCooldown()));
     }
 
     public static void GetJoinDecision(Clan clan, bool clanHasMapEvent, List<Clan> list, DiplomaticBartersBehavior instance)
@@ -183,7 +186,7 @@ namespace AllegianceOverhaul.Patches.Migration
         || (clan.Kingdom != null && !clan.IsUnderMercenaryService)
         || clan.MapFaction == kingdomToJion
         || clan.MapFaction.IsAtWarWith(kingdomToJion)
-        || (!SettingsHelper.SubSystemEnabled(clan.IsUnderMercenaryService ? SubSystemType.AllowHireRequests : SubSystemType.AllowJoinRequests) && kingdomToJion.Leader == Hero.MainHero)
+        || (kingdomToJion.Leader == Hero.MainHero && (!SettingsHelper.SubSystemEnabled(clan.IsUnderMercenaryService ? SubSystemType.AllowHireRequests : SubSystemType.AllowJoinRequests) || AOCooldownManager.HasPlayerRequestCooldown()))
         || !CanJoinOutOfWars(clan, kingdomToJion);
     }
 
@@ -227,6 +230,11 @@ namespace AllegianceOverhaul.Patches.Migration
             break;
           }
         }
+        //Logging
+        if (defectStartIndex < 0 || defectEndIndex < 0 || joinStartIndex < 0 || joinEndIndex < 0)
+        {
+          LogNoHooksIssue(defectConditionIndex, defectStartIndex, defectEndIndex, joinConditionIndex, joinStartIndex, joinEndIndex, codes);
+        }
         //do it in reverse pattern to mantain indexes in tact
         ReplaceCodeInstructions(joinStartIndex, joinEndIndex, codes, miGetJoinDecision, "join");
         ReplaceCodeInstructions(defectStartIndex, defectEndIndex, codes, miGetDefectionDecision, "defection");
@@ -245,7 +253,7 @@ namespace AllegianceOverhaul.Patches.Migration
         return defectConditionIndex < 0 && i > 2 && i < codes.Count - 2
                && codes[i].Calls(miGetRandomFloat)
                && codes[i - 1].opcode == OpCodes.Ret && codes[i - 2].Calls(miConsiderPeace)
-               && codes[i + 1].Is(OpCodes.Ldc_R4, 0.2f) && codes[i + 2].opcode == OpCodes.Bge_Un;
+               && codes[i + 1].opcode == OpCodes.Ldc_R4 && codes[i + 2].opcode == OpCodes.Bge_Un;
       }
       static bool FindDefectionStart(int defectConditionIndex, int defectStartIndex, List<CodeInstruction> codes, int i)
       {
@@ -270,6 +278,36 @@ namespace AllegianceOverhaul.Patches.Migration
         {
           MessageHelper.ErrorMessage("Harmony transpiler for DiplomaticBartersBehavior. DailyTickClan could not find code hooks for " + decisionDesc + " decision!");
         }
+      }
+
+      static void LogNoHooksIssue(int defectConditionIndex, int defectStartIndex, int defectEndIndex, int joinConditionIndex, int joinStartIndex, int joinEndIndex, List<CodeInstruction> codes)
+      {
+        LoggingHelper.Log("Indexes:", "Transpiler for DailyTickClan");
+        StringBuilder issueInfo = new StringBuilder("");
+        issueInfo.Append($"\tdefectConditionIndex = {defectConditionIndex}.\n\tdefectStartIndex={defectStartIndex}.\n\tdefectEndIndex={defectEndIndex}.\n\tjoinConditionIndex={joinConditionIndex}.\n\tjoinStartIndex={joinStartIndex}.\n\tjoinEndIndex={joinEndIndex}.");
+        issueInfo.Append($"\nMethodInfos:");
+        issueInfo.Append($"\n\tmiGetRandomFloat={(miGetRandomFloat != null ? miGetRandomFloat.ToString() : "not found")}");
+        issueInfo.Append($"\n\tmiGetAllKingdoms={(miGetAllKingdoms != null ? miGetAllKingdoms.ToString() : "not found")}");
+        issueInfo.Append($"\n\tmiConsiderPeace={(miConsiderPeace != null ? miConsiderPeace.ToString() : "not found")}");
+        issueInfo.Append($"\n\tmiConsiderDefection={(miConsiderDefection != null ? miConsiderDefection.ToString() : "not found")}");
+        issueInfo.Append($"\n\tmiConsiderClanJoin={(miConsiderClanJoin != null ? miConsiderClanJoin.ToString() : "not found")}");
+        issueInfo.Append($"\nIL:");
+        for (int i = 0; i < codes.Count; ++i)
+        {
+          issueInfo.Append($"\n\t{i:D4}:\t{codes[i]}");
+        }
+        // get info about other transpilers on OriginalMethod        
+        HarmonyLib.Patches patches;
+        patches = Harmony.GetPatchInfo(MethodBase.GetCurrentMethod());
+        if (patches != null)
+        {
+          issueInfo.Append($"\nOther transpilers:");
+          foreach (Patch patch in patches.Transpilers)
+          {
+            issueInfo.Append(patch.GetDebugString());
+          }
+        }
+        LoggingHelper.Log(issueInfo.ToString());
       }
     }
 

@@ -30,6 +30,8 @@
 		<string id="4ymcIHKvE" text="Specify if AI clans should consider player kingdom when they are deciding which kingdom to join or defect to." />
 		<string id="taw7SjXfx" text="Allow hire requests" />
 		<string id="wb3y7btgb" text="Specify if AI clans should consider player kingdom when they are deciding which kingdom to join as mercenaries." />
+		<string id="N0cdUV5L7" text="Player requests cooldown" />
+		<string id="mlMTdZg6M" text="The minimum period in days following a request from an AI clan to join the player's kingdom, after which a new request may appear. Default = 0 (no cooldown)." />
 		<string id="ZZKClL1sA" text="Determined kingdom pick logic" />
 		<string id="OUEwq5kM0" text="Specify if AI clans should always pick the most attractive kingdom instead of a random one when considering joining some kingdom or defecting. Enabling this can potentially increase intensity of clan migration between kingdoms." />
 	</strings>

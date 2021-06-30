@@ -173,8 +173,8 @@ namespace AllegianceOverhaul.Helpers
         new Dictionary<string, object>()
         {
           [PLURAL_FORM_TAG] = new TextObject(pluralForm == PluralForm.Plural ? 1 : 0),
-          [SPECIFIC_PLURAL_FORM_TAG] = new TextObject(pluralForm != PluralForm.SpecificPlural ? 1 : 0),
-          [SPECIFIC_SINGULAR_FORM_TAG] = new TextObject(pluralForm != PluralForm.SpecificSingular ? 1 : 0)
+          [SPECIFIC_PLURAL_FORM_TAG] = new TextObject(pluralForm == PluralForm.SpecificPlural ? 1 : 0),
+          [SPECIFIC_SINGULAR_FORM_TAG] = new TextObject(pluralForm == PluralForm.SpecificSingular ? 1 : 0)
         };
 
     public static void SetNumericVariable(TextObject textObject, string tag, int variableValue, string? format = null)

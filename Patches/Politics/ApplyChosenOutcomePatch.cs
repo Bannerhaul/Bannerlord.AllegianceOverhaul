@@ -27,7 +27,7 @@ namespace AllegianceOverhaul.Patches.Politics
       {
         foreach (DecisionOutcome decisionOutcome in  kingdomElection.PossibleOutcomes)
         {
-          AOEvents.Instance!.OnRelationShift(decisionOutcome.SponsorClan?.Leader ?? Hero.MainHero, Hero.MainHero.Spouse, new SavableClasses.SegmentalFractionalScore(decisionOutcome.TotalSupportPoints, 0));
+          //AOEvents.Instance!.OnRelationShift(decisionOutcome.SponsorClan?.Leader ?? Hero.MainHero, Hero.MainHero.Spouse, new SavableClasses.SegmentalFractionalScore(decisionOutcome.TotalSupportPoints, 0));
         }
       }
       catch (Exception ex)

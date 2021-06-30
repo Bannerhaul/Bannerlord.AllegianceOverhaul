@@ -17,15 +17,22 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
   {
     [SaveableField(1)]
     private Dictionary<KingdomDecision, KingdomDecisionConclusion> _KingdomDecisionHistory;
+    [SaveableField(2)]
+    private CampaignTime _lastJoinPlayerRequest;
 
     internal static Dictionary<KingdomDecision, KingdomDecisionConclusion>? KingdomDecisionHistory { get; private set; }
     internal static ReadOnlyCollection<Type> SupportedDecisionTypes => new ReadOnlyCollection<Type>
       (new List<Type>() { typeof(MakePeaceKingdomDecision), typeof(DeclareWarDecision), typeof(ExpelClanFromKingdomDecision), typeof(KingdomPolicyDecision), typeof(SettlementClaimantPreliminaryDecision) });
 
+    internal static CampaignTime LastJoinPlayerRequest { get; private set; }
+
     internal AOCooldownManager()
     {
       _KingdomDecisionHistory = new Dictionary<KingdomDecision, KingdomDecisionConclusion>(new DecisionEqualityComparer());
       KingdomDecisionHistory = _KingdomDecisionHistory;
+      
+      _lastJoinPlayerRequest = CampaignTime.Zero;
+      LastJoinPlayerRequest = _lastJoinPlayerRequest;
     }
 
     public void UpdateKingdomDecisionHistory(KingdomDecision decision, DecisionOutcome chosenOutcome, CampaignTime conclusionTime)
@@ -38,6 +45,12 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
       }
       else
         throw new ArgumentException(string.Format("{0} is not supported KingdomDecision type", decision.GetType().FullName), nameof(decision));
+    }
+
+    public void UpdateJoinPlayerRequestHistory(CampaignTime lastRequestTime)
+    {
+      _lastJoinPlayerRequest = lastRequestTime;
+      LastJoinPlayerRequest = _lastJoinPlayerRequest;
     }
 
     public static int GetRequiredDecisionCooldown(KingdomDecision decision)
@@ -103,6 +116,12 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
       }
     }
 
+    public static bool HasPlayerRequestCooldown()
+    {
+      int requestCooldown = Settings.Instance!.PlayerRequestCooldown;
+      return requestCooldown > 0 && LastJoinPlayerRequest > CampaignTime.Zero && LastJoinPlayerRequest.ElapsedDaysUntilNow < requestCooldown;
+    }
+
     public static bool HasDecisionCooldown(KingdomDecision decision, out float elapsedDaysUntilNow)
     {
       return HasPrimaryDecisionCooldown(decision, out elapsedDaysUntilNow) || HasAlternativeDecisionCooldown(decision, out elapsedDaysUntilNow);
@@ -134,6 +153,8 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
           ? new Dictionary<KingdomDecision, KingdomDecisionConclusion>(new DecisionEqualityComparer())
           : new Dictionary<KingdomDecision, KingdomDecisionConclusion>(_KingdomDecisionHistory.Where(d => d.Value.ConclusionTime.ElapsedYearsUntilNow < 2).ToDictionary(nd => nd.Key, nd => nd.Value), new DecisionEqualityComparer());
       KingdomDecisionHistory = _KingdomDecisionHistory;
+
+      LastJoinPlayerRequest = _lastJoinPlayerRequest;
     }
 
     private static CampaignTime? GetTimeOfLastAnnexDecisionAgainstClan(Clan clan)

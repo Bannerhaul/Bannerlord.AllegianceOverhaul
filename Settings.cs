@@ -4,7 +4,6 @@ using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Dropdown;
 using TaleWorlds.Localization;
-using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul
 {

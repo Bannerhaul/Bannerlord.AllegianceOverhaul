@@ -22,13 +22,15 @@ namespace AllegianceOverhaul
     private const string SConflicted = "{=9PyDYijvk}Allegiance Overhaul identified possible conflicts with other mods! See details in the mod log.";
 
     public bool Patched { get; private set; }
+    public bool OnBeforeInitialModuleScreenSetAsRootWasCalled { get; private set; }
+
     private Harmony? _allegianceOverhaulHarmonyInstance;
     public Harmony? AllegianceOverhaulHarmonyInstance { get => _allegianceOverhaulHarmonyInstance; private set => _allegianceOverhaulHarmonyInstance = value; }
 
     protected override void OnSubModuleLoad()
     {
       base.OnSubModuleLoad();
-      //Reserved for future needs
+      Patched = false;
     }
 
     protected override void OnBeforeInitialModuleScreenSetAsRoot()
@@ -36,15 +38,27 @@ namespace AllegianceOverhaul
       base.OnBeforeInitialModuleScreenSetAsRoot();
       try
       {
+        if (OnBeforeInitialModuleScreenSetAsRootWasCalled)
+        {
+          return;
+        }
+        OnBeforeInitialModuleScreenSetAsRootWasCalled = true;
+
         Patched = HarmonyHelper.PatchAll(ref _allegianceOverhaulHarmonyInstance, "OnSubModuleLoad", "Initialization error - {0}");
         if (Patched)
+        {
           InformationManager.DisplayMessage(new InformationMessage(SLoaded.ToLocalizedString(), Color.FromUint(4282569842U)));
+        }
         else
+        {
           MessageHelper.ErrorMessage(SErrorLoading.ToLocalizedString());
+        }
 
         //check for possible conflicts
         if (Settings.Instance!.EnableHarmonyCheckup && HarmonyHelper.ReportCompatibilityIssues(AllegianceOverhaulHarmonyInstance, "Checkup on initialize"))
+        {
           MessageHelper.SimpleMessage(SConflicted.ToLocalizedString());
+        }
       }
       catch (Exception ex)
       {
@@ -66,7 +80,6 @@ namespace AllegianceOverhaul
         AOGameModels.Instance = new AOGameModels(AOGameModels.GetAOGameModels(gameStarter));
         //Behaviors
         gameStarter.AddBehavior(new AOCooldownBehavior());
-        //gameStarter.AddBehavior(new AORelationBehavior());
       }
     }
   }

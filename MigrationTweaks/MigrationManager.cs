@@ -2,7 +2,6 @@
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
-
 using AllegianceOverhaul.Extensions;
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
@@ -103,6 +102,8 @@ namespace AllegianceOverhaul.MigrationTweaks
 
     internal static void ApplyPlayerDecision(Clan clan, bool decisionIsWelcome)
     {
+      AOEvents.Instance!.OnPlayerGotJoinRequest();
+
       if (!decisionIsWelcome)
       {
         return;
