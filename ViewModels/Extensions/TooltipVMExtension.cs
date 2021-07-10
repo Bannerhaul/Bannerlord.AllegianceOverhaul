@@ -2,6 +2,8 @@
 using TaleWorlds.CampaignSystem.ViewModelCollection;
 using TaleWorlds.Core.ViewModelCollection;
 
+using AllegianceOverhaul.Extensions;
+
 namespace AllegianceOverhaul.ViewModels.Extensions
 {
   public static class TooltipVMExtension
@@ -10,7 +12,7 @@ namespace AllegianceOverhaul.ViewModels.Extensions
     {
       tooltipVM.UpdateTooltip(hero);
       if (otherHero != null)
-        tooltipVM.TooltipPropertyList.Add(new TooltipProperty(TooltipHelper.GetTooltipRelationHeader(otherHero), hero?.GetRelation(otherHero).ToString("N0"), 0, false, TooltipProperty.TooltipPropertyFlags.None));
+        tooltipVM.TooltipPropertyList.Add(new TooltipProperty(TooltipHelper.GetTooltipRelationHeader(otherHero), hero?.GetModifiedRelation(otherHero).ToString("N0"), 0, false, TooltipProperty.TooltipPropertyFlags.None));
     }
   }
 }

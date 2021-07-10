@@ -1,7 +1,11 @@
-﻿using TaleWorlds.CampaignSystem;
+﻿extern alias TWCS;
+using TWHelpers = TWCS::Helpers;
+
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
+
 using AllegianceOverhaul.Extensions;
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
@@ -10,7 +14,7 @@ namespace AllegianceOverhaul.MigrationTweaks
   internal static class MigrationManager
   {
     private const string PlayerInquiryHeader = "{=0DEJNa14n}A clan wishes to join your kingdom!";
-    private const string PlayerInquiryBody = "{=NAlAH3pJk}The {JOINING_CLAN.NAME} clan is looking to join your kingdom{?JOINING_CLAN.UNDER_CONTRACT} as mercenary{?}{\\?}!\n \nThey have {TROOPS_DESCRIPTION} and {FIEFS_DESCRIPTION}.Their leader is {RELATION} towards you.\n \nWhat say ye?";
+    private const string PlayerInquiryBody = "{=NAlAH3pJk}The {JOINING_CLAN.NAME} clan is looking to join your kingdom{?JOINING_CLAN.UNDER_CONTRACT} as mercenary{?}{\\?}!{NEW_LINE} {NEW_LINE}They have {TROOPS_DESCRIPTION} and {FIEFS_DESCRIPTION}.Their leader is {RELATION} towards you.{NEW_LINE} {NEW_LINE}What say ye?";
 
     private const string TroopsDescription = "{=JhJW9KQcw}{TROOPS} {?TROOPS.PLURAL_FORM}able warriors{?}able warrior{\\?} across {WAR_PARTIES} {?WAR_PARTIES.PLURAL_FORM}war parties{?}war party{\\?}";
     private const string NoFiefsDescription = "{=RzO5SBUgJ}no fiefs";
@@ -34,6 +38,7 @@ namespace AllegianceOverhaul.MigrationTweaks
       inquiryBody.SetTextVariable("TROOPS_DESCRIPTION", GetTroopsDesc(clan));
       inquiryBody.SetTextVariable("FIEFS_DESCRIPTION", GetFiefsDesc(clan));
       inquiryBody.SetTextVariable("RELATION", GetRelationDesc(clan));
+      inquiryBody.SetTextVariable("NEW_LINE", "\n");
 
       InformationManager.ShowInquiry(new InquiryData(inquiryHeader.ToString(), inquiryBody.ToString(), true, true, ButtonWelcomeText.ToLocalizedString(), ButtonTurnAway.ToLocalizedString(), () => ApplyPlayerDecision(clan, true), () => ApplyPlayerDecision(clan, false)), true);
     }
@@ -110,7 +115,11 @@ namespace AllegianceOverhaul.MigrationTweaks
       }
 
       Kingdom targetKingdom = Clan.PlayerClan.Kingdom;
-      if (clan.Kingdom != null && clan.Kingdom.IsAtWarWith(targetKingdom))
+      Kingdom? currentKingdom = clan.Kingdom;
+      bool isMerc = clan.IsUnderMercenaryService;
+
+
+      if (currentKingdom != null && clan.Kingdom.IsAtWarWith(targetKingdom) && !isMerc)
       {
         ChangeKingdomAction.ApplyByLeaveWithRebellionAgainstKingdom(clan, targetKingdom, true);
       }
@@ -118,7 +127,14 @@ namespace AllegianceOverhaul.MigrationTweaks
       {
         ChangeKingdomAction.ApplyByLeaveKingdom(clan, false);
       }
-      ChangeKingdomAction.ApplyByJoinToKingdom(clan, targetKingdom, true);
+      if ((currentKingdom != null && isMerc) || (currentKingdom is null && clan.IsMinorFaction) )
+      {
+        ChangeKingdomAction.ApplyByJoinFactionAsMercenary(clan, targetKingdom, TWHelpers.FactionHelper.GetMercenaryAwardFactorToJoinKingdom(clan, targetKingdom, false), true);
+      }
+      else
+      {
+        ChangeKingdomAction.ApplyByJoinToKingdom(clan, targetKingdom, true);
+      }
     }
   }
 }

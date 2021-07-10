@@ -9,10 +9,10 @@ namespace AllegianceOverhaul
 {
   public partial class Settings : AttributeGlobalSettings<Settings>
   {
-    public override string Id => "AllegianceOverhaul_v2";
+    public override string Id => "AllegianceOverhaul_v3";
     public override string DisplayName => $"{new TextObject("{=rQWGD5PzD}Allegiance Overhaul")} {typeof(Settings).Assembly.GetName().Version.ToString(3)}";
     public override string FolderName => "Allegiance Overhaul";
-    public override string FormatType => "json";
+    public override string FormatType => "json2";
 
     //Headings
     private const string HeadingGeneral = "{=TfOZojdUe}General settings";
@@ -83,7 +83,11 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingTesting)]
     public bool FreeDecisionOverriding { get; set; } = false;
 
-    [SettingPropertyBool("{=2QJJZSvAj}Destabilize join kingdom evaluation", Order = 0, RequireRestart = true, IsToggle = true, HintText = "{=ylTfKfJtR}Destabilize the evaluation of the ScoreOfClanToJoinKingdom.")]
+    [SettingPropertyBool("{=g3xbLRIwj}Always pick player kingdom", Order = 1, RequireRestart = false, HintText = "{=q9flKsRfV}If \"Determined kingdom pick logic\" option from \"Migration tweaks\" system is enabled, player kingdom will always be chosen as a kingdom to join or defect to. Enabling this option also forces any checks on scores to join to be skipped. Cheat!")]
+    [SettingPropertyGroup(HeadingTesting)]
+    public bool AlwaysPickPlayerKingdom { get; set; } = false;
+
+    [SettingPropertyBool("{=2QJJZSvAj}Destabilize join kingdom evaluation", Order = 2, RequireRestart = true, IsToggle = true, HintText = "{=ylTfKfJtR}Destabilize the evaluation of the ScoreOfClanToJoinKingdom.")]
     [SettingPropertyGroup(HeadingDestabilizeJoining, GroupOrder = 0)]
     public bool DestabilizeJoinEvaluation { get; set; } = false;
 
@@ -91,7 +95,7 @@ namespace AllegianceOverhaul
     [SettingPropertyGroup(HeadingDestabilizeJoining)]
     public float JoinScoreFlatModifier { get; set; } = 10f;
 
-    [SettingPropertyBool("{=UGM3kBQaI}Destabilize leave kingdom evaluation", Order = 1, RequireRestart = true, IsToggle = true, HintText = "{=lxP0giGYl}Destabilize the evaluation of the ScoreOfClanToLeaveKingdom.")]
+    [SettingPropertyBool("{=UGM3kBQaI}Destabilize leave kingdom evaluation", Order = 3, RequireRestart = true, IsToggle = true, HintText = "{=lxP0giGYl}Destabilize the evaluation of the ScoreOfClanToLeaveKingdom.")]
     [SettingPropertyGroup(HeadingDestabilizeLeaving, GroupOrder = 1)]
     public bool DestabilizeLeaveEvaluation { get; set; } = false;
 

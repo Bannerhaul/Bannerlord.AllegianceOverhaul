@@ -231,7 +231,7 @@ namespace AllegianceOverhaul.Models.DefaultModels
     private double CalculateRelationshipFactor(DecisionMaker decisionMaker, IFaction factionToChangeStateWith)
     {
       bool atWar = decisionMaker.Hero.MapFaction.IsAtWarWith(factionToChangeStateWith);
-      Dictionary<Hero, int> otherFactionHeroRelations = factionToChangeStateWith.Heroes.Where(h => decisionMaker.Hero.IsFriend(h) || decisionMaker.Hero.IsEnemy(h)).ToDictionary(keySelector: h => h, elementSelector: h => decisionMaker.Hero.GetModifiedRelation(h) / 10);
+      Dictionary<Hero, int> otherFactionHeroRelations = factionToChangeStateWith.Heroes.Where(h => decisionMaker.Hero.IsFriend(h) || decisionMaker.Hero.IsEnemy(h)).ToDictionary(keySelector: h => h, elementSelector: h => decisionMaker.Hero.GetModifiedRelation(h, true) / 10);
       return otherFactionHeroRelations.Count() > 0 ? otherFactionHeroRelations.Sum(f => f.Value) / (double)otherFactionHeroRelations.Count() * 10 : 0;
     }
 

@@ -48,7 +48,8 @@ namespace AllegianceOverhaul.Patches.Migration
         Clan? clanToDefectTo;
         if (SettingsHelper.SubSystemEnabled(SubSystemType.UseDeterminedKingdomPick))
         {
-          clanToDefectTo = GetTopValuedKingdom(clan)?.Clans.FirstOrDefault(clanSelector => !clanSelector.IsEliminated);
+          bool alwaysPickPlayerKingdom = SettingsHelper.SubSystemEnabled(SubSystemType.AlwaysPickPlayerKingdom) && Clan.PlayerClan.Kingdom is not null;
+          clanToDefectTo = alwaysPickPlayerKingdom ? Clan.PlayerClan : GetTopValuedKingdom(clan)?.Clans.FirstOrDefault(clanSelector => !clanSelector.IsEliminated);
         }
         else
         {
@@ -79,9 +80,6 @@ namespace AllegianceOverhaul.Patches.Migration
       static bool NotApplicable(Clan clan, Clan? clanToDefectTo) =>
         clanToDefectTo is null
         || clan.Kingdom is null
-#if STABLE
-        || clan.IsUnderMercenaryService
-#endif
         || clanToDefectTo.Kingdom == null
         || clan.Kingdom == clanToDefectTo.Kingdom
         || !clanToDefectTo.MapFaction.IsKingdomFaction
@@ -101,7 +99,8 @@ namespace AllegianceOverhaul.Patches.Migration
         Kingdom? kingdomToJoin;
         if (SettingsHelper.SubSystemEnabled(SubSystemType.UseDeterminedKingdomPick))
         {
-          kingdomToJoin = GetTopValuedKingdom(clan);
+          bool alwaysPickPlayerKingdom = SettingsHelper.SubSystemEnabled(SubSystemType.AlwaysPickPlayerKingdom) && Clan.PlayerClan.Kingdom is not null;
+          kingdomToJoin = alwaysPickPlayerKingdom ? Clan.PlayerClan.Kingdom : GetTopValuedKingdom(clan);
         }
         else
         {

@@ -74,6 +74,7 @@ namespace AllegianceOverhaul.Helpers
         case SubSystemType.AdvancedHeroTooltips: return Settings.Instance!.UseAdvancedHeroTooltips;
         //Testing
         case SubSystemType.FreeDecisionOverriding: return Settings.Instance!.UseTestingSettings && Settings.Instance.FreeDecisionOverriding;
+        case SubSystemType.AlwaysPickPlayerKingdom: return Settings.Instance!.UseTestingSettings && Settings.Instance.AlwaysPickPlayerKingdom;
         case SubSystemType.DestabilizeJoinEvaluation: return Settings.Instance!.UseTestingSettings && Settings.Instance.DestabilizeJoinEvaluation;
         case SubSystemType.DestabilizeLeaveEvaluation: return Settings.Instance!.UseTestingSettings && Settings.Instance.DestabilizeLeaveEvaluation;
         default: return false;
@@ -180,7 +181,8 @@ namespace AllegianceOverhaul.Helpers
     AdvancedHeroTooltips = 200,
     //TestingSettings
     FreeDecisionOverriding = 210,
-    DestabilizeJoinEvaluation = 211,
-    DestabilizeLeaveEvaluation = 212
+    AlwaysPickPlayerKingdom = 211,
+    DestabilizeJoinEvaluation = 221,
+    DestabilizeLeaveEvaluation = 222
   }
 }
