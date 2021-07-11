@@ -8,73 +8,73 @@
 		||||||||||||||||||||||||||| Game interface ||||||||||||||||||||||||||
 		-->
 		<!--Kingdom management page-->
-		<string id="7GoBlY9o4" text="This proposal is on cooldown for {NUMBER_OF_DAYS} {?NUMBER_OF_DAYS.PLURAL_FORM}days{?}day{\?}." />
+		<string id="7GoBlY9o4" text="Данное предложение будет недоступно ещё {NUMBER_OF_DAYS} {?NUMBER_OF_DAYS.PLURAL_FORM}дней{?}{?NUMBER_OF_DAYS.SPECIFIC_SINGULAR_FORM}дня{?}день{\?}{\?}." />
 		<!--Log message about considering an election-->
-		<string id="6LqEiBkdd" text="{?REFLECTING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\?} {REFLECTING_CLAN.NAME} {?REFLECTING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\?} {REFLECTING_CLAN_KINGDOM.NAME} {POSSIBLE_ACTION}, but found no suitable candidates." />
-		<string id="n3OiPQh4b" text="{?REFLECTING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\?} {REFLECTING_CLAN.NAME} {?REFLECTING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\?} {REFLECTING_CLAN_KINGDOM.NAME} considered {CONSIDERED_ACTION} {ACTION_TARGET}{ACTION_DETAILS}. {CONSIDER_OUTCOME}" />
+		<string id="6LqEiBkdd" text="{?REFLECTING_CLAN.MINOR_FACTION}Малая фракция{?}Клан{\?} {REFLECTING_CLAN.NAME} {?REFLECTING_CLAN.UNDER_CONTRACT}на службе у{?}из{\?} {REFLECTING_CLAN_KINGDOM.NAME} {POSSIBLE_ACTION}, но не нашлось подходящих кандидатов." />
+		<string id="n3OiPQh4b" text="{?REFLECTING_CLAN.MINOR_FACTION}Малая фракция{?}Клан{\?} {REFLECTING_CLAN.NAME} {?REFLECTING_CLAN.UNDER_CONTRACT}на службе у{?}из{\?} {REFLECTING_CLAN_KINGDOM.NAME} {?REFLECTING_CLAN.MINOR_FACTION}рассматривала{?}рассматривал{\?} {CONSIDERED_ACTION} {ACTION_TARGET}{ACTION_DETAILS}. {CONSIDER_OUTCOME}" />
 		<!--Consideration subject-->
-		<string id="XB9p2y7ud" text="are in the good mood and would like to make peace with someone" />
-		<string id="jMY459MFu" text="are in the bad mood and would like to declare war on someone" />
-		<string id="SK0HqxegU" text="are in the worries about the fates of the kingdom and would like to change some of its policies" />
-		<string id="LFrk9H8l1" text="are vaguely feel a certain injustice in the current assignment of kingdom lands and would like to redistribute some fiefs" />
+		<string id="XB9p2y7ud" text="в хорошем расположении духа и желает заключить мир с кем-нибудь" />
+		<string id="jMY459MFu" text="в плохом настроении и желает объявить кому-нибудь войну" />
+		<string id="SK0HqxegU" text="беспокоится о судьбе королевства и хочет поменять некоторые законы" />
+		<string id="LFrk9H8l1" text=" мутно ощущает несправедливость в текущем распределении земель королевства и желает перераспределить феодальные владения" />
 		<!--Action in question-->
-		<string id="zkoVo2k1B" text="making peace with" />
-		<string id="NPVP3pLvJ" text="declaring war on" />
-		<string id="h7u4qQSDf" text="introducing a new policy of" />
-		<string id="Hz1c1I7Ux" text="disavowing the policy of" />
-		<string id="JnzHpQzql" text="annexing {?ANNEXED_SETTLEMENT.IS_TOWN}town of{?}{?ANNEXED_SETTLEMENT.IS_VILLAGE}village of{?}{\?}{\?}" />
+		<string id="zkoVo2k1B" text="заключение мира с" />
+		<string id="NPVP3pLvJ" text="объявление войны" />
+		<string id="h7u4qQSDf" text="ввод нового закона" />
+		<string id="Hz1c1I7Ux" text="отказ от закона" />
+		<string id="JnzHpQzql" text="аннексию {?ANNEXED_SETTLEMENT.IS_TOWN}города {?}{?ANNEXED_SETTLEMENT.IS_VILLAGE}деревни {?}{\?}{\?}" />
 		<!--Annex details-->
-		<string id="09ZE4GRyY" text="from {ANNEXED_SETTLEMENT_CLAN.NAME}" />
+		<string id="09ZE4GRyY" text="от {ANNEXED_SETTLEMENT_CLAN.NAME}" />
 		<!--Outcome-->
-		<string id="8osThex4K" text="They chose not to bring this matter to the royal court." />
-		<string id="MiKzBv8hv" text="They chose to initiate new kingdom election on this matter." />
+		<string id="8osThex4K" text="Они предпочли не доводить этот вопрос до королевского двора." />
+		<string id="MiKzBv8hv" text="Они решили инициировать голосование по этому вопросу в королевстве." />
 		<!--
 		|||||||||||||||||||||||||||| Mod Options ||||||||||||||||||||||||||||
 		-->
-		<string id="SSc734kI8" text="Enables specifying various adjustments regarding kingdom political life and relations between lords." />
-		<string id="KjkJ0swLq" text="Election rebalance" />
-		<string id="sFWVFQSX7" text="Enables specifying various adjustments regarding kingdom elections." />
+		<string id="SSc734kI8" text="Позволяет задать различные настройки, касающиеся политической жизни королевства и отношений между лордами." />
+		<string id="KjkJ0swLq" text="Изменение баланса выборов" />
+		<string id="sFWVFQSX7" text="Позволяет указать различные настройки, касающиеся проведения выборов в королевстве." />
 
-		<string id="BZnXaAO4m" text="Influence required to override decision" />
-		<string id="mhjZ7999E" text="Specify desired way of calculating the influence, required to override popular decision with unpopular one. Ruler can pay 'Slight Favor', 'Strong Favor' or 'Full Push' decision costs for each lacking support point of unpopular decision, or just pay the exact amount of influence, that supporters of the popular decision spent in total. Native is [Override using 'Full Push' cost]. Suggested is [Flat influence override]." />
-		<string id="PB4s4f10m" text="Score threshold for AI to override decision" />
-		<string id="GWUSWJ41x" text="Minimum difference between AI ruler desired decision score and popular decision score for the ruler clan to consider overriding popular decision. Native is 10. Default = 50.0." />
+		<string id="BZnXaAO4m" text="Влияние, необходимое для переопределения решения" />
+		<string id="mhjZ7999E" text="Укажите желаемый способ расчета влияния, которое необходимо для замены популярного решения на непопулярное. Правитель может потратить очки влияния, аналогичные оказанию «Незначительной поддержки», «Значительной поддержки» или «Полной поддержки» на каждую недостающую единицу поддержки непопулярного решения, или просто использовать точное количество очков влияния, которое сторонники популярного решения потратили в сумме. В оригинале - [Заменить, используя стоимость 'Полной поддержки']. Рекомендовано [Заменить, используя точное значение влияния]." />
+		<string id="PB4s4f10m" text="Оценочный порог для ИИ, необходимый для отмены решения" />
+		<string id="GWUSWJ41x" text="Минимальная разница между оценкой желаемого ИИ правителем решения и оценкой популярного решения, требуемая чтобы правящий клан рассматривал возможность замены популярного решения. В оригинале - 10. По умолчанию = 50.0." />
 
-		<string id="UUhO7T6KO" text="Decision support rebalance" />
-		<string id="rHR6gl9ef" text="Enables adjustments to decision support calculation logics, used by AI clans." />
+		<string id="UUhO7T6KO" text="Ребаланс системы принятия решений" />
+		<string id="rHR6gl9ef" text="Позволяет вносить корректировки в логику расчета поддержки принятия решений, используемую кланами ИИ." />
 
-		<string id="iraC4RG2n" text="Make peace" />
-		<string id="U1Yf34bca" text="Specify if and how clan support calculation logics for the make peace decision should be enhanced. Situational factor takes into account wars currently being fought and success rate against the faction to make peace with. Relationship factor is based on the relation with lords of the faction to make peace with. Tribute factor accounts for the gains or losses from the tributes to be imposed, including reputational ones." />
-		<string id="nHu9iaUUB" text="Declare war" />
-		<string id="rAV9kYkov" text="Specify if and how clan support calculation logics for the declare war decision should be enhanced. Situational factor takes into account the power ratings of the currently warring kingdoms and of the kingdom to declare war on. Relationship factor is based on the relation with lords of the kingdom to declare war on. Tribute factor accounts for the amount of dinars the kingdom is currently receiving or being forced to pay." />
+		<string id="iraC4RG2n" text="Заключение мира" />
+		<string id="U1Yf34bca" text="Укажите, нужно ли улучшить логику расчета поддержки принятия решения о мире и если нужно, то как. Ситуационный фактор учитывает текущие войны и успешность войны против фракции, с которой нужно заключить мир. Фактор взаимоотношений основан на отношениях с лордами фракции, с которой нужно примириться. Фактор дани учитывает прибыль или убытки, включая репутационные, от назначенной в будущем дани." />
+		<string id="nHu9iaUUB" text="Объявление войны" />
+		<string id="rAV9kYkov" text="Укажите, нужно ли улучшить логику расчета поддержки принятия решения об объявлении войны и если нужно, то как. Ситуационный фактор учитывает рейтинги силы враждующих в настоящее время королевств и королевства, которому будет объявлена война. Фактор отношений основан на отношениях с лордами королевства, которому будет объявлена война. Фактор дани учитывает количество динаров, которое королевство в настоящее время получает или вынуждено платить." />
 
-		<string id="4TcdeL7Uu" text="Factors strength" />
-		<string id="pgibaYP51" text="Make peace situational factor strength" />
-		<string id="Wkz82wdTt" text="A multiplier for the baseline result of calculating the situational factor for the 'make peace' decision. Situational factor takes into account the total number of wars currently being fought and the power ratings of each participating kingdom, as well as the success rate in the war against the faction to make peace with. Default = 1." />
-		<string id="zNwukiWT4" text="Make peace relationship factor strength" />
-		<string id="QL1TVKjBX" text="A multiplier for the baseline result of calculating the relationship factor for the 'make peace' decision. Relationship factor is based on the mean relation with lords of the faction to make peace with. Default = 1." />
-		<string id="HzC3XjypN" text="Make peace tribute factor strength" />
-		<string id="gH9rnSGtM" text="A multiplier for the baseline result of calculating the tribute factor for the 'make peace' decision. Tribute factor takes into account the amount of denars that the kingdom will receive or will be forced to pay if peace is concluded, as well as the associated reputational gains or losses. Default = 1." />
-		<string id="QLIrm7VAp" text="Declare war situational factor strength" />
-		<string id="bdIYWo2R8" text="A multiplier for the baseline result of calculating the situational factor for the 'declare war' decision. Situational factor takes into account the total number of wars currently being fought and the power ratings of each participating kingdom as well as of the kingdom to declare war on. Default = 1." />
-		<string id="DvvoBmrEZ" text="Declare war relationship factor strength" />
-		<string id="zzv2bMQhr" text="A multiplier for the baseline result of calculating the relationship factor for the 'declare war' decision.. Relationship factor takes into account the median and extremes of relation with the clans of the kingdom to declare war on. Default = 1." />
-		<string id="lqfhT75fH" text="Declare war tribute factor strength" />
-		<string id="lc5iLtS0G" text="A multiplier for the baseline result of calculating the tribute factor for the 'declare war' decision. Tribute factor takes into account the amount of dinars the kingdom is currently receiving or being forced to pay. Default = 1." />
+		<string id="4TcdeL7Uu" text="Сила факторов" />
+		<string id="pgibaYP51" text="Заключение мира - ситуационный фактор" />
+		<string id="Wkz82wdTt" text="Множитель базового результата расчета ситуационного фактора для решения о заключении мира. Ситуационный фактор учитывает общее количество войн, которые ведутся в настоящее время, и рейтинги силы каждого участвующего королевства, а также степень успеха в войне против фракции, с которой нужно заключить мир. По умолчанию = 1." />
+		<string id="zNwukiWT4" text="Заключение мира - фактор отношений" />
+		<string id="QL1TVKjBX" text="Множитель базового результата расчета фактора отношений для решения о заключении мира. Фактор отношений основан на среднем уровне отношений с лордами фракции, с которой нужно примириться. По умолчанию = 1." />
+		<string id="HzC3XjypN" text="Заключение мира - фактор дани" />
+		<string id="gH9rnSGtM" text="Множитель базового результата расчета коэффициента дани для решения о заключении мира. Фактор дани учитывает количество динаров, которое королевство получит или будет вынуждено заплатить в случае заключения мира, а также связанные с этим репутационные выгоды или потери. По умолчанию = 1." />
+		<string id="QLIrm7VAp" text="Объявление войны - ситуационный фактор" />
+		<string id="bdIYWo2R8" text="Множитель базового результата расчета ситуационного фактора для решения об объявлнии войны. Ситуационный фактор учитывает общее количество войн, которые ведутся в настоящее время, и рейтинги мощностей каждого участвующего королевства, а также королевства, которому нужно объявить войну. По умолчанию = 1." />
+		<string id="DvvoBmrEZ" text="Объявление войны - фактор отношений" />
+		<string id="zzv2bMQhr" text="Множитель базового результата расчета коэффициента фактора отношений для решения об объявлнии войны. Фактор отношений учитывает средние и крайние значения отношений с кланами королевства, которому объявляется война. По умолчанию = 1." />
+		<string id="lqfhT75fH" text="Объявление войны - фактор дани" />
+		<string id="lc5iLtS0G" text="Множитель базового результата расчета коэффициента дани для решения об объявлнии войны. Фактор дани учитывает сумму динаров, которую королевство в настоящее время получает или вынуждено платить. По умолчанию = 1." />
 
-		<string id="YyNEnyXao" text="Election cooldowns" />
-		<string id="cBT3GuZ7A" text="Enables cooldowns for kingdom elections on the identical topics." />
-		<string id="GhFRRa81m" text="Make peace election cooldown" />
-		<string id="gFtIHi76c" text="Minimum period in days following concluding of kingdom election on making peace with a faction, after which new election for making peace with that faction could be started. Default = 10." />
-		<string id="ChnOQKRaL" text="Declare war election cooldown" />
-		<string id="A6YgnDiES" text="Minimum period in days following concluding of kingdom election on declaring war on a faction, after which new election for declaring war on that faction could be started. Default = 10." />
-		<string id="A6I64VlbW" text="Expel clan election cooldown" />
-		<string id="ueSGbEov9" text="Minimum period in days following concluding of kingdom election on expelling a clan from the kingdom, after which new election for expelling that clan could be started. Default = 84 (a game year)." />
-		<string id="XEHTEUkOg" text="Kingdom policy election cooldown" />
-		<string id="DnfTXY2fI" text="Minimum period in days following concluding of kingdom election regarding certain kingdom policy, after which new election regarding same kingdom policy could be started. Default = 21 (one quarter of a game year)." />
-		<string id="GaFi8TUsT" text="Fief annexation election cooldown" />
-		<string id="heYA15q43" text="Minimum period in days following concluding of kingdom election on annexation of certain fief, after which new election regarding annexation of the same fief could be started. Half of that period applies to every other settlement of the original owner clan. Default = 42 (half a game year)." />
-		<string id="Wx4GbepKH" text="Affect player kingdom management" />
-		<string id="3AgxiAy1v" text="Specify if election cooldowns should affect player's kingdom management, making it impossible for player to propose decisions that were recently under consideration by the kingdom's royal court." />
+		<string id="YyNEnyXao" text="Кулдаун на проведение голосований" />
+		<string id="cBT3GuZ7A" text="Позволяет задавать паузы произвольной длины, которые должны быть выдержаны между голосованиями в королевстве по идентичным темам." />
+		<string id="GhFRRa81m" text="Голосования о заключении мира" />
+		<string id="gFtIHi76c" text="Минимальный период в днях после завершения голосования в королевстве о заключении мира с фракцией, после которого может быть открыто новое голосование о заключения мира с той же фракцией. По умолчанию = 10." />
+		<string id="ChnOQKRaL" text="Голосования об объявлении войны" />
+		<string id="A6YgnDiES" text="Минимальный период в днях после завершения голосования в королевстве об объявлении войны фракции, после которого может быть открыто новое голосование об объявлении войны той же фракции. По умолчанию = 10." />
+		<string id="A6I64VlbW" text="Голосования об изгнании клана" />
+		<string id="ueSGbEov9" text="Минимальный период в днях после завершения голосования об изгнании клана из королевства, после которого может быть открыто новое голосование об изгнании того же клана. По умолчанию = 84 (игровой год)." />
+		<string id="XEHTEUkOg" text="Голосования по поводу законов" />
+		<string id="DnfTXY2fI" text="Минимальный период в днях после завершения голосования в отношении определенного закона, после которого может быть открыто новое голосование в отношении того же закона. По умолчанию = 21 (четверть игрового года)." />
+		<string id="GaFi8TUsT" text="Голосования об аннексии феодального владения" />
+		<string id="heYA15q43" text="Минимальный период в днях после завершения голосования об аннексии определенного феода, после которого может быть открыто новое голосование об аннексии того же феода. Половина этого периода применяется ко всем остальным феодам первоначального клана-владельца. По умолчанию = 42 (половина игрового года)." />
+		<string id="Wx4GbepKH" text="Влияет на управление королевством игрока" />
+		<string id="3AgxiAy1v" text="Укажите, должны ли кулдауны на голосования влиять на управление королевством игрока, делая невозможным для игрока предлагать решения, которые недавно находились на рассмотрении королевского двора." />
 	</strings>
 </base>

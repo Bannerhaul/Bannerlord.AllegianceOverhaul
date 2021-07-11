@@ -46,7 +46,7 @@
 		<string id="iraC4RG2n" text="Make peace" />
 		<string id="U1Yf34bca" text="Specify if and how clan support calculation logics for the make peace decision should be enhanced. Situational factor takes into account wars currently being fought and success rate against the faction to make peace with. Relationship factor is based on the relation with lords of the faction to make peace with. Tribute factor accounts for the gains or losses from the tributes to be imposed, including reputational ones." />
 		<string id="nHu9iaUUB" text="Declare war" />
-		<string id="rAV9kYkov" text="Specify if and how clan support calculation logics for the declare war decision should be enhanced. Situational factor takes into account the power ratings of the currently warring kingdoms and of the kingdom to declare war on. Relationship factor is based on the relation with lords of the kingdom to declare war on. Tribute factor accounts for the amount of dinars the kingdom is currently receiving or being forced to pay." />
+		<string id="rAV9kYkov" text="Specify if and how clan support calculation logics for the declare war decision should be enhanced. Situational factor takes into account the power ratings of the currently warring kingdoms and of the kingdom to declare war on. Relationship factor is based on the relation with lords of the kingdom to declare war on. Tribute factor accounts for the amount of denars the kingdom is currently receiving or being forced to pay." />
 
 		<string id="4TcdeL7Uu" text="Factors strength" />
 		<string id="pgibaYP51" text="Make peace situational factor strength" />
@@ -60,7 +60,7 @@
 		<string id="DvvoBmrEZ" text="Declare war relationship factor strength" />
 		<string id="zzv2bMQhr" text="A multiplier for the baseline result of calculating the relationship factor for the 'declare war' decision.. Relationship factor takes into account the median and extremes of relation with the clans of the kingdom to declare war on. Default = 1." />
 		<string id="lqfhT75fH" text="Declare war tribute factor strength" />
-		<string id="lc5iLtS0G" text="A multiplier for the baseline result of calculating the tribute factor for the 'declare war' decision. Tribute factor takes into account the amount of dinars the kingdom is currently receiving or being forced to pay. Default = 1." />
+		<string id="lc5iLtS0G" text="A multiplier for the baseline result of calculating the tribute factor for the 'declare war' decision. Tribute factor takes into account the amount of denars the kingdom is currently receiving or being forced to pay. Default = 1." />
 
 		<string id="YyNEnyXao" text="Election cooldowns" />
 		<string id="cBT3GuZ7A" text="Enables cooldowns for kingdom elections on the identical topics." />

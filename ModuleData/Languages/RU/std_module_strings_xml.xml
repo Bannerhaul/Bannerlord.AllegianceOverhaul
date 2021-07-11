@@ -18,10 +18,10 @@
 		<!-- Main or reused headings -->
 		<string id="TfOZojdUe" text="Общие настройки" />
 		<string id="qvoCfbvzC" text="Гарантированная верность" />
-		<string id="cMaAPsPG7" text="Migration tweaks" />
-		<string id="36iqZfxor" text="Politics rebalance" />		
+		<string id="cMaAPsPG7" text="Настройки миграции" />
+		<string id="36iqZfxor" text="Изменения политического баланса" />		
 		<string id="EYZduHauC" text="Отладочные настройки" />
-		<string id="xveQEwa3t" text="Testing settings" />
+		<string id="xveQEwa3t" text="Настройки тестирования" />
 		
 		<!-- Reused settings and hints -->
 		<string id="mNeDsYqbr" text="Распространяется на" />
@@ -38,34 +38,34 @@
 		<string id="d7Lm9By8Y" text="Королевство игрока" />
 		<string id="rE0tAgMYX" text="Королевство, возглавляемое игроком" />
 		<!-- Dropdown values - systems -->
-		<string id="5F7vaCncU" text="None" />
-		<string id="Tku0VzTa5" text="All systems" />
+		<string id="5F7vaCncU" text="Никакие системы" />
+		<string id="Tku0VzTa5" text="Все системы" />
 		<!-- Dropdown values - influence for overrides -->
-		<string id="zWf4os3fg" text="Flat influence override" />
-		<string id="3Z8OCjcgX" text="Override using 'Slight Favor' cost" />
-		<string id="S1FwBcuBB" text="Override using 'Strong Favor' cost" />
-		<string id="vuZpjgfjv" text="Override using 'Full Push' cost" />
+		<string id="zWf4os3fg" text="Заменить, используя точное значение влияния" />
+		<string id="3Z8OCjcgX" text="Заменить, используя стоимость 'Незначительной поддержки'" />
+		<string id="S1FwBcuBB" text="Заменить, используя стоимость 'Значительной поддержки'" />
+		<string id="vuZpjgfjv" text="Заменить, используя стоимость 'Полной поддержки'" />
 		<!-- Dropdown values - peace and war factors -->
-		<string id="LI9tc4Xuc" text="Use native logic" />
-		<string id="s1KlQUCzS" text="Apply situational factor" />
-		<string id="J19R7g9RJ" text="Apply relationship factor" />
-		<string id="mYcC08wjI" text="Apply tribute factor" />
-		<string id="FmJLrbHHr" text="Apply situational and relationship factors" />
-		<string id="clynUPKFE" text="Apply situational and tribute factors" />
-		<string id="70VVVTVQo" text="Apply relationship and tribute factors" />
-		<string id="KwgG3HrlM" text="Apply all the factors" />
+		<string id="LI9tc4Xuc" text="Использовать оригинальную логику" />
+		<string id="s1KlQUCzS" text="Применить ситуационный фактор" />
+		<string id="J19R7g9RJ" text="Применить фактор отношений" />
+		<string id="mYcC08wjI" text="Применить фактор дани" />
+		<string id="FmJLrbHHr" text="Применить ситуационный фактор и фактор отношений" />
+		<string id="clynUPKFE" text="Применить ситуационный фактор и фактор дани" />
+		<string id="70VVVTVQo" text="Применить фактор отношений и фактор дани" />
+		<string id="KwgG3HrlM" text="Применить все факторы" />
 
 		<!-- General settings -->
-		<string id="tRpMRCEhN" text="Influence to denars ratio" />
-		<string id="NKOFiv68M" text="The amount of denars that is interconvertible to one influence point. Native is 500. Default = 1000." />
+		<string id="tRpMRCEhN" text="Курс очков влияния к динарам" />
+		<string id="NKOFiv68M" text="Количество динаров, которое конвертируется в одно очко влияния. В оригинале - 500. По умолчанию - 1000." />
 		<string id="0F8Q0KWEY" text="Малые вассальные фракции следуют общим правилам" />
 		<string id="JL391Jf8S" text="Укажите, должны ли малые фракции, являющиеся вассалами, использовать стандартную логику при рассмотрении вопроса о выходе из своих королевств. Если отключено, малые фракции будут использовать логику наемников, даже будучи вассалами. Включение рекомендовано, считайте это исправлением ошибки." />
 		<string id="KJJRsb9mD" text="Расширенные всплывающие подсказки для героев" />
 		<string id="myaps1StY" text="Включить добавление дополнительной информации к всплывающим подсказкам для героев в игровой энциклопедии. Добавляет информацию об отношениях, лояльности итд - в зависимости от включенных систем." />
 		
 		<!-- Debug settings -->
-		<string id="hDblsNGNu" text="Systems of interest" />
-		<string id="vHBc3PR0d" text="Specify if you interested in debugging all of the mod functionality, or just some particular systems. Default is [All systems]." />
+		<string id="hDblsNGNu" text="Интересующие системы" />
+		<string id="vHBc3PR0d" text="Укажите, заинтересованы ли вы в отладке всей функциональности мода или только некоторых конкретных систем. По умолчанию [Все системы]." />
 		<string id="IcSqRbFXO" text="Отладочные сообщения" />
 		<string id="FBXsJfTus" text="Включает общие отладочные сообщения. Они информативны, но могут перегружать игровой лог. По умолчанию выключены." />
 		<string id="3OLm7uYVa" text="Технические отладочные сообщения" />
@@ -77,16 +77,16 @@
 		<string id="QjPIOBo4f" text="Список ID модов, которые должны игнорироваться при проверке на возможные конфликты. В качестве разделителя используйте точку с запятой." />
 			
 		<!-- Testing settings -->
-		<string id="lfkh9U9h2" text="These settings are intended for mod testing purposes, do not use them in actual gameplay." />
-		<string id="mAHbl2rzh" text="Free decision overriding" />
-		<string id="CB1vpOzra" text="Override kingdom decisions for free. Cheat!" />
-		<string id="2QJJZSvAj" text="Destabilize join kingdom evaluation" />
-		<string id="ylTfKfJtR" text="Destabilize the evaluation of the ScoreOfClanToJoinKingdom." />
-		<string id="jT31LaKLD" text="Join kingdom score flat modifier" />
-		<string id="L2S3TSjyg" text="Negative score modifier makes harder for clans to defect, positive score modifier increases probability of defection. Measured in millions.  Default = 10.0." />
-		<string id="UGM3kBQaI" text="Destabilize leave kingdom evaluation" />
-		<string id="lxP0giGYl" text="Destabilize the evaluation of the ScoreOfClanToLeaveKingdom." />
-		<string id="xZVeNSyJ7" text="Leave kingdom score flat modifier" />
-		<string id="4k9YXqh3E" text="Negative score modifier makes harder for clans to leave, positive score modifier increases probability of clans leaving kingdoms. Measured in millions. Default = 10.0." />
+		<string id="lfkh9U9h2" text="Эти настройки предназначены для тестирования мода, не используйте их в реальном игровом процессе." />
+		<string id="mAHbl2rzh" text="Бесплатное переопределние решений" />
+		<string id="CB1vpOzra" text="Переопределять исходы голосований в королевстве бесплатно. Чит! " />
+		<string id="2QJJZSvAj" text="Дестабилизировать оценку присоединения к королевству" />
+		<string id="ylTfKfJtR" text="Дестабилизирует вычисление оценки целесообразности присоединения к королевству (ScoreOfClanToJoinKingdom)." />
+		<string id="jT31LaKLD" text="Модификатор оценки целесообразности присоединения к королевству" />
+		<string id="L2S3TSjyg" text="Отрицтельный модификатор усложняет переход в другое королевство, а положительный - увеличивает его вероятность. Измеряется в миллионах. По умолчанию = 10.0." />
+		<string id="UGM3kBQaI" text="Дестабилизировать оценку целесообразности выхода из королевства" />
+		<string id="lxP0giGYl" text="Дестабилизирует оценку целесообразности выхода из королевства (ScoreOfClanToLeaveKingdom)." />
+		<string id="xZVeNSyJ7" text="Модификтор оценки целесообразности выхода из королевства" />
+		<string id="4k9YXqh3E" text="Модификатор с отрицательным значением затрудняет выход кланов, а с положительным - увеличивает вероятность выхода кланов из королевств. Измеряется в миллионах. По умолчанию = 10.0." />
 	</strings>
 </base>
