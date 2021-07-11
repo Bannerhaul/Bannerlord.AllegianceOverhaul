@@ -79,7 +79,9 @@
 		<!-- Testing settings -->
 		<string id="lfkh9U9h2" text="These settings are intended for mod testing purposes, do not use them in actual gameplay." />
 		<string id="mAHbl2rzh" text="Free decision overriding" />
-		<string id="CB1vpOzra" text="Override kingdom decisions for free. Cheat!" />		
+		<string id="CB1vpOzra" text="Override kingdom decisions for free. Cheat!" />
+		<string id="g3xbLRIwj" text="Always pick player kingdom" />
+		<string id="q9flKsRfV" text="If &quot;Determined kingdom pick logic&quot; option from &quot;Migration tweaks&quot; system is enabled, player kingdom will always be chosen as a kingdom to join or defect to. Enabling this option also forces any checks on scores to join to be skipped. Cheat!" />
 		<string id="2QJJZSvAj" text="Destabilize join kingdom evaluation" />
 		<string id="ylTfKfJtR" text="Destabilize the evaluation of the ScoreOfClanToJoinKingdom." />
 		<string id="jT31LaKLD" text="Join kingdom score flat modifier" />

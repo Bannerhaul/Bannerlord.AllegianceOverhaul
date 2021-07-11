@@ -56,14 +56,23 @@ namespace AllegianceOverhaul.Patches
         {
           return true;
         }
-
-        JoinKingdomAsClanBarterable asClanBarterable = new JoinKingdomAsClanBarterable(clan1.Leader, kingdom);
-        int valueForFaction1 = asClanBarterable.GetValueForFaction(clan1);
-        int valueForFaction2 = asClanBarterable.GetValueForFaction(kingdom);
-        int checkSum = valueForFaction1 + valueForFaction2;
-        int num2 = (valueForFaction1 < 0) ? -valueForFaction1 : 0;
-        if (checkSum <= 0 || num2 > kingdom.Leader.Gold * 0.5)
+        if (!SettingsHelper.SubSystemEnabled(SubSystemType.AllowJoinRequests) || clan1.IsUnderMercenaryService)
+        {
           return false;
+        }
+
+        if (!SettingsHelper.SubSystemEnabled(SubSystemType.AlwaysPickPlayerKingdom))
+        {
+          JoinKingdomAsClanBarterable asClanBarterable = new JoinKingdomAsClanBarterable(clan1.Leader, kingdom);
+          int valueForClan = asClanBarterable.GetValueForFaction(clan1);
+          int valueForKingdom = asClanBarterable.GetValueForFaction(kingdom);
+          int checkSum = valueForClan + valueForKingdom;
+          int num2 = (valueForClan < 0) ? -valueForClan : 0;
+          if (checkSum <= 0 || num2 > kingdom.Leader.Gold * 0.5)
+          {
+            return false;
+          }
+        }
 
         MigrationManager.AwaitPlayerDecision(clan1);
         return false;

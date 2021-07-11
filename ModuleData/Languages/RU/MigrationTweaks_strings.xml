@@ -7,7 +7,7 @@
 		<!--Player inquiry about AI joining - header-->
 		<string id="0DEJNa14n" text="Клан желает присоединиться к вашему королевству!" />
 		<!--Player inquiry about AI joining - body-->
-		<string id="NAlAH3pJk" text="Клан {JOINING_CLAN.NAME} выражает желание присоединиться к вашему королевству{?JOINING_CLAN.UNDER_CONTRACT} в качестве наемника{?}{\?}! Они распологают {TROOPS_DESCRIPTION}{FIEFS_DESCRIPTION}. Их лидер настроен {RELATION} по отношению к вам. Ваш ответ?" />
+		<string id="NAlAH3pJk" text="Клан {JOINING_CLAN.NAME} выражает желание присоединиться к вашему королевству{?JOINING_CLAN.UNDER_CONTRACT} в качестве наемника{?}{\?}!{NEW_LINE} {NEW_LINE}Они распологают {TROOPS_DESCRIPTION}{FIEFS_DESCRIPTION}. Их лидер настроен {RELATION} по отношению к вам.{NEW_LINE} {NEW_LINE}Ваш ответ?" />
 		<!--Player inquiry about AI joining - buttons-->
 		<string id="ey1dxwam7" text="Принять" />
 		<string id="wV0pIOvEg" text="Отказать" />
