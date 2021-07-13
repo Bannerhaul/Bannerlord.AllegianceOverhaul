@@ -16,11 +16,11 @@ namespace AllegianceOverhaul.ViewModels.Patches
   public static class KingdomPoliciesVMOnPolicySelectPatch
   {   
     [HarmonyPostfix]
-    public static void OnPolicySelectPatch(KingdomPolicyItemVM policy, KingdomPoliciesVM __instance)
+    public static void OnPolicySelectPatch(KingdomPolicyItemVM? policy, KingdomPoliciesVM __instance)
     {
       try
       {
-        if (SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer))
+        if (SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer) && policy?.Policy != null)
         {
           bool hasCooldown = AOCooldownManager.HasDecisionCooldown(new KingdomPolicyDecision(Clan.PlayerClan, policy.Policy, Clan.PlayerClan.Kingdom.ActivePolicies.Contains(policy.Policy)), out float elapsedDaysUntilNow);
           __instance.CanProposeOrDisavowPolicy = __instance.CanProposeOrDisavowPolicy && !hasCooldown;
