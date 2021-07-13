@@ -9,8 +9,8 @@ namespace AllegianceOverhaul.Helpers
   {
     public static void HandleException(Exception ex, MethodInfo? methodInfo, string sectionName)
     {
-      MessageHelper.ErrorMessage(string.Format("Allegiance Overhaul - error occured in [{1}]{0} - {2} See details in the mod log.", methodInfo != null ? " in " + methodInfo.Name : "", sectionName, ex.Message));
-      LoggingHelper.Log(string.Format("Error occured{0} - {1}", methodInfo != null ? $" in {methodInfo}" : "", ex.ToString()), sectionName);
+      MessageHelper.ErrorMessage(string.Format("Allegiance Overhaul - error occurred in [{1}]{0} - {2} See details in the mod log.", methodInfo != null ? " in " + methodInfo.Name : "", sectionName, ex.Message));
+      LoggingHelper.Log(string.Format("Error occurred{0} - {1}", methodInfo != null ? $" in {methodInfo}" : "", ex.ToString()), sectionName);
     }
 
     public static void HandleException(Exception ex, string sectionName, string logMessage, string chatMessage)
