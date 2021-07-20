@@ -1,12 +1,16 @@
 ﻿extern alias TWCS;
 using TWHelpers = TWCS::Helpers;
 
+using System;
+using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
 using AllegianceOverhaul.Extensions;
+using AllegianceOverhaul.Helpers;
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.MigrationTweaks
@@ -118,22 +122,42 @@ namespace AllegianceOverhaul.MigrationTweaks
       Kingdom? currentKingdom = clan.Kingdom;
       bool isMerc = clan.IsUnderMercenaryService;
 
+      try
+      {
+        if (currentKingdom != null)
+        {
+          if (currentKingdom.IsAtWarWith(targetKingdom) && !isMerc)
+          {
+            ChangeKingdomAction.ApplyByLeaveWithRebellionAgainstKingdom(clan, targetKingdom, true);
+          }
+          else
+          {
+            ChangeKingdomAction.ApplyByLeaveKingdom(clan, false);
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        DebugHelper.HandleException(ex, methodInfo, "ApplyPlayerDecision (leave kingdom section)");
+        return;
+      }
 
-      if (currentKingdom != null && clan.Kingdom.IsAtWarWith(targetKingdom) && !isMerc)
+      try
       {
-        ChangeKingdomAction.ApplyByLeaveWithRebellionAgainstKingdom(clan, targetKingdom, true);
+        if ((currentKingdom != null && isMerc) || (currentKingdom is null && clan.IsMinorFaction))
+        {
+          ChangeKingdomAction.ApplyByJoinFactionAsMercenary(clan, targetKingdom, TWHelpers.FactionHelper.GetMercenaryAwardFactorToJoinKingdom(clan, targetKingdom, false), true);
+        }
+        else
+        {
+          ChangeKingdomAction.ApplyByJoinToKingdom(clan, targetKingdom, true);
+        }
       }
-      else
+      catch (Exception ex)
       {
-        ChangeKingdomAction.ApplyByLeaveKingdom(clan, false);
-      }
-      if ((currentKingdom != null && isMerc) || (currentKingdom is null && clan.IsMinorFaction) )
-      {
-        ChangeKingdomAction.ApplyByJoinFactionAsMercenary(clan, targetKingdom, TWHelpers.FactionHelper.GetMercenaryAwardFactorToJoinKingdom(clan, targetKingdom, false), true);
-      }
-      else
-      {
-        ChangeKingdomAction.ApplyByJoinToKingdom(clan, targetKingdom, true);
+        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+        DebugHelper.HandleException(ex, methodInfo, "ApplyPlayerDecision (join kingdom section)");
       }
     }
   }

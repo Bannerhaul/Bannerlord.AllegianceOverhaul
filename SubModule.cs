@@ -80,6 +80,7 @@ namespace AllegianceOverhaul
         AOGameModels.Instance = new AOGameModels(AOGameModels.GetAOGameModels(gameStarter));
         //Behaviors
         gameStarter.AddBehavior(new AOCooldownBehavior());
+        //Individual relationships 
       }
     }
   }
