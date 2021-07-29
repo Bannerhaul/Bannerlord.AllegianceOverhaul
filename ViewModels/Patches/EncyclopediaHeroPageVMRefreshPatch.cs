@@ -1,4 +1,7 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.ViewModels.Extensions;
+
+using HarmonyLib;
 
 using System;
 using System.Reflection;
@@ -6,9 +9,6 @@ using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Encyclopedia;
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia;
-
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.ViewModels.Extensions;
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AllegianceOverhaul.Extensions;
+using AllegianceOverhaul.Helpers;
+
+using System;
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
@@ -7,8 +10,6 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-using AllegianceOverhaul.Extensions;
-using AllegianceOverhaul.Helpers;
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty

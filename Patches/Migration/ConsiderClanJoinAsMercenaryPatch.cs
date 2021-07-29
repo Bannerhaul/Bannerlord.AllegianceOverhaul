@@ -1,4 +1,7 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.MigrationTweaks;
+
+using HarmonyLib;
 
 using System;
 using System.Reflection;
@@ -6,9 +9,6 @@ using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
-
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.MigrationTweaks;
 
 namespace AllegianceOverhaul.Patches.Migration
 {

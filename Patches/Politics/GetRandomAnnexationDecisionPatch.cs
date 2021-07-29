@@ -1,23 +1,23 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.PoliticsRebalance;
+
+using HarmonyLib;
 
 using System;
 using System.Linq;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.Election;
+using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.PoliticsRebalance;
-using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul.Patches.Politics
 {
-  /*
+  
   [HarmonyPatch(typeof(KingdomDecisionProposalBehavior), "GetRandomAnnexationDecision")]
   public class GetRandomAnnexationDecisionPatch
   {
@@ -29,7 +29,7 @@ namespace AllegianceOverhaul.Patches.Politics
     {
       try
       {
-        bool SubSystemEnabled = SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldowns, clan) || SettingsHelper.SubSystemEnabled(SubSystemType.DecisionSupportRebalance, clan);
+        bool SubSystemEnabled = SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldowns, clan);
         bool SystemDebugEnabled = SettingsHelper.SystemDebugEnabled(AOSystems.PoliticsRebalance, DebugType.General, clan);
 
         if (!SubSystemEnabled && !SystemDebugEnabled)
@@ -41,12 +41,9 @@ namespace AllegianceOverhaul.Patches.Politics
         __result = null;
         if (kingdom.UnresolvedDecisions.FirstOrDefault(x => x is SettlementClaimantPreliminaryDecision) == null && clan.Influence >= 300.0)
         {
-          bool possessionsFactorApplied = SettingsHelper.SubSystemEnabled(SubSystemType.AnnexationSupportRebalance, clan)
-                                          && Settings.Instance!.AnnexSupportCalculationMethod.SelectedValue.EnumValue.HasFlag(FiefOwnershipConsideration.PossessionsFactor)
-                                          && Settings.Instance!.FiefsDeemedFairBaseline.SelectedValue.EnumValue != NumberOfFiefsCalculationMethod.WithoutRestrictions;
           Clan randomClan = kingdom.Clans.Where(x => x != clan
                                                      && x.Fiefs.Count > 0
-                                                     && (x.GetRelationWithClan(clan) < -25 || (possessionsFactorApplied && Campaign.Current.GetAOGameModels()!.DecisionSupportScoringModel!.GetNumberOfFiefsDeemedFair(x) < x.Fiefs.Count))
+                                                     && (x.GetRelationWithClan(clan) < -25)
                                                      && x.Fiefs.FirstOrDefault(f => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))) != null
                                                ).ToArray().GetRandomElement();
 
@@ -79,5 +76,4 @@ namespace AllegianceOverhaul.Patches.Politics
       return SettingsHelper.SubSystemEnabled(SubSystemType.ElectionRebalance) || SettingsHelper.SystemDebugEnabled(AOSystems.PoliticsRebalance, DebugType.General);
     }
   }
-  */
 }

@@ -1,10 +1,7 @@
-﻿using System;
-using MCM.Abstractions.Settings.Base.Global;
-using MCM.Abstractions.Attributes;
+﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Dropdown;
-using TaleWorlds.Localization;
-using AllegianceOverhaul.Extensions;
+using MCM.Abstractions.Settings.Base.Global;
 
 namespace AllegianceOverhaul
 {

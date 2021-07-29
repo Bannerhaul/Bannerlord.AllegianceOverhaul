@@ -1,4 +1,7 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Reflection;
@@ -7,14 +10,11 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomClan;
 
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using AllegianceOverhaul.Helpers;
-
 namespace AllegianceOverhaul.ViewModels.Patches
 {
   [HarmonyPatch(typeof(KingdomClanVM), "SetCurrentSelectedClan")]
   public static class KingdomClanVMSetCurrentSelectedClanPatch
-  {   
+  {
     [HarmonyPostfix]
     public static void SetCurrentSelectedClanPatch(KingdomClanItemVM clan, KingdomClanVM __instance)
     {

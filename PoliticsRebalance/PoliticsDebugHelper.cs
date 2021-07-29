@@ -1,8 +1,8 @@
 ﻿using System;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.Election;
+using TaleWorlds.Localization;
 
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
 

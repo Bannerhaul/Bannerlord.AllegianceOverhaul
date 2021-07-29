@@ -1,14 +1,12 @@
-﻿using HarmonyLib;
-
+﻿using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.ViewModels.Extensions;
+using HarmonyLib;
 using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
 using TaleWorlds.Core.ViewModelCollection;
-
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.ViewModels.Extensions;
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {

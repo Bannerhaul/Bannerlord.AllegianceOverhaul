@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.SavableClasses;
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -6,9 +9,6 @@ using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.SaveSystem;
-
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.SavableClasses;
 
 namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
 {
@@ -30,7 +30,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
     {
       _KingdomDecisionHistory = new Dictionary<KingdomDecision, KingdomDecisionConclusion>(new DecisionEqualityComparer());
       KingdomDecisionHistory = _KingdomDecisionHistory;
-      
+
       _lastJoinPlayerRequest = CampaignTime.Zero;
       LastJoinPlayerRequest = _lastJoinPlayerRequest;
     }

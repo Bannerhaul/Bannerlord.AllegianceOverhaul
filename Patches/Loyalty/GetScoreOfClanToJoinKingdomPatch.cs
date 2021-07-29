@@ -1,4 +1,7 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.LoyaltyRebalance;
+
+using HarmonyLib;
 
 using System;
 using System.Collections.Generic;
@@ -6,9 +9,6 @@ using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
-
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.LoyaltyRebalance;
 
 namespace AllegianceOverhaul.Patches.Loyalty
 {

@@ -1,5 +1,7 @@
 ﻿extern alias TWCS;
-using TWHelpers = TWCS::Helpers;
+
+using AllegianceOverhaul.Extensions;
+using AllegianceOverhaul.Helpers;
 
 using System;
 using System.Reflection;
@@ -9,9 +11,8 @@ using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
-using AllegianceOverhaul.Extensions;
-using AllegianceOverhaul.Helpers;
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
+using TWHelpers = TWCS::Helpers;
 
 namespace AllegianceOverhaul.MigrationTweaks
 {

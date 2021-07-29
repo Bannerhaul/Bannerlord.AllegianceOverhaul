@@ -1,7 +1,8 @@
-﻿using System;
+﻿using AllegianceOverhaul.Extensions;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul
 {

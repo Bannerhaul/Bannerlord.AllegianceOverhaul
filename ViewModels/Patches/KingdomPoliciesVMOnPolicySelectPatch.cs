@@ -1,4 +1,7 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Reflection;
@@ -7,14 +10,11 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomDecision;
 
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using AllegianceOverhaul.Helpers;
-
 namespace AllegianceOverhaul.ViewModels.Patches
 {
   [HarmonyPatch(typeof(KingdomPoliciesVM), "OnPolicySelect")]
   public static class KingdomPoliciesVMOnPolicySelectPatch
-  {   
+  {
     [HarmonyPostfix]
     public static void OnPolicySelectPatch(KingdomPolicyItemVM? policy, KingdomPoliciesVM __instance)
     {
@@ -31,7 +31,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
           }
         }
       }
-      catch (Exception ex) 
+      catch (Exception ex)
       {
         MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
         DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomPoliciesVM. OnPolicySelect");

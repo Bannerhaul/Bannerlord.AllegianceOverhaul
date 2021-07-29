@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Linq;
@@ -7,8 +9,6 @@ using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
-
-using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Politics
 {
@@ -19,7 +19,7 @@ namespace AllegianceOverhaul.Patches.Politics
     {
       return condition ? "applied" : "not applied";
     }
-    private static float GetBaseCompensationCost (ODCostCalculationMethod calculationMethod, DecisionOutcome popularOption, DecisionOutcome overridingOption, KingdomDecision decision)
+    private static float GetBaseCompensationCost(ODCostCalculationMethod calculationMethod, DecisionOutcome popularOption, DecisionOutcome overridingOption, KingdomDecision decision)
     {
       float PopularOptionSupportPoints = popularOption.TotalSupportPoints;
       float OverridingOptionSupportPoints = overridingOption.TotalSupportPoints + 3f;
@@ -96,7 +96,7 @@ namespace AllegianceOverhaul.Patches.Politics
             "CalculatedResult = {11}. NativeResult = {12}",
             decision.Kingdom.Name, decision.GetGeneralTitle(), popularOption.GetDecisionTitle(), overridingOption.GetDecisionTitle(),
             PopularOptionSupportPoints, OverridingOptionSupportPoints,
-            Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue, LackingPointsCompensationCost, 
+            Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue, LackingPointsCompensationCost,
             GetModifierApplied(decision.Kingdom.ActivePolicies.Contains(DefaultPolicies.RoyalPrivilege)), GetModifierApplied(decision.Kingdom.RulingClan != Clan.PlayerClan), GetModifierApplied(SettingsHelper.SubSystemEnabled(SubSystemType.FreeDecisionOverriding)),
             CalculatedResult.ToString("N"), __result.ToString("N"));
 

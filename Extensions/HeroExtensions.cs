@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.LoyaltyRebalance;
+
+using System.Collections.Generic;
 using System.Linq;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
 using TaleWorlds.Library;
-
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.LoyaltyRebalance;
 
 namespace AllegianceOverhaul.Extensions
 {

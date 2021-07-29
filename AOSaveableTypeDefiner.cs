@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.SavableClasses;
+
+using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.SaveSystem;
-
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using AllegianceOverhaul.SavableClasses;
 
 namespace AllegianceOverhaul
 {

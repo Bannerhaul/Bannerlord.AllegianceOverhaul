@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Collections.Generic;
@@ -8,8 +10,6 @@ using System.Reflection.Emit;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
-
-using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Politics
 {
@@ -25,7 +25,7 @@ namespace AllegianceOverhaul.Patches.Politics
       //MessageHelper.SimpleMessage("ApplyRelationChange is called!");
       try
       {
-        foreach (DecisionOutcome decisionOutcome in  kingdomElection.PossibleOutcomes)
+        foreach (DecisionOutcome decisionOutcome in kingdomElection.PossibleOutcomes)
         {
           //AOEvents.Instance!.OnRelationShift(decisionOutcome.SponsorClan?.Leader ?? Hero.MainHero, Hero.MainHero.Spouse, new SavableClasses.SegmentalFractionalScore(decisionOutcome.TotalSupportPoints, 0));
         }

@@ -1,4 +1,8 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.CampaignBehaviors;
+using AllegianceOverhaul.Extensions;
+using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 
@@ -6,11 +10,6 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-
-using AllegianceOverhaul.CampaignBehaviors;
-using AllegianceOverhaul.Extensions;
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.Models.DefaultModels;
 
 namespace AllegianceOverhaul
 {
@@ -75,9 +74,6 @@ namespace AllegianceOverhaul
         AOEvents.Instance = new AOEvents();
         //CampaignGameStarter
         CampaignGameStarter gameStarter = (CampaignGameStarter)gameStarterObject;
-        //Models
-        gameStarter.AddModel(new DefaultDecisionSupportScoringModel());
-        AOGameModels.Instance = new AOGameModels(AOGameModels.GetAOGameModels(gameStarter));
         //Behaviors
         gameStarter.AddBehavior(new AOCooldownBehavior());
         //Individual relationships 

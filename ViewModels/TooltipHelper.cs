@@ -1,15 +1,14 @@
-﻿using TaleWorlds.Localization;
-using TaleWorlds.Library;
-using TaleWorlds.CampaignSystem;
+﻿using AllegianceOverhaul.Extensions;
 
-using AllegianceOverhaul.Extensions;
+using TaleWorlds.CampaignSystem;
+using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace AllegianceOverhaul.ViewModels
 {
   internal class TooltipHelper
   {
     public static Color DefaultTooltipColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-    //1gqZN4op,eABKeDAv,CnfTEQxp,m7kD2tc5,hIPaEV34,vTefFHTT,jqY89njY,xduBOxJW
     private const string TooltipRelationHeader = "{=YCgmy4haM}Relation with {HERO}";
     private const string TooltipLoyaltyHeader = "{=YJmaYz7il}Loyalty";
 

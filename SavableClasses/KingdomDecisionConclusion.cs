@@ -12,7 +12,7 @@ namespace AllegianceOverhaul.SavableClasses
     [SaveableProperty(2)]
     public CampaignTime ConclusionTime { get; private set; }
 
-    public KingdomDecisionConclusion (DecisionOutcome outcome, CampaignTime conclusionTime)
+    public KingdomDecisionConclusion(DecisionOutcome outcome, CampaignTime conclusionTime)
     {
       ChosenOutcome = outcome;
       ConclusionTime = conclusionTime;

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using TaleWorlds.CampaignSystem;
+﻿using AllegianceOverhaul.Extensions;
 
 using MCM.Abstractions.Dropdown;
 
-using AllegianceOverhaul.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+
+using TaleWorlds.CampaignSystem;
 
 namespace AllegianceOverhaul.Helpers
 {
@@ -39,46 +39,31 @@ namespace AllegianceOverhaul.Helpers
     }
     public static bool SubSystemEnabled(SubSystemType subSystem)
     {
-      switch (subSystem)
+      return subSystem switch
       {
         //Loyalty
-        case SubSystemType.EnsuredLoyalty: return Settings.Instance!.UseEnsuredLoyalty;
-        case SubSystemType.LoyaltyWithholding: return Settings.Instance!.UseEnsuredLoyalty && Settings.Instance.UseRelationForEnsuredLoyalty && Settings.Instance.UseWithholdPrice;
-        case SubSystemType.LoyaltyInConversations: return Settings.Instance!.UseEnsuredLoyalty && Settings.Instance.UseLoyaltyInConversations;
-        case SubSystemType.LoyaltyTooltips: return Settings.Instance!.UseAdvancedHeroTooltips && Settings.Instance.UseEnsuredLoyalty;
+        SubSystemType.EnsuredLoyalty => Settings.Instance!.UseEnsuredLoyalty,
+        SubSystemType.LoyaltyWithholding => Settings.Instance!.UseEnsuredLoyalty && Settings.Instance.UseRelationForEnsuredLoyalty && Settings.Instance.UseWithholdPrice,
+        SubSystemType.LoyaltyInConversations => Settings.Instance!.UseEnsuredLoyalty && Settings.Instance.UseLoyaltyInConversations,
+        SubSystemType.LoyaltyTooltips => Settings.Instance!.UseAdvancedHeroTooltips && Settings.Instance.UseEnsuredLoyalty,
         //Migration
-        case SubSystemType.MigrationTweaks: return Settings.Instance!.UseMigrationTweaks;
-        case SubSystemType.AllowJoinRequests: return Settings.Instance!.UseMigrationTweaks && Settings.Instance.AllowJoinRequests;
-        case SubSystemType.AllowHireRequests: return Settings.Instance!.UseMigrationTweaks && Settings.Instance.AllowHireRequests;
-        case SubSystemType.UseDeterminedKingdomPick: return Settings.Instance!.UseMigrationTweaks && Settings.Instance.UseDeterminedKingdomPick;
+        SubSystemType.MigrationTweaks => Settings.Instance!.UseMigrationTweaks,
+        SubSystemType.AllowJoinRequests => Settings.Instance!.UseMigrationTweaks && Settings.Instance.AllowJoinRequests,
+        SubSystemType.AllowHireRequests => Settings.Instance!.UseMigrationTweaks && Settings.Instance.AllowHireRequests,
+        SubSystemType.UseDeterminedKingdomPick => Settings.Instance!.UseMigrationTweaks && Settings.Instance.UseDeterminedKingdomPick,
         //Politics
-        case SubSystemType.ElectionRebalance: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance;
-        case SubSystemType.DecisionSupportRebalance: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance;
-        case SubSystemType.MakePeaceSupportRebalance:
-          return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
-                 && Settings.Instance.PeaceSupportCalculationMethod.SelectedValue.EnumValue != PeaceAndWarConsideration.Native;
-        case SubSystemType.DeclareWarSupportRebalance:
-          return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
-                 && Settings.Instance.WarSupportCalculationMethod.SelectedValue.EnumValue != PeaceAndWarConsideration.Native;
-        /*
-        case SubSystemType.SettlementClaimantSupportRebalance:
-          return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
-                 && Settings.Instance.FiefOwnershipSupportCalculationMethod.SelectedValue.EnumValue != FiefOwnershipConsideration.Native;
-        case SubSystemType.AnnexationSupportRebalance:
-          return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseDecisionSupportRebalance
-                 && Settings.Instance.AnnexSupportCalculationMethod.SelectedValue.EnumValue != FiefOwnershipConsideration.Native;
-        */
-        case SubSystemType.ElectionCooldowns: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns;
-        case SubSystemType.ElectionCooldownsForPlayer: return Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns && Settings.Instance.UseElectionCooldownsForPlayer;
+        SubSystemType.ElectionRebalance => Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance,
+        SubSystemType.ElectionCooldowns => Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns,
+        SubSystemType.ElectionCooldownsForPlayer => Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns && Settings.Instance.UseElectionCooldownsForPlayer,
         //General
-        case SubSystemType.AdvancedHeroTooltips: return Settings.Instance!.UseAdvancedHeroTooltips;
+        SubSystemType.AdvancedHeroTooltips => Settings.Instance!.UseAdvancedHeroTooltips,
         //Testing
-        case SubSystemType.FreeDecisionOverriding: return Settings.Instance!.UseTestingSettings && Settings.Instance.FreeDecisionOverriding;
-        case SubSystemType.AlwaysPickPlayerKingdom: return Settings.Instance!.UseTestingSettings && Settings.Instance.AlwaysPickPlayerKingdom;
-        case SubSystemType.DestabilizeJoinEvaluation: return Settings.Instance!.UseTestingSettings && Settings.Instance.DestabilizeJoinEvaluation;
-        case SubSystemType.DestabilizeLeaveEvaluation: return Settings.Instance!.UseTestingSettings && Settings.Instance.DestabilizeLeaveEvaluation;
-        default: return false;
-      }
+        SubSystemType.FreeDecisionOverriding => Settings.Instance!.UseTestingSettings && Settings.Instance.FreeDecisionOverriding,
+        SubSystemType.AlwaysPickPlayerKingdom => Settings.Instance!.UseTestingSettings && Settings.Instance.AlwaysPickPlayerKingdom,
+        SubSystemType.DestabilizeJoinEvaluation => Settings.Instance!.UseTestingSettings && Settings.Instance.DestabilizeJoinEvaluation,
+        SubSystemType.DestabilizeLeaveEvaluation => Settings.Instance!.UseTestingSettings && Settings.Instance.DestabilizeLeaveEvaluation,
+        _ => false,
+      };
     }
     public static bool SubSystemEnabled(SubSystemType subSystem, IFaction faction)
     {
@@ -168,15 +153,9 @@ namespace AllegianceOverhaul.Helpers
     UseDeterminedKingdomPick = 55,
     //Politics
     ElectionRebalance = 100,
-    //Politics - DecisionSupportRebalance
-    DecisionSupportRebalance = 110,
-    MakePeaceSupportRebalance = 111,
-    DeclareWarSupportRebalance = 112,
-    SettlementClaimantSupportRebalance = 113,
-    AnnexationSupportRebalance = 114,
     //Politics - ElectionCooldowns
-    ElectionCooldowns = 120,
-    ElectionCooldownsForPlayer = 121,
+    ElectionCooldowns = 110,
+    ElectionCooldownsForPlayer = 111,
     //GeneralVM
     AdvancedHeroTooltips = 200,
     //TestingSettings

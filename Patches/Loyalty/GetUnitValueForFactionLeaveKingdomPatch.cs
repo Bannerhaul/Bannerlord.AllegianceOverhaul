@@ -1,13 +1,13 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.LoyaltyRebalance;
+
+using HarmonyLib;
 
 using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
-
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.LoyaltyRebalance;
 
 namespace AllegianceOverhaul.Patches.Loyalty
 {

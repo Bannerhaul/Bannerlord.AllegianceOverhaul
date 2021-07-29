@@ -1,12 +1,12 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
-
-using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Loyalty
 {

@@ -1,8 +1,10 @@
-﻿using System;
-using MCM.Abstractions.Settings.Base.Global;
-using MCM.Abstractions.Attributes;
+﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Dropdown;
+using MCM.Abstractions.Settings.Base.Global;
+
+using System;
+
 using TaleWorlds.Localization;
 
 namespace AllegianceOverhaul
@@ -135,60 +137,4 @@ namespace AllegianceOverhaul
     [System.ComponentModel.Description("{=vuZpjgfjv}Override using 'Full Push' cost")]
     FullyPush = 3
   }
-
-  [Flags]
-  public enum PeaceAndWarConsideration : byte
-  {
-    [System.ComponentModel.Description("{=LI9tc4Xuc}Use native logic")]
-    Native = 0,
-    [System.ComponentModel.Description("{=s1KlQUCzS}Apply situational factor")]
-    SituationalFactor = 1,
-    [System.ComponentModel.Description("{=J19R7g9RJ}Apply relationship factor")]
-    RelationshipFactor = 2,
-    [System.ComponentModel.Description("{=mYcC08wjI}Apply tribute factor")]
-    TributeFactor = 4,
-    //Groups
-    [System.ComponentModel.Description("{=FmJLrbHHr}Apply situational and relationship factors")]
-    FirstPair = SituationalFactor | RelationshipFactor,
-    [System.ComponentModel.Description("{=clynUPKFE}Apply situational and tribute factors")]
-    SecondPair = SituationalFactor | TributeFactor,
-    [System.ComponentModel.Description("{=70VVVTVQo}Apply relationship and tribute factors")]
-    ThirdPair = RelationshipFactor | TributeFactor,
-    [System.ComponentModel.Description("{=KwgG3HrlM}Apply all the factors")]
-    All = SituationalFactor | RelationshipFactor | TributeFactor
-  }
-
-  /*
-  [Flags]
-  public enum FiefOwnershipConsideration : byte
-  {
-    [System.ComponentModel.Description("{=}Use native logic")]
-    Native = 0,
-    [System.ComponentModel.Description("{=}Apply possessions factor")]
-    PossessionsFactor = 1,
-    [System.ComponentModel.Description("{=}Apply personality factor")]
-    PersonalityFactor = 2,
-    [System.ComponentModel.Description("{=}Apply benefit factor")]
-    BenefitFactor = 4,
-    //Groups
-    [System.ComponentModel.Description("{=}Apply possessions and personality factors")]
-    FirstPair = PossessionsFactor | PersonalityFactor,
-    [System.ComponentModel.Description("{=}Apply possessions and benefit factors")]
-    SecondPair = PossessionsFactor | BenefitFactor,
-    [System.ComponentModel.Description("{=}Apply personality and benefit factors")]
-    ThirdPair = PersonalityFactor | BenefitFactor,
-    [System.ComponentModel.Description("{=}Apply all the factors")]
-    All = PossessionsFactor | PersonalityFactor | BenefitFactor
-  }
-  
-  public enum NumberOfFiefsCalculationMethod : byte
-  {
-    [System.ComponentModel.Description("{=}Without restrictions")]
-    WithoutRestrictions = 0,
-    [System.ComponentModel.Description("{=}Based on the clan tier")]
-    ByClanTier = 1,
-    [System.ComponentModel.Description("{=}Based on the number of clan members")]
-    ByClanMembers = 2
-  }
-  */
 }

@@ -1,8 +1,8 @@
-﻿using TaleWorlds.CampaignSystem;
+﻿using AllegianceOverhaul.Extensions;
+
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
 using TaleWorlds.Core.ViewModelCollection;
-
-using AllegianceOverhaul.Extensions;
 
 namespace AllegianceOverhaul.ViewModels.Extensions
 {

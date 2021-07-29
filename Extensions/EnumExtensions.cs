@@ -109,7 +109,7 @@ namespace AllegianceOverhaul.Extensions
           ResultBuilder.Append(ResultBuilder.Length == 0 ? item.GetDescription(useLocalizedStrings) : ", " + item.GetDescription(useLocalizedStrings));
         }
         return ResultBuilder.ToString();
-      }      
+      }
       string name = Enum.GetName(type, value);
       if (name != null)
       {

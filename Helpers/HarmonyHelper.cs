@@ -1,12 +1,12 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Extensions;
+using AllegianceOverhaul.Extensions.Harmony;
+
+using HarmonyLib;
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-
-using AllegianceOverhaul.Extensions;
-using AllegianceOverhaul.Extensions.Harmony;
 
 namespace AllegianceOverhaul.Helpers
 {

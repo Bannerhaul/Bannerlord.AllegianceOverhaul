@@ -1,18 +1,18 @@
-﻿using System;
+﻿using AllegianceOverhaul.Extensions;
+using AllegianceOverhaul.Helpers;
+
+using System;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-using AllegianceOverhaul.Extensions;
-using AllegianceOverhaul.Helpers;
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 {
   public static class LoyaltyManager
   {
-    //BB49Q65v,xJ9hsFLS,xCyQmsJJ,QH0E2w6p,yttWp6ez,4bAtdf3F,wpPwwxHp,CMYzDghV,h3RHyeGO,s3RAXuiB,CYUKnxOH,rdpdUqkQ,uNS0QtqU,zmR6sT03
     private const string TooltipOathLoyal = "{=BbMvJCYUm}Under {?HERO_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\\?} at least for {REMAINING_DAYS} {?REMAINING_DAYS.PLURAL_FORM}days{?}day{\\?}";
     private const string TooltipLoyal = "{=oYpHpgDPr}Loyal";
     private const string TooltipRatherLoyal = "{=1TGDgTZq0}Rather loyal";

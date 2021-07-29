@@ -1,7 +1,7 @@
-﻿using MCM.Abstractions.Settings.Base.Global;
-using MCM.Abstractions.Attributes;
+﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Dropdown;
+using MCM.Abstractions.Settings.Base.Global;
 
 namespace AllegianceOverhaul
 {
@@ -9,9 +9,6 @@ namespace AllegianceOverhaul
   {
     private const string HeadingPoliticsRebalance = "{=36iqZfxor}Politics rebalance";
     private const string HeadingElectionRebalance = HeadingPoliticsRebalance + "/{=KjkJ0swLq}Election rebalance";
-    private const string HeadingDecisionSupportRebalance = HeadingElectionRebalance + "/{=UUhO7T6KO}Decision support rebalance";
-    //private const string HeadingFactorsFineTuning = HeadingDecisionSupportRebalance + "/{=}Factors fine-tuning";
-    private const string HeadingFactorsStrength = HeadingDecisionSupportRebalance + "/{=4TcdeL7Uu}Factors strength";
     private const string HeadingElectionCooldowns = HeadingElectionRebalance + "/{=YyNEnyXao}Election cooldowns";
 
     //Politics rebalance
@@ -40,81 +37,6 @@ namespace AllegianceOverhaul
     [SettingPropertyFloatingInteger("{=PB4s4f10m}Score threshold for AI to override decision", 0f, 200f, Order = 1, RequireRestart = true, HintText = "{=GWUSWJ41x}Minimum difference between AI ruler desired decision score and popular decision score for the ruler clan to consider overriding popular decision. Native is 10. Default = 50.0.")]
     [SettingPropertyGroup(HeadingElectionRebalance)]
     public float OverrideDecisionScoreThreshold { get; set; } = 50f;
-
-    //Decision support calculation
-    [SettingPropertyBool("{=UUhO7T6KO}Decision support rebalance", RequireRestart = true, IsToggle = true, HintText = "{=rHR6gl9ef}Enables adjustments to decision support calculation logics, used by AI clans.")]
-    [SettingPropertyGroup(HeadingDecisionSupportRebalance, GroupOrder = 0)]
-    public bool UseDecisionSupportRebalance { get; set; } = false;
-
-    [SettingPropertyDropdown("{=iraC4RG2n}Make peace", Order = 0, RequireRestart = false, HintText = "{=U1Yf34bca}Specify if and how clan support calculation logics for the make peace decision should be enhanced. Situational factor takes into account wars currently being fought and success rate against the faction to make peace with. Relationship factor is based on the relation with lords of the faction to make peace with. Tribute factor accounts for the gains or losses from the tributes to be imposed, including reputational ones.")]
-    [SettingPropertyGroup(HeadingDecisionSupportRebalance)]
-    public DropdownDefault<DropdownObject<PeaceAndWarConsideration>> PeaceSupportCalculationMethod { get; set; } = new DropdownDefault<DropdownObject<PeaceAndWarConsideration>>(DropdownObject<PeaceAndWarConsideration>.SetDropdownListFromEnum(), DropdownObject<PeaceAndWarConsideration>.GetEnumIndex(PeaceAndWarConsideration.All));
-
-    [SettingPropertyDropdown("{=nHu9iaUUB}Declare war", Order = 1, RequireRestart = false, HintText = "{=rAV9kYkov}Specify if and how clan support calculation logics for the declare war decision should be enhanced. Situational factor takes into account the power ratings of the currently warring kingdoms and of the kingdom to declare war on. Relationship factor is based on the relation with lords of the kingdom to declare war on. Tribute factor accounts for the amount of dinars the kingdom is currently receiving or being forced to pay.")]
-    [SettingPropertyGroup(HeadingDecisionSupportRebalance)]
-    public DropdownDefault<DropdownObject<PeaceAndWarConsideration>> WarSupportCalculationMethod { get; set; } = new DropdownDefault<DropdownObject<PeaceAndWarConsideration>>(DropdownObject<PeaceAndWarConsideration>.SetDropdownListFromEnum(), DropdownObject<PeaceAndWarConsideration>.GetEnumIndex(PeaceAndWarConsideration.All));
-
-    /*
-    [SettingPropertyDropdown("{=}Fief ownership", Order = 2, RequireRestart = false, HintText = "{=}Specify if and how clan support calculation logics should be enhanced when deciding who will own a fief.")]
-    [SettingPropertyGroup(HeadingDecisionSupportRebalance)]
-    public DropdownDefault<DropdownObject<FiefOwnershipConsideration>> FiefOwnershipSupportCalculationMethod { get; set; } = new DropdownDefault<DropdownObject<FiefOwnershipConsideration>>(DropdownObject<FiefOwnershipConsideration>.SetDropdownListFromEnum(), DropdownObject<FiefOwnershipConsideration>.GetEnumIndex(FiefOwnershipConsideration.All));
-
-    [SettingPropertyDropdown("{=}Fief annexation", Order = 3, RequireRestart = false, HintText = "{=}Specify if and how clan support calculation logics for the fief annexation decision should be enhanced.")]
-    [SettingPropertyGroup(HeadingDecisionSupportRebalance)]
-    public DropdownDefault<DropdownObject<FiefOwnershipConsideration>> AnnexSupportCalculationMethod { get; set; } = new DropdownDefault<DropdownObject<FiefOwnershipConsideration>>(DropdownObject<FiefOwnershipConsideration>.SetDropdownListFromEnum(), DropdownObject<FiefOwnershipConsideration>.GetEnumIndex(FiefOwnershipConsideration.All));
-    
-    //Factors fine-tuning
-    [SettingPropertyDropdown("{=}Fiefs restriction baseline", Order = 0, RequireRestart = false, HintText = "{=}Specify a method for determining the maximum number of fiefs that could belong to a clan, without imposing penalties.")]
-    [SettingPropertyGroup(HeadingFactorsFineTuning, GroupOrder = 0)]
-    public DropdownDefault<DropdownObject<NumberOfFiefsCalculationMethod>> FiefsDeemedFairBaseline { get; set; } = new DropdownDefault<DropdownObject<NumberOfFiefsCalculationMethod>>(DropdownObject<NumberOfFiefsCalculationMethod>.SetDropdownListFromEnum(), DropdownObject<NumberOfFiefsCalculationMethod>.GetEnumIndex(NumberOfFiefsCalculationMethod.ByClanTier));
-
-    [SettingPropertyInteger("{=}Fiefs restriction modifier", -5, 5, Order = 1, RequireRestart = false, HintText = "{=}Flat value that will be added to the allowed number of fiefs, still not imposing any penalties. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsFineTuning, GroupOrder = 0)]
-    public int FiefsDeemedFairModifier { get; set; } = 1;
-
-    [SettingPropertyDropdown("{=}Desired fiefs baseline", Order = 10, RequireRestart = false, HintText = "{=}Specify a method for determining the desired number of fiefs for the clan.")]
-    [SettingPropertyGroup(HeadingFactorsFineTuning, GroupOrder = 0)]
-    public DropdownDefault<DropdownObject<NumberOfFiefsCalculationMethod>> DesiredFiefsBaseline { get; set; } = new DropdownDefault<DropdownObject<NumberOfFiefsCalculationMethod>>(DropdownObject<NumberOfFiefsCalculationMethod>.SetDropdownListFromEnum(), DropdownObject<NumberOfFiefsCalculationMethod>.GetEnumIndex(NumberOfFiefsCalculationMethod.ByClanMembers));
-
-    [SettingPropertyInteger("{=}Desired fiefs modifier", -5, 5, Order = 11, RequireRestart = false, HintText = "{=}Flat value that will be added to the desired number of fiefs. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsFineTuning, GroupOrder = 0)]
-    public int DesiredFiefsModifier { get; set; } = 1;
-
-    [SettingPropertyBool("{=}Account for personal traits", Order = 12, RequireRestart = false, HintText = "{=}Specify if personal traits of the clan leader should affect the desired number of fiefs.")]
-    [SettingPropertyGroup(HeadingFactorsFineTuning, GroupOrder = 0)]
-    public bool DesiredFiefPersonalTraitsModifier { get; set; } = true;
-    */
-
-    //Factors strength
-    [SettingPropertyFloatingInteger("{=pgibaYP51}Make peace situational factor strength", 0f, 5f, Order = 0, RequireRestart = false, HintText = "{=Wkz82wdTt}A multiplier for the baseline result of calculating the situational factor for the 'make peace' decision. Situational factor takes into account the total number of wars currently being fought and the power ratings of each participating kingdom, as well as the success rate in the war against the faction to make peace with. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsStrength, GroupOrder = 1)]
-    public float MakePeaceSituationalFactorStrength { get; set; } = 1f;
-
-    [SettingPropertyFloatingInteger("{=zNwukiWT4}Make peace relationship factor strength", 0f, 5f, Order = 1, RequireRestart = false, HintText = "{=QL1TVKjBX}A multiplier for the baseline result of calculating the relationship factor for the 'make peace' decision. Relationship factor is based on the mean relation with lords of the faction to make peace with. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsStrength, GroupOrder = 1)]
-    public float MakePeaceRelationshipFactorStrength { get; set; } = 1f;
-
-    [SettingPropertyFloatingInteger("{=HzC3XjypN}Make peace tribute factor strength", 0f, 5f, Order = 2, RequireRestart = false, HintText = "{=gH9rnSGtM}A multiplier for the baseline result of calculating the tribute factor for the 'make peace' decision. Tribute factor takes into account the amount of denars that the kingdom will receive or will be forced to pay if peace is concluded, as well as the associated reputational gains or losses. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsStrength, GroupOrder = 1)]
-    public float MakePeaceTributeFactorStrength { get; set; } = 1f;
-
-    [SettingPropertyFloatingInteger("{=QLIrm7VAp}Declare war situational factor strength", 0f, 5f, Order = 10, RequireRestart = false, HintText = "{=bdIYWo2R8}A multiplier for the baseline result of calculating the situational factor for the 'declare war' decision. Situational factor takes into account the total number of wars currently being fought and the power ratings of each participating kingdom as well as of the kingdom to declare war on. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsStrength, GroupOrder = 1)]
-    public float DeclareWarSituationalFactorStrength { get; set; } = 1f;
-
-    [SettingPropertyFloatingInteger("{=DvvoBmrEZ}Declare war relationship factor strength", 0f, 5f, Order = 11, RequireRestart = false, HintText = "{=zzv2bMQhr}A multiplier for the baseline result of calculating the relationship factor for the 'declare war' decision.. Relationship factor takes into account the median and extremes of relation with the clans of the kingdom to declare war on. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsStrength, GroupOrder = 1)]
-    public float DeclareWarRelationshipFactorStrength { get; set; } = 1f;
-
-    [SettingPropertyFloatingInteger("{=lqfhT75fH}Declare war tribute factor strength", 0f, 5f, Order = 12, RequireRestart = false, HintText = "{=lc5iLtS0G}A multiplier for the baseline result of calculating the tribute factor for the 'declare war' decision. Tribute factor takes into account the amount of dinars the kingdom is currently receiving or being forced to pay. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsStrength, GroupOrder = 1)]
-    public float DeclareWarTributeFactorStrength { get; set; } = 1f;
-
-    /*
-    [SettingPropertyFloatingInteger("{=}Fief ownership possessions factor strength", 0f, 5f, Order = 20, RequireRestart = false, HintText = "{=}A multiplier for the baseline result of calculating the possessions factor for the 'fief ownership' decision. Possessions factor takes into account total number of fiefs already belonging to the pretending clan. Default = 1.")]
-    [SettingPropertyGroup(HeadingFactorsStrength, GroupOrder = 1)]
-    public float FiefOwnershipPossessionsFactorStrength { get; set; } = 1f;
-    */
 
     //Election cooldowns
     [SettingPropertyBool("{=YyNEnyXao}Election cooldowns", RequireRestart = true, IsToggle = true, HintText = "{=cBT3GuZ7A}Enables cooldowns for kingdom elections on the identical topics.")]

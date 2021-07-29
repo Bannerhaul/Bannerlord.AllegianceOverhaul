@@ -1,18 +1,18 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.PoliticsRebalance;
+
+using HarmonyLib;
 
 using System;
 using System.Linq;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.Election;
+using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
-
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using AllegianceOverhaul.Helpers;
-using AllegianceOverhaul.PoliticsRebalance;
 
 namespace AllegianceOverhaul.Patches.Politics
 {

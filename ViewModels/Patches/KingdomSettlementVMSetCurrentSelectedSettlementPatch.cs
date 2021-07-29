@@ -1,4 +1,7 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Reflection;
@@ -7,14 +10,11 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomSettlement;
 
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using AllegianceOverhaul.Helpers;
-
 namespace AllegianceOverhaul.ViewModels.Patches
 {
   [HarmonyPatch(typeof(KingdomSettlementVM), "SetCurrentSelectedSettlement")]
   public static class KingdomSettlementVMSetCurrentSelectedSettlementPatch
-  {   
+  {
     [HarmonyPostfix]
     public static void SetCurrentSelectedSettlementPatch(KingdomSettlementItemVM settlementItem, KingdomSettlementVM __instance)
     {

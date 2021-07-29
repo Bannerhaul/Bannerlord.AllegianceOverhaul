@@ -1,31 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using AllegianceOverhaul.Helpers;
+using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
+
+using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.Localization;
 
-using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
-using AllegianceOverhaul.Helpers;
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.LoyaltyRebalance
 {
   internal static class LoyaltyDebugHelper
   {
-    //Fp18vLHE,16kFtifY
     private const string LeaveDecision = "{=YHZngi0zT}leave";
     private const string StayDecision = "{=1UE7qhyNL}stay";
 
     private const string Debug_Leave = "{=9UJCxwEOJ}{?LEAVING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\\?} {LEAVING_CLAN_KINGDOM.NAME} is considering leaving. Value of the kingdom for them is {LEAVE_BARTERABLE}, threshold is {LEAVE_THRESHOLD}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}";
     private const string Debug_Defect = "{=uCLx8xqZs}{?LEAVING_CLAN.MINOR_FACTION}Minor faction{?}The clan{\\?} {LEAVING_CLAN.NAME} {?LEAVING_CLAN.UNDER_CONTRACT}under mercenary service of{?}of{\\?} {LEAVING_CLAN_KINGDOM.NAME} is considering defecting to {TARGET_KINGDOM.NAME}. Current kingdom worth {CURRENT_BARTERABLE} for them and other kingdom is valued at {TARGET_BARTERABLE}. Natively they would {CLAN_DECISION}.{ENSURED_LOYALTY_RESULT}";
 
-    public static bool InDebugBranch { get;  private set; } = false;
+    public static bool InDebugBranch { get; private set; } = false;
 
     public static void LeaveKingdomDebug(Clan clan)
     {
       if (!SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.General, clan))
         return;
-      
+
       InDebugBranch = true;
       LeaveKingdomAsClanBarterable asClanBarterable = new LeaveKingdomAsClanBarterable(clan.Leader, null);
       int ClanBarterableValueForFaction = asClanBarterable.GetValueForFaction(clan);

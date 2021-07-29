@@ -1,11 +1,11 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
-
-using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches
 {

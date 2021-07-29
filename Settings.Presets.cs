@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AllegianceOverhaul.Extensions;
 
+using MCM.Abstractions.Dropdown;
 using MCM.Abstractions.Settings.Base;
 using MCM.Abstractions.Settings.Base.Global;
-using MCM.Abstractions.Dropdown;
 
-using AllegianceOverhaul.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace AllegianceOverhaul
 {
@@ -33,7 +33,6 @@ namespace AllegianceOverhaul
         //Politics
         UsePoliticsRebalance = true,
         UseElectionRebalance = true,
-        UseDecisionSupportRebalance = true,
         UseElectionCooldowns = true,
         //General
         FixMinorFactionVassals = true,
@@ -52,7 +51,6 @@ namespace AllegianceOverhaul
         //Politics
         UsePoliticsRebalance = true,
         UseElectionRebalance = true,
-        UseDecisionSupportRebalance = true,
         UseElectionCooldowns = true,
         //General
         FixMinorFactionVassals = true,
@@ -79,7 +77,6 @@ namespace AllegianceOverhaul
         //Politics
         UsePoliticsRebalance = true,
         UseElectionRebalance = true,
-        UseDecisionSupportRebalance = true,
         UseElectionCooldowns = true,
         //General
         FixMinorFactionVassals = true,

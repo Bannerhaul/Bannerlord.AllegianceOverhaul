@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Collections.Generic;
@@ -7,8 +9,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 
 using TaleWorlds.CampaignSystem.Election;
-
-using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Politics
 {

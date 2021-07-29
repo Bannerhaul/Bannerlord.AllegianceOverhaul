@@ -1,4 +1,8 @@
-﻿using HarmonyLib;
+﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Extensions.Harmony;
+using AllegianceOverhaul.Helpers;
+
+using HarmonyLib;
 
 using System;
 using System.Collections.Generic;
@@ -11,10 +15,6 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Barterables;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
 using TaleWorlds.Core;
-
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
-using AllegianceOverhaul.Extensions.Harmony;
-using AllegianceOverhaul.Helpers;
 
 namespace AllegianceOverhaul.Patches.Migration
 {
@@ -87,7 +87,7 @@ namespace AllegianceOverhaul.Patches.Migration
         || ((clanToDefectTo == Clan.PlayerClan || clanToDefectTo.MapFaction.Leader == Hero.MainHero) && (!SettingsHelper.SubSystemEnabled(SubSystemType.AllowJoinRequests) || AOCooldownManager.HasPlayerRequestCooldown()));
     }
 
-    public static void GetJoinDecision(Clan clan, bool clanHasMapEvent, List<Clan> list, DiplomaticBartersBehavior instance)
+    public static void GetJoinDecision(Clan clan, bool clanHasMapEvent, DiplomaticBartersBehavior instance)
     {
       try
       {
@@ -267,16 +267,30 @@ namespace AllegianceOverhaul.Patches.Migration
         if (startIndex > -1 && endIndex > -1)
         {
           codes.RemoveRange(startIndex, endIndex - startIndex);
-          codes.InsertRange(startIndex, new CodeInstruction[] { new CodeInstruction(opcode: OpCodes.Ldarg_1),
-                                                                new CodeInstruction(opcode: OpCodes.Ldloc_0),
-                                                                new CodeInstruction(opcode: OpCodes.Ldloc_1),
-                                                                new CodeInstruction(opcode: OpCodes.Ldarg_0),
-                                                                new CodeInstruction(opcode: OpCodes.Call, operand: miToCall) });
+          codes.InsertRange(startIndex, GetCodeInstructions(miToCall));
         }
         else
         {
           MessageHelper.ErrorMessage("Harmony transpiler for DiplomaticBartersBehavior. DailyTickClan could not find code hooks for " + decisionDesc + " decision!");
         }
+
+        static CodeInstruction[] GetCodeInstructions(MethodInfo miToCall) =>
+          miToCall == miGetJoinDecision
+            ? new CodeInstruction[]
+              {
+                  new CodeInstruction(opcode: OpCodes.Ldarg_1),
+                  new CodeInstruction(opcode: OpCodes.Ldloc_0),
+                  new CodeInstruction(opcode: OpCodes.Ldarg_0),
+                  new CodeInstruction(opcode: OpCodes.Call, operand: miToCall)
+              }
+            : new CodeInstruction[]
+              {
+                  new CodeInstruction(opcode: OpCodes.Ldarg_1),
+                  new CodeInstruction(opcode: OpCodes.Ldloc_0),
+                  new CodeInstruction(opcode: OpCodes.Ldloc_1),
+                  new CodeInstruction(opcode: OpCodes.Ldarg_0),
+                  new CodeInstruction(opcode: OpCodes.Call, operand: miToCall)
+              };
       }
 
       static void LogNoHooksIssue(int defectConditionIndex, int defectStartIndex, int defectEndIndex, int joinConditionIndex, int joinStartIndex, int joinEndIndex, List<CodeInstruction> codes)

@@ -1,5 +1,6 @@
-﻿using TaleWorlds.CampaignSystem;
-using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 
 namespace AllegianceOverhaul.CampaignBehaviors
