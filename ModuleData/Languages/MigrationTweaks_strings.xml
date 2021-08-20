@@ -7,7 +7,7 @@
 		<!--Player inquiry about AI joining - header-->
 		<string id="0DEJNa14n" text="A clan wishes to join your kingdom!" />
 		<!--Player inquiry about AI joining - body-->
-		<string id="NAlAH3pJk" text="The {JOINING_CLAN.NAME} clan is looking to join your kingdom{?JOINING_CLAN.UNDER_CONTRACT} as mercenary{?}{\?}!{NEW_LINE} {NEW_LINE}They have {TROOPS_DESCRIPTION} and {FIEFS_DESCRIPTION}. Their leader {RELATION} towards you.{NEW_LINE} {NEW_LINE}What say ye?" />
+		<string id="NAlAH3pJk" text="The {JOINING_CLAN.NAME} clan is looking to join your kingdom{?JOINING_CLAN.IS_MERCENARY} as a mercenary{?}{\?}!{NEW_LINE} {NEW_LINE}They have {TROOPS_DESCRIPTION} and {FIEFS_DESCRIPTION}. Their leader {RELATION} towards you.{NEW_LINE} {NEW_LINE}What say ye?" />
 		<!--Player inquiry about AI joining - buttons-->
 		<string id="ey1dxwam7" text="Welcome them" />
 		<string id="wV0pIOvEg" text="Turn them away" />

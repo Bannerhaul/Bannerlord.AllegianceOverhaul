@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AllegianceOverhaul.Extensions;
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -65,6 +67,7 @@ namespace AllegianceOverhaul.Helpers
           clanProperties.SetTextVariable("NAME", clan.Name);
           clanProperties.SetTextVariable("MINOR_FACTION", clan.IsMinorFaction ? 1 : 0);
           clanProperties.SetTextVariable("UNDER_CONTRACT", clan.IsUnderMercenaryService ? 1 : 0);
+          clanProperties.SetTextVariable("IS_MERCENARY", clan.IsMercenary() ? 1 : 0);
           clanProperties.SetTextVariable("LINK", clan.EncyclopediaLinkWithName);
           return clanProperties;
         case Kingdom kingdom:

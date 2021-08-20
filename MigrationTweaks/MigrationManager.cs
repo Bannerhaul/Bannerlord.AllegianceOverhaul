@@ -19,7 +19,7 @@ namespace AllegianceOverhaul.MigrationTweaks
   internal static class MigrationManager
   {
     private const string PlayerInquiryHeader = "{=0DEJNa14n}A clan wishes to join your kingdom!";
-    private const string PlayerInquiryBody = "{=NAlAH3pJk}The {JOINING_CLAN.NAME} clan is looking to join your kingdom{?JOINING_CLAN.UNDER_CONTRACT} as mercenary{?}{\\?}!{NEW_LINE} {NEW_LINE}They have {TROOPS_DESCRIPTION} and {FIEFS_DESCRIPTION}.Their leader is {RELATION} towards you.{NEW_LINE} {NEW_LINE}What say ye?";
+    private const string PlayerInquiryBody = "{=NAlAH3pJk}The {JOINING_CLAN.NAME} clan is looking to join your kingdom{?JOINING_CLAN.IS_MERCENARY} as a mercenary{?}{\\?}!{NEW_LINE} {NEW_LINE}They have {TROOPS_DESCRIPTION} and {FIEFS_DESCRIPTION}.Their leader is {RELATION} towards you.{NEW_LINE} {NEW_LINE}What say ye?";
 
     private const string TroopsDescription = "{=JhJW9KQcw}{TROOPS} {?TROOPS.PLURAL_FORM}able warriors{?}able warrior{\\?} across {WAR_PARTIES} {?WAR_PARTIES.PLURAL_FORM}war parties{?}war party{\\?}";
     private const string NoFiefsDescription = "{=RzO5SBUgJ}no fiefs";
