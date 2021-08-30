@@ -6,13 +6,13 @@ using TaleWorlds.Core.ViewModelCollection;
 
 namespace AllegianceOverhaul.ViewModels.Extensions
 {
-  public static class TooltipVMExtension
-  {
-    public static void UpdateTooltip(this TooltipVM tooltipVM, Hero? hero, Hero? otherHero)
+    public static class TooltipVMExtension
     {
-      tooltipVM.UpdateTooltip(hero);
-      if (otherHero != null)
-        tooltipVM.TooltipPropertyList.Add(new TooltipProperty(TooltipHelper.GetTooltipRelationHeader(otherHero), hero?.GetModifiedRelation(otherHero).ToString("N0"), 0, false, TooltipProperty.TooltipPropertyFlags.None));
+        public static void UpdateTooltip(this TooltipVM tooltipVM, Hero? hero, Hero? otherHero)
+        {
+            tooltipVM.UpdateTooltip(hero);
+            if (otherHero != null)
+                tooltipVM.TooltipPropertyList.Add(new TooltipProperty(TooltipHelper.GetTooltipRelationHeader(otherHero), hero?.GetModifiedRelation(otherHero).ToString("N0"), 0, false, TooltipProperty.TooltipPropertyFlags.None));
+        }
     }
-  }
 }

@@ -2,11 +2,11 @@
 
 namespace AllegianceOverhaul.Extensions
 {
-  public static class ClanExtensions
-  {
-    public static bool IsMercenary(this Clan clan)
+    public static class ClanExtensions
     {
-      return clan.Kingdom is null ? clan.IsMinorFaction : clan.IsUnderMercenaryService;
+        public static bool IsMercenary(this Clan clan)
+        {
+            return clan.Kingdom is null ? clan.IsMinorFaction : clan.IsUnderMercenaryService;
+        }
     }
-  }
 }

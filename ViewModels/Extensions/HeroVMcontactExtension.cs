@@ -4,22 +4,22 @@ using TaleWorlds.Core;
 
 namespace AllegianceOverhaul.ViewModels.Extensions
 {
-  public class HeroVMcontactExtension : HeroVM
-  {
-    public Hero OtherHero { get; }
-    public HeroVMcontactExtension(Hero hero, Hero otherHero) : base(hero)
+    public class HeroVMcontactExtension : HeroVM
     {
-      OtherHero = otherHero;
-    }
+        public Hero OtherHero { get; }
+        public HeroVMcontactExtension(Hero hero, Hero otherHero) : base(hero)
+        {
+            OtherHero = otherHero;
+        }
 
-    public override void ExecuteBeginHint()
-    {
-      if (Hero == null)
-        return;
-      if (OtherHero != null)
-        InformationManager.AddTooltipInformation(typeof(Hero), Hero, OtherHero);
-      else
-        InformationManager.AddTooltipInformation(typeof(Hero), Hero);
+        public override void ExecuteBeginHint()
+        {
+            if (Hero == null)
+                return;
+            if (OtherHero != null)
+                InformationManager.AddTooltipInformation(typeof(Hero), Hero, OtherHero);
+            else
+                InformationManager.AddTooltipInformation(typeof(Hero), Hero);
+        }
     }
-  }
 }

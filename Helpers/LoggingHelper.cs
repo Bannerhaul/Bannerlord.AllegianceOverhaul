@@ -4,28 +4,28 @@ using TaleWorlds.Library;
 
 namespace AllegianceOverhaul.Helpers
 {
-  internal static class LoggingHelper
-  {
-    public static readonly string AOLogFile = Path.Combine(BasePath.Name, "Modules", "AllegianceOverhaul", "AllegianceOverhaul.log");
-    public static void Log(string message)
+    internal static class LoggingHelper
     {
-      lock (AOLogFile)
-      {
-        using (StreamWriter streamWriter = File.AppendText(AOLogFile))
+        public static readonly string AOLogFile = Path.Combine(BasePath.Name, "Modules", "AllegianceOverhaul", "AllegianceOverhaul.log");
+        public static void Log(string message)
         {
-          streamWriter.WriteLine(message);
+            lock (AOLogFile)
+            {
+                using (StreamWriter streamWriter = File.AppendText(AOLogFile))
+                {
+                    streamWriter.WriteLine(message);
+                }
+            }
         }
-      }
-    }
-    public static void Log(string message, string sectionName)
-    {
-      lock (AOLogFile)
-      {
-        using (StreamWriter streamWriter = File.AppendText(AOLogFile))
+        public static void Log(string message, string sectionName)
         {
-          streamWriter.WriteLine($"[{DateTime.Now:dd.MM.yyyy HH:mm:ss}] - {sectionName}.\n{message}");
+            lock (AOLogFile)
+            {
+                using (StreamWriter streamWriter = File.AppendText(AOLogFile))
+                {
+                    streamWriter.WriteLine($"[{DateTime.Now:dd.MM.yyyy HH:mm:ss}] - {sectionName}.\n{message}");
+                }
+            }
         }
-      }
     }
-  }
 }

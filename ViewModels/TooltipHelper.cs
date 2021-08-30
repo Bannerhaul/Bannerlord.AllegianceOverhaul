@@ -6,23 +6,23 @@ using TaleWorlds.Localization;
 
 namespace AllegianceOverhaul.ViewModels
 {
-  internal class TooltipHelper
-  {
-    public static Color DefaultTooltipColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-    private const string TooltipRelationHeader = "{=YCgmy4haM}Relation with {HERO}";
-    private const string TooltipLoyaltyHeader = "{=YJmaYz7il}Loyalty";
+    internal class TooltipHelper
+    {
+        public static Color DefaultTooltipColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        private const string TooltipRelationHeader = "{=YCgmy4haM}Relation with {HERO}";
+        private const string TooltipLoyaltyHeader = "{=YJmaYz7il}Loyalty";
 
-    public static string GetTooltipRelationHeader(Hero hero)
-    {
-      if (hero is null)
-        return string.Empty;
-      TextObject textObject = new TextObject(TooltipRelationHeader);
-      textObject.SetTextVariable("HERO", hero.Name);
-      return textObject.ToString();
+        public static string GetTooltipRelationHeader(Hero hero)
+        {
+            if (hero is null)
+                return string.Empty;
+            TextObject textObject = new TextObject(TooltipRelationHeader);
+            textObject.SetTextVariable("HERO", hero.Name);
+            return textObject.ToString();
+        }
+        public static string GetTooltipLoyaltyHeader()
+        {
+            return TooltipLoyaltyHeader.ToLocalizedString();
+        }
     }
-    public static string GetTooltipLoyaltyHeader()
-    {
-      return TooltipLoyaltyHeader.ToLocalizedString();
-    }
-  }
 }

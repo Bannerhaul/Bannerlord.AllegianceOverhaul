@@ -12,31 +12,31 @@ using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomCla
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {
-  [HarmonyPatch(typeof(KingdomClanVM), "SetCurrentSelectedClan")]
-  public static class KingdomClanVMSetCurrentSelectedClanPatch
-  {
-    [HarmonyPostfix]
-    public static void SetCurrentSelectedClanPatch(KingdomClanItemVM clan, KingdomClanVM __instance)
+    [HarmonyPatch(typeof(KingdomClanVM), "SetCurrentSelectedClan")]
+    public static class KingdomClanVMSetCurrentSelectedClanPatch
     {
-      try
-      {
-        if (SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer))
+        [HarmonyPostfix]
+        public static void SetCurrentSelectedClanPatch(KingdomClanItemVM clan, KingdomClanVM __instance)
         {
-          bool HasCooldown = AOCooldownManager.HasDecisionCooldown(new ExpelClanFromKingdomDecision(Clan.PlayerClan, clan.Clan), out float elapsedDaysUntilNow);
-          __instance.CanExpelCurrentClan = __instance.CanExpelCurrentClan && !HasCooldown;
-          __instance.ExpelActionExplanationText += HasCooldown ? "\n" + StringHelper.GetCooldownText(typeof(ExpelClanFromKingdomDecision), elapsedDaysUntilNow).ToString() : string.Empty;
+            try
+            {
+                if (SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer))
+                {
+                    bool HasCooldown = AOCooldownManager.HasDecisionCooldown(new ExpelClanFromKingdomDecision(Clan.PlayerClan, clan.Clan), out float elapsedDaysUntilNow);
+                    __instance.CanExpelCurrentClan = __instance.CanExpelCurrentClan && !HasCooldown;
+                    __instance.ExpelActionExplanationText += HasCooldown ? "\n" + StringHelper.GetCooldownText(typeof(ExpelClanFromKingdomDecision), elapsedDaysUntilNow).ToString() : string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+                DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomClanVM. SetCurrentSelectedClan");
+            }
         }
-      }
-      catch (Exception ex)
-      {
-        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
-        DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomClanVM. SetCurrentSelectedClan");
-      }
-    }
 
-    public static bool Prepare()
-    {
-      return SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer);
+        public static bool Prepare()
+        {
+            return SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer);
+        }
     }
-  }
 }

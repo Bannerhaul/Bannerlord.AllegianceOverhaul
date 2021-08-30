@@ -12,31 +12,31 @@ using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomDip
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {
-  [HarmonyPatch(typeof(KingdomDiplomacyVM), "OnSetWarItem")]
-  public static class KingdomDiplomacyVMOnSetWarItemPatch
-  {
-    [HarmonyPostfix]
-    public static void OnSetWarItemPatch(KingdomWarItemVM item, KingdomDiplomacyVM __instance)
+    [HarmonyPatch(typeof(KingdomDiplomacyVM), "OnSetWarItem")]
+    public static class KingdomDiplomacyVMOnSetWarItemPatch
     {
-      try
-      {
-        if (SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer))
+        [HarmonyPostfix]
+        public static void OnSetWarItemPatch(KingdomWarItemVM item, KingdomDiplomacyVM __instance)
         {
-          bool HasCooldown = AOCooldownManager.HasDecisionCooldown(new MakePeaceKingdomDecision(Clan.PlayerClan, item.Faction2, applyResults: false), out float elapsedDaysUntilNow);
-          __instance.IsActionEnabled = __instance.IsActionEnabled && !HasCooldown;
-          __instance.ProposeActionExplanationText += HasCooldown ? "\n" + StringHelper.GetCooldownText(typeof(MakePeaceKingdomDecision), elapsedDaysUntilNow).ToString() : string.Empty;
+            try
+            {
+                if (SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer))
+                {
+                    bool HasCooldown = AOCooldownManager.HasDecisionCooldown(new MakePeaceKingdomDecision(Clan.PlayerClan, item.Faction2, applyResults: false), out float elapsedDaysUntilNow);
+                    __instance.IsActionEnabled = __instance.IsActionEnabled && !HasCooldown;
+                    __instance.ProposeActionExplanationText += HasCooldown ? "\n" + StringHelper.GetCooldownText(typeof(MakePeaceKingdomDecision), elapsedDaysUntilNow).ToString() : string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
+                DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomDiplomacyVM. OnSetWarItem");
+            }
         }
-      }
-      catch (Exception ex)
-      {
-        MethodInfo? methodInfo = MethodBase.GetCurrentMethod() as MethodInfo;
-        DebugHelper.HandleException(ex, methodInfo, "Harmony patch for KingdomDiplomacyVM. OnSetWarItem");
-      }
-    }
 
-    public static bool Prepare()
-    {
-      return SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer);
+        public static bool Prepare()
+        {
+            return SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldownsForPlayer);
+        }
     }
-  }
 }
