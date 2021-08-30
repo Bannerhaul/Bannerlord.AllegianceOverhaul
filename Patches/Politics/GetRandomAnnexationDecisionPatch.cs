@@ -39,17 +39,17 @@ namespace AllegianceOverhaul.Patches.Politics
 
         Kingdom kingdom = clan.Kingdom;
         __result = null;
-        if (kingdom.UnresolvedDecisions.FirstOrDefault(x => x is SettlementClaimantPreliminaryDecision) == null && clan.Influence >= 300.0)
+        if (!kingdom.UnresolvedDecisions.Any(x => x is SettlementClaimantPreliminaryDecision) && clan.Influence >= 300.0)
         {
           Clan randomClan = kingdom.Clans.Where(x => x != clan
                                                      && x.Fiefs.Count > 0
                                                      && (x.GetRelationWithClan(clan) < -25)
-                                                     && x.Fiefs.FirstOrDefault(f => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))) != null
+                                                     && x.Fiefs.Any(f => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement))))
                                                ).ToArray().GetRandomElement();
 
-          Town randomFortification = SettingsHelper.SubSystemEnabled(SubSystemType.ElectionCooldowns, clan)
-              ? clan.Fiefs.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
-              : clan.Fiefs.ToArray().GetRandomElement();
+          Town randomFortification = SubSystemEnabled
+              ? randomClan.Fiefs.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
+              : randomClan.Fiefs.ToArray().GetRandomElement();
 
           if (randomClan != null && deConsiderAnnex!(__instance, clan, kingdom, randomClan, randomFortification))
             __result = new SettlementClaimantPreliminaryDecision(clan, randomFortification.Settlement);
