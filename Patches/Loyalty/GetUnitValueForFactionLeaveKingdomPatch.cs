@@ -44,7 +44,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
                         CalculatedResult = !faction.IsClan || !FactionManager.IsAtWarAgainstFaction(faction, iOriginalOwnerKingdom) ? (!FactionManager.IsAlliedWithFaction(faction, iOriginalOwnerKingdom) ? clanStrength * 0.01f : clanStrength * -0.5f) : clanStrength * 0.5f;
                     }
                 }
-                
+
                 if (debugEnabled)
                 {
                     string UnitValueDebugInfo = string.Format("LeaveKingdom - UnitValueForFaction. faction: {0}. ScoreOfMercenaryToLeaveKingdom = {1}. ScoreOfClanToLeaveKingdom = {2}. CalculatedResult = {3}. Result = {4}",

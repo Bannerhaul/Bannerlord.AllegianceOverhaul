@@ -1,6 +1,5 @@
 ﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
 using AllegianceOverhaul.Extensions;
-using AllegianceOverhaul.Extensions.Harmony;
 using AllegianceOverhaul.Helpers;
 
 using HarmonyLib;

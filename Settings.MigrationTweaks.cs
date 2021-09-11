@@ -29,7 +29,8 @@ namespace AllegianceOverhaul
         [SettingPropertyGroup(HeadingMigrationTweaks)]
         public bool UseDeterminedKingdomPick { get; set; } = false;
 
-        [SettingPropertyBool("{=lc5iLtS0G}Leader defection fix", Order = 4, RequireRestart = false, HintText = "{=lqfhT75fH}Fixes a vanilla bug that allowed ruling clans to defect to other kingdoms while remaining the leaders of their former kingdoms. When applied, restricts ruling clans from defecting, unless they are the last active clan in their kingdom, in which case they can defect with all their fiefs and the former kingdom will be destroyed.")]        [SettingPropertyGroup(HeadingMigrationTweaks)]
+        [SettingPropertyBool("{=lc5iLtS0G}Leader defection fix", Order = 4, RequireRestart = false, HintText = "{=lqfhT75fH}Fixes a vanilla bug that allowed ruling clans to defect to other kingdoms while remaining the leaders of their former kingdoms. When applied, restricts ruling clans from defecting, unless they are the last active clan in their kingdom, in which case they can defect with all their fiefs and the former kingdom will be destroyed.")]
+        [SettingPropertyGroup(HeadingMigrationTweaks)]
         public bool ApplyLeaderDefectionFix { get; set; } = true;
     }
 }

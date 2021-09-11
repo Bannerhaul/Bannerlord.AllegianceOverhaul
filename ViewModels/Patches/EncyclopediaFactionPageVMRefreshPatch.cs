@@ -21,7 +21,6 @@ namespace AllegianceOverhaul.ViewModels.Patches
             {
                 if (SettingsHelper.SubSystemEnabled(SubSystemType.LeaderDefectionFix) && ____faction.IsEliminated)
                 {
-                    
                     __instance.LeaderText = "{=DvvoBmrEZ}Former ".ToLocalizedString() + __instance.LeaderText;
                     __instance.NameText += "{=bdIYWo2R8} (eliminated)".ToLocalizedString();
                     __instance.Settlements.Clear();

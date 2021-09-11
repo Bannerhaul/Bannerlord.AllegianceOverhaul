@@ -1,6 +1,5 @@
 ﻿extern alias TWCS;
 
-using AllegianceOverhaul.Extensions.Harmony;
 using AllegianceOverhaul.Helpers;
 
 using HarmonyLib;
