@@ -14,10 +14,8 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
-
 namespace AllegianceOverhaul.Patches.Politics
 {
-
     [HarmonyPatch(typeof(KingdomDecisionProposalBehavior), "GetRandomAnnexationDecision")]
     public static class GetRandomAnnexationDecisionPatch
     {

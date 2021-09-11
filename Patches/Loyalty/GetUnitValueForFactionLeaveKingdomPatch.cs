@@ -44,7 +44,6 @@ namespace AllegianceOverhaul.Patches.Loyalty
                         CalculatedResult = !faction.IsClan || !FactionManager.IsAtWarAgainstFaction(faction, iOriginalOwnerKingdom) ? (!FactionManager.IsAlliedWithFaction(faction, iOriginalOwnerKingdom) ? clanStrength * 0.01f : clanStrength * -0.5f) : clanStrength * 0.5f;
                     }
                 }
-
                 
                 if (debugEnabled)
                 {

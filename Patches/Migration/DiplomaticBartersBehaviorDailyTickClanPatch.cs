@@ -306,22 +306,7 @@ namespace AllegianceOverhaul.Patches.Migration
                 issueInfo.Append($"\n\tmiConsiderPeace={(miConsiderPeace != null ? miConsiderPeace.ToString() : "not found")}");
                 issueInfo.Append($"\n\tmiConsiderDefection={(miConsiderDefection != null ? miConsiderDefection.ToString() : "not found")}");
                 issueInfo.Append($"\n\tmiConsiderClanJoin={(miConsiderClanJoin != null ? miConsiderClanJoin.ToString() : "not found")}");
-                issueInfo.Append($"\nIL:");
-                for (int i = 0; i < codes.Count; ++i)
-                {
-                    issueInfo.Append($"\n\t{i:D4}:\t{codes[i]}");
-                }
-                // get info about other transpilers on OriginalMethod        
-                HarmonyLib.Patches patches;
-                patches = Harmony.GetPatchInfo(MethodBase.GetCurrentMethod());
-                if (patches != null)
-                {
-                    issueInfo.Append($"\nOther transpilers:");
-                    foreach (Patch patch in patches.Transpilers)
-                    {
-                        issueInfo.Append(patch.GetDebugString());
-                    }
-                }
+                LoggingHelper.LogILAndPatches(codes, issueInfo, MethodBase.GetCurrentMethod());
                 LoggingHelper.Log(issueInfo.ToString());
             }
         }

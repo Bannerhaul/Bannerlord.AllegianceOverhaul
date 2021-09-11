@@ -132,22 +132,7 @@ namespace AllegianceOverhaul.Patches.Migration
                 issueInfo.Append($"\toriginalKingdomConditionIndex = {originalKingdomConditionIndex}.\n\treplaceStartIndex={replaceStartIndex}.\n\treplaceEndIndex={replaceEndIndex}.");
                 issueInfo.Append($"\nMethodInfos:");
                 issueInfo.Append($"\n\tmiApplyByLeaveKingdom={(miApplyByLeaveKingdom != null ? miApplyByLeaveKingdom.ToString() : "not found")}");
-                issueInfo.Append($"\nIL:");
-                for (int i = 0; i < codes.Count; ++i)
-                {
-                    issueInfo.Append($"\n\t{i:D4}:\t{codes[i]}");
-                }
-                // get info about other transpilers on OriginalMethod        
-                HarmonyLib.Patches patches;
-                patches = Harmony.GetPatchInfo(MethodBase.GetCurrentMethod());
-                if (patches != null)
-                {
-                    issueInfo.Append($"\nOther transpilers:");
-                    foreach (Patch patch in patches.Transpilers)
-                    {
-                        issueInfo.Append(patch.GetDebugString());
-                    }
-                }
+                LoggingHelper.LogILAndPatches(codes, issueInfo, MethodBase.GetCurrentMethod());
                 LoggingHelper.Log(issueInfo.ToString());
             }
         }
