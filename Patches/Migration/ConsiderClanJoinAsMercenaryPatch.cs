@@ -13,7 +13,7 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
 namespace AllegianceOverhaul.Patches.Migration
 {
     [HarmonyPatch(typeof(DiplomaticBartersBehavior), "ConsiderClanJoinAsMercenary")]
-    public class ConsiderClanJoinAsMercenaryPatch
+    public static class ConsiderClanJoinAsMercenaryPatch
     {
         public static bool Prefix(Clan clan, Kingdom kingdom) //Bool prefixes compete with each other and skip others, as well as original, if return false
         {

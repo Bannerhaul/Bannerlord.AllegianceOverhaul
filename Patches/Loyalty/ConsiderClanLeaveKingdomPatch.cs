@@ -11,7 +11,7 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
 namespace AllegianceOverhaul.Patches.Loyalty
 {
     [HarmonyPatch(typeof(DiplomaticBartersBehavior), "ConsiderClanLeaveKingdom")]
-    public class ConsiderClanLeaveKingdomPatch
+    public static class ConsiderClanLeaveKingdomPatch
     {
         [HarmonyPrefix]
         [HarmonyPriority(Priority.High)]

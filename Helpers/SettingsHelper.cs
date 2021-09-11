@@ -51,6 +51,7 @@ namespace AllegianceOverhaul.Helpers
                 SubSystemType.AllowJoinRequests => Settings.Instance!.UseMigrationTweaks && Settings.Instance.AllowJoinRequests,
                 SubSystemType.AllowHireRequests => Settings.Instance!.UseMigrationTweaks && Settings.Instance.AllowHireRequests,
                 SubSystemType.UseDeterminedKingdomPick => Settings.Instance!.UseMigrationTweaks && Settings.Instance.UseDeterminedKingdomPick,
+                SubSystemType.LeaderDefectionFix => Settings.Instance!.UseMigrationTweaks && Settings.Instance.ApplyLeaderDefectionFix,
                 //Politics
                 SubSystemType.ElectionRebalance => Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance,
                 SubSystemType.ElectionCooldowns => Settings.Instance!.UsePoliticsRebalance && Settings.Instance.UseElectionRebalance && Settings.Instance.UseElectionCooldowns,
@@ -151,6 +152,7 @@ namespace AllegianceOverhaul.Helpers
         AllowJoinRequests = 51,
         AllowHireRequests = 52,
         UseDeterminedKingdomPick = 55,
+        LeaderDefectionFix = 56,
         //Politics
         ElectionRebalance = 100,
         //Politics - ElectionCooldowns

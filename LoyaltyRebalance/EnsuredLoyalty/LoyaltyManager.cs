@@ -34,6 +34,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 
         private const string ReasonIsNotEnabled = "{=7LsNUEwPJ}it is not enabled";
         private const string ReasonOutOfScope = "{=uTQ8JIJNf}faction is out of scope";
+        private const string ReasonRulingClan = "{=zzv2bMQhr}it does not apply to rulers themselves";
         private const string ReasonRelationEnabled = "{=xnwSHHbB2}clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} is {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}";
         private const string ReasonRelationDisabled = "{=uyOFtcDGq}clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not affect it and clan fulfilled minimal obligations";
         private const string ReasonServicePeriod = "{=hn7Jf5Z2c}clan is under {?LEAVING_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\\?} for {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}days{?}day{\\?} out of required {REQUIRED_DAYS_UNDER_SERVICE}";
@@ -69,6 +70,10 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                 case ELState.FactionOutOfScope:
                     DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", ResultFalse);
                     DebugTextObject.SetTextVariable("REASON", ReasonOutOfScope);
+                    return false;
+                case ELState.DoesNotApplyToRulers:
+                    DebugTextObject.SetTextVariable("LOYALTY_CHECK_RESULT", ResultFalse);
+                    DebugTextObject.SetTextVariable("REASON", ReasonRulingClan);
                     return false;
                 case ELState.UnderRequiredService:
                     TextObject ReasonPeriod = new TextObject(ReasonServicePeriod);
@@ -134,44 +139,48 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             {
                 return SetDebugResult(ELState.SystemDisabled, DebugTextObject);
             }
+
+            if (!SettingsHelper.FactionInScope(clan, Settings.Instance.EnsuredLoyaltyScope))
+            {
+                return SetDebugResult(ELState.FactionOutOfScope, DebugTextObject);
+            }
+
+            if (clan.IsRulingClan())
+            {
+                return SetDebugResult(ELState.DoesNotApplyToRulers, DebugTextObject);
+            }
+
+            int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
+            int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance.MinorFactionServicePeriod : (clan.IsMercenary() ? Settings.Instance.MinorFactionOathPeriod : Settings.Instance.FactionOathPeriod);
+            if (clan.Kingdom != null && DaysWithKingdom <= RequiredDays)
+            {
+                return SetDebugResult(ELState.UnderRequiredService, DebugTextObject, DaysWithKingdom: DaysWithKingdom, RequiredDays: RequiredDays);
+            }
+            else if (Settings.Instance.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
+            {
+                return SetDebugResult(ELState.AffectedByRelations, DebugTextObject, clan, kingdom);
+            }
             else
             {
-                if (!SettingsHelper.FactionInScope(clan, Settings.Instance.EnsuredLoyaltyScope))
-                {
-                    return SetDebugResult(ELState.FactionOutOfScope, DebugTextObject);
-                }
-                else
-                {
-                    int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
-                    int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance.MinorFactionServicePeriod : (clan.IsMinorFaction ? Settings.Instance.MinorFactionOathPeriod : Settings.Instance.FactionOathPeriod);
-                    if (clan.Kingdom != null && DaysWithKingdom <= RequiredDays)
-                    {
-                        return SetDebugResult(ELState.UnderRequiredService, DebugTextObject, DaysWithKingdom: DaysWithKingdom, RequiredDays: RequiredDays);
-                    }
-                    else if (Settings.Instance.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
-                    {
-                        return SetDebugResult(ELState.AffectedByRelations, DebugTextObject, clan, kingdom);
-                    }
-                    else
-                    {
-                        return SetDebugResult(ELState.UnaffectedByRelations, DebugTextObject, clan);
-                    }
-                }
+                return SetDebugResult(ELState.UnaffectedByRelations, DebugTextObject, clan);
             }
         }
 
         public static bool CheckLoyalty(Clan clan, Kingdom? kingdom = null)
         {
-            if (!SettingsHelper.SubSystemEnabled(SubSystemType.EnsuredLoyalty, clan))
+            if (!SettingsHelper.SubSystemEnabled(SubSystemType.EnsuredLoyalty, clan) || clan.IsRulingClan())
+            {
                 return false;
+            }
 
             int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
-            if
-              (
-                (clan.IsUnderMercenaryService && DaysWithKingdom <= Settings.Instance!.MinorFactionServicePeriod) ||
-                (!clan.IsUnderMercenaryService && clan.Kingdom != null && DaysWithKingdom <= (clan.IsMinorFaction ? Settings.Instance!.MinorFactionOathPeriod : Settings.Instance!.FactionOathPeriod))
-              )
+            bool isUnderOath = (clan.IsUnderMercenaryService && DaysWithKingdom <= Settings.Instance!.MinorFactionServicePeriod)
+                               || (!clan.IsUnderMercenaryService && clan.Kingdom != null && DaysWithKingdom <= (clan.IsMercenary() ? Settings.Instance!.MinorFactionOathPeriod : Settings.Instance!.FactionOathPeriod));
+            
+            if (isUnderOath)
+            {
                 return true;
+            }
 
             if (Settings.Instance!.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
             {
@@ -203,14 +212,14 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 
         public static void GetLoyaltyTooltipInfo(Clan clan, out string text, out Color color)
         {
-            if (clan.Kingdom is null)
+            if (clan.Kingdom is null || clan.IsRulingClan())
             {
                 GetBlankLoyaltyTooltip(out text, out color);
                 return;
             }
 
             int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
-            int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance!.MinorFactionServicePeriod : (clan.IsMinorFaction ? Settings.Instance!.MinorFactionOathPeriod : Settings.Instance!.FactionOathPeriod);
+            int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance!.MinorFactionServicePeriod : (clan.IsMercenary() ? Settings.Instance!.MinorFactionOathPeriod : Settings.Instance!.FactionOathPeriod);
             if (clan.Kingdom != null && DaysWithKingdom <= RequiredDays)
             {
                 TextObject ReasonPeriod = new TextObject(TooltipOathLoyal);
@@ -283,6 +292,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         {
             SystemDisabled,
             FactionOutOfScope,
+            DoesNotApplyToRulers,
             UnderRequiredService,
             UnaffectedByRelations,
             AffectedByRelations

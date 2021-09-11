@@ -70,7 +70,7 @@ namespace AllegianceOverhaul.MigrationTweaks
             {
                 TextObject fiefsDesc = new TextObject(FiefsDescription);
                 SetNumericVariable(fiefsDesc, "FIEFS", clan.Fiefs.Count);
-                fiefsDesc.SetTextVariable("AT_WAR", (clan.Kingdom != null && clan.Kingdom.IsAtWarWith(Clan.PlayerClan.Kingdom)) ? 1 : 0);
+                fiefsDesc.SetTextVariable("AT_WAR", (clan.Kingdom != null && (clan.Kingdom.IsAtWarWith(Clan.PlayerClan.Kingdom) || clan.IsRulingClan())) ? 1 : 0);
                 return fiefsDesc;
             }
             else
@@ -122,14 +122,19 @@ namespace AllegianceOverhaul.MigrationTweaks
             Kingdom targetKingdom = Clan.PlayerClan.Kingdom;
             Kingdom? currentKingdom = clan.Kingdom;
             bool isMerc = clan.IsUnderMercenaryService;
+            bool rulerIsLeaving = SettingsHelper.SubSystemEnabled(SubSystemType.LeaderDefectionFix) && clan.IsRulingClan();
 
             try
             {
                 if (currentKingdom != null)
                 {
-                    if (currentKingdom.IsAtWarWith(targetKingdom) && !isMerc)
+                    if ((rulerIsLeaving || currentKingdom.IsAtWarWith(targetKingdom)) && !isMerc)
                     {
                         ChangeKingdomAction.ApplyByLeaveWithRebellionAgainstKingdom(clan, targetKingdom, true);
+                        if (rulerIsLeaving)
+                        {
+                            DestroyKingdomAction.Apply(currentKingdom);
+                        }
                     }
                     else
                     {

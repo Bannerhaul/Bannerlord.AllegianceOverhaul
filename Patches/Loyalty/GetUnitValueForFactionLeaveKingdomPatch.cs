@@ -12,7 +12,7 @@ using TaleWorlds.CampaignSystem.Barterables;
 namespace AllegianceOverhaul.Patches.Loyalty
 {
     [HarmonyPatch(typeof(LeaveKingdomAsClanBarterable), "GetUnitValueForFaction")]
-    public class GetUnitValueForFactionLeaveKingdomPatch
+    public static class GetUnitValueForFactionLeaveKingdomPatch
     {
         public static void Postfix(IFaction faction, ref int __result, LeaveKingdomAsClanBarterable __instance)
         {
@@ -22,13 +22,16 @@ namespace AllegianceOverhaul.Patches.Loyalty
                 Clan iOriginalOwnerClan = iOriginalOwner.Clan;
                 Kingdom iOriginalOwnerKingdom = iOriginalOwnerClan.Kingdom;
 
-                if (!Settings.Instance!.FixMinorFactionVassals && (!LoyaltyDebugHelper.InDebugBranch || !SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical, faction)))
+                bool fixMinorFactionVassals = Settings.Instance!.FixMinorFactionVassals;
+                bool debugEnabled = LoyaltyDebugHelper.InDebugBranch && SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical);
+
+                if (!fixMinorFactionVassals && !debugEnabled)
                     return;
 
                 IFaction mapFaction = iOriginalOwner.MapFaction;
                 float CalculatedResult;
-                if (faction == __instance.OriginalOwner.Clan)
-                    CalculatedResult = __instance.OriginalOwner.Clan.IsUnderMercenaryService ? (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom) : (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom);
+                if (faction == iOriginalOwnerClan)
+                    CalculatedResult = iOriginalOwnerClan.IsUnderMercenaryService ? (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom) : (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom);
                 else
                 {
                     if (faction == mapFaction)
@@ -42,7 +45,8 @@ namespace AllegianceOverhaul.Patches.Loyalty
                     }
                 }
 
-                if (LoyaltyDebugHelper.InDebugBranch && SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical))
+                
+                if (debugEnabled)
                 {
                     string UnitValueDebugInfo = string.Format("LeaveKingdom - UnitValueForFaction. faction: {0}. ScoreOfMercenaryToLeaveKingdom = {1}. ScoreOfClanToLeaveKingdom = {2}. CalculatedResult = {3}. Result = {4}",
                       faction.Name,
@@ -52,8 +56,10 @@ namespace AllegianceOverhaul.Patches.Loyalty
 
                     MessageHelper.TechnicalMessage(UnitValueDebugInfo);
                 }
-                if (Settings.Instance.FixMinorFactionVassals)
+                if (fixMinorFactionVassals)
+                {
                     __result = (int)CalculatedResult;
+                }
             }
             catch (Exception ex)
             {

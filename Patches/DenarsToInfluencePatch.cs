@@ -10,7 +10,7 @@ using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
 namespace AllegianceOverhaul.Patches
 {
     [HarmonyPatch(typeof(DefaultDiplomacyModel), "DenarsToInfluence")]
-    class DenarsToInfluencePatch
+    public static class DenarsToInfluencePatch
     {
         public static void Postfix(ref float __result)
         {

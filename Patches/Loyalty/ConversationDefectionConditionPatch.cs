@@ -13,7 +13,7 @@ using TaleWorlds.Localization;
 namespace AllegianceOverhaul.Patches.Loyalty
 {
     [HarmonyPatch(typeof(LordDefectionCampaignBehavior), "conversation_lord_from_ruling_clan_on_condition")]
-    public class ConversationDefectionConditionPatch
+    public static class ConversationDefectionConditionPatch
     {
         private const string LoyaltyRefuse = "{=5lThJhdEu}I have no will to discuss such matters with outsiders.";
         private const string LoyaltyPoliteRefuse = "{=P0bzqgjMT}I don't think this conversation will take us anywhere.";

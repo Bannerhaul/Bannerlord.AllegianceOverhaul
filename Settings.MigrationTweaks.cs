@@ -28,5 +28,8 @@ namespace AllegianceOverhaul
         [SettingPropertyBool("{=ZZKClL1sA}Determined kingdom pick logic", Order = 3, RequireRestart = false, HintText = "{=OUEwq5kM0}Specify if AI clans should always pick the most attractive kingdom instead of a random one when considering joining some kingdom or defecting. Enabling this can potentially increase intensity of clan migration between kingdoms.")]
         [SettingPropertyGroup(HeadingMigrationTweaks)]
         public bool UseDeterminedKingdomPick { get; set; } = false;
+
+        [SettingPropertyBool("{=lc5iLtS0G}Leader defection fix", Order = 4, RequireRestart = false, HintText = "{=lqfhT75fH}Fixes a vanilla bug that allowed ruling clans to defect to other kingdoms while remaining the leaders of their former kingdoms. When applied, restricts ruling clans from defecting, unless they are the last active clan in their kingdom, in which case they can defect with all their fiefs and the former kingdom will be destroyed.")]        [SettingPropertyGroup(HeadingMigrationTweaks)]
+        public bool ApplyLeaderDefectionFix { get; set; } = true;
     }
 }

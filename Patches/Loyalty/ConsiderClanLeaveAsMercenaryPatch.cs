@@ -11,7 +11,7 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
 namespace AllegianceOverhaul.Patches.Loyalty
 {
     [HarmonyPatch(typeof(DiplomaticBartersBehavior), "ConsiderClanLeaveAsMercenary")]
-    public class ConsiderClanLeaveAsMercenaryPatch
+    public static class ConsiderClanLeaveAsMercenaryPatch
     {
         [HarmonyPrefix]
         [HarmonyPriority(Priority.High)]

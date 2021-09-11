@@ -36,7 +36,6 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             }
         }
 
-        //CPk4UlNb,PHLW0tH1,BbGZQujC,zMaP4T5X,9nAkgARf,Q4U1RxkS,xSYLqZ3q,UxXnDAyP,QvRH6auB,nnWihTh4,w3OMVa7M
         private const string ComplexCostString = "{=3MafquFdR}[Influence cost = {INFLUENCE_COST}; Gold cost = {GOLD_COST}]";
 
         private const string WithholdPricePayed = "{=M040sU1dF}{LEAVING_CLAN_KINGDOM_LEADER.NAME} decided to withhold {LEAVING_CLAN.NAME} in {LEAVING_CLAN_KINGDOM.NAME}. Initially {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} had {INITIAL_INFLUENCE} influence and {INITILAL_GOLD} denars. Withholding required {INFLUENCE_COST} influence and {GOLD_COST} denars. After intervention {?LEAVING_CLAN_KINGDOM_LEADER.GENDER}she{?}he{\\?} has {RESULT_INFLUENCE} influence and {RESULT_GOLD} denars.";
@@ -173,6 +172,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             }
             LeavingClan.Kingdom.RulingClan.Influence = MBMath.ClampFloat(LeavingClan.Kingdom.RulingClan.Influence - WithholdCost.InfluenceCost, 0f, float.MaxValue);
             LeavingClan.Kingdom.Ruler.Gold = MBMath.ClampInt(LeavingClan.Kingdom.Ruler.Gold - WithholdCost.GoldCost, 0, int.MaxValue);
+            LeavingClan.Leader.Gold += MBMath.ClampInt(LeavingClan.Kingdom.Ruler.Gold - WithholdCost.GoldCost, 0, int.MaxValue);
         }
 
         public void AwaitPlayerDecision()

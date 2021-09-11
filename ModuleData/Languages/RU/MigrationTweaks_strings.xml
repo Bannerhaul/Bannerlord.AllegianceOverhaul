@@ -4,6 +4,19 @@
 		<tag language="Русский" />
 	</tags>
 	<strings>
+		<!--
+		||||||||||||||||||||||||||| Encyclopedia ||||||||||||||||||||||||||||
+		-->
+		<!--Additions and clarifications for the pages of eliminated kingdoms-->
+		<!--Regarding the last active leader-->
+		<string id="DvvoBmrEZ" text="Бывший " />
+		<!--Faction status as a name suffix -->
+		<string id="bdIYWo2R8" text=" (уничтожено)" />
+		<!--Description epilogue -->
+		<string id="QLIrm7VAp" text="This faction was unable to cope with the variety of internal and external problems. It now belongs to history." />
+		<!--
+		||||||||||||||||||||||||| Player inquiries ||||||||||||||||||||||||||
+		-->
 		<!--Player inquiry about AI joining - header-->
 		<string id="0DEJNa14n" text="Клан желает присоединиться к вашему королевству!" />
 		<!--Player inquiry about AI joining - body-->
@@ -34,5 +47,7 @@
 		<string id="mlMTdZg6M" text="Минимальный период в днях после запроса ИИ-клана о присоединении к королевству игрока, по истечении которого может быть получен новый запрос. По умолчанию = 0 (без кулдауна)." />
 		<string id="ZZKClL1sA" text="Детерминированный порядок выбора королевства" />
 		<string id="OUEwq5kM0" text="Укажите, должны ли ИИ-кланы выбирать только наиболее привлекательное королевство вместо случайного, когда думают присоедниться или дезертировать. Включение этой опции может увеличить интенсивность миграции кланов между королевствами." />
+		<string id="lc5iLtS0G" text="Leader defection fix" />
+		<string id="lqfhT75fH" text="Fixes a vanilla bug that allowed ruling clans to defect to other kingdoms while remaining the leaders of their former kingdoms. When applied, restricts ruling clans from defecting, unless they are the last active clan in their kingdom, in which case they can defect with all their fiefs and the former kingdom will be destroyed." />
 	</strings>
 </base>

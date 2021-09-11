@@ -13,7 +13,7 @@ using TaleWorlds.CampaignSystem.SandBox.GameComponents;
 namespace AllegianceOverhaul.Patches.Politics
 {
     [HarmonyPatch(typeof(DefaultClanPoliticsModel), "GetInfluenceRequiredToOverrideKingdomDecision")]
-    public class GetInfluenceRequiredToOverrideKingdomDecisionPatch
+    public static class GetInfluenceRequiredToOverrideKingdomDecisionPatch
     {
         private static string GetModifierApplied(bool condition)
         {

@@ -8,5 +8,9 @@ namespace AllegianceOverhaul.Extensions
         {
             return clan.Kingdom is null ? clan.IsMinorFaction : clan.IsUnderMercenaryService;
         }
+        public static bool IsRulingClan(this Clan clan)
+        {
+            return clan.Kingdom?.RulingClan == clan;
+        }
     }
 }

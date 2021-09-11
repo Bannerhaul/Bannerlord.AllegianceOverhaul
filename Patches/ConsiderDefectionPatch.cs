@@ -13,7 +13,7 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
 namespace AllegianceOverhaul.Patches
 {
     [HarmonyPatch(typeof(DiplomaticBartersBehavior), "ConsiderDefection")]
-    public class ConsiderDefectionPatch
+    public static class ConsiderDefectionPatch
     {
         [HarmonyPrefix]
         [HarmonyPriority(Priority.High)]
@@ -87,7 +87,7 @@ namespace AllegianceOverhaul.Patches
 
         public static bool Prepare()
         {
-            return Settings.Instance!.UseEnsuredLoyalty || SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Any) || Settings.Instance!.UseMigrationTweaks;
+            return Settings.Instance!.UseEnsuredLoyalty || Settings.Instance!.UseMigrationTweaks || SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Any);
         }
     }
 }

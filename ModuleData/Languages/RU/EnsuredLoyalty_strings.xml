@@ -35,6 +35,7 @@
 		<!--REASON-->
 		<string id="7LsNUEwPJ" text="эта опция выключена" />
 		<string id="uTQ8JIJNf" text="на фракцию эта опция не распространяется" />
+		<string id="zzv2bMQhr" text="it does not apply to rulers themselves" />
 		<string id="xnwSHHbB2" text="отношения лидера клана с {LEAVING_CLAN_KINGDOM_LEADER.NAME} {CHECK_RESULT} ({CURRENT_RELATION} из требуемых {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
 		<string id="uyOFtcDGq" text="отношения лидера клана с {LEAVING_CLAN_KINGDOM_LEADER.NAME} на это не влияют, и клан выполнил минимальные обязательства" />
 		<string id="hn7Jf5Z2c" text="клан соблюдает {?LEAVING_CLAN.UNDER_CONTRACT}наемнический контракт{?}клятву верности{\?} только {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}дней{?}{?DAYS_UNDER_SERVICE.SPECIFIC_SINGULAR_FORM}дня{?}день{\?}{\?} из необходимых {REQUIRED_DAYS_UNDER_SERVICE}" />

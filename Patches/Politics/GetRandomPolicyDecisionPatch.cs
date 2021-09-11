@@ -17,7 +17,7 @@ using TaleWorlds.Localization;
 namespace AllegianceOverhaul.Patches.Politics
 {
     [HarmonyPatch(typeof(KingdomDecisionProposalBehavior), "GetRandomPolicyDecision")]
-    public class GetRandomPolicyDecisionPatch
+    public static class GetRandomPolicyDecisionPatch
     {
         private delegate bool ConsiderPolicyDelegate(KingdomDecisionProposalBehavior instance, Clan clan, Kingdom kingdom, PolicyObject policy, bool invert);
         private static readonly ConsiderPolicyDelegate? deConsiderPolicy = AccessHelper.GetDelegate<ConsiderPolicyDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderPolicy");

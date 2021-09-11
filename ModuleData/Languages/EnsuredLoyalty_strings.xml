@@ -35,6 +35,7 @@
 		<!--REASON-->
 		<string id="7LsNUEwPJ" text="it is not enabled" />
 		<string id="uTQ8JIJNf" text="faction is out of scope" />
+		<string id="zzv2bMQhr" text="it does not apply to rulers themselves" />
 		<string id="xnwSHHbB2" text="clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} is {CHECK_RESULT} ({CURRENT_RELATION} out of required {REQUIRED_RELATION}){WITHHOLD_PRICE_INFO}" />
 		<string id="uyOFtcDGq" text="clan leader's relationship with {LEAVING_CLAN_KINGDOM_LEADER.NAME} does not affect it and clan fulfilled minimal obligations" />
 		<string id="hn7Jf5Z2c" text="clan is under {?LEAVING_CLAN.UNDER_CONTRACT}mercenary service{?}oath of fealty{\?} for {DAYS_UNDER_SERVICE} {?DAYS_UNDER_SERVICE.PLURAL_FORM}days{?}day{\?} out of required {REQUIRED_DAYS_UNDER_SERVICE}" />

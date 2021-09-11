@@ -1,4 +1,5 @@
 ﻿using AllegianceOverhaul.CampaignBehaviors.BehaviorManagers;
+using AllegianceOverhaul.Extensions;
 using AllegianceOverhaul.Extensions.Harmony;
 using AllegianceOverhaul.Helpers;
 
@@ -19,7 +20,7 @@ using TaleWorlds.Core;
 namespace AllegianceOverhaul.Patches.Migration
 {
     [HarmonyPatch(typeof(DiplomaticBartersBehavior), "DailyTickClan")]
-    class DiplomaticBartersBehaviorDailyTickClanPatch
+    public static class DiplomaticBartersBehaviorDailyTickClanPatch
     {
         private delegate void ConsiderDefectionDelegate(DiplomaticBartersBehavior instance, Clan clan1, Kingdom kingdom);
         private delegate void ConsiderClanJoinDelegate(DiplomaticBartersBehavior instance, Clan clan, Kingdom kingdom);
@@ -41,7 +42,7 @@ namespace AllegianceOverhaul.Patches.Migration
         {
             try
             {
-                if (clanHasMapEvent)
+                if (clanHasMapEvent || clan.Kingdom is null || LeaderHasToStay(clan))
                 {
                     return;
                 }
@@ -79,19 +80,21 @@ namespace AllegianceOverhaul.Patches.Migration
             //local methods
             static bool NotApplicable(Clan clan, Clan? clanToDefectTo) =>
               clanToDefectTo is null
-              || clan.Kingdom is null
               || clanToDefectTo.Kingdom == null
               || clan.Kingdom == clanToDefectTo.Kingdom
               || !clanToDefectTo.MapFaction.IsKingdomFaction
-              || clanToDefectTo.IsEliminated
+              || clanToDefectTo.IsEliminated || clanToDefectTo.MapFaction.IsEliminated
               || ((clanToDefectTo == Clan.PlayerClan || clanToDefectTo.MapFaction.Leader == Hero.MainHero) && (!SettingsHelper.SubSystemEnabled(SubSystemType.AllowJoinRequests) || AOCooldownManager.HasPlayerRequestCooldown()));
+
+            static bool LeaderHasToStay(Clan clan) =>
+                SettingsHelper.SubSystemEnabled(SubSystemType.LeaderDefectionFix) && clan.IsRulingClan() && clan.Kingdom.Clans.Any(otherClan => otherClan != clan && !otherClan.IsEliminated);
         }
 
         public static void GetJoinDecision(Clan clan, bool clanHasMapEvent, DiplomaticBartersBehavior instance)
         {
             try
             {
-                if (clanHasMapEvent)
+                if (clanHasMapEvent || (clan.Kingdom != null && !clan.IsUnderMercenaryService))
                 {
                     return;
                 }
@@ -182,7 +185,6 @@ namespace AllegianceOverhaul.Patches.Migration
             static bool NotApplicable(Clan clan, Kingdom? kingdomToJion) =>
               kingdomToJion is null
               || kingdomToJion.IsEliminated
-              || (clan.Kingdom != null && !clan.IsUnderMercenaryService)
               || clan.MapFaction == kingdomToJion
               || clan.MapFaction.IsAtWarWith(kingdomToJion)
               || (kingdomToJion.Leader == Hero.MainHero && (!SettingsHelper.SubSystemEnabled(clan.IsUnderMercenaryService ? SubSystemType.AllowHireRequests : SubSystemType.AllowJoinRequests) || AOCooldownManager.HasPlayerRequestCooldown()))

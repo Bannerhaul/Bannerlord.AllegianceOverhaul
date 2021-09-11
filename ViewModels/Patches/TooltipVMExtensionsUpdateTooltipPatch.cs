@@ -1,4 +1,5 @@
-﻿using AllegianceOverhaul.Helpers;
+﻿using AllegianceOverhaul.Extensions;
+using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
 
 using HarmonyLib;
@@ -26,7 +27,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
                     return;
                 }
 
-                if (hero.Clan.Kingdom != null && hero.Clan.Kingdom.RulingClan != hero.Clan && hero == hero.Clan.Leader)
+                if (hero.Clan.Kingdom != null && !hero.Clan.IsRulingClan() && hero == hero.Clan.Leader)
                 {
                     int RelationWithLiege = hero.GetRelation(hero.Clan.Kingdom.Ruler);
                     tooltipVM.TooltipPropertyList.Add(new TooltipProperty(TooltipHelper.GetTooltipRelationHeader(hero.Clan.Kingdom.Ruler), RelationWithLiege.ToString("N0"), 0, RelationWithLiege < -10 ? Colors.Red : RelationWithLiege > 10 ? Colors.Green : TooltipHelper.DefaultTooltipColor, false, TooltipProperty.TooltipPropertyFlags.None));
