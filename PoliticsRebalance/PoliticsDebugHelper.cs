@@ -55,7 +55,7 @@ namespace AllegianceOverhaul.PoliticsRebalance
             SetEntityProperties(debugLogMessage, "REFLECTING_CLAN", clan);
         }
 
-        public static void PrepareConsiderationDebugMessage(Clan clan, Town fiefBeingAnnexed, KingdomDecision? clanDecision, out TextObject debugLogMessage)
+        public static void PrepareConsiderationDebugMessage(Clan clan, Town? fiefBeingAnnexed, KingdomDecision? clanDecision, out TextObject debugLogMessage)
         {
             if (fiefBeingAnnexed != null)
             {

@@ -19,7 +19,7 @@ namespace AllegianceOverhaul.Patches.Politics
 {
 
     [HarmonyPatch(typeof(KingdomDecisionProposalBehavior), "GetRandomAnnexationDecision")]
-    public class GetRandomAnnexationDecisionPatch
+    public static class GetRandomAnnexationDecisionPatch
     {
         private delegate bool ConsiderAnnexDelegate(KingdomDecisionProposalBehavior instance, Clan clan, Kingdom kingdom, Clan targetClan, Town targetSettlement);
         private static readonly ConsiderAnnexDelegate? deConsiderAnnex = AccessHelper.GetDelegate<ConsiderAnnexDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderAnnex");
@@ -41,17 +41,17 @@ namespace AllegianceOverhaul.Patches.Politics
                 __result = null;
                 if (!kingdom.UnresolvedDecisions.Any(x => x is SettlementClaimantPreliminaryDecision) && clan.Influence >= 300.0)
                 {
-                    Clan randomClan = kingdom.Clans.Where(x => x != clan
+                    Clan? randomClan = kingdom.Clans.Where(x => x != clan
                                                                && x.Fiefs.Count > 0
                                                                && (x.GetRelationWithClan(clan) < -25)
                                                                && x.Fiefs.Any(f => !(SubSystemEnabled && AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement))))
                                                          ).ToArray().GetRandomElement();
 
-                    Town randomFortification = SubSystemEnabled
-                        ? randomClan.Fiefs.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
-                        : randomClan.Fiefs.ToArray().GetRandomElement();
+                    Town? randomFortification = SubSystemEnabled
+                        ? randomClan?.Fiefs.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
+                        : randomClan?.Fiefs.ToArray().GetRandomElement();
 
-                    if (randomClan != null && deConsiderAnnex!(__instance, clan, kingdom, randomClan, randomFortification))
+                    if (randomClan != null && randomFortification != null && deConsiderAnnex!(__instance, clan, kingdom, randomClan, randomFortification))
                         __result = new SettlementClaimantPreliminaryDecision(clan, randomFortification.Settlement);
 
                     if (SystemDebugEnabled)
