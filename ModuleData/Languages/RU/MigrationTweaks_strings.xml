@@ -49,5 +49,9 @@
 		<string id="OUEwq5kM0" text="Укажите, должны ли ИИ-кланы выбирать только наиболее привлекательное королевство вместо случайного, когда думают присоедниться или дезертировать. Включение этой опции может увеличить интенсивность миграции кланов между королевствами." />
 		<string id="lc5iLtS0G" text="Leader defection fix" />
 		<string id="lqfhT75fH" text="Fixes a vanilla bug that allowed ruling clans to defect to other kingdoms while remaining the leaders of their former kingdoms. When applied, restricts ruling clans from defecting, unless they are the last active clan in their kingdom, in which case they can defect with all their fiefs and the former kingdom will be destroyed." />
+		<string id="gH9rnSGtM" text="Defection conversation tweak" />
+		<string id="HzC3XjypN" text="Modifies a vanilla check that preemptively blocks persuasion attempts if the barter demand for the defection is too high or the player doesn't have enough money. Enabling allows to change the price threshold and forces the game to take into account player's non-financial assets." />
+		<string id="QL1TVKjBX" text="Demand threshold (millions)" />
+		<string id="zNwukiWT4" text="Measured in millions. If the lord's demands for the defection will exceed this value, he will refuse to negotiate. Zero means no threshold at all. Native value is 2. Default = 2." />		
 	</strings>
 </base>

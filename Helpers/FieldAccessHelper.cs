@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.Localization;
+
 using static HarmonyLib.AccessTools;
 
 namespace AllegianceOverhaul.Helpers
