@@ -24,7 +24,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
                     __instance.LeaderText = "{=DvvoBmrEZ}Former ".ToLocalizedString() + __instance.LeaderText;
                     __instance.NameText += "{=bdIYWo2R8} (eliminated)".ToLocalizedString();
                     __instance.Settlements.Clear();
-                    __instance.InformationText += "\n \n" + "{=QLIrm7VAp}This faction was unable to cope with the variety of internal and external problems. It now belongs to history.".ToLocalizedString();
+                    __instance.InformationText += "\n \n" + "{=QLIrm7VAp}This faction was unable to cope with the variety of internal and external problems. Now it belongs to history.".ToLocalizedString();
                 }
             }
             catch (Exception ex)
