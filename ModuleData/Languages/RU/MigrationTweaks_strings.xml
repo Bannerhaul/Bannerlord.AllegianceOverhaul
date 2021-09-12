@@ -13,7 +13,7 @@
 		<!--Faction status as a name suffix -->
 		<string id="bdIYWo2R8" text=" (уничтожено)" />
 		<!--Description epilogue -->
-		<string id="QLIrm7VAp" text="This faction was unable to cope with the variety of internal and external problems. It now belongs to history." />
+		<string id="QLIrm7VAp" text="Эта фракция не смогла справиться с потоком внутренних и внешних проблем. Теперь она принадлежит истории." />
 		<!--
 		||||||||||||||||||||||||| Player inquiries ||||||||||||||||||||||||||
 		-->
@@ -47,11 +47,11 @@
 		<string id="mlMTdZg6M" text="Минимальный период в днях после запроса ИИ-клана о присоединении к королевству игрока, по истечении которого может быть получен новый запрос. По умолчанию = 0 (без кулдауна)." />
 		<string id="ZZKClL1sA" text="Детерминированный порядок выбора королевства" />
 		<string id="OUEwq5kM0" text="Укажите, должны ли ИИ-кланы выбирать только наиболее привлекательное королевство вместо случайного, когда думают присоедниться или дезертировать. Включение этой опции может увеличить интенсивность миграции кланов между королевствами." />
-		<string id="lc5iLtS0G" text="Leader defection fix" />
-		<string id="lqfhT75fH" text="Fixes a vanilla bug that allowed ruling clans to defect to other kingdoms while remaining the leaders of their former kingdoms. When applied, restricts ruling clans from defecting, unless they are the last active clan in their kingdom, in which case they can defect with all their fiefs and the former kingdom will be destroyed." />
-		<string id="gH9rnSGtM" text="Defection conversation tweak" />
-		<string id="HzC3XjypN" text="Modifies a vanilla check that preemptively blocks persuasion attempts if the barter demand for the defection is too high or the player doesn't have enough money. Enabling allows to change the price threshold and forces the game to take into account player's non-financial assets." />
-		<string id="QL1TVKjBX" text="Demand threshold (millions)" />
-		<string id="zNwukiWT4" text="Measured in millions. If the lord's demands for the defection will exceed this value, he will refuse to negotiate. Zero means no threshold at all. Native value is 2. Default = 2." />		
+		<string id="lc5iLtS0G" text="Исправление дизертирства правителей" />
+		<string id="lqfhT75fH" text="Исправляет ошибку, которая позволяла правящим кланам переходить в другие королевства, оставаясь лидерами своих бывших королевств. При включении запрещает правящим кланам дезертировать, если только они не являются последним активным кланом в своем королевстве. В этом случае они могут дезертировать со всеми своими феодальными владениями, а бывшее королевство будет разрушено." />
+		<string id="gH9rnSGtM" text="Регулировка диалога о дезертирстве" />
+		<string id="HzC3XjypN" text="Изменяет проверку, которая упреждающе блокирует попытки убеждения, если бартерный цена дезертирства слишком высока или у игрока недостаточно денег. Включение позволяет изменить порог цены и заставляет игру учитывать нефинансовые активы игрока." />
+		<string id="QL1TVKjBX" text="Порог цены (в миллионах)" />
+		<string id="zNwukiWT4" text="Измеряется вмиллионах. Если требования лорда при дезертирстве превысят это значение, он откажется вести переговоры. Ноль означает отсутствие порога. В оригинале - 2.Поумолчанию = 2." />		
 	</strings>
 </base>
