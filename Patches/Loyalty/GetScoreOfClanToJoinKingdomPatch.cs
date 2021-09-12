@@ -17,9 +17,9 @@ namespace AllegianceOverhaul.Patches.Loyalty
         {
             try
             {
-                if (SettingsHelper.SubSystemEnabled(SubSystemType.DestabilizeLeaveEvaluation))
+                if (SettingsHelper.SubSystemEnabled(SubSystemType.DestabilizeJoinEvaluation))
                 {
-                    __result += Settings.Instance!.LeaveScoreFlatModifier * 1000000f;
+                    __result += Settings.Instance!.JoinScoreFlatModifier * 1000000f;
                 }
             }
             catch (Exception ex)
