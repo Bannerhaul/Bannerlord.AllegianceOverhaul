@@ -15,7 +15,7 @@
 
 This mod aims to enhance aspects of the game, relevant to interactions between kings and their vassals. For now it overhauls the rules that NPC clans use to leave, join and evaluate kingdoms, but many more features are planned.
 
-Key features too keep in mind while developing:
+Key features to keep in mind while developing:
 - Modular approach 
 - Everything should be reasonably configurable
 - Every system should be designed to work for AI as well as for players
