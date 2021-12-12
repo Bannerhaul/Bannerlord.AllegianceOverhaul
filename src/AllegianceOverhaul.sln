@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllegianceOverhaul", "AllegianceOverhaul\AllegianceOverhaul.csproj", "{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllegianceOverhaul.ImplementationLoader", "AllegianceOverhaul.ImplementationLoader\AllegianceOverhaul.ImplementationLoader.csproj", "{378F8C63-04C3-4B75-AA54-7CB397E79055}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A31EB927-C42D-4D29-A7E2-71C28E9A1255}"
+	ProjectSection(SolutionItems) = preProject
+		..\changelog.txt = ..\changelog.txt
+		..\supported-game-versions.txt = ..\supported-game-versions.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{CB20C6C8-2857-4B1E-9C00-265893C094E3}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\common.props = ..\build\common.props
+		..\build\common.targets = ..\build\common.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{AE56FFC8-0129-4E0F-83C0-D00011A2B127}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8CBC023C-EB40-415D-8A78-B6B7F82523E9}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
+		..\.github\workflows\TestBuild.yml = ..\.github\workflows\TestBuild.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Beta_Debug|x64 = Beta_Debug|x64
+		Beta_Release|x64 = Beta_Release|x64
+		Debug|x64 = Debug|x64
+		Minimal_Debug|x64 = Minimal_Debug|x64
+		Minimal_Release|x64 = Minimal_Release|x64
+		Release|x64 = Release|x64
+		Stable_Debug|x64 = Stable_Debug|x64
+		Stable_Release|x64 = Stable_Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Beta_Debug|x64.ActiveCfg = Beta_Debug|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Beta_Debug|x64.Build.0 = Beta_Debug|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Beta_Release|x64.ActiveCfg = Beta_Release|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Beta_Release|x64.Build.0 = Beta_Release|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Debug|x64.ActiveCfg = Debug|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Debug|x64.Build.0 = Debug|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Minimal_Debug|x64.ActiveCfg = Debug|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Minimal_Debug|x64.Build.0 = Debug|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Minimal_Release|x64.ActiveCfg = Release|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Minimal_Release|x64.Build.0 = Release|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Release|x64.ActiveCfg = Release|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Release|x64.Build.0 = Release|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Debug|x64.ActiveCfg = Stable_Debug|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Debug|x64.Build.0 = Stable_Debug|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Release|x64.ActiveCfg = Stable_Release|x64
+		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Release|x64.Build.0 = Stable_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Debug|x64.ActiveCfg = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Debug|x64.Build.0 = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Release|x64.ActiveCfg = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Release|x64.Build.0 = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Debug|x64.ActiveCfg = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Debug|x64.Build.0 = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Debug|x64.ActiveCfg = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Debug|x64.Build.0 = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Release|x64.ActiveCfg = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Release|x64.Build.0 = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Release|x64.ActiveCfg = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Release|x64.Build.0 = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Debug|x64.ActiveCfg = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Debug|x64.Build.0 = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Release|x64.ActiveCfg = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Release|x64.Build.0 = Minimal_Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8CBC023C-EB40-415D-8A78-B6B7F82523E9} = {AE56FFC8-0129-4E0F-83C0-D00011A2B127}
+	EndGlobalSection	
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8807564B-6935-4739-A558-136CD2750DE8}
+	EndGlobalSection
+EndGlobal
