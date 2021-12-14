@@ -31,12 +31,12 @@ namespace AllegianceOverhaul.Patches.Loyalty
                 IFaction mapFaction = iOriginalOwner.MapFaction;
                 float CalculatedResult;
                 if (faction == iOriginalOwnerClan)
-                    CalculatedResult = iOriginalOwnerClan.IsUnderMercenaryService ? (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom) : (int)Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom);
+                    CalculatedResult = iOriginalOwnerClan.IsUnderMercenaryService ? (int) Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom) : (int) Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom);
                 else
                 {
                     if (faction == mapFaction)
                     {
-                        CalculatedResult = (float)((!iOriginalOwnerClan.IsUnderMercenaryService ? Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom) : Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)) * (faction == iOriginalOwnerClan || faction == iOriginalOwnerKingdom ? -1.0 : 1.0));
+                        CalculatedResult = (float) ((!iOriginalOwnerClan.IsUnderMercenaryService ? Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom) : Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)) * (faction == iOriginalOwnerClan || faction == iOriginalOwnerKingdom ? -1.0 : 1.0));
                     }
                     else
                     {
@@ -49,15 +49,15 @@ namespace AllegianceOverhaul.Patches.Loyalty
                 {
                     string UnitValueDebugInfo = string.Format("LeaveKingdom - UnitValueForFaction. faction: {0}. ScoreOfMercenaryToLeaveKingdom = {1}. ScoreOfClanToLeaveKingdom = {2}. CalculatedResult = {3}. Result = {4}",
                       faction.Name,
-                      ((int)Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)).ToString("N"),
-                      ((int)Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)).ToString("N"),
+                      ((int) Campaign.Current.Models.DiplomacyModel.GetScoreOfMercenaryToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)).ToString("N"),
+                      ((int) Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToLeaveKingdom(iOriginalOwnerClan, iOriginalOwnerKingdom)).ToString("N"),
                       CalculatedResult.ToString("N"), __result.ToString("N"));
 
                     MessageHelper.TechnicalMessage(UnitValueDebugInfo);
                 }
                 if (fixMinorFactionVassals)
                 {
-                    __result = (int)CalculatedResult;
+                    __result = (int) CalculatedResult;
                 }
             }
             catch (Exception ex)

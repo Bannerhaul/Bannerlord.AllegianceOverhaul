@@ -27,7 +27,7 @@ namespace AllegianceOverhaul.Patches.Migration
             {
                 if (SettingsHelper.SubSystemEnabled(SubSystemType.PersuasionLockoutTweak))
                 {
-                    double valueForFaction = new JoinKingdomAsClanBarterable(Hero.OneToOneConversationHero, (Kingdom)Hero.MainHero.MapFaction).GetValueForFaction(Hero.OneToOneConversationHero.Clan);
+                    double valueForFaction = new JoinKingdomAsClanBarterable(Hero.OneToOneConversationHero, (Kingdom) Hero.MainHero.MapFaction).GetValueForFaction(Hero.OneToOneConversationHero.Clan);
 
                     if (Settings.Instance!.PLDemandThreshold > 0f && valueForFaction < -Settings.Instance!.PLDemandThreshold * 1000000)
                     {
@@ -56,7 +56,7 @@ namespace AllegianceOverhaul.Patches.Migration
                                 {
                                     ItemRosterElement elementCopyAtIndex = playerItemRoster.GetElementCopyAtIndex(i);
                                     if (elementCopyAtIndex.Amount > 0 && elementCopyAtIndex.EquipmentElement.GetBaseValue() > 100)
-                                    {                                                                                
+                                    {
                                         int valueInNearbySettlements = deCalculateAverageItemValueInNearbySettlements!(itemBarterBehavior, elementCopyAtIndex.EquipmentElement, mainParty, closestSettlements);
                                         ItemBarterable barterable = new(Hero.MainHero, Hero.OneToOneConversationHero, mainParty, otherParty, elementCopyAtIndex, valueInNearbySettlements);
 

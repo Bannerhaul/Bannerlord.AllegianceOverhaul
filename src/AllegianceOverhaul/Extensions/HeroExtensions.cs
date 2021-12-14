@@ -28,7 +28,7 @@ namespace AllegianceOverhaul.Extensions
         {
             int relationBetweenHeroes = CharacterRelationManager.GetHeroRelation(hero, otherHero);
             deGetPersonalityEffects!(Campaign.Current.Models.DiplomacyModel is DefaultDiplomacyModel defaultDiplomacyModel ? defaultDiplomacyModel : new DefaultDiplomacyModel(), ref relationBetweenHeroes, hero, otherHero);
-            return (int)Math.Round(MBMath.ClampFloat(relationBetweenHeroes + ((modifyByBlood && RelativesHelper.BloodRelatives(hero, otherHero)) ? 30f : 0f), -100f, 100f));
+            return (int) Math.Round(MBMath.ClampFloat(relationBetweenHeroes + ((modifyByBlood && RelativesHelper.BloodRelatives(hero, otherHero)) ? 30f : 0f), -100f, 100f));
         }
     }
 }

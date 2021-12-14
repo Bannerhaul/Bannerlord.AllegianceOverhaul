@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+
 using TaleWorlds.CampaignSystem;
 
 namespace AllegianceOverhaul.Patches.Loyalty

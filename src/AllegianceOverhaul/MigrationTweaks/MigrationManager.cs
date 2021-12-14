@@ -9,8 +9,9 @@ using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
-using TaleWorlds.Localization;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
+
 using static AllegianceOverhaul.Helpers.LocalizationHelper;
 
 namespace AllegianceOverhaul.MigrationTweaks

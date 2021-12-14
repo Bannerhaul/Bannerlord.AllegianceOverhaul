@@ -94,8 +94,8 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             return
               new ComplexCost
               (
-                (int)(BaseCalculatedCost * Settings.Instance.WithholdInfluenceMultiplier),
-                Settings.Instance.UseWithholdBribing && Settings.Instance.WithholdToleranceLimitForBribes * 1000000 < BarterableSum ? (int)BaseCalculatedCost * Settings.Instance.WithholdGoldMultiplier : 0
+                (int) (BaseCalculatedCost * Settings.Instance.WithholdInfluenceMultiplier),
+                Settings.Instance.UseWithholdBribing && Settings.Instance.WithholdToleranceLimitForBribes * 1000000 < BarterableSum ? (int) BaseCalculatedCost * Settings.Instance.WithholdGoldMultiplier : 0
               );
         }
         private int GetScoreForKingdomToWithholdClan()
@@ -121,7 +121,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             {
                 MessageHelper.TechnicalMessage($"Score for Kingdom {LeavingClan.Kingdom.Name} to withhold Clan {LeavingClan.Name}.\nRelativeScoreToLeave = {RelativeScoreToLeave:N}. CostScore = {CostScore:N}. ClanCountModifier = {ClanCountModifier}. ScoreOfKingdomToGetClan = {Campaign.Current.Models.DiplomacyModel.GetScoreOfKingdomToGetClan(LeavingClan.Kingdom, LeavingClan):N}. SettlementValue = {SettlementValue:N}. Result = {Result:N}.");
             }
-            return (int)Result;
+            return (int) Result;
         }
         public bool CheckAIWithholdDecision()
         {

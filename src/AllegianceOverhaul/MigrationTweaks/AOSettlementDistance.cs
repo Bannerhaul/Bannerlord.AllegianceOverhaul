@@ -57,7 +57,7 @@ namespace AllegianceOverhaul.MigrationTweaks
 
             public int CompareTo(SettlementDistancePair other)
             {
-                return (double)_distance == other._distance ? 0 : (double)_distance > other._distance ? 1 : -1;
+                return (double) _distance == other._distance ? 0 : (double) _distance > other._distance ? 1 : -1;
             }
         }
     }

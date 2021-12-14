@@ -150,7 +150,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                 return SetDebugResult(ELState.DoesNotApplyToRulers, DebugTextObject);
             }
 
-            int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
+            int DaysWithKingdom = (int) (CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
             int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance.MinorFactionServicePeriod : (clan.IsMercenary() ? Settings.Instance.MinorFactionOathPeriod : Settings.Instance.FactionOathPeriod);
             if (clan.Kingdom != null && DaysWithKingdom <= RequiredDays)
             {
@@ -173,7 +173,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                 return false;
             }
 
-            int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
+            int DaysWithKingdom = (int) (CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
             bool isUnderOath = (clan.IsUnderMercenaryService && DaysWithKingdom <= Settings.Instance!.MinorFactionServicePeriod)
                                || (!clan.IsUnderMercenaryService && clan.Kingdom != null && DaysWithKingdom <= (clan.IsMercenary() ? Settings.Instance!.MinorFactionOathPeriod : Settings.Instance!.FactionOathPeriod));
 
@@ -218,7 +218,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                 return;
             }
 
-            int DaysWithKingdom = (int)(CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
+            int DaysWithKingdom = (int) (CampaignTime.Now - clan.LastFactionChangeTime).ToDays;
             int RequiredDays = clan.IsUnderMercenaryService ? Settings.Instance!.MinorFactionServicePeriod : (clan.IsMercenary() ? Settings.Instance!.MinorFactionOathPeriod : Settings.Instance!.FactionOathPeriod);
             if (clan.Kingdom != null && DaysWithKingdom <= RequiredDays)
             {

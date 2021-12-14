@@ -21,7 +21,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
         private CampaignTime _lastJoinPlayerRequest;
 
         internal static Dictionary<KingdomDecision, KingdomDecisionConclusion>? KingdomDecisionHistory { get; private set; }
-        internal static ReadOnlyCollection<Type> SupportedDecisionTypes => new          (new List<Type>() { typeof(MakePeaceKingdomDecision), typeof(DeclareWarDecision), typeof(ExpelClanFromKingdomDecision), typeof(KingdomPolicyDecision), typeof(SettlementClaimantPreliminaryDecision) });
+        internal static ReadOnlyCollection<Type> SupportedDecisionTypes => new(new List<Type>() { typeof(MakePeaceKingdomDecision), typeof(DeclareWarDecision), typeof(ExpelClanFromKingdomDecision), typeof(KingdomPolicyDecision), typeof(SettlementClaimantPreliminaryDecision) });
 
         internal static CampaignTime LastJoinPlayerRequest { get; private set; }
 
@@ -172,11 +172,11 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
                     return false;
                 return decision1 switch
                 {
-                    MakePeaceKingdomDecision peaceDecision1 => peaceDecision1.FactionToMakePeaceWith == ((MakePeaceKingdomDecision)decision2).FactionToMakePeaceWith,
-                    DeclareWarDecision warDecision1 => warDecision1.FactionToDeclareWarOn == ((DeclareWarDecision)decision2).FactionToDeclareWarOn,
-                    ExpelClanFromKingdomDecision expelDecision1 => expelDecision1.ClanToExpel == ((ExpelClanFromKingdomDecision)decision2).ClanToExpel,
-                    KingdomPolicyDecision policyDecision1 => policyDecision1.Policy == ((KingdomPolicyDecision)decision2).Policy,
-                    SettlementClaimantPreliminaryDecision annexationDecision1 => annexationDecision1.Settlement == ((SettlementClaimantPreliminaryDecision)decision2).Settlement,
+                    MakePeaceKingdomDecision peaceDecision1 => peaceDecision1.FactionToMakePeaceWith == ((MakePeaceKingdomDecision) decision2).FactionToMakePeaceWith,
+                    DeclareWarDecision warDecision1 => warDecision1.FactionToDeclareWarOn == ((DeclareWarDecision) decision2).FactionToDeclareWarOn,
+                    ExpelClanFromKingdomDecision expelDecision1 => expelDecision1.ClanToExpel == ((ExpelClanFromKingdomDecision) decision2).ClanToExpel,
+                    KingdomPolicyDecision policyDecision1 => policyDecision1.Policy == ((KingdomPolicyDecision) decision2).Policy,
+                    SettlementClaimantPreliminaryDecision annexationDecision1 => annexationDecision1.Settlement == ((SettlementClaimantPreliminaryDecision) decision2).Settlement,
                     _ => throw new ArgumentException(string.Format("{0} is not supported KingdomDecision type", decision1.GetType().FullName), nameof(decision1)),
                 };
             }

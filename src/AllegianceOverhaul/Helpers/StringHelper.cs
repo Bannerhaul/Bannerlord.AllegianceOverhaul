@@ -14,7 +14,7 @@ namespace AllegianceOverhaul.Helpers
 
         public static TextObject GetCooldownText(Type decisionType, float elapsedDaysUntilNow)
         {
-            int RemainingDays = (int)Math.Ceiling(AOCooldownManager.GetRequiredDecisionCooldown(decisionType) - elapsedDaysUntilNow);
+            int RemainingDays = (int) Math.Ceiling(AOCooldownManager.GetRequiredDecisionCooldown(decisionType) - elapsedDaysUntilNow);
             TextObject cooldownText = new(DECISION_IS_ON_COOLDOWN);
             SetNumericVariable(cooldownText, "NUMBER_OF_DAYS", RemainingDays);
             return cooldownText;

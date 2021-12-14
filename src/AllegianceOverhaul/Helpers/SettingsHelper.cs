@@ -123,11 +123,11 @@ namespace AllegianceOverhaul.Helpers
         private static DropdownDefault<string>? DetermineSubSystemScope(SubSystemType subSystem)
         {
             DropdownDefault<string> defaultGlobalScope = new(new string[] { Settings.DropdownValueAllFactions, Settings.DropdownValuePlayers, Settings.DropdownValueRuledBy }, 0);
-            return (int)subSystem switch
+            return (int) subSystem switch
             {
-                int subSystemIdx when subSystemIdx < (int)SubSystemType.MigrationTweaks => Settings.Instance!.EnsuredLoyaltyScope,
-                int subSystemIdx when subSystemIdx is >= (int)SubSystemType.MigrationTweaks and < (int)SubSystemType.ElectionRebalance => defaultGlobalScope,
-                int subSystemIdx when subSystemIdx is >= (int)SubSystemType.ElectionRebalance and < 150 => Settings.Instance!.PoliticsRebalanceScope,
+                int subSystemIdx when subSystemIdx < (int) SubSystemType.MigrationTweaks => Settings.Instance!.EnsuredLoyaltyScope,
+                int subSystemIdx when subSystemIdx is >= (int) SubSystemType.MigrationTweaks and < (int) SubSystemType.ElectionRebalance => defaultGlobalScope,
+                int subSystemIdx when subSystemIdx is >= (int) SubSystemType.ElectionRebalance and < 150 => Settings.Instance!.PoliticsRebalanceScope,
                 _ => null,
             };
         }
