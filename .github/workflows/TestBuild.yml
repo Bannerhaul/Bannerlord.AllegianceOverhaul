@@ -3,7 +3,8 @@ name: TestBuild
 on:
   push:
     branches:
-      - dev
+      - '*'
+      - '!master'
 
 env:
   # Disable the .NET logo in the console output.
