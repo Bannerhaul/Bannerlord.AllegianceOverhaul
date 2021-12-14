@@ -67,7 +67,7 @@ namespace AllegianceOverhaul.Patches.Migration
                 }
                 if (!NotApplicable(clan, clanToDefectTo))
                 {
-                    deConsiderDefection!(instance, clan, (Kingdom)clanToDefectTo!.MapFaction);
+                    deConsiderDefection!(instance, clan, (Kingdom) clanToDefectTo!.MapFaction);
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace AllegianceOverhaul.Patches.Migration
                         ++num1;
                     }
                 }
-                int num2 = (int)(MBRandom.RandomFloat * num1);
+                int num2 = (int) (MBRandom.RandomFloat * num1);
                 foreach (Kingdom kingdom2 in Kingdom.All)
                 {
                     if (kingdom2.Culture == clan.Culture)

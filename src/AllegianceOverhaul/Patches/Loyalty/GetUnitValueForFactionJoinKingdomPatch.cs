@@ -74,7 +74,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
                 }
                 if (ApplyLeaderDefectionFix)
                 {
-                    __result = (int)CalculatedResult;
+                    __result = (int) CalculatedResult;
                 }
             }
             catch (Exception ex)

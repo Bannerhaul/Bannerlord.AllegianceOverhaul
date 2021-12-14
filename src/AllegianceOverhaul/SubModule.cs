@@ -73,7 +73,7 @@ namespace AllegianceOverhaul
                 //Events
                 AOEvents.Instance = new AOEvents();
                 //CampaignGameStarter
-                CampaignGameStarter gameStarter = (CampaignGameStarter)gameStarterObject;
+                CampaignGameStarter gameStarter = (CampaignGameStarter) gameStarterObject;
                 //Behaviors
                 gameStarter.AddBehavior(new AOCooldownBehavior());
                 //Individual relationships 
