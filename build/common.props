@@ -16,10 +16,14 @@
     <BuildResourcesVersion>1.0.0.39</BuildResourcesVersion>
     <!--MCM Version-->
     <MCMVersion>4.3.10</MCMVersion>
-	<!--BUTRShared Version-->
-    <BUTRSharedVersion>1.6.1.61</BUTRSharedVersion>
-	<!--Harmony Extensions Version-->
-    <HarmonyExtensionsVersion>2.0.0.51</HarmonyExtensionsVersion>
+    <!--BUTRShared Version-->
+    <BUTRSharedVersion>2.0.0.78</BUTRSharedVersion>
+    <!--BUTRModuleManager Version-->
+    <BUTRModuleManagerVersion>3.0.85</BUTRModuleManagerVersion>
+    <!--ModuleLoader Version-->
+    <BUTRModuleLoaderVersion>1.0.0</BUTRModuleLoaderVersion>
+    <!--Harmony Extensions Version-->
+    <HarmonyExtensionsVersion>2.0.0.53</HarmonyExtensionsVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -29,15 +33,15 @@
     <Nullable>enable</Nullable>
     <ModuleName>AllegianceOverhaul</ModuleName>
     <DisplayName>Allegiance Overhaul</DisplayName>
-	<RootNamespace>$(MSBuildProjectName)</RootNamespace>
+    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
     <Authors>artifixer</Authors>
     <Product>Allegiance Overhaul Library for Bannerlord</Product>
-	<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-	<Copyright>Copyright © 2020-2021 artifixer</Copyright>
-	<Description>Clan allegiance system overhaul for Mount &amp; Blade II: Bannerlord</Description>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <Copyright>Copyright © 2020-2021 artifixer</Copyright>
+    <Description>Clan allegiance system overhaul for Mount &amp; Blade II: Bannerlord</Description>
   </PropertyGroup>
 
   <PropertyGroup>
