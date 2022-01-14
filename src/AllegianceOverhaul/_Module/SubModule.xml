@@ -17,7 +17,7 @@
 		<DependedModule Id="StoryMode" />
 	</DependedModules>
 	<DependedModuleMetadatas>
-		<DependedModuleMetadata id="Bannerlord.Harmony" order="LoadBeforeThis" version="v$harmonyversion$" />
+		<DependedModuleMetadata id="Bannerlord.Harmony" order="LoadBeforeThis" version="v$harmonyversion$.*" />
 		<DependedModuleMetadata id="Bannerlord.ButterLib" order="LoadBeforeThis" version="v$butterlibversion$" />
 		<DependedModuleMetadata id="Bannerlord.MBOptionScreen" order="LoadBeforeThis" version="v$mcmversion$" />
 		<DependedModuleMetadata id="Native" order="LoadBeforeThis" version="e$gameversion$.*" />
