@@ -1,6 +1,8 @@
 ﻿using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.ViewModels.Extensions;
+
 using HarmonyLib;
+
 using System;
 using System.Reflection;
 

@@ -32,7 +32,7 @@ namespace AllegianceOverhaul
 
         [SettingPropertyDropdown("{=BZnXaAO4m}Influence required to override decision", Order = 0, RequireRestart = false, HintText = "{=mhjZ7999E}Specify desired way of calculating the influence, required to override popular decision with unpopular one. Ruler can pay 'Slight Favor', 'Strong Favor' or 'Full Push' decision costs for each lacking support point of unpopular decision, or just pay the exact amount of influence, that supporters of the popular decision spent in total. Native is [Override using 'Full Push' cost]. Suggested is [Flat influence override].")]
         [SettingPropertyGroup(HeadingElectionRebalance)]
-        public DropdownDefault<DropdownObject<ODCostCalculationMethod>> OverrideDecisionCostCalculationMethod { get; set; } = new DropdownDefault<DropdownObject<ODCostCalculationMethod>>(DropdownObject<ODCostCalculationMethod>.SetDropdownListFromEnum(), (int)ODCostCalculationMethod.FlatInfluenceOverride);
+        public DropdownDefault<DropdownObject<ODCostCalculationMethod>> OverrideDecisionCostCalculationMethod { get; set; } = new DropdownDefault<DropdownObject<ODCostCalculationMethod>>(DropdownObject<ODCostCalculationMethod>.SetDropdownListFromEnum(), (int) ODCostCalculationMethod.FlatInfluenceOverride);
 
         [SettingPropertyFloatingInteger("{=PB4s4f10m}Score threshold for AI to override decision", 0f, 200f, Order = 1, RequireRestart = true, HintText = "{=GWUSWJ41x}Minimum difference between AI ruler desired decision score and popular decision score for the ruler clan to consider overriding popular decision. Native is 10. Default = 50.0.")]
         [SettingPropertyGroup(HeadingElectionRebalance)]

@@ -89,7 +89,7 @@ namespace AllegianceOverhaul.Extensions
                 {
                     if ((accountForZeros || idx != 0) && CountSetBits(idx) == numberOfBitsSet)
                     {
-                        yield return (T)Enum.Parse(typeof(T), idx.ToString(), true);
+                        yield return (T) Enum.Parse(typeof(T), idx.ToString(), true);
                     }
                 }
             }

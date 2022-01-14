@@ -23,7 +23,7 @@ namespace AllegianceOverhaul.Patches.Politics
         {
             float PopularOptionSupportPoints = popularOption.TotalSupportPoints;
             float OverridingOptionSupportPoints = overridingOption.TotalSupportPoints + 3f;
-#if e170
+#if e170 || e171
             Clan rulingClan = decision.Kingdom.RulingClan;
             return calculationMethod switch
             {
@@ -46,13 +46,13 @@ namespace AllegianceOverhaul.Patches.Politics
         }
         private static float ApplySupport(ref float popularOptionSupportPoints, ref float overridingOptionSupportPoints, KingdomDecision decision)
         {
-#if e170
+#if e170 || e171
             Clan rulingClan = decision.Kingdom.RulingClan;
 #endif
             if (popularOptionSupportPoints == overridingOptionSupportPoints + 1.0)
             {
                 ++overridingOptionSupportPoints;
-#if e170
+#if e170 || e171
                 return decision.GetInfluenceCostOfSupport(rulingClan, Supporter.SupportWeights.SlightlyFavor);
 #else
                 return decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.SlightlyFavor);
@@ -61,7 +61,7 @@ namespace AllegianceOverhaul.Patches.Politics
             else if (popularOptionSupportPoints == overridingOptionSupportPoints + 2.0)
             {
                 overridingOptionSupportPoints += 2f;
-#if e170
+#if e170 || e171
                 return decision.GetInfluenceCostOfSupport(rulingClan, Supporter.SupportWeights.StronglyFavor);
 #else
                 return decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.StronglyFavor);
@@ -70,7 +70,7 @@ namespace AllegianceOverhaul.Patches.Politics
             else if (popularOptionSupportPoints > overridingOptionSupportPoints + 2.0)
             {
                 overridingOptionSupportPoints += 3f;
-#if e170
+#if e170 || e171
                 return decision.GetInfluenceCostOfSupport(rulingClan, Supporter.SupportWeights.FullyPush);
 #else
                 return decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.FullyPush);

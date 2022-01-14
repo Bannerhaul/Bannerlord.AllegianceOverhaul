@@ -3,23 +3,27 @@
 
   <!--Module Version-->
   <PropertyGroup>
-    <Version>2.2.0.0</Version>
+    <Version>2.2.1.0</Version>
   </PropertyGroup>
 
   <!-- Versions of Major Dependencies (for Package References & SubModule.xml Substitution) -->
   <PropertyGroup>
     <!--Harmony Version-->
-    <HarmonyVersion>2.1.1</HarmonyVersion>
+    <HarmonyVersion>2.2.0</HarmonyVersion>
     <!--ButterLib Version-->
-    <ButterLibVersion>1.0.31</ButterLibVersion>
+    <ButterLibVersion>1.0.33</ButterLibVersion>
     <!--BuildResources Version-->
     <BuildResourcesVersion>1.0.0.39</BuildResourcesVersion>
     <!--MCM Version-->
-    <MCMVersion>4.3.10</MCMVersion>
-	<!--BUTRShared Version-->
-    <BUTRSharedVersion>1.6.1.61</BUTRSharedVersion>
-	<!--Harmony Extensions Version-->
-    <HarmonyExtensionsVersion>2.0.0.51</HarmonyExtensionsVersion>
+    <MCMVersion>4.3.17</MCMVersion>
+    <!--BUTRShared Version-->
+    <BUTRSharedVersion>2.0.0.78</BUTRSharedVersion>
+    <!--BUTRModuleManager Version-->
+    <BUTRModuleManagerVersion>3.0.87</BUTRModuleManagerVersion>
+    <!--ModuleLoader Version-->
+    <BUTRModuleLoaderVersion>1.0.0.5</BUTRModuleLoaderVersion>
+    <!--Harmony Extensions Version-->
+    <HarmonyExtensionsVersion>2.0.0.53</HarmonyExtensionsVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -29,15 +33,15 @@
     <Nullable>enable</Nullable>
     <ModuleName>AllegianceOverhaul</ModuleName>
     <DisplayName>Allegiance Overhaul</DisplayName>
-	<RootNamespace>$(MSBuildProjectName)</RootNamespace>
+    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
     <Authors>artifixer</Authors>
     <Product>Allegiance Overhaul Library for Bannerlord</Product>
-	<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-	<Copyright>Copyright © 2020-2021 artifixer</Copyright>
-	<Description>Clan allegiance system overhaul for Mount &amp; Blade II: Bannerlord</Description>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <Copyright>Copyright © 2020-2021 artifixer</Copyright>
+    <Description>Clan allegiance system overhaul for Mount &amp; Blade II: Bannerlord</Description>
   </PropertyGroup>
 
   <PropertyGroup>

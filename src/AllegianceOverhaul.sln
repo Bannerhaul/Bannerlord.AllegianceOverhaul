@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllegianceOverhaul", "AllegianceOverhaul\AllegianceOverhaul.csproj", "{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllegianceOverhaul.ImplementationLoader", "AllegianceOverhaul.ImplementationLoader\AllegianceOverhaul.ImplementationLoader.csproj", "{378F8C63-04C3-4B75-AA54-7CB397E79055}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A31EB927-C42D-4D29-A7E2-71C28E9A1255}"
 	ProjectSection(SolutionItems) = preProject
 		..\changelog.txt = ..\changelog.txt
@@ -20,10 +18,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{CB20C6C8
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{AE56FFC8-0129-4E0F-83C0-D00011A2B127}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\dependabot.yml = ..\.github\dependabot.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8CBC023C-EB40-415D-8A78-B6B7F82523E9}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
+		..\.github\workflows\dotnet-format-daily.yml = ..\.github\workflows\dotnet-format-daily.yml
 		..\.github\workflows\TestBuild.yml = ..\.github\workflows\TestBuild.yml
 	EndProjectSection
 EndProject
@@ -55,29 +57,13 @@ Global
 		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Debug|x64.Build.0 = Stable_Debug|x64
 		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Release|x64.ActiveCfg = Stable_Release|x64
 		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Release|x64.Build.0 = Stable_Release|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Debug|x64.ActiveCfg = Minimal_Debug|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Debug|x64.Build.0 = Minimal_Debug|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Release|x64.ActiveCfg = Minimal_Release|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Release|x64.Build.0 = Minimal_Release|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Debug|x64.ActiveCfg = Minimal_Debug|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Debug|x64.Build.0 = Minimal_Debug|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Debug|x64.ActiveCfg = Minimal_Debug|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Debug|x64.Build.0 = Minimal_Debug|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Release|x64.ActiveCfg = Minimal_Release|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Release|x64.Build.0 = Minimal_Release|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Release|x64.ActiveCfg = Minimal_Release|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Release|x64.Build.0 = Minimal_Release|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Debug|x64.ActiveCfg = Minimal_Debug|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Debug|x64.Build.0 = Minimal_Debug|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Release|x64.ActiveCfg = Minimal_Release|x64
-		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Release|x64.Build.0 = Minimal_Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8CBC023C-EB40-415D-8A78-B6B7F82523E9} = {AE56FFC8-0129-4E0F-83C0-D00011A2B127}
-	EndGlobalSection	
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8807564B-6935-4739-A558-136CD2750DE8}
 	EndGlobalSection

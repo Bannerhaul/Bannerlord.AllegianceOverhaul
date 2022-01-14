@@ -15,12 +15,12 @@ namespace AllegianceOverhaul.Helpers
         public static TDelegate? GetDelegate<TDelegate>(Type type, string originalMethod) where TDelegate : Delegate
         {
             MethodInfo? miOriginal = Method(type, originalMethod);
-            return miOriginal != null ? (TDelegate)Delegate.CreateDelegate(typeof(TDelegate), miOriginal) : null;
+            return miOriginal != null ? (TDelegate) Delegate.CreateDelegate(typeof(TDelegate), miOriginal) : null;
         }
 
         public static TFieldType GetFieldValue<TFieldType, TInstance>(TInstance instance, string fieldName)
         {
-            return (TFieldType)Field(instance!.GetType(), fieldName).GetValue(instance);
+            return (TFieldType) Field(instance!.GetType(), fieldName).GetValue(instance);
         }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,7 +31,7 @@ namespace AllegianceOverhaul.Extensions
             int[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null
-                : (double?)(data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0 : data[data.Length / 2]);
+                : (double?) (data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0 : data[data.Length / 2]);
         }
 
         public static double Median(this IEnumerable<long> source)
@@ -57,7 +57,7 @@ namespace AllegianceOverhaul.Extensions
             long[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null
-                : (double?)(data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0 : data[data.Length / 2]);
+                : (double?) (data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0 : data[data.Length / 2]);
         }
 
         public static float Median(this IEnumerable<float> source)
@@ -83,7 +83,7 @@ namespace AllegianceOverhaul.Extensions
             float[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null
-                : (float?)(data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0f : data[data.Length / 2]);
+                : (float?) (data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0f : data[data.Length / 2]);
         }
 
         public static double Median(this IEnumerable<double> source)
@@ -109,7 +109,7 @@ namespace AllegianceOverhaul.Extensions
             double[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null
-                : (double?)(data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0 : data[data.Length / 2]);
+                : (double?) (data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0 : data[data.Length / 2]);
         }
 
         public static decimal Median(this IEnumerable<decimal> source)
@@ -135,7 +135,7 @@ namespace AllegianceOverhaul.Extensions
             decimal[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null
-                : (decimal?)(data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0m : data[data.Length / 2]);
+                : (decimal?) (data.Length % 2 == 0 ? (data[data.Length / 2 - 1] + data[data.Length / 2]) / 2.0m : data[data.Length / 2]);
         }
 
         public static double Median<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector)

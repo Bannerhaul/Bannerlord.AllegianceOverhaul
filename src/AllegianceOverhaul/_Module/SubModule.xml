@@ -17,7 +17,7 @@
 		<DependedModule Id="StoryMode" />
 	</DependedModules>
 	<DependedModuleMetadatas>
-		<DependedModuleMetadata id="Bannerlord.Harmony" order="LoadBeforeThis" version="v$harmonyversion$" />
+		<DependedModuleMetadata id="Bannerlord.Harmony" order="LoadBeforeThis" version="v$harmonyversion$.*" />
 		<DependedModuleMetadata id="Bannerlord.ButterLib" order="LoadBeforeThis" version="v$butterlibversion$" />
 		<DependedModuleMetadata id="Bannerlord.MBOptionScreen" order="LoadBeforeThis" version="v$mcmversion$" />
 		<DependedModuleMetadata id="Native" order="LoadBeforeThis" version="e$gameversion$.*" />
@@ -27,11 +27,14 @@
 		<DependedModuleMetadata id="CustomBattle" order="LoadBeforeThis" version="e$gameversion$.*" optional="true" />
 	</DependedModuleMetadatas>
 	<SubModules>
-		<SubModule>
-			<Name value="$modulename$" />
-			<DLLName value="$modulename$.dll" />
-			<SubModuleClassType value="$buildprojectname$.ImplementationLoaderSubModule" />
-			<Tags />
-		</SubModule>
+    <!-- Bannerlord Module Loader. Do not change the name! -->
+    <SubModule>
+      <Name value="Bannerlord Module Loader" />
+      <DLLName value="Bannerlord.ModuleLoader.dll" />
+      <SubModuleClassType value="Bannerlord.ModuleLoader.SubModule" />
+      <Tags>
+        <Tag key="LoaderFilter" value ="AllegianceOverhaul.*.dll" />
+      </Tags>
+    </SubModule>
 	</SubModules>
 </Module>
