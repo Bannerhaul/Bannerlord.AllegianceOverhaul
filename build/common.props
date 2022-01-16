@@ -3,7 +3,7 @@
 
   <!--Module Version-->
   <PropertyGroup>
-    <Version>2.2.1.0</Version>
+    <Version>2.2.1.1</Version>
   </PropertyGroup>
 
   <!-- Versions of Major Dependencies (for Package References & SubModule.xml Substitution) -->
@@ -15,11 +15,11 @@
     <!--BuildResources Version-->
     <BuildResourcesVersion>1.0.0.39</BuildResourcesVersion>
     <!--MCM Version-->
-    <MCMVersion>4.3.10</MCMVersion>
+    <MCMVersion>4.3.17</MCMVersion>
 	<!--BUTRShared Version-->
     <BUTRSharedVersion>1.6.1.61</BUTRSharedVersion>
 	<!--Harmony Extensions Version-->
-    <HarmonyExtensionsVersion>2.0.0.51</HarmonyExtensionsVersion>
+    <HarmonyExtensionsVersion>2.0.0.53</HarmonyExtensionsVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -36,7 +36,7 @@
     <Authors>artifixer</Authors>
     <Product>Allegiance Overhaul Library for Bannerlord</Product>
 	<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-	<Copyright>Copyright © 2020-2021 artifixer</Copyright>
+	<Copyright>Copyright © 2020-2022 artifixer</Copyright>
 	<Description>Clan allegiance system overhaul for Mount &amp; Blade II: Bannerlord</Description>
   </PropertyGroup>
 
