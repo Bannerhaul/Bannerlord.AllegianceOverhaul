@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllegianceOverhaul", "AllegianceOverhaul\AllegianceOverhaul.csproj", "{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllegianceOverhaul.ImplementationLoader", "AllegianceOverhaul.ImplementationLoader\AllegianceOverhaul.ImplementationLoader.csproj", "{378F8C63-04C3-4B75-AA54-7CB397E79055}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A31EB927-C42D-4D29-A7E2-71C28E9A1255}"
 	ProjectSection(SolutionItems) = preProject
 		..\changelog.txt = ..\changelog.txt
@@ -57,6 +59,22 @@ Global
 		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Debug|x64.Build.0 = Stable_Debug|x64
 		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Release|x64.ActiveCfg = Stable_Release|x64
 		{2C810B42-CA98-430A-97C3-3DD0DF0C11D8}.Stable_Release|x64.Build.0 = Stable_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Debug|x64.ActiveCfg = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Debug|x64.Build.0 = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Release|x64.ActiveCfg = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Beta_Release|x64.Build.0 = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Debug|x64.ActiveCfg = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Debug|x64.Build.0 = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Debug|x64.ActiveCfg = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Debug|x64.Build.0 = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Release|x64.ActiveCfg = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Minimal_Release|x64.Build.0 = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Release|x64.ActiveCfg = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Release|x64.Build.0 = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Debug|x64.ActiveCfg = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Debug|x64.Build.0 = Minimal_Debug|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Release|x64.ActiveCfg = Minimal_Release|x64
+		{378F8C63-04C3-4B75-AA54-7CB397E79055}.Stable_Release|x64.Build.0 = Minimal_Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
