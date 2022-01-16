@@ -13,14 +13,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Bannerlord.BuildResources" Version="$(BuildResourcesVersion)">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Bannerlord.BUTR.Shared" Version="$(BUTRSharedVersion)">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+    <PackageReference Include="Bannerlord.BuildResources" Version="$(BuildResourcesVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Bannerlord.BUTR.Shared" Version="$(BUTRSharedVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Bannerlord.ModuleLoader.Injector" Version="$(BUTRModuleLoaderVersion)" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="Bannerlord.ModuleManager.Source" Version="$(BUTRModuleManagerVersion)" />
 		<PackageReference Include="Nullable" Version="1.3.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -50,7 +52,16 @@
 	<ItemGroup>
 		<Folder Include="_Module\ModuleData\" />
 	</ItemGroup>
+
+	<!-- Extra Substitution Variables to Use in SubModule.xml -->
 	<ItemGroup>
-		<ProjectReference Include="..\AllegianceOverhaul.ImplementationLoader\AllegianceOverhaul.ImplementationLoader.csproj" />
+		<SubModuleOverrides Include="DisplayName">
+			<Regex>\$displayname\$</Regex>
+			<Replacement>$(DisplayName)</Replacement>
+		</SubModuleOverrides>
+		<SubModuleOverrides Include="MCMVersion">
+			<Regex>\$mcmversion\$</Regex>
+			<Replacement>$(MCMVersion)</Replacement>
+		</SubModuleOverrides>
 	</ItemGroup>
 </Project>
