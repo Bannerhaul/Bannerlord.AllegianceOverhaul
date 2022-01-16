@@ -131,7 +131,7 @@ namespace AllegianceOverhaul.Patches.Politics
                 }
 
                 if (SubSystemEnabled)
-                    __result = (int)CalculatedResult;
+                    __result = (int) CalculatedResult;
             }
             catch (Exception ex)
             {
