@@ -2,6 +2,7 @@
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Localization;
 
 using static AllegianceOverhaul.Helpers.LocalizationHelper;

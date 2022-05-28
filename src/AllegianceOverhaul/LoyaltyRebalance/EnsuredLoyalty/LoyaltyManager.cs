@@ -4,6 +4,7 @@ using AllegianceOverhaul.Helpers;
 using System;
 
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 

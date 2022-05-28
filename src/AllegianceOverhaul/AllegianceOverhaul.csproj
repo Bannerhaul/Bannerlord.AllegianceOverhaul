@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyName>$(ModuleName).$(GameVersion)</AssemblyName>
+        <AssemblyName>$(ModuleId).$(GameVersion)</AssemblyName>
         <Configurations>Stable_Debug;Stable_Release;Beta_Debug;Beta_Release;Debug;Release</Configurations>
     </PropertyGroup>
 

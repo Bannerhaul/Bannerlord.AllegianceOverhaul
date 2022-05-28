@@ -8,6 +8,7 @@ using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
+using TaleWorlds.CampaignSystem.Party.PartyComponents;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -137,11 +138,12 @@ namespace AllegianceOverhaul.MigrationTweaks
                 {
                     if ((rulerIsLeaving || currentKingdom.IsAtWarWith(targetKingdom)) && !isMerc)
                     {
-                        ChangeKingdomAction.ApplyByLeaveWithRebellionAgainstKingdom(clan, targetKingdom, true);
+                        ChangeKingdomAction.ApplyByLeaveWithRebellionAgainstKingdom(clan, true);
                         if (rulerIsLeaving)
                         {
                             DestroyKingdomAction.Apply(currentKingdom);
                         }
+                        ChangeKingdomAction.ApplyByJoinToKingdom(clan, targetKingdom, true);
                     }
                     else
                     {

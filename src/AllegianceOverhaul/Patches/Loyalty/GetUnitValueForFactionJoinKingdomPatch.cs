@@ -8,7 +8,8 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Barterables;
+using TaleWorlds.CampaignSystem.BarterSystem.Barterables;
+using TaleWorlds.CampaignSystem.Party;
 
 namespace AllegianceOverhaul.Patches.Loyalty
 {

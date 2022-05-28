@@ -11,7 +11,7 @@ using System.Text;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.Barterables;
+using TaleWorlds.CampaignSystem.BarterSystem.Barterables;
 
 namespace AllegianceOverhaul.Patches.Migration
 {
@@ -33,11 +33,12 @@ namespace AllegianceOverhaul.Patches.Migration
 
                 if (shouldRebel)
                 {
-                    ChangeKingdomAction.ApplyByLeaveWithRebellionAgainstKingdom(originalClan, instance.TargetKingdom, true);
+                    ChangeKingdomAction.ApplyByLeaveWithRebellionAgainstKingdom(originalClan, true);
                     if (kingIsLeaving)
                     {
                         DestroyKingdomAction.Apply(originalKingdom);
                     }
+                    ChangeKingdomAction.ApplyByJoinToKingdom(originalClan, instance.TargetKingdom);
                 }
                 else
                 {

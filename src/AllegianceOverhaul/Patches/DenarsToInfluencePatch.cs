@@ -5,7 +5,7 @@ using HarmonyLib;
 using System;
 using System.Reflection;
 
-using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+using TaleWorlds.CampaignSystem.GameComponents;
 
 namespace AllegianceOverhaul.Patches
 {

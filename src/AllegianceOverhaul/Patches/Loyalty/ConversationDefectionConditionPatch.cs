@@ -7,7 +7,7 @@ using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.Localization;
 
 namespace AllegianceOverhaul.Patches.Loyalty

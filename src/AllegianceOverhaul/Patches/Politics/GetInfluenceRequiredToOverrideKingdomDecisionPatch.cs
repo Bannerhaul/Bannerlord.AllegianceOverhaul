@@ -8,7 +8,7 @@ using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents;
+using TaleWorlds.CampaignSystem.GameComponents;
 
 namespace AllegianceOverhaul.Patches.Politics
 {
@@ -23,7 +23,7 @@ namespace AllegianceOverhaul.Patches.Politics
         {
             float PopularOptionSupportPoints = popularOption.TotalSupportPoints;
             float OverridingOptionSupportPoints = overridingOption.TotalSupportPoints + 3f;
-#if e170 || e171
+
             Clan rulingClan = decision.Kingdom.RulingClan;
             return calculationMethod switch
             {
@@ -33,48 +33,24 @@ namespace AllegianceOverhaul.Patches.Politics
                 ODCostCalculationMethod.FullyPush => (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(rulingClan, Supporter.SupportWeights.FullyPush),
                 _ => throw new ArgumentOutOfRangeException(nameof(Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue), Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue, null),
             };
-#else
-            return calculationMethod switch
-            {
-                ODCostCalculationMethod.FlatInfluenceOverride => popularOption.SupporterList.Sum(sup => decision.GetInfluenceCostOfSupport(sup.SupportWeight)),
-                ODCostCalculationMethod.SlightlyFavor => (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.SlightlyFavor),
-                ODCostCalculationMethod.StronglyFavor => (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.StronglyFavor),
-                ODCostCalculationMethod.FullyPush => (PopularOptionSupportPoints - OverridingOptionSupportPoints) * decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.FullyPush),
-                _ => throw new ArgumentOutOfRangeException(nameof(Settings.Instance.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue), Settings.Instance!.OverrideDecisionCostCalculationMethod.SelectedValue.EnumValue, null),
-            };
-#endif
         }
         private static float ApplySupport(ref float popularOptionSupportPoints, ref float overridingOptionSupportPoints, KingdomDecision decision)
         {
-#if e170 || e171
             Clan rulingClan = decision.Kingdom.RulingClan;
-#endif
             if (popularOptionSupportPoints == overridingOptionSupportPoints + 1.0)
             {
                 ++overridingOptionSupportPoints;
-#if e170 || e171
                 return decision.GetInfluenceCostOfSupport(rulingClan, Supporter.SupportWeights.SlightlyFavor);
-#else
-                return decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.SlightlyFavor);
-#endif
             }
             else if (popularOptionSupportPoints == overridingOptionSupportPoints + 2.0)
             {
                 overridingOptionSupportPoints += 2f;
-#if e170 || e171
                 return decision.GetInfluenceCostOfSupport(rulingClan, Supporter.SupportWeights.StronglyFavor);
-#else
-                return decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.StronglyFavor);
-#endif
             }
             else if (popularOptionSupportPoints > overridingOptionSupportPoints + 2.0)
             {
                 overridingOptionSupportPoints += 3f;
-#if e170 || e171
                 return decision.GetInfluenceCostOfSupport(rulingClan, Supporter.SupportWeights.FullyPush);
-#else
-                return decision.GetInfluenceCostOfSupport(Supporter.SupportWeights.FullyPush);
-#endif
             }
             else return 0.0f;
         }
