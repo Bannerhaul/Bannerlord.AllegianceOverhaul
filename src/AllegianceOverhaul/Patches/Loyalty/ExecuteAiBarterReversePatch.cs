@@ -1,6 +1,8 @@
 ﻿using HarmonyLib;
 
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.BarterSystem;
+using TaleWorlds.CampaignSystem.BarterSystem.Barterables;
 
 namespace AllegianceOverhaul.Patches.Loyalty
 {

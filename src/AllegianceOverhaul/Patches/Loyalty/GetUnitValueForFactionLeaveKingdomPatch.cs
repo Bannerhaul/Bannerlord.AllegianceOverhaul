@@ -7,7 +7,7 @@ using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Barterables;
+using TaleWorlds.CampaignSystem.BarterSystem.Barterables;
 
 namespace AllegianceOverhaul.Patches.Loyalty
 {

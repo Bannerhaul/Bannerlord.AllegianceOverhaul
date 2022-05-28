@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+using TaleWorlds.CampaignSystem.GameComponents;
 
 namespace AllegianceOverhaul.Patches.Loyalty
 {

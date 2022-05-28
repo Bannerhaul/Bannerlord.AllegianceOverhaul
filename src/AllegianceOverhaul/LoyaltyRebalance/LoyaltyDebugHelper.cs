@@ -4,7 +4,7 @@ using AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty;
 using System.Collections.Generic;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Barterables;
+using TaleWorlds.CampaignSystem.BarterSystem.Barterables;
 using TaleWorlds.Localization;
 
 using static AllegianceOverhaul.Helpers.LocalizationHelper;

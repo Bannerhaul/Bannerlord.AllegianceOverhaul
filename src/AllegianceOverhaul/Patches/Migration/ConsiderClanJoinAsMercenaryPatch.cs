@@ -7,8 +7,8 @@ using System;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Barterables;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors.BarterBehaviors;
+using TaleWorlds.CampaignSystem.BarterSystem.Barterables;
+using TaleWorlds.CampaignSystem.CampaignBehaviors.BarterBehaviors;
 
 namespace AllegianceOverhaul.Patches.Migration
 {
