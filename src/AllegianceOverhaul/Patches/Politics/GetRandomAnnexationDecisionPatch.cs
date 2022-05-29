@@ -9,8 +9,8 @@ using System.Linq;
 using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.Election;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
