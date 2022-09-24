@@ -14,7 +14,6 @@ using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomDip
 using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.Diplomacy;
 #endif
 
-
 namespace AllegianceOverhaul.ViewModels.Patches
 {
     [HarmonyPatch(typeof(KingdomDiplomacyVM), "OnSetWarItem")]

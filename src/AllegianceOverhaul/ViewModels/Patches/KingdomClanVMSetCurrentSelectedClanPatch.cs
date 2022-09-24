@@ -14,7 +14,6 @@ using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomCla
 using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.Clans;
 #endif
 
-
 namespace AllegianceOverhaul.ViewModels.Patches
 {
     [HarmonyPatch(typeof(KingdomClanVM), "SetCurrentSelectedClan")]
