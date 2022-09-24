@@ -8,7 +8,12 @@ using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
+#if e172
 using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomClan;
+#else
+using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.Clans;
+#endif
+
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {

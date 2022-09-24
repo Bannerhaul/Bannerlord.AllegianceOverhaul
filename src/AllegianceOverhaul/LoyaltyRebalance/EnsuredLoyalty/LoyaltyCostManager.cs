@@ -103,7 +103,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         {
             double RelativeScoreToLeave = new LeaveKingdomAsClanBarterable(LeavingClan.Leader, null).GetValueForFaction(LeavingClan) - (LeavingClan.IsMinorFaction ? 500 : 0);
             RelativeScoreToLeave = Math.Sqrt(Math.Abs(RelativeScoreToLeave)) * (RelativeScoreToLeave >= 0 ? -500 : 250); //invert it as negative is good for us
-            double CostScore = WithholdCost!.InfluenceCost / Math.Max(0.001, LeavingClan.Kingdom.RulingClan.Influence) * WithholdCost.InfluenceCost * 1000 + WithholdCost.GoldCost / Math.Max(0.001, LeavingClan.Kingdom.Ruler.Gold) * WithholdCost.GoldCost;
+            double CostScore = WithholdCost!.InfluenceCost / Math.Max(0.001, LeavingClan.Kingdom.RulingClan.Influence) * WithholdCost.InfluenceCost * 1000 + WithholdCost.GoldCost / Math.Max(0.001, LeavingClan.Kingdom.Leader.Gold) * WithholdCost.GoldCost;
             double ClanCountModifier = 0;
             foreach (Clan clan in LeavingClan.Kingdom.Clans)
             {
@@ -116,7 +116,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                 }
             }
             double RelativeStrengthModifier = LeavingClan.TotalStrength / (LeavingClan.Kingdom.TotalStrength - LeavingClan.Kingdom.RulingClan.TotalStrength);
+#if e172
             float SettlementValue = (TargetKingdom != null && TargetKingdom.IsAtWarWith(LeavingClan.Kingdom) && !LeavingClan.IsUnderMercenaryService) ? LeavingClan.CalculateSettlementValue(LeavingClan.Kingdom) : 0;
+#else
+            float SettlementValue = (TargetKingdom != null && TargetKingdom.IsAtWarWith(LeavingClan.Kingdom) && !LeavingClan.IsUnderMercenaryService) ? LeavingClan.CalculateTotalSettlementValueForFaction(LeavingClan.Kingdom) : 0;
+#endif
             double Result = (Campaign.Current.Models.DiplomacyModel.GetScoreOfKingdomToGetClan(LeavingClan.Kingdom, LeavingClan) + RelativeScoreToLeave) * (RelativeStrengthModifier + (LeavingClan.IsUnderMercenaryService ? 0.1 : 1)) + SettlementValue - CostScore * ClanCountModifier;
             if (SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical, LeavingClan))
             {
@@ -128,7 +132,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         {
             return
               WithholdCost is null
-              || (LeavingClan.Kingdom.RulingClan.Influence > WithholdCost.InfluenceCost && LeavingClan.Kingdom.Ruler.Gold > WithholdCost.GoldCost && GetScoreForKingdomToWithholdClan() >= 0);
+              || (LeavingClan.Kingdom.RulingClan.Influence > WithholdCost.InfluenceCost && LeavingClan.Kingdom.Leader.Gold > WithholdCost.GoldCost && GetScoreForKingdomToWithholdClan() >= 0);
         }
         public bool GetAIWithholdDecision()
         {
@@ -150,7 +154,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                 return;
             }
             float InitialInfluence = LeavingClan.Kingdom.RulingClan.Influence;
-            int InitilalGold = LeavingClan.Kingdom.Ruler.Gold;
+            int InitilalGold = LeavingClan.Kingdom.Leader.Gold;
             TextObject textObject = new(decisionIsWithhold ? WithholdPricePayed : WithholdPriceRejected);
             SetEntityProperties(textObject, "LEAVING_CLAN", LeavingClan, true);
             SetNumericVariable(textObject, "INITIAL_INFLUENCE", InitialInfluence, "N0");
@@ -161,7 +165,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
             {
                 ApplyAIWithholdDecision(decisionIsWithhold);
                 SetNumericVariable(textObject, "RESULT_INFLUENCE", LeavingClan.Kingdom.RulingClan.Influence, "N0");
-                SetNumericVariable(textObject, "RESULT_GOLD", LeavingClan.Kingdom.Ruler.Gold, "N0");
+                SetNumericVariable(textObject, "RESULT_GOLD", LeavingClan.Kingdom.Leader.Gold, "N0");
             }
             MessageHelper.SimpleMessage(textObject);
         }
@@ -172,8 +176,8 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                 return;
             }
             LeavingClan.Kingdom.RulingClan.Influence = MBMath.ClampFloat(LeavingClan.Kingdom.RulingClan.Influence - WithholdCost.InfluenceCost, 0f, float.MaxValue);
-            LeavingClan.Kingdom.Ruler.Gold = MBMath.ClampInt(LeavingClan.Kingdom.Ruler.Gold - WithholdCost.GoldCost, 0, int.MaxValue);
-            LeavingClan.Leader.Gold += MBMath.ClampInt(LeavingClan.Kingdom.Ruler.Gold - WithholdCost.GoldCost, 0, int.MaxValue);
+            LeavingClan.Kingdom.Leader.Gold = MBMath.ClampInt(LeavingClan.Kingdom.Leader.Gold - WithholdCost.GoldCost, 0, int.MaxValue);
+            LeavingClan.Leader.Gold += MBMath.ClampInt(LeavingClan.Kingdom.Leader.Gold - WithholdCost.GoldCost, 0, int.MaxValue);
         }
 
         public void AwaitPlayerDecision()

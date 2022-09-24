@@ -90,11 +90,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                     DebugTextObject.SetTextVariable("REASON", ReasonDisabled);
                     return false;
                 case ELState.AffectedByRelations:
-                    int CurrentRelation = clan!.Leader.GetRelation(clan.Kingdom.Ruler);
+                    int CurrentRelation = clan!.Leader.GetRelation(clan.Kingdom.Leader);
                     int RequiredRelation = GetRelationThreshold(clan, kingdom);
                     bool RelationCheckResult = CurrentRelation >= RequiredRelation;
                     LoyaltyCostManager costManager = new(clan, kingdom);
-                    bool HaveResources = clan.Kingdom.RulingClan.Influence > (costManager.WithholdCost?.InfluenceCost ?? 0) && clan.Kingdom.Ruler.Gold > (costManager.WithholdCost?.GoldCost ?? 0);
+                    bool HaveResources = clan.Kingdom.RulingClan.Influence > (costManager.WithholdCost?.InfluenceCost ?? 0) && clan.Kingdom.Leader.Gold > (costManager.WithholdCost?.GoldCost ?? 0);
                     bool ShouldPay = Settings.Instance!.UseWithholdPrice && Settings.Instance.WithholdToleranceLimit * 1000000 < costManager.BarterableSum;
                     TextObject WithholdPrice = new(HaveResources ? LeaderHasResources : LeaderHasNoResources);
                     SetEntityProperties(WithholdPrice, "LEAVING_CLAN", clan, true);
@@ -185,7 +185,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
 
             if (Settings.Instance!.UseRelationForEnsuredLoyalty && !clan.IsUnderMercenaryService)
             {
-                if (!(clan.Leader.GetRelation(clan.Kingdom?.Ruler) >= GetRelationThreshold(clan, kingdom)))
+                if (!(clan.Leader.GetRelation(clan.Kingdom?.Leader) >= GetRelationThreshold(clan, kingdom)))
                     return false;
                 else
                 if (Settings.Instance.UseWithholdPrice)
@@ -195,7 +195,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                     {
                         if (costManager.WithholdCost != null)
                         {
-                            if (!(clan.Kingdom?.RulingClan.Influence > costManager.WithholdCost.InfluenceCost) || !(clan.Kingdom?.Ruler.Gold > costManager.WithholdCost.GoldCost))
+                            if (!(clan.Kingdom?.RulingClan.Influence > costManager.WithholdCost.InfluenceCost) || !(clan.Kingdom?.Leader.Gold > costManager.WithholdCost.GoldCost))
                                 return false;
                             costManager.AwaitPlayerDecision();
                         }
@@ -264,7 +264,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
         private static void GetAveragedLoyaltyStatus(Clan clan, out string text, out Color color)
         {
             GetRelationThresholds(clan, out int MinRelationThreshold, out int MaxRelationThreshold, out int LeaveRelationThreshold);
-            int RelationWithLiege = clan.Leader.GetRelation(clan.Kingdom.Ruler);
+            int RelationWithLiege = clan.Leader.GetRelation(clan.Kingdom.Leader);
             if (RelationWithLiege > LeaveRelationThreshold && RelationWithLiege > MaxRelationThreshold)
             {
                 text = TooltipLoyal.ToLocalizedString();

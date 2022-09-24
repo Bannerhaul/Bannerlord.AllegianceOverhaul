@@ -8,7 +8,11 @@ using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Election;
+#if e172
 using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.KingdomDiplomacy;
+#else
+using TaleWorlds.CampaignSystem.ViewModelCollection.KingdomManagement.Diplomacy;
+#endif
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {
