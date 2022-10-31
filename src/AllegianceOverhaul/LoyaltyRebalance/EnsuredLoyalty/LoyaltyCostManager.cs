@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.BarterSystem;
 using TaleWorlds.CampaignSystem.BarterSystem.Barterables;
-using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -116,11 +115,7 @@ namespace AllegianceOverhaul.LoyaltyRebalance.EnsuredLoyalty
                 }
             }
             double RelativeStrengthModifier = LeavingClan.TotalStrength / (LeavingClan.Kingdom.TotalStrength - LeavingClan.Kingdom.RulingClan.TotalStrength);
-#if e172
-            float SettlementValue = (TargetKingdom != null && TargetKingdom.IsAtWarWith(LeavingClan.Kingdom) && !LeavingClan.IsUnderMercenaryService) ? LeavingClan.CalculateSettlementValue(LeavingClan.Kingdom) : 0;
-#else
             float SettlementValue = (TargetKingdom != null && TargetKingdom.IsAtWarWith(LeavingClan.Kingdom) && !LeavingClan.IsUnderMercenaryService) ? LeavingClan.CalculateTotalSettlementValueForFaction(LeavingClan.Kingdom) : 0;
-#endif
             double Result = (Campaign.Current.Models.DiplomacyModel.GetScoreOfKingdomToGetClan(LeavingClan.Kingdom, LeavingClan) + RelativeScoreToLeave) * (RelativeStrengthModifier + (LeavingClan.IsUnderMercenaryService ? 0.1 : 1)) + SettlementValue - CostScore * ClanCountModifier;
             if (SettingsHelper.SystemDebugEnabled(AOSystems.EnsuredLoyalty, DebugType.Technical, LeavingClan))
             {

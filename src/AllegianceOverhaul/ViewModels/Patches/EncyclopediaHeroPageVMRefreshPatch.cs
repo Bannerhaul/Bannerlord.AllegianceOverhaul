@@ -8,11 +8,7 @@ using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Encyclopedia;
-#if e172
-using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia;
-#else
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
-#endif
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {

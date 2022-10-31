@@ -1,7 +1,8 @@
 ﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
-using MCM.Abstractions.Dropdown;
-using MCM.Abstractions.Settings.Base.Global;
+using MCM.Abstractions.Base.Global;
+
+using MCM.Common;
 
 using System;
 
@@ -49,7 +50,7 @@ namespace AllegianceOverhaul
         //Debugging and loging
         [SettingPropertyDropdown("{=mNeDsYqbr}Applies to", Order = 0, RequireRestart = false, HintText = "{=eJ4E8HeZd}Specify if you interested in debugging all kingdoms, or just the player's one. Default is [Player's kingdom].")]
         [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
-        public DropdownDefault<string> DebugFactionScope { get; set; } = new DropdownDefault<string>(new string[]
+        public Dropdown<string> DebugFactionScope { get; set; } = new Dropdown<string>(new string[]
         {
       DropdownValueAllFactions,
       DropdownValuePlayers,
@@ -58,7 +59,7 @@ namespace AllegianceOverhaul
 
         [SettingPropertyDropdown("{=hDblsNGNu}Systems of interest", Order = 1, RequireRestart = false, HintText = "{=vHBc3PR0d}Specify if you interested in debugging all of the mod functionality, or just some particular systems. Default is [All systems].")]
         [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]
-        public DropdownDefault<DropdownObject<AOSystems>> DebugSystemScope { get; set; } = new DropdownDefault<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 0);
+        public Dropdown<DropdownObject<AOSystems>> DebugSystemScope { get; set; } = new Dropdown<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 0);
 
         [SettingPropertyBool("{=IcSqRbFXO}Debug messages", Order = 2, RequireRestart = true, HintText = "{=FBXsJfTus}Enables general debug messages. These are informative and reasonably lore-friendly, but spammy. Default is false.")]
         [SettingPropertyGroup(HeadingDebug, GroupOrder = 100)]

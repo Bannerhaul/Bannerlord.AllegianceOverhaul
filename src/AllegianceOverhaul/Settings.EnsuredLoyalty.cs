@@ -1,7 +1,8 @@
 ﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
-using MCM.Abstractions.Dropdown;
-using MCM.Abstractions.Settings.Base.Global;
+using MCM.Abstractions.Base.Global;
+
+using MCM.Common;
 
 namespace AllegianceOverhaul
 {
@@ -21,7 +22,7 @@ namespace AllegianceOverhaul
 
         [SettingPropertyDropdown("{=mNeDsYqbr}Applies to", RequireRestart = false, HintText = "{=EgueYDtnH}Specify if below rules should affect all kingdoms, or just the player's one. Default is [All kingdoms].")]
         [SettingPropertyGroup(HeadingEnsuredLoyalty)]
-        public DropdownDefault<string> EnsuredLoyaltyScope { get; set; } = new DropdownDefault<string>(new string[]
+        public Dropdown<string> EnsuredLoyaltyScope { get; set; } = new Dropdown<string>(new string[]
         {
       DropdownValueAllFactions,
       DropdownValuePlayers,
