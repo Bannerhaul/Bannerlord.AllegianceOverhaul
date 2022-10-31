@@ -50,11 +50,7 @@ namespace AllegianceOverhaul.Patches.Loyalty
                             valueForFaction = new LeaveKingdomAsClanBarterable(iOriginalOwner, iOriginalParty).GetValueForFaction(factionForEvaluation);
                             if (!iTargetKingdom.IsAtWarWith(iOriginalOwnerKingdom) && !(ApplyLeaderDefectionFix && iOriginalOwnerClan == iOriginalOwnerKingdom.RulingClan))
                             {
-#if e172
-                                settlementValue = iOriginalOwnerClan.CalculateSettlementValue(iOriginalOwnerKingdom);
-#else
                                 settlementValue = iOriginalOwnerClan.CalculateTotalSettlementValueForFaction(iOriginalOwnerKingdom);
-#endif
                                 CalculatedResult -= settlementValue * (iTargetKingdom.Leader == Hero.MainHero ? 0.5f : 1f);
                             }
                             CalculatedResult += valueForFaction;

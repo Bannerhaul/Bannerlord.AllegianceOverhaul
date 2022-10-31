@@ -1,8 +1,10 @@
 ﻿using AllegianceOverhaul.Extensions;
 
-using MCM.Abstractions.Dropdown;
-using MCM.Abstractions.Settings.Base;
-using MCM.Abstractions.Settings.Base.Global;
+using MCM.Abstractions;
+using MCM.Abstractions.Base;
+using MCM.Abstractions.Base.Global;
+
+using MCM.Common;
 
 using System;
 using System.Collections.Generic;
@@ -16,10 +18,15 @@ namespace AllegianceOverhaul
         private const string PresetTechnical = "{=gYrl8ux8o}Technical";
 
         //Presets
-        public override IDictionary<string, Func<BaseSettings>> GetAvailablePresets()
+        public override IEnumerable<ISettingsPreset> GetBuiltInPresets()
         {
-            IDictionary<string, Func<BaseSettings>> basePresets = base.GetAvailablePresets(); // include the 'Default' preset that MCM provides
-            basePresets.Add(PresetSuggested.ToLocalizedString(), () => new Settings()
+            // include all the presets that MCM provides
+            foreach (var preset in base.GetBuiltInPresets())
+            {
+                yield return preset;
+            }
+
+            yield return new MemorySettingsPreset(Id, "suggested", PresetSuggested.ToLocalizedString(), () => new Settings()
             {
                 //Loyalty
                 UseEnsuredLoyalty = true,
@@ -38,7 +45,8 @@ namespace AllegianceOverhaul
                 FixMinorFactionVassals = true,
                 UseAdvancedHeroTooltips = true
             });
-            basePresets.Add(PresetSLogging.ToLocalizedString(), () => new Settings()
+
+            yield return new MemorySettingsPreset(Id, "logging", PresetSLogging.ToLocalizedString(), () => new Settings()
             {
                 UseEnsuredLoyalty = true,
                 UseRelationForEnsuredLoyalty = true,
@@ -56,15 +64,16 @@ namespace AllegianceOverhaul
                 FixMinorFactionVassals = true,
                 UseAdvancedHeroTooltips = true,
                 EnableGeneralDebugging = true,
-                DebugFactionScope = new DropdownDefault<string>(new string[]
+                DebugFactionScope = new Dropdown<string>(new string[]
                 {
             DropdownValueAllFactions,
             DropdownValuePlayers,
             DropdownValueRuledBy
                 }, 1),
-                DebugSystemScope = new DropdownDefault<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 7)
+                DebugSystemScope = new Dropdown<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 7)
             });
-            basePresets.Add(PresetTechnical.ToLocalizedString(), () => new Settings()
+
+            yield return new MemorySettingsPreset(Id, "technical", PresetTechnical.ToLocalizedString(), () => new Settings()
             {
                 UseEnsuredLoyalty = true,
                 UseRelationForEnsuredLoyalty = true,
@@ -83,15 +92,14 @@ namespace AllegianceOverhaul
                 UseAdvancedHeroTooltips = true,
                 EnableGeneralDebugging = true,
                 EnableTechnicalDebugging = true,
-                DebugFactionScope = new DropdownDefault<string>(new string[]
+                DebugFactionScope = new Dropdown<string>(new string[]
                 {
             DropdownValueAllFactions,
             DropdownValuePlayers,
             DropdownValueRuledBy
                 }, 0),
-                DebugSystemScope = new DropdownDefault<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 7)
+                DebugSystemScope = new Dropdown<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 7)
             });
-            return basePresets;
         }
     }
 }

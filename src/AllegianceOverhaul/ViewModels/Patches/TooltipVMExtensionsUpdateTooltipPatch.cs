@@ -9,31 +9,18 @@ using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
-#if e172
-using TaleWorlds.Core.ViewModelCollection;
-#else
 using TaleWorlds.Core.ViewModelCollection.Information;
-#endif
 using TaleWorlds.Library;
 
 namespace AllegianceOverhaul.ViewModels.Patches
 {
-#if e172
-    [HarmonyPatch(typeof(TooltipVMExtensions), "UpdateTooltip", new[] { typeof(TooltipVM), typeof(Hero) })]
-#else
     [HarmonyPatch(typeof(PropertyBasedTooltipVMExtensions), "UpdateTooltip", new[] { typeof(PropertyBasedTooltipVM), typeof(Hero), typeof(bool) })]
-#endif
     public static class TooltipVMExtensionsUpdateTooltipPatch
     {
         [HarmonyPostfix]
-#if e172
-        public static void UpdateTooltipPatch(TooltipVM tooltipVM, Hero hero)
-        {
-#else
         public static void UpdateTooltipPatch(PropertyBasedTooltipVM propertyBasedTooltipVM, Hero hero, bool isNear)
         {
             var tooltipVM = propertyBasedTooltipVM;
-#endif
             try
             {
                 if (hero.Clan is null || !SettingsHelper.SubSystemEnabled(SubSystemType.LoyaltyTooltips, hero.Clan))

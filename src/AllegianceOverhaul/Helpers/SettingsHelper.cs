@@ -1,6 +1,6 @@
 ﻿using AllegianceOverhaul.Extensions;
 
-using MCM.Abstractions.Dropdown;
+using MCM.Common;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace AllegianceOverhaul.Helpers
 {
     internal static class SettingsHelper
     {
-        public static bool FactionInScope(IFaction faction, DropdownDefault<string>? scope)
+        public static bool FactionInScope(IFaction faction, Dropdown<string>? scope)
         {
             if (faction is null || faction.MapFaction is null || scope is null || scope.SelectedIndex < 0 || scope.SelectedIndex > 2)
                 return false;
@@ -77,7 +77,7 @@ namespace AllegianceOverhaul.Helpers
             {
                 return false;
             }
-            DropdownDefault<string>? scope = DetermineSubSystemScope(subSystem);
+            Dropdown<string>? scope = DetermineSubSystemScope(subSystem);
             foreach (IFaction faction in factionList)
             {
                 if (FactionInScope(faction, scope))
@@ -120,9 +120,9 @@ namespace AllegianceOverhaul.Helpers
             }
             return false;
         }
-        private static DropdownDefault<string>? DetermineSubSystemScope(SubSystemType subSystem)
+        private static Dropdown<string>? DetermineSubSystemScope(SubSystemType subSystem)
         {
-            DropdownDefault<string> defaultGlobalScope = new(new string[] { Settings.DropdownValueAllFactions, Settings.DropdownValuePlayers, Settings.DropdownValueRuledBy }, 0);
+            Dropdown<string> defaultGlobalScope = new(new string[] { Settings.DropdownValueAllFactions, Settings.DropdownValuePlayers, Settings.DropdownValueRuledBy }, 0);
             return (int) subSystem switch
             {
                 int subSystemIdx when subSystemIdx < (int) SubSystemType.MigrationTweaks => Settings.Instance!.EnsuredLoyaltyScope,
