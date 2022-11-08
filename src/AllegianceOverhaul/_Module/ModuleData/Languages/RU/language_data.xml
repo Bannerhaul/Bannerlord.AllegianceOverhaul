@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData id="Русский">
+    <LanguageFile xml_path="RU/EnsuredLoyalty_strings-rus.xml" />
+    <LanguageFile xml_path="RU/MigrationTweaks_strings-rus.xml" />
+    <LanguageFile xml_path="RU/PoliticsRebalance_strings-rus.xml" />
+    <LanguageFile xml_path="RU/std_module_strings_xml-rus.xml" />
+</LanguageData>
