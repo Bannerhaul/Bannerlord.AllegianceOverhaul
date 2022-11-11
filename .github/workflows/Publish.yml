@@ -105,7 +105,7 @@ jobs:
     uses: BUTR/workflows/.github/workflows/release-steam.yml@master
     with:
       workshop_id: 2886206108
-      mod_id: Allegiance Overhaul
+      mod_id: AllegianceOverhaul
       mod_description: ${{ needs.build-module.outputs.mod_description }}
       artifact_name: AllegianceOverhaul
     secrets:
