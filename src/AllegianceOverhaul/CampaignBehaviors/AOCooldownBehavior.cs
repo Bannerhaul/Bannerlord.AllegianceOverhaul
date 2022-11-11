@@ -7,11 +7,11 @@ namespace AllegianceOverhaul.CampaignBehaviors
 {
     public class AOCooldownBehavior : CampaignBehaviorBase
     {
-        private AOCooldownManager _cooldownManager;
+        private AOCooldownManager _cooldownManagerAO;
 
         public AOCooldownBehavior()
         {
-            this._cooldownManager = new AOCooldownManager();
+            this._cooldownManagerAO = new AOCooldownManager();
         }
 
         public override void RegisterEvents()
@@ -23,24 +23,24 @@ namespace AllegianceOverhaul.CampaignBehaviors
         private void RegisterKingdomDecisionConcluded(KingdomDecision decision, DecisionOutcome chosenOutcome, bool isPlayerInvolved)
         {
             if (AOCooldownManager.SupportedDecisionTypes.Contains(decision.GetType()))
-                _cooldownManager.UpdateKingdomDecisionHistory(decision, chosenOutcome, CampaignTime.Now);
+                _cooldownManagerAO.UpdateKingdomDecisionHistory(decision, chosenOutcome, CampaignTime.Now);
         }
 
         private void RegisterPlayerJoinRequest()
         {
-            _cooldownManager.UpdateJoinPlayerRequestHistory(CampaignTime.Now);
+            _cooldownManagerAO.UpdateJoinPlayerRequestHistory(CampaignTime.Now);
         }
 
         public override void SyncData(IDataStore dataStore)
         {
-            dataStore.SyncData("_cooldownManager", ref _cooldownManager);
+            dataStore.SyncData("_cooldownManagerAO", ref _cooldownManagerAO);
             if (dataStore.IsLoading)
             {
-                if (_cooldownManager == null)
+                if (_cooldownManagerAO == null)
                 {
-                    _cooldownManager = new AOCooldownManager();
+                    _cooldownManagerAO = new AOCooldownManager();
                 }
-                _cooldownManager.Sync();
+                _cooldownManagerAO.Sync();
             }
         }
     }

@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.3.1
+Game Versions: v1.0.0,v1.0.1
+* Compatibility with v1.0.1
+* Fixed CooldownManager conflicting with Diplomacy
+* Fixed localization files having outdated format
+---------------------------------------------------------------------------------------------------
 Version: 2.3.0
 Game Versions: v1.0.0
 * Compatibility with v1.0.0
