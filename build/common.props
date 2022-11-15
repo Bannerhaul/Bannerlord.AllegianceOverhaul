@@ -11,11 +11,11 @@
         <!--Harmony Version-->
         <HarmonyVersion>2.2.2</HarmonyVersion>
         <!--ButterLib Version-->
-        <ButterLibVersion>2.4.1</ButterLibVersion>
+        <ButterLibVersion>2.5.1</ButterLibVersion>
         <!--BuildResources Version-->
         <BuildResourcesVersion>1.0.1.80</BuildResourcesVersion>
         <!--MCM Version-->
-        <MCMVersion>5.0.4</MCMVersion>
+        <MCMVersion>5.1.1</MCMVersion>
         <!--BUTRShared Version-->
         <BUTRSharedVersion>3.0.0.121</BUTRSharedVersion>
         <!--BUTRModuleManager Version-->
