@@ -36,3 +36,5 @@ jobs:
         echo "$desc"
         desc="${desc#*'%0A'}"
         echo "$desc"
+        desc="${desc//'%0A* '/'%0A'}"
+        echo "$desc"
