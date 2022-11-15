@@ -8,13 +8,18 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
+using TaleWorlds.Engine;
 using TaleWorlds.Library;
+
+using Path = System.IO.Path;
 
 namespace AllegianceOverhaul.Helpers
 {
     internal static class LoggingHelper
     {
-        public static readonly string AOLogFile = Path.Combine(BasePath.Name, "Modules", "AllegianceOverhaul", "AllegianceOverhaul.log");
+        private static readonly PlatformDirectoryPath ModLogsPath = EngineFilePaths.ConfigsPath + "/ModLogs";
+        public static readonly string AOLogFile = Path.Combine(ModLogsPath.Path, "AllegianceOverhaul.log");
+
         public static void Log(string message)
         {
             lock (AOLogFile)
