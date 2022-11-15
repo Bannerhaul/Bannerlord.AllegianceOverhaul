@@ -11,14 +11,13 @@ using System.Text;
 using TaleWorlds.Engine;
 using TaleWorlds.Library;
 
-using Path = System.IO.Path;
-
 namespace AllegianceOverhaul.Helpers
 {
     internal static class LoggingHelper
     {
         private static readonly PlatformDirectoryPath ModLogsPath = EngineFilePaths.ConfigsPath + "/ModLogs";
-        public static readonly string AOLogFile = Path.Combine(ModLogsPath.Path, "AllegianceOverhaul.log");
+        private static readonly PlatformFilePath ModLogsFilePath = new PlatformFilePath(ModLogsPath, "AllegianceOverhaul.log");
+        public static readonly string AOLogFile = ModLogsFilePath.FileFullPath;
 
         public static void Log(string message)
         {
