@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.3.2
+Game Versions: v1.0.0,v1.0.1
+* Changed logging path to the (game directory)\bin\Win64_Shipping_Client\Configs\ModLogs
+* Logging should work both for Nexus Mods and Steam Workshop versions of the mod now.
+---------------------------------------------------------------------------------------------------
 Version: 2.3.1
 Game Versions: v1.0.0,v1.0.1
 * Compatibility with v1.0.1
