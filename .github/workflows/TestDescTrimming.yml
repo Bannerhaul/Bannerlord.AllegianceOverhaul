@@ -34,7 +34,7 @@ jobs:
         desc="${desc//$'\n'/'%0A'}"
         desc="${desc//$'\r'/'%0D'}"
         echo "$desc"
-        desc="${desc#*'%0A'}"
+        desc="${desc#'For'*'%0A* '}"
         echo "$desc"
         desc="${desc//'%0A* '/'%0A'}"
         echo "$desc"
