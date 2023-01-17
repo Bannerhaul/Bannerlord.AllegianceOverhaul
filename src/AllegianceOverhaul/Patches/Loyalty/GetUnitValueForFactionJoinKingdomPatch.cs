@@ -40,26 +40,23 @@ namespace AllegianceOverhaul.Patches.Loyalty
                 float ScoreOfClanToJoinKingdom = Campaign.Current.Models.DiplomacyModel.GetScoreOfClanToJoinKingdom(iOriginalOwnerClan, iTargetKingdom);
                 float ScoreOfKingdomToGetClan = Campaign.Current.Models.DiplomacyModel.GetScoreOfKingdomToGetClan(iTargetKingdom, iOriginalOwnerClan);
 
-                if (iTargetKingdom.IsKingdomFaction)
+                if (factionForEvaluation == iOriginalOwnerClan)
                 {
-                    if (factionForEvaluation == iOriginalOwnerClan)
+                    CalculatedResult = ScoreOfClanToJoinKingdom;
+                    if (iOriginalOwnerKingdom != null)
                     {
-                        CalculatedResult = ScoreOfClanToJoinKingdom;
-                        if (iOriginalOwnerKingdom != null)
+                        valueForFaction = new LeaveKingdomAsClanBarterable(iOriginalOwner, iOriginalParty).GetValueForFaction(factionForEvaluation);
+                        if (!iTargetKingdom.IsAtWarWith(iOriginalOwnerKingdom) && !(ApplyLeaderDefectionFix && iOriginalOwnerClan == iOriginalOwnerKingdom.RulingClan))
                         {
-                            valueForFaction = new LeaveKingdomAsClanBarterable(iOriginalOwner, iOriginalParty).GetValueForFaction(factionForEvaluation);
-                            if (!iTargetKingdom.IsAtWarWith(iOriginalOwnerKingdom) && !(ApplyLeaderDefectionFix && iOriginalOwnerClan == iOriginalOwnerKingdom.RulingClan))
-                            {
-                                settlementValue = iOriginalOwnerClan.CalculateTotalSettlementValueForFaction(iOriginalOwnerKingdom);
-                                CalculatedResult -= settlementValue * (iTargetKingdom.Leader == Hero.MainHero ? 0.5f : 1f);
-                            }
-                            CalculatedResult += valueForFaction;
+                            settlementValue = iOriginalOwnerClan.CalculateTotalSettlementValueForFaction(iOriginalOwnerKingdom);
+                            CalculatedResult -= settlementValue * (iTargetKingdom.Leader == Hero.MainHero ? 0.5f : 1f);
                         }
+                        CalculatedResult += valueForFaction;
                     }
-                    else if (factionForEvaluation.MapFaction == iTargetKingdom)
-                    {
-                        CalculatedResult = ScoreOfKingdomToGetClan;
-                    }
+                }
+                else if (factionForEvaluation.MapFaction == iTargetKingdom)
+                {
+                    CalculatedResult = ScoreOfKingdomToGetClan;
                 }
 
                 if (debugEnabled)
