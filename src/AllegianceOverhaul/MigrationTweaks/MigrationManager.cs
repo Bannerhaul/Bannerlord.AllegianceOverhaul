@@ -9,7 +9,6 @@ using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Party.PartyComponents;
-using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -19,12 +18,14 @@ namespace AllegianceOverhaul.MigrationTweaks
 {
     internal static class MigrationManager
     {
+#if v100 || v101 || v102 || v103
         private delegate int GetMercenaryAwardFactorToJoinKingdomDelegate(Clan mercenaryClan, Kingdom kingdom, bool neededAmountForClanToJoinCalculation = false);
 
         private static readonly Assembly campaignSystemAssembly = typeof(Clan).Assembly;
         private static readonly Type factionHelperType = campaignSystemAssembly.GetType("Helpers.FactionHelper");
 
         private static readonly GetMercenaryAwardFactorToJoinKingdomDelegate? deGetMercenaryAwardFactorToJoinKingdom = AccessTools2.GetDelegate<GetMercenaryAwardFactorToJoinKingdomDelegate>(factionHelperType, "GetMercenaryAwardFactorToJoinKingdom");
+#endif
 
         private const string PlayerInquiryHeader = "{=0DEJNa14n}A clan wishes to join your kingdom!";
         private const string PlayerInquiryBody = "{=NAlAH3pJk}The {JOINING_CLAN.NAME} clan is looking to join your kingdom{?JOINING_CLAN.IS_MERCENARY} as a mercenary{?}{\\?}!{NEW_LINE} {NEW_LINE}They have {TROOPS_DESCRIPTION} and {FIEFS_DESCRIPTION}.Their leader is {RELATION} towards you.{NEW_LINE} {NEW_LINE}What say ye?";
@@ -162,7 +163,11 @@ namespace AllegianceOverhaul.MigrationTweaks
             {
                 if ((currentKingdom != null && isMerc) || (currentKingdom is null && clan.IsMinorFaction))
                 {
-                    ChangeKingdomAction.ApplyByJoinFactionAsMercenary(clan, targetKingdom, deGetMercenaryAwardFactorToJoinKingdom!(clan, targetKingdom, false), true);
+#if v100 || v101 || v102 || v103
+                    ChangeKingdomAction.ApplyByJoinFactionAsMercenary(clan, targetKingdom, deGetMercenaryAwardFactorToJoinKingdom!(clan, targetKingdom, false));
+#else
+                    ChangeKingdomAction.ApplyByJoinFactionAsMercenary(clan, targetKingdom, Campaign.Current.Models.MinorFactionsModel.GetMercenaryAwardFactorToJoinKingdom(clan, targetKingdom, false));
+#endif
                 }
                 else
                 {
