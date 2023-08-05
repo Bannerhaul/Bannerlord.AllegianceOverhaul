@@ -24,8 +24,11 @@ namespace AllegianceOverhaul.LoyaltyRebalance
                                               || baseHero.Spouse.Children.Contains(queriedHero) || baseHero.Children.ToList().Exists(h => h.Spouse == queriedHero)
                                              ));
         }
-        public static bool BloodRelatives(Clan queriedClan, Clan baseClan)
+        public static bool BloodRelatives(Clan? queriedClan, Clan? baseClan)
         {
+            if (baseClan is null || queriedClan is null)
+                return false;
+
             foreach (Hero baseHero in baseClan.Heroes)
             {
                 foreach (Hero queriedHero in queriedClan.Heroes)

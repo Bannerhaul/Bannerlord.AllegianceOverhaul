@@ -1,4 +1,5 @@
-﻿using AllegianceOverhaul.Helpers;
+﻿#if v100 || v101 || v102 || v103 || v110 || v111 || v112 || v113 || v114 || v115
+using AllegianceOverhaul.Helpers;
 using AllegianceOverhaul.ViewModels.Extensions;
 
 using HarmonyLib;
@@ -41,3 +42,4 @@ namespace AllegianceOverhaul.ViewModels.Patches
         }
     }
 }
+#endif
