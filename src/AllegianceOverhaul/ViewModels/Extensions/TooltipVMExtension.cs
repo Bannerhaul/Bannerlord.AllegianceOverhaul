@@ -1,4 +1,5 @@
-﻿using AllegianceOverhaul.Extensions;
+﻿#if v100 || v101 || v102 || v103 || v110 || v111 || v112 || v113 || v114 || v115
+using AllegianceOverhaul.Extensions;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
@@ -16,3 +17,4 @@ namespace AllegianceOverhaul.ViewModels.Extensions
         }
     }
 }
+#endif

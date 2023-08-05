@@ -20,7 +20,11 @@ namespace AllegianceOverhaul.Patches.Politics
     [HarmonyPatch(typeof(KingdomDecisionProposalBehavior), "GetRandomAnnexationDecision")]
     public static class GetRandomAnnexationDecisionPatch
     {
+#if v100 || v101 || v102 || v103 || v110 || v111 || v112 || v113 || v114 || v115
         private delegate bool ConsiderAnnexDelegate(KingdomDecisionProposalBehavior instance, Clan clan, Kingdom kingdom, Clan targetClan, Town targetSettlement);
+#else
+        private delegate bool ConsiderAnnexDelegate(KingdomDecisionProposalBehavior instance, Clan clan, Town targetSettlement);
+#endif
         private static readonly ConsiderAnnexDelegate? deConsiderAnnex = AccessHelper.GetDelegate<ConsiderAnnexDelegate>(typeof(KingdomDecisionProposalBehavior), "ConsiderAnnex");
 
         [HarmonyPriority(Priority.VeryHigh)]
@@ -50,7 +54,11 @@ namespace AllegianceOverhaul.Patches.Politics
                         ? randomClan?.Fiefs.Where(f => !(AOCooldownManager.HasDecisionCooldown(new SettlementClaimantPreliminaryDecision(clan, f.Settlement)))).ToArray().GetRandomElement()
                         : randomClan?.Fiefs.ToArray().GetRandomElement();
 
+#if v100 || v101 || v102 || v103 || v110 || v111 || v112 || v113 || v114 || v115
                     if (randomClan != null && randomFortification != null && deConsiderAnnex!(__instance, clan, kingdom, randomClan, randomFortification))
+#else
+                    if (randomClan != null && randomFortification != null && deConsiderAnnex!(__instance, clan, randomFortification))
+#endif
                         __result = new SettlementClaimantPreliminaryDecision(clan, randomFortification.Settlement);
 
                     if (SystemDebugEnabled)
