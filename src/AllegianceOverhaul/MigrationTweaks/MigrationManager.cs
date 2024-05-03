@@ -22,9 +22,9 @@ namespace AllegianceOverhaul.MigrationTweaks
         private delegate int GetMercenaryAwardFactorToJoinKingdomDelegate(Clan mercenaryClan, Kingdom kingdom, bool neededAmountForClanToJoinCalculation = false);
 
         private static readonly Assembly campaignSystemAssembly = typeof(Clan).Assembly;
-        private static readonly Type factionHelperType = campaignSystemAssembly.GetType("Helpers.FactionHelper");
+        private static readonly Type factionHelperType = campaignSystemAssembly.GetType("Helpers.FactionHelper")!;
 
-        private static readonly GetMercenaryAwardFactorToJoinKingdomDelegate? deGetMercenaryAwardFactorToJoinKingdom = AccessTools2.GetDelegate<GetMercenaryAwardFactorToJoinKingdomDelegate>(factionHelperType, "GetMercenaryAwardFactorToJoinKingdom");
+        private static readonly GetMercenaryAwardFactorToJoinKingdomDelegate? deGetMercenaryAwardFactorToJoinKingdom = AccessTools2.GetDelegate<GetMercenaryAwardFactorToJoinKingdomDelegate>(factionHelperType!, "GetMercenaryAwardFactorToJoinKingdom");
 #endif
 
         private const string PlayerInquiryHeader = "{=0DEJNa14n}A clan wishes to join your kingdom!";
