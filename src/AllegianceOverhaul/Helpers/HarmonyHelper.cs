@@ -42,9 +42,9 @@ namespace AllegianceOverhaul.Helpers
                 {
                     Result = true;
                     if (PossibleConflictsInfo.Length <= 0)
-                        PossibleConflictsInfo.Append($"[{DateTime.Now:dd.MM.yyyy HH:mm:ss}] - {sectionName}.\nForeign patches checkup for method {MyMethod.DeclaringType.FullName}.{MyMethod.Name}, used by AllegianceOverhaul, revealed possible conflicts!{DebugInfo}");
+                        PossibleConflictsInfo.Append($"[{DateTime.Now:dd.MM.yyyy HH:mm:ss}] - {sectionName}.\nForeign patches checkup for method {MyMethod.DeclaringType!.FullName}.{MyMethod.Name}, used by AllegianceOverhaul, revealed possible conflicts!{DebugInfo}");
                     else
-                        PossibleConflictsInfo.Append($"\nPatches checkup for method {MyMethod.DeclaringType.FullName}.{MyMethod.Name}, used by AllegianceOverhaul, revealed possible conflicts!{DebugInfo}");
+                        PossibleConflictsInfo.Append($"\nPatches checkup for method {MyMethod.DeclaringType!.FullName}.{MyMethod.Name}, used by AllegianceOverhaul, revealed possible conflicts!{DebugInfo}");
                 }
             }
             if (Result)

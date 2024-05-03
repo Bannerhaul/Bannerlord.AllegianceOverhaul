@@ -100,7 +100,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
         public static bool HasPrimaryDecisionCooldown(KingdomDecision decision)
         {
             return SupportedDecisionTypes.Contains(decision.GetType())
-                   && KingdomDecisionHistory!.TryGetValue(decision, out KingdomDecisionConclusion decisionConclusion)
+                   && KingdomDecisionHistory!.TryGetValue(decision, out KingdomDecisionConclusion? decisionConclusion)
                    && decisionConclusion.ConclusionTime.ElapsedDaysUntilNow < GetRequiredDecisionCooldown(decision);
         }
         public static bool HasAlternativeDecisionCooldown(KingdomDecision decision)
@@ -130,7 +130,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
         {
             elapsedDaysUntilNow = default;
             return SupportedDecisionTypes.Contains(decision.GetType())
-                   && KingdomDecisionHistory!.TryGetValue(decision, out KingdomDecisionConclusion decisionConclusion)
+                   && KingdomDecisionHistory!.TryGetValue(decision, out KingdomDecisionConclusion? decisionConclusion)
                    && (elapsedDaysUntilNow = decisionConclusion.ConclusionTime.ElapsedDaysUntilNow) < GetRequiredDecisionCooldown(decision);
         }
         public static bool HasAlternativeDecisionCooldown(KingdomDecision decision, out float elapsedDaysUntilNow)
@@ -158,7 +158,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
 
         private static CampaignTime? GetTimeOfLastAnnexDecisionAgainstClan(Clan clan)
         {
-            return KingdomDecisionHistory.Where(d => d.Key is SettlementClaimantPreliminaryDecision otherPreliminaryDecision
+            return KingdomDecisionHistory!.Where(d => d.Key is SettlementClaimantPreliminaryDecision otherPreliminaryDecision
                                                      && otherPreliminaryDecision.Kingdom == clan.Kingdom
                                                      && FieldAccessHelper.annexDecisionInitialOwnerByRef(otherPreliminaryDecision) == clan)
                                          .OrderByDescending(d => d.Value.ConclusionTime).FirstOrDefault().Value?.ConclusionTime;
@@ -180,7 +180,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
                     _ => throw new ArgumentException(string.Format("{0} is not supported KingdomDecision type", decision1.GetType().FullName), nameof(decision1)),
                 };
             }
-            public override bool Equals(KingdomDecision decision1, KingdomDecision decision2)
+            public override bool Equals(KingdomDecision? decision1, KingdomDecision? decision2)
             {
                 return (decision1 == null && decision2 == null) || (decision1 != null && decision2 != null && decision1.Kingdom == decision2.Kingdom && InternalEquals(decision1, decision2));
             }

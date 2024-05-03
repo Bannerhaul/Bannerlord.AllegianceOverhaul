@@ -41,7 +41,7 @@ namespace AllegianceOverhaul.Extensions.Harmony
             {
                 if (patch.owner != domesticHarmoy.Id)
                 {
-                    if (ignoreList is null || !ignoreList.Contains(patch.PatchMethod.DeclaringType.Assembly.GetName().Name))
+                    if (ignoreList is null || !ignoreList.Contains(patch.PatchMethod.DeclaringType!.Assembly.GetName().Name!))
                     {
                         PatchHasCompetitors = true;
                         if (ForeignPatchesInfo.Length > 0)
@@ -76,12 +76,12 @@ namespace AllegianceOverhaul.Extensions.Harmony
             if (boolPrefixes != null)
                 foreach (Patch patch in collection)
                 {
-                    if (ignoreList is null || !ignoreList.Contains(patch.PatchMethod.DeclaringType.Assembly.GetName().Name))
+                    if (ignoreList is null || !ignoreList.Contains(patch.PatchMethod.DeclaringType!.Assembly.GetName().Name!))
                     {
                         StringBuilder SkippingPatchesInfo = new(string.Empty);
                         foreach (Patch prefix in boolPrefixes)
                         {
-                            if (patch.owner != prefix.owner && (ignoreList is null || !ignoreList.Contains(prefix.PatchMethod.DeclaringType.Assembly.GetName().Name)))
+                            if (patch.owner != prefix.owner && (ignoreList is null || !ignoreList.Contains(prefix.PatchMethod.DeclaringType!.Assembly.GetName().Name!)))
                             {
                                 PossibleUnexpectedSkip = true;
                                 if (SkippingPatchesInfo.Length > 0)

@@ -110,10 +110,10 @@ namespace AllegianceOverhaul.Extensions
                 }
                 return ResultBuilder.ToString();
             }
-            string name = Enum.GetName(type, value);
+            string name = Enum.GetName(type, value)!;
             if (name != null)
             {
-                FieldInfo field = type.GetField(name);
+                FieldInfo field = type.GetField(name)!;
                 if (field != null)
                 {
                     if (Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attr)
@@ -122,7 +122,7 @@ namespace AllegianceOverhaul.Extensions
                     }
                 }
             }
-            return useLocalizedStrings ? value.ToString().ToLocalizedString() : value.ToString();
+            return useLocalizedStrings ? value.ToString()!.ToLocalizedString() : value.ToString()!;
         }
     }
 }

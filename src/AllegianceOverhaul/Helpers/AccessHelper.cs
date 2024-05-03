@@ -20,7 +20,7 @@ namespace AllegianceOverhaul.Helpers
 
         public static TFieldType GetFieldValue<TFieldType, TInstance>(TInstance instance, string fieldName)
         {
-            return (TFieldType) Field(instance!.GetType(), fieldName).GetValue(instance);
+            return (TFieldType) Field(instance!.GetType(), fieldName).GetValue(instance)!;
         }
     }
 }
