@@ -260,7 +260,7 @@ namespace AllegianceOverhaul.Patches.Migration
                 return defectConditionIndex > 0 && defectStartIndex < 0 && i < codes.Count - 2
                        && codes[i].opcode == OpCodes.Ldloc_1
                        && codes[i + 1].opcode == OpCodes.Call
-                       && codes[i + 1].operand.ToString().Contains("GetRandomElement")
+                       && codes[i + 1].operand.ToString()!.Contains("GetRandomElement")
                        && codes[i + 2].opcode == OpCodes.Stloc_S;
             }
             static void ReplaceCodeInstructions(int startIndex, int endIndex, List<CodeInstruction> codes, MethodInfo miToCall, string decisionDesc)
@@ -305,7 +305,7 @@ namespace AllegianceOverhaul.Patches.Migration
                 issueInfo.Append($"\n\tmiConsiderPeace={(miConsiderPeace != null ? miConsiderPeace.ToString() : "not found")}");
                 issueInfo.Append($"\n\tmiConsiderDefection={(miConsiderDefection != null ? miConsiderDefection.ToString() : "not found")}");
                 issueInfo.Append($"\n\tmiConsiderClanJoin={(miConsiderClanJoin != null ? miConsiderClanJoin.ToString() : "not found")}");
-                LoggingHelper.LogILAndPatches(codes, issueInfo, MethodBase.GetCurrentMethod());
+                LoggingHelper.LogILAndPatches(codes, issueInfo, MethodBase.GetCurrentMethod()!);
                 LoggingHelper.Log(issueInfo.ToString());
             }
         }

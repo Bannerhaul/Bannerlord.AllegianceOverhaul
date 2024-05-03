@@ -95,11 +95,11 @@ namespace AllegianceOverhaul.Patches.Migration
             {
                 return originalKingdomConditionIndex < 0 && i > 2 && i < codes.Count - 2
                        && codes[i].opcode == OpCodes.Callvirt
-                       && codes[i].operand.ToString().Contains("get_Kingdom")
+                       && codes[i].operand.ToString()!.Contains("get_Kingdom")
                        && codes[i - 1].opcode == OpCodes.Callvirt
-                       && codes[i - 1].operand.ToString().Contains("get_Clan")
+                       && codes[i - 1].operand.ToString()!.Contains("get_Clan")
                        && codes[i - 2].opcode == OpCodes.Call
-                       && codes[i - 2].operand.ToString().Contains("get_OriginalOwner")
+                       && codes[i - 2].operand.ToString()!.Contains("get_OriginalOwner")
                        && codes[i - 3].opcode == OpCodes.Ldarg_0
                        && codes[i + 1].opcode == OpCodes.Brfalse_S;
             }
@@ -129,7 +129,7 @@ namespace AllegianceOverhaul.Patches.Migration
                 issueInfo.Append($"\toriginalKingdomConditionIndex = {originalKingdomConditionIndex}.\n\treplaceStartIndex={replaceStartIndex}.\n\treplaceEndIndex={replaceEndIndex}.");
                 issueInfo.Append($"\nMethodInfos:");
                 issueInfo.Append($"\n\tmiApplyByLeaveKingdom={(miApplyByLeaveKingdom != null ? miApplyByLeaveKingdom.ToString() : "not found")}");
-                LoggingHelper.LogILAndPatches(codes, issueInfo, MethodBase.GetCurrentMethod());
+                LoggingHelper.LogILAndPatches(codes, issueInfo, MethodBase.GetCurrentMethod()!);
                 LoggingHelper.Log(issueInfo.ToString());
             }
         }

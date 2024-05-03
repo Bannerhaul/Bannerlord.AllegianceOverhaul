@@ -3,23 +3,23 @@
 
     <!--Module Version-->
     <PropertyGroup>
-        <Version>2.3.6</Version>
+        <Version>2.4.0</Version>
     </PropertyGroup>
 
     <!-- Versions of Major Dependencies (for Package References & SubModule.xml Substitution) -->
     <PropertyGroup>
         <!--Harmony Version-->
-        <HarmonyVersion>2.2.2</HarmonyVersion>
+        <HarmonyVersion>2.3.3</HarmonyVersion>
         <!--ButterLib Version-->
-        <ButterLibVersion>2.8.11</ButterLibVersion>
+        <ButterLibVersion>2.9.7</ButterLibVersion>
         <!--BuildResources Version-->
         <BuildResourcesVersion>1.1.0.104</BuildResourcesVersion>
         <!--MCM Version-->
-        <MCMVersion>5.9.1</MCMVersion>
+        <MCMVersion>5.9.2</MCMVersion>
         <!--BUTRShared Version-->
-        <BUTRSharedVersion>3.0.0.137</BUTRSharedVersion>
+        <BUTRSharedVersion>3.0.0.139</BUTRSharedVersion>
         <!--BUTRModuleManager Version-->
-        <BUTRModuleManagerVersion>5.0.209</BUTRModuleManagerVersion>
+        <BUTRModuleManagerVersion>5.0.222</BUTRModuleManagerVersion>
         <!--ModuleLoader Version-->
         <BUTRModuleLoaderVersion>1.0.1.44</BUTRModuleLoaderVersion>
         <!--Harmony Extensions Version-->
@@ -27,10 +27,15 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <TargetFramework>net472</TargetFramework>
-        <Platforms>x64</Platforms>
-        <LangVersion>9.0</LangVersion>
+        <TargetFrameworks>net472;net6</TargetFrameworks>
+        <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
+        <Platforms>x64</Platforms>
+        <BuildForWindows>false</BuildForWindows>
+        <BuildForWindowsStore>false</BuildForWindowsStore>
+    </PropertyGroup>
+
+    <PropertyGroup>
         <ModuleId>AllegianceOverhaul</ModuleId>
         <ModuleName>$(ModuleId)</ModuleName>
         <DisplayName>Allegiance Overhaul</DisplayName>

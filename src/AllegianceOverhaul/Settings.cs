@@ -13,7 +13,7 @@ namespace AllegianceOverhaul
     public partial class Settings : AttributeGlobalSettings<Settings>
     {
         public override string Id => "AllegianceOverhaul_v3";
-        public override string DisplayName => $"{new TextObject("{=rQWGD5PzD}Allegiance Overhaul")} {typeof(Settings).Assembly.GetName().Version.ToString(3)}";
+        public override string DisplayName => $"{new TextObject("{=rQWGD5PzD}Allegiance Overhaul")} {typeof(Settings).Assembly.GetName().Version!.ToString(3)}";
         public override string FolderName => "Allegiance Overhaul";
         public override string FormatType => "json2";
 
