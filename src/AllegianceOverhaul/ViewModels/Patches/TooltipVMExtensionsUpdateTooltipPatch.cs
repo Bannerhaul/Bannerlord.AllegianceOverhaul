@@ -38,7 +38,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
             var tooltipVM = propertyBasedTooltipVM;
             try
             {
-                if (hero.Clan is null || !SettingsHelper.SubSystemEnabled(SubSystemType.LoyaltyTooltips, hero.Clan))
+                if (hero.Clan is null || !SettingsHelper.SubSystemEnabled(SubSystemType.LoyaltyTooltips, hero.Clan) || !HeroIsKnownToPlayer(hero))
                 {
                     return;
                 }
@@ -51,7 +51,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
                     LoyaltyManager.GetLoyaltyTooltipInfo(hero.Clan, out string LoyaltyText, out Color LoyaltyTextColor);
                     tooltipVM.TooltipPropertyList.Add(new TooltipProperty(TooltipHelper.GetTooltipLoyaltyHeader(), LoyaltyText, 0, LoyaltyTextColor, false, TooltipProperty.TooltipPropertyFlags.None));
                 }
-#if v120 || v121 || v122 || v123
+#if v120 || v121 || v122 || v123 || v124 || v125 || v126 || v127 || v128 || v129
                 Hero? otherHero = null;
                 if (args.Length >= 3 && args[2] != null && args[2] is Hero)
                     otherHero = args[2] as Hero;
@@ -69,6 +69,19 @@ namespace AllegianceOverhaul.ViewModels.Patches
         public static bool Prepare()
         {
             return SettingsHelper.SubSystemEnabled(SubSystemType.LoyaltyTooltips);
+        }
+
+        private static bool HeroIsKnownToPlayer(Hero hero)
+        {
+#if v100 || v101 || v102 || v103
+            if (hero.HasMet || (hero.Clan != null && hero.Clan == Clan.PlayerClan))
+                return true;
+            if (hero.MapFaction is Kingdom heroKingdom && (heroKingdom.Leader == hero || (Clan.PlayerClan.MapFaction is Kingdom playerKingdom && playerKingdom == heroKingdom && hero.Clan is Clan heroClan && heroClan.Tier >= 4 && hero == heroClan.Leader)))
+                return true;
+            return false;
+#else
+            return Campaign.Current.Models.InformationRestrictionModel.DoesPlayerKnowDetailsOf(hero);
+#endif
         }
     }
 }
