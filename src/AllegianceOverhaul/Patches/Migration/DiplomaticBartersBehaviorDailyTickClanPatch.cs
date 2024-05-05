@@ -277,21 +277,21 @@ namespace AllegianceOverhaul.Patches.Migration
 
                 static CodeInstruction[] GetCodeInstructions(MethodInfo miToCall) =>
                   miToCall == miGetJoinDecision
-                    ? new CodeInstruction[]
-                      {
-                  new CodeInstruction(opcode: OpCodes.Ldarg_1),
-                  new CodeInstruction(opcode: OpCodes.Ldloc_0),
-                  new CodeInstruction(opcode: OpCodes.Ldarg_0),
-                  new CodeInstruction(opcode: OpCodes.Call, operand: miToCall)
-                      }
-                    : new CodeInstruction[]
-                      {
-                  new CodeInstruction(opcode: OpCodes.Ldarg_1),
-                  new CodeInstruction(opcode: OpCodes.Ldloc_0),
-                  new CodeInstruction(opcode: OpCodes.Ldloc_1),
-                  new CodeInstruction(opcode: OpCodes.Ldarg_0),
-                  new CodeInstruction(opcode: OpCodes.Call, operand: miToCall)
-                      };
+                    ?
+                      [
+                          new CodeInstruction(opcode: OpCodes.Ldarg_1),
+                          new CodeInstruction(opcode: OpCodes.Ldloc_0),
+                          new CodeInstruction(opcode: OpCodes.Ldarg_0),
+                          new CodeInstruction(opcode: OpCodes.Call, operand: miToCall)
+                      ]
+                    :
+                      [
+                          new CodeInstruction(opcode: OpCodes.Ldarg_1),
+                          new CodeInstruction(opcode: OpCodes.Ldloc_0),
+                          new CodeInstruction(opcode: OpCodes.Ldloc_1),
+                          new CodeInstruction(opcode: OpCodes.Ldarg_0),
+                          new CodeInstruction(opcode: OpCodes.Call, operand: miToCall)
+                      ];
             }
 
             static void LogNoHooksIssue(int defectConditionIndex, int defectStartIndex, int defectEndIndex, int joinConditionIndex, int joinStartIndex, int joinEndIndex, List<CodeInstruction> codes)
@@ -318,10 +318,12 @@ namespace AllegianceOverhaul.Patches.Migration
               && (SettingsHelper.SubSystemEnabled(clan.IsUnderMercenaryService ? SubSystemType.AllowHireRequests
                                                                                : SubSystemType.AllowJoinRequests) || k.Leader != Hero.MainHero);
 
-            Dictionary<Kingdom, float> kingdoms = Kingdom.All.Where(predicate)
-                                                             .ToDictionary(keySelector: kingdom => kingdom, elementSelector: kingdom => GetJoinValue(clan, kingdom));
+            Dictionary<Kingdom, float> kingdoms = Kingdom.All.Where(predicate).ToDictionary(keySelector: kingdom => kingdom, elementSelector: kingdom => GetJoinValue(clan, kingdom));
 
-            topValuedKingdom = kingdoms.OrderByDescending(kvp => kvp.Value).First().Key;
+            if (kingdoms.Any())
+            {
+                topValuedKingdom = (Kingdom?) kingdoms.OrderByDescending(kvp => kvp.Value).First().Key;
+            }
             return topValuedKingdom;
 
             static float GetJoinValue(Clan clan, Kingdom kingdom) =>
