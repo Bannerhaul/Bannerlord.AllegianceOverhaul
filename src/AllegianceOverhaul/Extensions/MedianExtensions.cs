@@ -11,8 +11,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             int[] data = source.OrderBy(n => n).ToArray();
             if (data.Length == 0)
             {
@@ -25,7 +26,7 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             int[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
@@ -38,8 +39,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             long[] data = source.OrderBy(n => n).ToArray();
             if (data.Length == 0)
             {
@@ -52,8 +54,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             long[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null
@@ -64,8 +67,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             float[] data = source.OrderBy(n => n).ToArray();
             if (data.Length == 0)
             {
@@ -78,8 +82,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             float[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null
@@ -90,8 +95,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             double[] data = source.OrderBy(n => n).ToArray();
             if (data.Length == 0)
             {
@@ -104,8 +110,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             double[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null
@@ -116,8 +123,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             decimal[] data = source.OrderBy(n => n).ToArray();
             if (data.Length == 0)
             {
@@ -130,8 +138,9 @@ namespace AllegianceOverhaul.Extensions
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
+
             decimal[] data = source.Where(n => n.HasValue).Select(n => n.Value).OrderBy(n => n).ToArray();
             return data.Length == 0
                 ? null

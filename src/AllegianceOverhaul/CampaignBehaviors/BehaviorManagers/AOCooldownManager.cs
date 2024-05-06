@@ -38,8 +38,7 @@ namespace AllegianceOverhaul.CampaignBehaviors.BehaviorManagers
         {
             if (SupportedDecisionTypes.Contains(decision.GetType()))
             {
-                if (_KingdomDecisionHistory.ContainsKey(decision))
-                    _KingdomDecisionHistory.Remove(decision);
+                _KingdomDecisionHistory.Remove(decision);
                 _KingdomDecisionHistory[decision] = new KingdomDecisionConclusion(chosenOutcome, conclusionTime);
             }
             else
