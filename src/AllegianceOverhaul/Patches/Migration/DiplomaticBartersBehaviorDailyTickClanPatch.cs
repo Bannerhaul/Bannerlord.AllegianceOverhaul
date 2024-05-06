@@ -320,7 +320,7 @@ namespace AllegianceOverhaul.Patches.Migration
 
             Dictionary<Kingdom, float> kingdoms = Kingdom.All.Where(predicate).ToDictionary(keySelector: kingdom => kingdom, elementSelector: kingdom => GetJoinValue(clan, kingdom));
 
-            if (kingdoms.Any())
+            if (kingdoms.Count > 0)
             {
                 topValuedKingdom = (Kingdom?) kingdoms.OrderByDescending(kvp => kvp.Value).First().Key;
             }

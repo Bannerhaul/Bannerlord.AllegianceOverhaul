@@ -98,7 +98,7 @@ namespace AllegianceOverhaul.Extensions.Harmony
             if (PossibleUnexpectedSkip)
             {
                 debugInfoBuilder.Append($"\nPossible unexpected skip found in {patchTypeName}.");
-                debugInfoBuilder.Append(SkippedPatchesInfo.ToString());
+                debugInfoBuilder.Append(SkippedPatchesInfo);
             }
             return PossibleUnexpectedSkip;
         }
