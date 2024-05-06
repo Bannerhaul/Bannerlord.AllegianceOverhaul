@@ -1,4 +1,8 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.4.2
+Game Versions: v1.0.0 - v1.2.9 (except v1.1.6)
+* Fixed a bug framework declaration
+---------------------------------------------------------------------------------------------------
 Version: 2.4.1
 Game Versions: v1.0.0 - v1.2.9 (except v1.1.6)
 * Fixed a bug in GetTopValuedKingdom
