@@ -1,5 +1,4 @@
-﻿using TaleWorlds.Core;
-using TaleWorlds.Library;
+﻿using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace AllegianceOverhaul.Helpers

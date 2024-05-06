@@ -1,12 +1,10 @@
 ﻿using AllegianceOverhaul.Extensions;
 
 using MCM.Abstractions;
-using MCM.Abstractions.Base;
 using MCM.Abstractions.Base.Global;
 
 using MCM.Common;
 
-using System;
 using System.Collections.Generic;
 
 namespace AllegianceOverhaul
@@ -64,12 +62,12 @@ namespace AllegianceOverhaul
                 FixMinorFactionVassals = true,
                 UseAdvancedHeroTooltips = true,
                 EnableGeneralDebugging = true,
-                DebugFactionScope = new Dropdown<string>(new string[]
-                {
-            DropdownValueAllFactions,
-            DropdownValuePlayers,
-            DropdownValueRuledBy
-                }, 1),
+                DebugFactionScope = new Dropdown<string>(
+                [
+                    DropdownValueAllFactions,
+                    DropdownValuePlayers,
+                    DropdownValueRuledBy
+                ], 1),
                 DebugSystemScope = new Dropdown<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 7)
             });
 
@@ -92,12 +90,12 @@ namespace AllegianceOverhaul
                 UseAdvancedHeroTooltips = true,
                 EnableGeneralDebugging = true,
                 EnableTechnicalDebugging = true,
-                DebugFactionScope = new Dropdown<string>(new string[]
-                {
-            DropdownValueAllFactions,
-            DropdownValuePlayers,
-            DropdownValueRuledBy
-                }, 0),
+                DebugFactionScope = new Dropdown<string>(
+                [
+                    DropdownValueAllFactions,
+                    DropdownValuePlayers,
+                    DropdownValueRuledBy
+                ], 0),
                 DebugSystemScope = new Dropdown<DropdownObject<AOSystems>>(DropdownObject<AOSystems>.SetDropdownListFromEnum(), 7)
             });
         }
