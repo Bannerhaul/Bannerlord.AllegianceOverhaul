@@ -3,7 +3,7 @@
 
     <!--Module Version-->
     <PropertyGroup>
-        <Version>2.4.1</Version>
+        <Version>2.4.2</Version>
     </PropertyGroup>
 
     <!-- Versions of Major Dependencies (for Package References & SubModule.xml Substitution) -->
@@ -24,15 +24,6 @@
         <BUTRModuleLoaderVersion>1.0.1.44</BUTRModuleLoaderVersion>
         <!--Harmony Extensions Version-->
         <HarmonyExtensionsVersion>3.2.0.77</HarmonyExtensionsVersion>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <TargetFrameworks>net472;net6</TargetFrameworks>
-        <LangVersion>latest</LangVersion>
-        <Nullable>enable</Nullable>
-        <Platforms>x64</Platforms>
-        <BuildForWindows>false</BuildForWindows>
-        <BuildForWindowsStore>false</BuildForWindowsStore>
     </PropertyGroup>
 
     <PropertyGroup>
