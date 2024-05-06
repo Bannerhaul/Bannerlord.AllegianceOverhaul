@@ -27,15 +27,6 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <TargetFrameworks>net472;net6</TargetFrameworks>
-        <LangVersion>latest</LangVersion>
-        <Nullable>enable</Nullable>
-        <Platforms>x64</Platforms>
-        <BuildForWindows>false</BuildForWindows>
-        <BuildForWindowsStore>false</BuildForWindowsStore>
-    </PropertyGroup>
-
-    <PropertyGroup>
         <ModuleId>AllegianceOverhaul</ModuleId>
         <ModuleName>$(ModuleId)</ModuleName>
         <DisplayName>Allegiance Overhaul</DisplayName>
