@@ -37,7 +37,7 @@
         <Authors>artifixer</Authors>
         <Product>Allegiance Overhaul Library for Bannerlord</Product>
         <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-        <Copyright>Copyright © 2020-2022 artifixer</Copyright>
+        <Copyright>Copyright © 2020-2024 artifixer</Copyright>
         <Description>Clan allegiance system overhaul for Mount &amp; Blade II: Bannerlord</Description>
     </PropertyGroup>
 
