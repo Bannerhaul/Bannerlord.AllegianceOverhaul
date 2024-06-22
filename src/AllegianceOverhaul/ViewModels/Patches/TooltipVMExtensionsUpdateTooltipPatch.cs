@@ -51,7 +51,7 @@ namespace AllegianceOverhaul.ViewModels.Patches
                     LoyaltyManager.GetLoyaltyTooltipInfo(hero.Clan, out string LoyaltyText, out Color LoyaltyTextColor);
                     tooltipVM.TooltipPropertyList.Add(new TooltipProperty(TooltipHelper.GetTooltipLoyaltyHeader(), LoyaltyText, 0, LoyaltyTextColor, false, TooltipProperty.TooltipPropertyFlags.None));
                 }
-#if v120 || v121 || v122 || v123 || v124 || v125 || v126 || v127 || v128 || v129
+#if v120 || v121 || v122 || v123 || v124 || v125 || v126 || v127 || v128 || v129 || v1210
                 Hero? otherHero = null;
                 if (args.Length >= 3 && args[2] != null && args[2] is Hero)
                     otherHero = args[2] as Hero;
